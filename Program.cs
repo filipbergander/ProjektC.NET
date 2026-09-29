@@ -1,3 +1,5 @@
+using static System.Console;
+
 namespace ProjektC_.NET
 {
     internal static class Program
