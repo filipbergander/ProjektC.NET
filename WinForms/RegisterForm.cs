@@ -8,11 +8,16 @@ using System.Windows.Forms;
 
 namespace ProjektC_.NET.WinForms
 {
-    public partial class RegisterForm : Form
+    public partial class newUserRegisterForm : Form
     {
-        public RegisterForm()
+        public newUserRegisterForm()
         {
             InitializeComponent();
+        }
+
+        private void newUserConfirmPasswordLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

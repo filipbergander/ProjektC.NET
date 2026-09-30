@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace ProjektC_.NET.WinForms
 {
-    public partial class MainForm : Form
+    public partial class mainForm : Form
     {
-        public MainForm()
+        public mainForm()
         {
             InitializeComponent();
         }

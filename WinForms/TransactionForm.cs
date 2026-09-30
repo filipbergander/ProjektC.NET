@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace ProjektC_.NET.WinForms
 {
-    public partial class TransactionForm : Form
+    public partial class transactionForm : Form
     {
-        public TransactionForm()
+        public transactionForm()
         {
             InitializeComponent();
         }

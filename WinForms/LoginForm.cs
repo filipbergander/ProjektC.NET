@@ -8,11 +8,16 @@ using System.Windows.Forms;
 
 namespace ProjektC_.NET.WinForms
 {
-    public partial class LoginForm : Form
+    public partial class loginForm : Form
     {
-        public LoginForm()
+        public loginForm()
         {
             InitializeComponent();
+        }
+
+        private void passwordLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
