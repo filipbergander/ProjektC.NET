@@ -1,4 +1,6 @@
-﻿namespace ProjektC_.NET.WinForms
+﻿using Forms;
+
+namespace Forms
 {
     partial class loginForm
     {
@@ -32,8 +34,8 @@
             passwordLabel = new Label();
             newUserButton = new Button();
             loginButton = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            userNameText = new TextBox();
+            passwordText = new TextBox();
             SuspendLayout();
             // 
             // userNameLabel
@@ -54,7 +56,6 @@
             passwordLabel.Size = new Size(84, 18);
             passwordLabel.TabIndex = 1;
             passwordLabel.Text = "Lösenord:";
-            passwordLabel.Click += passwordLabel_Click;
             // 
             // newUserButton
             // 
@@ -75,22 +76,23 @@
             loginButton.TabIndex = 3;
             loginButton.Text = "Logga in";
             loginButton.UseVisualStyleBackColor = false;
+            loginButton.Click += loginButton_Click;
             // 
-            // textBox1
+            // userNameText
             // 
-            textBox1.Location = new Point(490, 185);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Skriv användarnamn";
-            textBox1.Size = new Size(228, 26);
-            textBox1.TabIndex = 4;
+            userNameText.Location = new Point(490, 185);
+            userNameText.Name = "userNameText";
+            userNameText.PlaceholderText = "Skriv användarnamn";
+            userNameText.Size = new Size(228, 26);
+            userNameText.TabIndex = 4;
             // 
-            // textBox2
+            // passwordText
             // 
-            textBox2.Location = new Point(490, 263);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "Skriv lösenord";
-            textBox2.Size = new Size(228, 26);
-            textBox2.TabIndex = 5;
+            passwordText.Location = new Point(490, 263);
+            passwordText.Name = "passwordText";
+            passwordText.PlaceholderText = "Skriv lösenord";
+            passwordText.Size = new Size(228, 26);
+            passwordText.TabIndex = 5;
             // 
             // loginForm
             // 
@@ -98,8 +100,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(passwordText);
+            Controls.Add(userNameText);
             Controls.Add(loginButton);
             Controls.Add(newUserButton);
             Controls.Add(passwordLabel);
@@ -118,7 +120,7 @@
         private Label passwordLabel;
         private Button newUserButton;
         private Button loginButton;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox userNameText;
+        private TextBox passwordText;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ProjektC_.NET.WinForms
+﻿namespace Forms
 {
     partial class newUserRegisterForm
     {
@@ -66,12 +66,11 @@
             newUserConfirmPasswordLabel.Size = new Size(146, 18);
             newUserConfirmPasswordLabel.TabIndex = 3;
             newUserConfirmPasswordLabel.Text = "Bekräfta lösenord:";
-            newUserConfirmPasswordLabel.Click += newUserConfirmPasswordLabel_Click;
             // 
             // newUsernameText
             // 
             newUsernameText.Location = new Point(523, 192);
-            newUsernameText.Margin = new Padding(4, 4, 4, 4);
+            newUsernameText.Margin = new Padding(4);
             newUsernameText.Name = "newUsernameText";
             newUsernameText.PlaceholderText = "Skriv användarnamn";
             newUsernameText.Size = new Size(228, 26);
@@ -80,7 +79,7 @@
             // newUserPasswordText
             // 
             newUserPasswordText.Location = new Point(523, 269);
-            newUserPasswordText.Margin = new Padding(4, 4, 4, 4);
+            newUserPasswordText.Margin = new Padding(4);
             newUserPasswordText.Name = "newUserPasswordText";
             newUserPasswordText.PlaceholderText = "Skriv lösenord";
             newUserPasswordText.Size = new Size(228, 26);
@@ -89,7 +88,7 @@
             // newUserConfirmPasswordText
             // 
             newUserConfirmPasswordText.Location = new Point(523, 351);
-            newUserConfirmPasswordText.Margin = new Padding(4, 4, 4, 4);
+            newUserConfirmPasswordText.Margin = new Padding(4);
             newUserConfirmPasswordText.Name = "newUserConfirmPasswordText";
             newUserConfirmPasswordText.PlaceholderText = "Bekräfta lösenordet";
             newUserConfirmPasswordText.Size = new Size(228, 26);
@@ -100,12 +99,13 @@
             createUserButton.BackColor = SystemColors.GradientActiveCaption;
             createUserButton.ForeColor = SystemColors.WindowText;
             createUserButton.Location = new Point(523, 417);
-            createUserButton.Margin = new Padding(4, 4, 4, 4);
+            createUserButton.Margin = new Padding(4);
             createUserButton.Name = "createUserButton";
             createUserButton.Size = new Size(228, 48);
             createUserButton.TabIndex = 7;
             createUserButton.Text = "Skapa användare";
             createUserButton.UseVisualStyleBackColor = false;
+            createUserButton.Click += createUserButton_Click;
             // 
             // newUserRegisterForm
             // 
@@ -121,7 +121,7 @@
             Controls.Add(newUserPasswordLabel);
             Controls.Add(newUserNameLabel);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "newUserRegisterForm";
             Text = "Skapa ny användare";
             ResumeLayout(false);

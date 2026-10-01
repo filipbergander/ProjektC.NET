@@ -1,4 +1,4 @@
-﻿namespace ProjektC_.NET.WinForms
+﻿namespace Forms
 {
     partial class mainForm
     {

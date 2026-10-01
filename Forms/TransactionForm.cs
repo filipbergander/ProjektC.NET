@@ -6,18 +6,13 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ProjektC_.NET.WinForms
+namespace Forms
 {
-    public partial class newUserRegisterForm : Form
+    public partial class transactionForm : Form
     {
-        public newUserRegisterForm()
+        public transactionForm()
         {
             InitializeComponent();
-        }
-
-        private void newUserConfirmPasswordLabel_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -1,4 +1,5 @@
 using static System.Console;
+using Forms;
 
 namespace ProjektC_.NET
 {
@@ -13,7 +14,8 @@ namespace ProjektC_.NET
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new mainForm());
+            //Application.Run(new mainForm());
+            Application.Run(new newUserRegisterForm());
         }
     }
 }

@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ProjektC_.NET.WinForms
+namespace Forms
 {
-    public partial class transactionForm : Form
+    public partial class StatisticsForm : Form
     {
-        public transactionForm()
+        public StatisticsForm()
         {
             InitializeComponent();
         }

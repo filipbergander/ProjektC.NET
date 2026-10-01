@@ -6,18 +6,13 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ProjektC_.NET.WinForms
+namespace Forms
 {
-    public partial class loginForm : Form
+    public partial class mainForm : Form
     {
-        public loginForm()
+        public mainForm()
         {
             InitializeComponent();
-        }
-
-        private void passwordLabel_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
