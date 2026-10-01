@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             statsHeaderLabel = new Label();
+            statsFormReturnBtn = new Button();
             SuspendLayout();
             // 
             // statsHeaderLabel
@@ -40,15 +41,29 @@
             statsHeaderLabel.TabIndex = 0;
             statsHeaderLabel.Text = "Statistik för ditt konto";
             // 
+            // statsFormReturnBtn
+            // 
+            statsFormReturnBtn.Anchor = AnchorStyles.Left;
+            statsFormReturnBtn.AutoSize = true;
+            statsFormReturnBtn.Location = new Point(19, 504);
+            statsFormReturnBtn.Margin = new Padding(10);
+            statsFormReturnBtn.Name = "statsFormReturnBtn";
+            statsFormReturnBtn.Padding = new Padding(5);
+            statsFormReturnBtn.Size = new Size(111, 38);
+            statsFormReturnBtn.TabIndex = 1;
+            statsFormReturnBtn.Text = "Gå tillbaka";
+            statsFormReturnBtn.UseVisualStyleBackColor = true;
+            // 
             // StatisticsForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
+            Controls.Add(statsFormReturnBtn);
             Controls.Add(statsHeaderLabel);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "StatisticsForm";
             Text = "Statistik";
             ResumeLayout(false);
@@ -58,5 +73,6 @@
         #endregion
 
         private Label statsHeaderLabel;
+        private Button statsFormReturnBtn;
     }
 }

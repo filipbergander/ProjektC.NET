@@ -36,6 +36,7 @@ namespace Forms
             loginButton = new Button();
             userNameText = new TextBox();
             passwordText = new TextBox();
+            loginFormHeaderLabel = new Label();
             SuspendLayout();
             // 
             // userNameLabel
@@ -94,12 +95,22 @@ namespace Forms
             passwordText.Size = new Size(228, 26);
             passwordText.TabIndex = 5;
             // 
+            // loginFormHeaderLabel
+            // 
+            loginFormHeaderLabel.AutoSize = true;
+            loginFormHeaderLabel.Location = new Point(573, 65);
+            loginFormHeaderLabel.Name = "loginFormHeaderLabel";
+            loginFormHeaderLabel.Size = new Size(75, 18);
+            loginFormHeaderLabel.TabIndex = 6;
+            loginFormHeaderLabel.Text = "Logga in";
+            // 
             // loginForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
+            Controls.Add(loginFormHeaderLabel);
             Controls.Add(passwordText);
             Controls.Add(userNameText);
             Controls.Add(loginButton);
@@ -122,5 +133,6 @@ namespace Forms
         private Button loginButton;
         private TextBox userNameText;
         private TextBox passwordText;
+        private Label loginFormHeaderLabel;
     }
 }

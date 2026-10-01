@@ -35,6 +35,7 @@
             newUserPasswordText = new TextBox();
             newUserConfirmPasswordText = new TextBox();
             createUserButton = new Button();
+            addNewUserHeaderLabel = new Label();
             SuspendLayout();
             // 
             // newUserNameLabel
@@ -107,12 +108,22 @@
             createUserButton.UseVisualStyleBackColor = false;
             createUserButton.Click += createUserButton_Click;
             // 
+            // addNewUserHeaderLabel
+            // 
+            addNewUserHeaderLabel.AutoSize = true;
+            addNewUserHeaderLabel.Location = new Point(534, 81);
+            addNewUserHeaderLabel.Name = "addNewUserHeaderLabel";
+            addNewUserHeaderLabel.Size = new Size(178, 18);
+            addNewUserHeaderLabel.TabIndex = 8;
+            addNewUserHeaderLabel.Text = "Lägg till ny användare";
+            // 
             // newUserRegisterForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1691, 673);
+            Controls.Add(addNewUserHeaderLabel);
             Controls.Add(createUserButton);
             Controls.Add(newUserConfirmPasswordText);
             Controls.Add(newUserPasswordText);
@@ -137,5 +148,6 @@
         private TextBox newUserPasswordText;
         private TextBox newUserConfirmPasswordText;
         private Button createUserButton;
+        private Label addNewUserHeaderLabel;
     }
 }
