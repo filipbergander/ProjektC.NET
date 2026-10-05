@@ -1,4 +1,4 @@
-﻿namespace Forms
+﻿namespace Projekt.Forms
 {
     partial class TransactionForm
     {
@@ -31,6 +31,7 @@
             transactionGrid = new DataGridView();
             transactionsHeaderLabel = new Label();
             transactionFormReturnBtn = new Button();
+            addNewTransactionBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)transactionGrid).BeginInit();
             SuspendLayout();
             // 
@@ -38,7 +39,7 @@
             // 
             transactionGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             transactionGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            transactionGrid.Location = new Point(163, 228);
+            transactionGrid.Location = new Point(185, 106);
             transactionGrid.Margin = new Padding(4);
             transactionGrid.Name = "transactionGrid";
             transactionGrid.Size = new Size(835, 229);
@@ -47,13 +48,13 @@
             // transactionsHeaderLabel
             // 
             transactionsHeaderLabel.AutoSize = true;
-            transactionsHeaderLabel.Location = new Point(529, 108);
+            transactionsHeaderLabel.Location = new Point(550, 50);
             transactionsHeaderLabel.Margin = new Padding(4, 0, 4, 0);
             transactionsHeaderLabel.Name = "transactionsHeaderLabel";
             transactionsHeaderLabel.Size = new Size(109, 18);
             transactionsHeaderLabel.TabIndex = 1;
             transactionsHeaderLabel.Text = "Transaktioner";
-            transactionsHeaderLabel.TextAlign = ContentAlignment.TopCenter;
+            transactionsHeaderLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // transactionFormReturnBtn
             // 
@@ -69,18 +70,30 @@
             transactionFormReturnBtn.UseVisualStyleBackColor = true;
             transactionFormReturnBtn.Click += transactionFormReturnBtn_Click;
             // 
+            // addNewTransactionBtn
+            // 
+            addNewTransactionBtn.Location = new Point(294, 342);
+            addNewTransactionBtn.Name = "addNewTransactionBtn";
+            addNewTransactionBtn.Size = new Size(97, 46);
+            addNewTransactionBtn.TabIndex = 3;
+            addNewTransactionBtn.Text = "Lägg till";
+            addNewTransactionBtn.UseVisualStyleBackColor = true;
+            addNewTransactionBtn.Click += addNewTransactionBtn_Click;
+            // 
             // TransactionForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
+            Controls.Add(addNewTransactionBtn);
             Controls.Add(transactionFormReturnBtn);
             Controls.Add(transactionsHeaderLabel);
             Controls.Add(transactionGrid);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "TransactionForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Transaktioner";
             Load += TransactionForm_Load;
             ((System.ComponentModel.ISupportInitialize)transactionGrid).EndInit();
@@ -93,5 +106,6 @@
         private DataGridView transactionGrid;
         private Label transactionsHeaderLabel;
         private Button transactionFormReturnBtn;
+        private Button addNewTransactionBtn;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Forms
+﻿namespace Projekt.Forms
 {
     partial class MainForm
     {
@@ -82,6 +82,7 @@
             mainFormTransactionBtn.TabIndex = 4;
             mainFormTransactionBtn.Text = "Transaktioner";
             mainFormTransactionBtn.UseVisualStyleBackColor = true;
+            mainFormTransactionBtn.Click += mainFormTransactionBtn_Click;
             // 
             // mainFormStatsBtn
             // 
@@ -106,7 +107,7 @@
             tableLayoutPanel1.Size = new Size(362, 121);
             tableLayoutPanel1.TabIndex = 6;
             // 
-            // mainForm
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -120,8 +121,9 @@
             Controls.Add(mainFormMonthLabel);
             Controls.Add(mainFormDashboardLabel);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Margin = new Padding(4, 4, 4, 4);
-            Name = "mainForm";
+            Margin = new Padding(4);
+            Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Översikt konto";
             ResumeLayout(false);
             PerformLayout();

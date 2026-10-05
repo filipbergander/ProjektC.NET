@@ -1,4 +1,4 @@
-﻿namespace Forms
+﻿namespace Projekt.Forms
 {
     partial class newUserRegisterForm
     {
@@ -41,7 +41,7 @@
             // newUserNameLabel
             // 
             newUserNameLabel.AutoSize = true;
-            newUserNameLabel.Location = new Point(523, 170);
+            newUserNameLabel.Location = new Point(524, 118);
             newUserNameLabel.Margin = new Padding(4, 0, 4, 0);
             newUserNameLabel.Name = "newUserNameLabel";
             newUserNameLabel.Size = new Size(125, 18);
@@ -51,7 +51,7 @@
             // newUserPasswordLabel
             // 
             newUserPasswordLabel.AutoSize = true;
-            newUserPasswordLabel.Location = new Point(523, 247);
+            newUserPasswordLabel.Location = new Point(524, 195);
             newUserPasswordLabel.Margin = new Padding(4, 0, 4, 0);
             newUserPasswordLabel.Name = "newUserPasswordLabel";
             newUserPasswordLabel.Size = new Size(84, 18);
@@ -61,7 +61,7 @@
             // newUserConfirmPasswordLabel
             // 
             newUserConfirmPasswordLabel.AutoSize = true;
-            newUserConfirmPasswordLabel.Location = new Point(523, 329);
+            newUserConfirmPasswordLabel.Location = new Point(524, 277);
             newUserConfirmPasswordLabel.Margin = new Padding(4, 0, 4, 0);
             newUserConfirmPasswordLabel.Name = "newUserConfirmPasswordLabel";
             newUserConfirmPasswordLabel.Size = new Size(146, 18);
@@ -70,7 +70,7 @@
             // 
             // newUsernameText
             // 
-            newUsernameText.Location = new Point(523, 192);
+            newUsernameText.Location = new Point(524, 140);
             newUsernameText.Margin = new Padding(4);
             newUsernameText.Name = "newUsernameText";
             newUsernameText.PlaceholderText = "Skriv användarnamn";
@@ -79,7 +79,7 @@
             // 
             // newUserPasswordText
             // 
-            newUserPasswordText.Location = new Point(523, 269);
+            newUserPasswordText.Location = new Point(524, 217);
             newUserPasswordText.Margin = new Padding(4);
             newUserPasswordText.Name = "newUserPasswordText";
             newUserPasswordText.PlaceholderText = "Skriv lösenord";
@@ -88,7 +88,7 @@
             // 
             // newUserConfirmPasswordText
             // 
-            newUserConfirmPasswordText.Location = new Point(523, 351);
+            newUserConfirmPasswordText.Location = new Point(524, 299);
             newUserConfirmPasswordText.Margin = new Padding(4);
             newUserConfirmPasswordText.Name = "newUserConfirmPasswordText";
             newUserConfirmPasswordText.PlaceholderText = "Bekräfta lösenordet";
@@ -99,7 +99,7 @@
             // 
             createUserButton.BackColor = SystemColors.GradientActiveCaption;
             createUserButton.ForeColor = SystemColors.WindowText;
-            createUserButton.Location = new Point(523, 417);
+            createUserButton.Location = new Point(524, 365);
             createUserButton.Margin = new Padding(4);
             createUserButton.Name = "createUserButton";
             createUserButton.Size = new Size(228, 48);
@@ -110,12 +110,12 @@
             // 
             // addNewUserHeaderLabel
             // 
-            addNewUserHeaderLabel.AutoSize = true;
-            addNewUserHeaderLabel.Location = new Point(534, 81);
+            addNewUserHeaderLabel.Location = new Point(550, 50);
             addNewUserHeaderLabel.Name = "addNewUserHeaderLabel";
             addNewUserHeaderLabel.Size = new Size(178, 18);
             addNewUserHeaderLabel.TabIndex = 8;
             addNewUserHeaderLabel.Text = "Lägg till ny användare";
+            addNewUserHeaderLabel.TextAlign = ContentAlignment.TopCenter;
             // 
             // newUserRegisterForm
             // 
@@ -134,6 +134,7 @@
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "newUserRegisterForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Skapa ny användare";
             ResumeLayout(false);
             PerformLayout();

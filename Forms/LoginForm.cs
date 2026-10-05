@@ -5,9 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Models;
+using Projekt.Models;
 
-namespace Forms
+namespace Projekt.Forms
 {
     public partial class loginForm : Form
     {

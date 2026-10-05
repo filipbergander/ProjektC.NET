@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Models
+namespace Projekt.Models
 {
     public class Transaction
     {
         public Guid Id { get; set; }
-        public string? Type { get; set; }
-        public string? Title { get; set; }
-        public string? Category { get; set; }
-        public float Amount { get; set; }
-        public string? Date { get; set; }
+        public string? Typ { get; set; }
+        public string? Namn { get; set; }
+        public string? Kategori { get; set; }
+        public float Belopp { get; set; }
+        public string? Datum { get; set; }
 
-        public Transaction(string? type, string? title, string? category, float amount)
+        public Transaction(string? typ, string? namn, string? kategori, float belopp)
         {
             Id = Guid.NewGuid();
-            Type = type;
-            Title = title;
-            Category = category;
-            Amount = amount;
-            Date = DateTime.Now.ToString("yyyy-MM-dd");
+            Typ = typ;
+            Namn = namn;
+            Kategori = kategori;
+            Belopp = belopp;
+            Datum = DateTime.Now.ToString("yyyy-MM-dd");
+        
         }
     }
 }

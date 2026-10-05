@@ -1,4 +1,4 @@
-﻿namespace ProjektC_.NET.Forms
+﻿namespace Projekt.Forms
 {
     partial class AddTransactionForm
     {
@@ -41,6 +41,7 @@
             addTransactionAmountLabel = new Label();
             addTransactionPanel = new TableLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            errorLabel = new Label();
             addTransactionFormReturnBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)addTransactionAmountNum).BeginInit();
             addTransactionPanel.SuspendLayout();
@@ -50,7 +51,7 @@
             // addTransactionLabel
             // 
             addTransactionLabel.AutoSize = true;
-            addTransactionLabel.Location = new Point(504, 53);
+            addTransactionLabel.Location = new Point(550, 50);
             addTransactionLabel.Name = "addTransactionLabel";
             addTransactionLabel.Size = new Size(182, 18);
             addTransactionLabel.TabIndex = 0;
@@ -61,46 +62,46 @@
             addTransactionTypeComboBox.AccessibleDescription = "Typ av transaktion";
             addTransactionTypeComboBox.Dock = DockStyle.Fill;
             addTransactionTypeComboBox.FormattingEnabled = true;
-            addTransactionTypeComboBox.Location = new Point(190, 30);
+            addTransactionTypeComboBox.Location = new Point(197, 30);
             addTransactionTypeComboBox.Margin = new Padding(10);
             addTransactionTypeComboBox.Name = "addTransactionTypeComboBox";
-            addTransactionTypeComboBox.Size = new Size(301, 26);
+            addTransactionTypeComboBox.Size = new Size(315, 26);
             addTransactionTypeComboBox.TabIndex = 1;
             addTransactionTypeComboBox.Tag = "";
             // 
             // addTransactionTitleText
             // 
             addTransactionTitleText.Dock = DockStyle.Fill;
-            addTransactionTitleText.Location = new Point(190, 76);
+            addTransactionTitleText.Location = new Point(197, 76);
             addTransactionTitleText.Margin = new Padding(10);
             addTransactionTitleText.Name = "addTransactionTitleText";
             addTransactionTitleText.PlaceholderText = "Ange namn";
-            addTransactionTitleText.Size = new Size(301, 26);
+            addTransactionTitleText.Size = new Size(315, 26);
             addTransactionTitleText.TabIndex = 2;
             // 
             // addTransactionCategoryText
             // 
             addTransactionCategoryText.Dock = DockStyle.Fill;
-            addTransactionCategoryText.Location = new Point(190, 122);
+            addTransactionCategoryText.Location = new Point(197, 122);
             addTransactionCategoryText.Margin = new Padding(10);
             addTransactionCategoryText.Name = "addTransactionCategoryText";
             addTransactionCategoryText.PlaceholderText = "Ange kategori";
-            addTransactionCategoryText.Size = new Size(301, 26);
+            addTransactionCategoryText.Size = new Size(315, 26);
             addTransactionCategoryText.TabIndex = 3;
             // 
             // addTransactionAmountNum
             // 
             addTransactionAmountNum.Dock = DockStyle.Fill;
-            addTransactionAmountNum.Location = new Point(190, 168);
+            addTransactionAmountNum.Location = new Point(197, 168);
             addTransactionAmountNum.Margin = new Padding(10);
-            addTransactionAmountNum.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
+            addTransactionAmountNum.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             addTransactionAmountNum.Name = "addTransactionAmountNum";
-            addTransactionAmountNum.Size = new Size(301, 26);
+            addTransactionAmountNum.Size = new Size(315, 26);
             addTransactionAmountNum.TabIndex = 4;
             // 
             // saveAddTransactionBtn
             // 
-            saveAddTransactionBtn.Location = new Point(134, 8);
+            saveAddTransactionBtn.Location = new Point(140, 8);
             saveAddTransactionBtn.Name = "saveAddTransactionBtn";
             saveAddTransactionBtn.Size = new Size(120, 46);
             saveAddTransactionBtn.TabIndex = 5;
@@ -110,7 +111,7 @@
             // 
             // addTransactionCancelBtn
             // 
-            addTransactionCancelBtn.Location = new Point(8, 8);
+            addTransactionCancelBtn.Location = new Point(14, 8);
             addTransactionCancelBtn.Name = "addTransactionCancelBtn";
             addTransactionCancelBtn.Size = new Size(120, 46);
             addTransactionCancelBtn.TabIndex = 6;
@@ -157,9 +158,9 @@
             addTransactionAmountLabel.Location = new Point(30, 172);
             addTransactionAmountLabel.Margin = new Padding(10);
             addTransactionAmountLabel.Name = "addTransactionAmountLabel";
-            addTransactionAmountLabel.Size = new Size(106, 18);
+            addTransactionAmountLabel.Size = new Size(147, 18);
             addTransactionAmountLabel.TabIndex = 10;
-            addTransactionAmountLabel.Text = "Ange belopp";
+            addTransactionAmountLabel.Text = "Ange belopp (sek)";
             // 
             // addTransactionPanel
             // 
@@ -173,12 +174,12 @@
             addTransactionPanel.Controls.Add(addTransactionAmountLabel, 0, 3);
             addTransactionPanel.Controls.Add(addTransactionTypeComboBox, 1, 0);
             addTransactionPanel.Controls.Add(addTransactionAmountNum, 1, 3);
-            addTransactionPanel.Controls.Add(flowLayoutPanel1, 1, 4);
             addTransactionPanel.Controls.Add(addTransactionCategoryLabel, 0, 2);
             addTransactionPanel.Controls.Add(addTransactionNameLabel, 0, 1);
             addTransactionPanel.Controls.Add(addTransactionTitleText, 1, 1);
             addTransactionPanel.Controls.Add(addTransactionCategoryText, 1, 2);
-            addTransactionPanel.Location = new Point(355, 159);
+            addTransactionPanel.Controls.Add(flowLayoutPanel1, 1, 4);
+            addTransactionPanel.Location = new Point(356, 105);
             addTransactionPanel.Name = "addTransactionPanel";
             addTransactionPanel.Padding = new Padding(20);
             addTransactionPanel.RowCount = 5;
@@ -187,21 +188,30 @@
             addTransactionPanel.RowStyles.Add(new RowStyle());
             addTransactionPanel.RowStyles.Add(new RowStyle());
             addTransactionPanel.RowStyles.Add(new RowStyle());
-            addTransactionPanel.Size = new Size(521, 296);
+            addTransactionPanel.Size = new Size(542, 296);
             addTransactionPanel.TabIndex = 11;
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            flowLayoutPanel1.Controls.Add(errorLabel);
             flowLayoutPanel1.Controls.Add(addTransactionCancelBtn);
             flowLayoutPanel1.Controls.Add(saveAddTransactionBtn);
-            flowLayoutPanel1.Location = new Point(185, 209);
+            flowLayoutPanel1.Location = new Point(192, 209);
             flowLayoutPanel1.Margin = new Padding(5);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(5);
-            flowLayoutPanel1.Size = new Size(262, 62);
+            flowLayoutPanel1.Size = new Size(268, 62);
             flowLayoutPanel1.TabIndex = 12;
+            // 
+            // errorLabel
+            // 
+            errorLabel.AutoSize = true;
+            errorLabel.Location = new Point(8, 5);
+            errorLabel.Name = "errorLabel";
+            errorLabel.Size = new Size(0, 18);
+            errorLabel.TabIndex = 7;
             // 
             // addTransactionFormReturnBtn
             // 
@@ -229,12 +239,14 @@
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "AddTransactionForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Lägg till transaktion";
             Load += AddTransactionForm_Load;
             ((System.ComponentModel.ISupportInitialize)addTransactionAmountNum).EndInit();
             addTransactionPanel.ResumeLayout(false);
             addTransactionPanel.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -255,5 +267,6 @@
         private TableLayoutPanel addTransactionPanel;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button addTransactionFormReturnBtn;
+        private Label errorLabel;
     }
 }

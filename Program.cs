@@ -1,9 +1,8 @@
-using Forms;
-using ProjektC_.NET.Forms;
+using Projekt.Forms;
 using static System.Console;
-using Services;
+using Projekt.Services;
 
-namespace ProjektC_.NET
+namespace Projekt
 {
     internal static class Program
     {
@@ -16,7 +15,7 @@ namespace ProjektC_.NET
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new AddTransactionForm());
+            Application.Run(new MainForm());
         }
     }
 }

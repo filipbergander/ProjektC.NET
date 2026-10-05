@@ -1,4 +1,4 @@
-﻿namespace Forms
+﻿namespace Projekt.Forms
 {
     partial class StatisticsForm
     {
@@ -35,7 +35,7 @@
             // statsHeaderLabel
             // 
             statsHeaderLabel.AutoSize = true;
-            statsHeaderLabel.Location = new Point(503, 102);
+            statsHeaderLabel.Location = new Point(550, 50);
             statsHeaderLabel.Name = "statsHeaderLabel";
             statsHeaderLabel.Size = new Size(172, 18);
             statsHeaderLabel.TabIndex = 0;
@@ -65,6 +65,7 @@
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "StatisticsForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Statistik";
             ResumeLayout(false);
             PerformLayout();

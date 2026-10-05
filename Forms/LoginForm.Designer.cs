@@ -1,6 +1,6 @@
-﻿using Forms;
+﻿using Projekt.Forms;
 
-namespace Forms
+namespace Projekt.Forms
 {
     partial class loginForm
     {
@@ -120,6 +120,7 @@ namespace Forms
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "loginForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Logga in";
             ResumeLayout(false);
             PerformLayout();
