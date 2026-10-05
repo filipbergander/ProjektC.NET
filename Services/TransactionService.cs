@@ -1,20 +1,36 @@
 using static System.Console;
 using Projekt.Models;
+using Microsoft.EntityFrameworkCore;
+using Projekt.Data;
+using System.Runtime.InteropServices.Marshalling;
 
 namespace Projekt.Services
 {
-    public class TransactionService    {
-     
-        private readonly List<Transaction> transactions = new List<Transaction>();
+    public class TransactionService
+    {
 
-        public void AddTransaction(string? type, string? title, string? category, float amount)
+        //private readonly List<Transaction> transactions = new List<Transaction>();
+
+        private readonly ProjektDbContext database;
+        // Konstruktor
+        public TransactionService()
         {
-            var transaction = new Transaction(type, title, category, amount);
-            transactions.Add(transaction);
+            database = new ProjektDbContext();
         }
-        public List<Transaction> GetTransactions()
+
+        // Lägga till en ny transaktion
+        public async Task AddTransaction(string? type, string? title, string? category, float amount)
         {
-              return transactions;
+            // Lägger till en ny transaktion i listan av transaktioner
+            var transaction = new Transaction(type, title, category, amount);
+            // Lägger till ändringarna i minnet
+            database.Set<Transaction>().Add(transaction);
+            // Sparar ned ändringar till databasen
+            await database.SaveChangesAsync();
+        }
+        public async Task<List<Transaction>> GetTransactions()
+        {
+            return await database.Set<Transaction>().ToListAsync();
         }
     }
 }

@@ -13,17 +13,17 @@ namespace Projekt.Forms
 {
     public partial class AddTransactionForm : Form
     {
-
+        // Instans av TransactionService
         private readonly TransactionService _transaction;
 
         // Konstruktor som initierar AddTransactionForm, samt instans av en ny Transaction
         public AddTransactionForm(TransactionService transaction)
         {
-            InitializeComponent();
+            InitializeComponent(); // Startar upp formuläret med alla komponenter
             _transaction = transaction;
         }
-        // Vid klick på knappen "Spara" läggs den nya transaktionen till i listan av transaktioner
-        private void SaveAddTransactionBtn_Click(object sender, EventArgs e)
+        // Vid klick på knappen "Spara" läggs den nya transaktionen till i listan av transaktioner & i databasen
+        private async void SaveAddTransactionBtn_Click(object sender, EventArgs e)
         {
             // Sätter felmeddelandet till rött
             errorLabel.ForeColor = Color.Red;
@@ -60,6 +60,7 @@ namespace Projekt.Forms
             // Om det finns felmeddelanden i listan så visas dem i errorLabel och metoden körs inte vidare
             if (errors.Count > 0)
             {
+                // Radbryter varje felmeddelande
                 errorLabel.Text = string.Join("\n", errors);
                 return;
             }
@@ -71,7 +72,7 @@ namespace Projekt.Forms
             float amount = (float)addTransactionAmountNum.Value;
 
             // Lägger till den specifika transaktionen i listan av transaktioner
-            _transaction.AddTransaction(type, title, category, amount);
+            await _transaction.AddTransaction(type, title, category, amount);
 
             // Återställer inputs
             addTransactionAmountNum.Value = 0;
@@ -88,9 +89,9 @@ namespace Projekt.Forms
             var transactionForm = new TransactionForm(_transaction);
 
             transactionForm.Show();
-            this.BeginInvoke(new Action(() => this.Hide()));
+            this.BeginInvoke(new Action(() => this.Close()));
         }
-        // Sätter in värdena i combooxen för en Typ
+        // Sätter in värdena i combooxen för Typ
         private void AddTransactionForm_Load(object sender, EventArgs e)
         {
             addTransactionTypeComboBox.Items.Add("Inkomst");
