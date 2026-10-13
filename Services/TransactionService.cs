@@ -16,6 +16,7 @@ namespace Projekt.Services
         public TransactionService()
         {
             database = new ProjektDbContext();
+            database.Database.EnsureCreated();
         }
 
         // Lägga till en ny transaktion
@@ -28,9 +29,24 @@ namespace Projekt.Services
             // Sparar ned ändringar till databasen
             await database.SaveChangesAsync();
         }
+
         public async Task<List<Transaction>> GetTransactions()
         {
             return await database.Set<Transaction>().ToListAsync();
+        }
+
+        public async Task<List<Transaction>> GetTransactionsSorted(string columnClicked)
+        {
+            return columnClicked switch
+            {
+                nameof(Transaction.Typ) => await database.Set<Transaction>().OrderBy(t => t.Typ).ToListAsync(),
+                nameof(Transaction.Namn) => await database.Set<Transaction>().OrderBy(t => t.Namn).ToListAsync(),
+                nameof(Transaction.Kategori) => await database.Set<Transaction>().OrderBy(t => t.Kategori).ToListAsync(),
+                nameof(Transaction.Belopp) => await database.Set<Transaction>().OrderBy(t => t.Belopp).ToListAsync(),
+                nameof(Transaction.Datum) => await database.Set<Transaction>().OrderBy(t => t.Datum).ToListAsync(),
+
+                _ => await database.Set<Transaction>().ToListAsync()
+            };
         }
     }
 }

@@ -117,6 +117,7 @@
             addTransactionCancelBtn.TabIndex = 6;
             addTransactionCancelBtn.Text = "Avbryt";
             addTransactionCancelBtn.UseVisualStyleBackColor = true;
+            addTransactionCancelBtn.Click += addTransactionCancelBtn_Click;
             // 
             // addTransactionTypeLabel
             // 

@@ -24,7 +24,6 @@ namespace Projekt.Models
             Kategori = kategori;
             Belopp = belopp;
             Datum = DateTime.Now.ToString("yyyy-MM-dd");
-        
         }
     }
 }

@@ -50,12 +50,12 @@ namespace Projekt.Forms
             // Om angivet belopp är 0 eller mindre
             if (addTransactionAmountNum.Value <= 0)
             {
-                errors.Add("* Beloppet behöver vara större än 0!");
+                errors.Add("* Beloppet behöver vara mer än 0!");
             }
             // Om angivet belopp är över 100 000 sek
             else if (addTransactionAmountNum.Value > 100_000)
             {
-                errors.Add("* Beloppet kan inte vara större än 100 000!");
+                errors.Add("* Beloppet kan inte vara mer än 100 000!");
             }
             // Om det finns felmeddelanden i listan så visas dem i errorLabel och metoden körs inte vidare
             if (errors.Count > 0)
@@ -71,14 +71,15 @@ namespace Projekt.Forms
             string? category = addTransactionCategoryText.Text;
             float amount = (float)addTransactionAmountNum.Value;
 
+            // Gör första bokstaven till stor bokstav
+            title = char.ToUpper(title[0]) + title.Substring(1);
+            category = char.ToUpper(category[0]) + category.Substring(1);
+
             // Lägger till den specifika transaktionen i listan av transaktioner
             await _transaction.AddTransaction(type, title, category, amount);
 
             // Återställer inputs
-            addTransactionAmountNum.Value = 0;
-            addTransactionTypeComboBox.SelectedIndex = 0;
-            addTransactionTitleText.Clear();
-            addTransactionCategoryText.Clear();
+            ResetForm();
             // Visar "success-meddelande" i UI, sätter även textfärgen till grön
             errorLabel.ForeColor = Color.Green;
             errorLabel.Text = "Transaktionen har lagts till!";
@@ -86,17 +87,33 @@ namespace Projekt.Forms
         // Går tillbaka till transaktionerna -> vid klick på "Gå tillbaka"
         private void AddTransactionFormReturnBtn_Click(object sender, EventArgs e)
         {
-            var transactionForm = new TransactionForm(_transaction);
-
-            transactionForm.Show();
-            this.BeginInvoke(new Action(() => this.Close()));
+            this.Close();
         }
         // Sätter in värdena i combooxen för Typ
         private void AddTransactionForm_Load(object sender, EventArgs e)
         {
-            addTransactionTypeComboBox.Items.Add("Inkomst");
             addTransactionTypeComboBox.Items.Add("Utgift");
+            addTransactionTypeComboBox.Items.Add("Inkomst");
             addTransactionTypeComboBox.SelectedIndex = 0;
+        }
+        // Vid klick på "Avbryt" återställs inputs
+        private void addTransactionCancelBtn_Click(object sender, EventArgs e)
+        {
+
+            ResetForm();
+        }
+        // Återställer inputs & ev felmeddelanden i formuläret
+        private void ResetForm()
+        {
+            addTransactionAmountNum.Value = 0;
+            addTransactionTypeComboBox.SelectedIndex = 0;
+            addTransactionTitleText.Clear();
+            addTransactionCategoryText.Clear();
+            errorLabel.Text = "";
+        }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

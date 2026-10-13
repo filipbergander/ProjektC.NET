@@ -11,7 +11,7 @@ using Projekt.Forms;
 
 namespace Projekt.Forms
 {
-    public partial class    MainForm : Form
+    public partial class MainForm : Form
     {
         private readonly TransactionService transaction;
         public MainForm()
@@ -22,8 +22,14 @@ namespace Projekt.Forms
 
         private void mainFormTransactionBtn_Click(object sender, EventArgs e)
         {
-            var transactionForm = new TransactionForm(transaction);
-            transactionForm.Show();
+            var transactionForm = new TransactionForm(transaction, this);
+            OpenForm(transactionForm);
+        }
+
+        private void OpenForm(Form form)
+        {
+            form.FormClosed += (s, args) => this.Show();
+            form.Show();
             this.Hide();
         }
     }
