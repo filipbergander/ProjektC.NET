@@ -364,3 +364,5 @@ FodyWeavers.xsd
 
 # Arkiverade filer som inte behöver versionshanteras
 /arkiv
+/akriv.cs
+/arkiv.cs
