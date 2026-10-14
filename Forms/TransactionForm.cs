@@ -14,10 +14,12 @@ namespace Projekt.Forms
     public partial class TransactionForm : Form
 
     {
-        private readonly MainForm mainForm;
+        private readonly MainForm mainForm; // Instans av mainform
+        private string currentSortColumn = ""; // Vilken kolumn som är sorterad i datagriden
+        private bool ascending = true; // Sorteringsordningen för kolumnerna i datagriden
+        private readonly TransactionService _transaction;   // Instans av TransactionService
 
-        // Instans av TransactionService
-        private readonly TransactionService _transaction;
+        private List<Transaction> transactions = new List<Transaction>();
         // Konstruktor som tar emot en instans av TransactionService (transaction) och sätter den till _transaction
         public TransactionForm(TransactionService transaction, MainForm mainForm)
         {
@@ -26,20 +28,59 @@ namespace Projekt.Forms
             this.mainForm = mainForm;
             LoadTransactions(); // Hämtar in alla sparade transaktioner
         }
-        // Hämtar in transaktioner sparade i databasen och visar datagriden (listan av transaktioner)
+        // Hämtar in transaktioner sparade i databasen och visar i datagriden (listan av transaktioner)
         private async void LoadTransactions()
         {
-            var transactions = await _transaction.GetTransactions();
+            transactions = await _transaction.GetTransactions();
             transactionGrid.DataSource = null;
             transactionGrid.DataSource = transactions;
         }
-
+        // Sorterar kolumnerna i datagriden när man klickar på kolumnrubriken, och lägger till en pil som visar sorteringsordningen (fallande/stigande)
         private async void transactionGrid_ColumnHeaderMouseClick_1(object sender, DataGridViewCellMouseEventArgs e)
         {
-            string columnName = transactionGrid.Columns[e.ColumnIndex].DataPropertyName;
-            var transactions = await _transaction.GetTransactionsSorted(columnName);
-            transactionGrid.DataSource = transactions;
+            // Hämtar den klickade kolumnen och dess namn
+            var clickedColumn = transactionGrid.Columns[e.ColumnIndex];
+            string columnName = clickedColumn.DataPropertyName;
 
+            // Om kolumnnamnet är tomt, return
+            if (string.IsNullOrEmpty(columnName))
+                return;
+
+            // Vänder på sorteringsordningen om samma kolumn klickas igen
+            if (currentSortColumn == columnName)
+            {
+                ascending = !ascending;
+            }
+            else
+            {
+                ascending = true;
+                currentSortColumn = columnName;
+            }
+            // Hämtar in de sorterade transaktionerna och visar dem i datagriden
+            var sortedTransactions = await _transaction.GetSortedTransactions(columnName, ascending);
+            transactionGrid.DataSource = null;
+            transactionGrid.DataSource = sortedTransactions;
+
+            //Återställer kolumnrubrikerna till sitt ordinarie namn varje gång vid klick, annars läggs text till på text
+            foreach (DataGridViewColumn column in transactionGrid.Columns)
+            {
+                if (!string.IsNullOrEmpty(column.DataPropertyName))
+                {
+                    column.HeaderText = column.DataPropertyName switch
+                    {
+                        nameof(Transaction.Id) => "Id",
+                        nameof(Transaction.Typ) => "Typ",
+                        nameof(Transaction.Namn) => "Namn",
+                        nameof(Transaction.Kategori) => "Kategori",
+                        nameof(Transaction.Belopp) => "Belopp",
+                        nameof(Transaction.Datum) => "Datum",
+                        _ => column.DataPropertyName
+                    };
+                }
+            }
+            // Lägger till pilen som visar sorteringsordningen (fallande/stigande) på den klickade kolumnen
+            var refreshedColumn = transactionGrid.Columns[e.ColumnIndex];
+            refreshedColumn.HeaderText += ascending ? " ▲" : " ▼";
         }
 
         // Går tillbaka till Mainform vid klick -> "Gå tillbaka" knapp
@@ -48,7 +89,7 @@ namespace Projekt.Forms
             mainForm.Show();
             this.Close();
         }
-        // Öppnar formuläret för att lägga till en ny transaktion vid klick -> "Lägg till" knapp
+        // Öppnar formuläret för att lägga till en ny transaktion vid klick -> "Lägg till"
         private void AddNewTransactionBtn_Click(object sender, EventArgs e)
         {
             var addTransactionForm = new AddTransactionForm(_transaction);
@@ -60,9 +101,22 @@ namespace Projekt.Forms
             addTransactionForm.Show();
             this.Hide();
         }
+        // Stänger formuläret vid klick -> "Stäng" (X-knappen i windows)
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        // Ändrar muspekaren på datagridens kolumnrubriker vid hover
+        private void transactionGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 && e.ColumnIndex >= 0) // Hover på de faktiska kolumnrubrikerna (inte på celler)
+            {
+                transactionGrid.Cursor = Cursors.Hand; // Muspekaren -> hand
+            }
+            else
+            {
+                transactionGrid.Cursor = Cursors.Default; // Muspekaren -> standard
+            }
         }
     }
 }

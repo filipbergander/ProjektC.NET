@@ -35,18 +35,20 @@ namespace Projekt.Services
             return await database.Set<Transaction>().ToListAsync();
         }
 
-        public async Task<List<Transaction>> GetTransactionsSorted(string columnClicked)
+        public async Task<List<Transaction>> GetSortedTransactions(string columnClicked, bool ascending)
         {
-            return columnClicked switch
+            var transactions = await GetTransactions();
+            IEnumerable<Transaction> sortedTranscations = columnClicked switch
             {
-                nameof(Transaction.Typ) => await database.Set<Transaction>().OrderBy(t => t.Typ).ToListAsync(),
-                nameof(Transaction.Namn) => await database.Set<Transaction>().OrderBy(t => t.Namn).ToListAsync(),
-                nameof(Transaction.Kategori) => await database.Set<Transaction>().OrderBy(t => t.Kategori).ToListAsync(),
-                nameof(Transaction.Belopp) => await database.Set<Transaction>().OrderBy(t => t.Belopp).ToListAsync(),
-                nameof(Transaction.Datum) => await database.Set<Transaction>().OrderBy(t => t.Datum).ToListAsync(),
-
-                _ => await database.Set<Transaction>().ToListAsync()
+                nameof(Transaction.Id) => ascending ? transactions.OrderBy(t => t.Id) : transactions.OrderByDescending(t => t.Id),
+                nameof(Transaction.Typ) => ascending ? transactions.OrderBy(t => t.Typ) : transactions.OrderByDescending(t => t.Typ),
+                nameof(Transaction.Namn) => ascending ? transactions.OrderBy(t => t.Namn) : transactions.OrderByDescending(t => t.Namn),
+                nameof(Transaction.Kategori) => ascending ? transactions.OrderBy(t => t.Kategori) : transactions.OrderByDescending(t => t.Kategori),
+                nameof(Transaction.Belopp) => ascending ? transactions.OrderBy(t => t.Belopp) : transactions.OrderByDescending(t => t.Belopp),
+                nameof(Transaction.Datum) => ascending ? transactions.OrderBy(t => t.Datum) : transactions.OrderByDescending(t => t.Datum),
+                _ => transactions
             };
+            return sortedTranscations.ToList();
         }
     }
 }

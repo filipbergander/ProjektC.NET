@@ -47,6 +47,7 @@
             transactionGrid.Name = "transactionGrid";
             transactionGrid.Size = new Size(835, 229);
             transactionGrid.TabIndex = 0;
+            transactionGrid.CellMouseEnter += transactionGrid_CellMouseEnter;
             transactionGrid.ColumnHeaderMouseClick += transactionGrid_ColumnHeaderMouseClick_1;
             // 
             // transactionsHeaderLabel
