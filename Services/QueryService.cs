@@ -16,30 +16,34 @@ namespace Projekt.Services
         // Instans av Transactionsservicen
         private readonly TransactionService transaction;
 
+        // Konstruktor
         public QueryService(TransactionService transaction)
         {
             this.transaction = transaction;
         }
-
-        public async Task<List<Transaction>> GetSortedTransactions(string columnClicked, bool ascending)
+        // Sortering av transaktioner genom att klicka på kolumnnamnet i tabellen, fallande/stigande ordning
+        public async Task<List<Transaction>> GetSortedTransactions(List<Transaction> transactions, string columnClicked, bool ascending)
         {
-            var transactions = await transaction.GetTransactions();
-            IEnumerable<Transaction> sortedTranscations = columnClicked switch
+            IEnumerable<Transaction> sortedTranscations = columnClicked switch // Sorterar transaktionerna baserat på kolumnen som klickats på
             {
-                nameof(Transaction.Id) => ascending ? transactions.OrderBy(t => t.Id) : transactions.OrderByDescending(t => t.Id),
-                nameof(Transaction.Typ) => ascending ? transactions.OrderBy(t => t.Typ) : transactions.OrderByDescending(t => t.Typ),
-                nameof(Transaction.Namn) => ascending ? transactions.OrderBy(t => t.Namn) : transactions.OrderByDescending(t => t.Namn),
-                nameof(Transaction.Kategori) => ascending ? transactions.OrderBy(t => t.Kategori) : transactions.OrderByDescending(t => t.Kategori),
-                nameof(Transaction.Belopp) => ascending ? transactions.OrderBy(t => t.Typ == "Utgift").ThenBy(t => t.Belopp) : transactions.OrderByDescending(t => t.Typ == "Utgift").ThenByDescending(t => t.Belopp),
-                nameof(Transaction.Datum) => ascending ? transactions.OrderBy(t => t.Datum) : transactions.OrderByDescending(t => t.Datum),
-                _ => transactions
+                nameof(Transaction.Id) => ascending ? transactions.OrderBy(t => t.Id) : transactions.OrderByDescending(t => t.Id), // Id -> borttaget ur gridens vy just nu
+                nameof(Transaction.Typ) => ascending ? transactions.OrderBy(t => t.Typ) : transactions.OrderByDescending(t => t.Typ), // Typ
+                nameof(Transaction.Namn) => ascending ? transactions.OrderBy(t => t.Namn).ToList() : transactions.OrderByDescending(t => t.Namn).ToList(), // Namn
+                nameof(Transaction.Kategori) => ascending ? transactions.OrderBy(t => t.Kategori) : transactions.OrderByDescending(t => t.Kategori), // Kategori
+
+                // Belopp
+                nameof(Transaction.Belopp) => ascending ? transactions.OrderBy(t => t.Typ == "Utgift").ThenBy(t => t.Belopp) :
+                transactions.OrderByDescending(t => t.Typ == "Utgift").ThenByDescending(t => t.Belopp),
+                nameof(Transaction.Datum) => ascending ? transactions.OrderBy(t => t.Datum) : transactions.OrderByDescending(t => t.Datum),// Datum
+                _ => transactions // Annars vanlig sortering
             };
             return sortedTranscations.ToList();
         }
-
+        // Hämtar in alla kategorier som lagts till i transaktioner
         public async Task<List<string>> GetCategoryValues()
         {
-            var transactions = await transaction.GetTransactions();
+            var transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner från databasen
+            // Filtrerar ut kategorier
             return transactions
                 .Select(t => t.Kategori)
                 .Where(k => !string.IsNullOrEmpty(k))
@@ -47,10 +51,11 @@ namespace Projekt.Services
                 .OrderBy(c => c)
                 .ToList()!;
         }
-
+        // Hämtar in alla typer av transaktioner som lagt till i -> listan av transaktioner
         public async Task<List<string>> GetTypeValues()
         {
-            var transactions = await transaction.GetTransactions();
+            var transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner från databasen
+            // Filtrerar ut typ
             return transactions
                 .Select(t => t.Typ)
                 .Where(t => !string.IsNullOrEmpty(t))
@@ -59,5 +64,35 @@ namespace Projekt.Services
                 .ToList()!;
         }
 
+        // Filtrerar transaktionerna beroende på vad användaren har valt i filterpanelen
+        public async Task<List<Transaction>> FilterTransactions(TransactionFilter filter)
+        {
+            var transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner från databasen
+            // Filtrerar ut typer av transaktioner
+            if (!string.IsNullOrWhiteSpace(filter.Typ) && filter.Typ != "Alla")
+            {
+                transactions = transactions.Where(t => t.Typ == filter.Typ).ToList();
+            }
+            // Filtrerar ut kategorier av transaktioner
+            if (filter.Kategori.Count > 0)
+            {
+                transactions = transactions.Where(t => filter.Kategori.Contains(t.Kategori!)).ToList();
+            }
+
+            // Filtrerar ut från datum av transaktioner
+            if (filter.fDate.HasValue)
+            {
+                // Alla transaktioner som ligger i framtiden eller samma dag som det valda datumet
+                transactions = transactions.Where(t => DateTime.Parse(t.Datum!) >= filter.fDate).ToList();
+            }
+
+            // Filtrerar ut till datum av transaktioner
+            if (filter.tDate.HasValue)
+            {
+                // Tar alla transaktioner som ligger innan eller samma som det valda datumet
+                transactions = transactions.Where(t => DateTime.Parse(t.Datum!) <= filter.tDate).ToList();
+            }
+                return transactions.ToList();
+        }
     }
 }

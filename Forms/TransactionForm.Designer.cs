@@ -252,7 +252,7 @@
             filterPanel.ForeColor = Color.White;
             filterPanel.Location = new Point(0, 0);
             filterPanel.Name = "filterPanel";
-            filterPanel.Size = new Size(211, 561);
+            filterPanel.Size = new Size(179, 561);
             filterPanel.TabIndex = 18;
             filterPanel.Visible = false;
             // 
@@ -260,9 +260,9 @@
             // 
             closeFilterPanelButton.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             closeFilterPanelButton.ForeColor = Color.Black;
-            closeFilterPanelButton.Location = new Point(171, 18);
+            closeFilterPanelButton.Location = new Point(137, 12);
             closeFilterPanelButton.Name = "closeFilterPanelButton";
-            closeFilterPanelButton.Size = new Size(28, 28);
+            closeFilterPanelButton.Size = new Size(28, 31);
             closeFilterPanelButton.TabIndex = 18;
             closeFilterPanelButton.Text = "X";
             closeFilterPanelButton.UseVisualStyleBackColor = true;
@@ -274,7 +274,7 @@
             filterCategoryListBox.FormattingEnabled = true;
             filterCategoryListBox.Location = new Point(3, 144);
             filterCategoryListBox.Name = "filterCategoryListBox";
-            filterCategoryListBox.Size = new Size(196, 130);
+            filterCategoryListBox.Size = new Size(162, 130);
             filterCategoryListBox.TabIndex = 17;
             filterCategoryListBox.ItemCheck += filterCategoryListBox_ItemCheck_1;
             // 
@@ -282,18 +282,19 @@
             // 
             filterApplyButton.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
             filterApplyButton.ForeColor = Color.Black;
-            filterApplyButton.Location = new Point(114, 460);
+            filterApplyButton.Location = new Point(101, 460);
             filterApplyButton.Name = "filterApplyButton";
             filterApplyButton.Size = new Size(75, 31);
             filterApplyButton.TabIndex = 15;
             filterApplyButton.Text = "Filtrera";
             filterApplyButton.UseVisualStyleBackColor = true;
+            filterApplyButton.Click += filterApplyButton_Click;
             // 
             // filterResetButton
             // 
             filterResetButton.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
             filterResetButton.ForeColor = Color.Black;
-            filterResetButton.Location = new Point(18, 460);
+            filterResetButton.Location = new Point(5, 460);
             filterResetButton.Name = "filterResetButton";
             filterResetButton.Size = new Size(80, 31);
             filterResetButton.TabIndex = 14;
@@ -308,7 +309,6 @@
             filterTypeComboBox.Name = "filterTypeComboBox";
             filterTypeComboBox.Size = new Size(151, 26);
             filterTypeComboBox.TabIndex = 6;
-            filterTypeComboBox.SelectedIndexChanged += filterComboBox_SelectedIndexChanged;
             // 
             // TransactionForm
             // 
@@ -353,7 +353,6 @@
         private Label filterToDateLabel;
         private DateTimePicker fromDatePicker;
         private DateTimePicker toDatePicker;
-        private TextBox textBox3;
         private Button filterApplyButton;
         private Button filterButton;
         private Panel filterPanel;
