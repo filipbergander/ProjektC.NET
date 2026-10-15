@@ -16,6 +16,7 @@ namespace Projekt.Services
         }
 
 
+
         public async Task<(float MonthBalanceSum, float IncomeSum, float ExpenseSum)> InsertFinanceValues()
         {
             List<Transaction> allTransactions = await transaction.GetTransactions();
@@ -26,6 +27,7 @@ namespace Projekt.Services
             var incomeSum = allTransactions.Where(t => t.Datum != null && t.Datum.StartsWith(currentYearMonth) && t.Typ == "Inkomst").Sum(t => t.Belopp);
 
             var expenseSum = allTransactions.Where(t => t.Datum != null && t.Datum.StartsWith(currentYearMonth) && t.Typ == "Utgift").Sum(t => t.Belopp);
+
             return (monthBalanceSum, incomeSum, expenseSum);
         }
     }

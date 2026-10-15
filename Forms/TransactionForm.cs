@@ -17,23 +17,25 @@ namespace Projekt.Forms
         private readonly MainForm mainForm; // Instans av mainform
         private string currentSortColumn = ""; // Vilken kolumn som är sorterad i datagriden
         private bool ascending = true; // Sorteringsordningen för kolumnerna i datagriden
-        private readonly TransactionService _transaction;   // Instans av TransactionService
+        private readonly TransactionService transaction;   // Instans av TransactionService
 
         private List<Transaction> transactions = new List<Transaction>();
         // Konstruktor som tar emot en instans av TransactionService (transaction) och sätter den till _transaction
         public TransactionForm(TransactionService transaction, MainForm mainForm)
         {
             InitializeComponent();
-            _transaction = transaction;
+            this.transaction = transaction;
             this.mainForm = mainForm;
             LoadTransactions(); // Hämtar in alla sparade transaktioner
         }
         // Hämtar in transaktioner sparade i databasen och visar i datagriden (listan av transaktioner)
         private async void LoadTransactions()
         {
-            transactions = await _transaction.GetTransactions();
+            transactions = await transaction.GetTransactions();
             transactionGrid.DataSource = null;
             transactionGrid.DataSource = transactions;
+            totalTransactionsPostLabel.Text = $"Visar {transactions.Count} transaktioner";
+
         }
         // Sorterar kolumnerna i datagriden när man klickar på kolumnrubriken, och lägger till en pil som visar sorteringsordningen (fallande/stigande)
         private async void transactionGrid_ColumnHeaderMouseClick_1(object sender, DataGridViewCellMouseEventArgs e)
@@ -57,7 +59,7 @@ namespace Projekt.Forms
                 currentSortColumn = columnName;
             }
             // Hämtar in de sorterade transaktionerna och visar dem i datagriden
-            var sortedTransactions = await _transaction.GetSortedTransactions(columnName, ascending);
+            var sortedTransactions = await transaction.GetSortedTransactions(columnName, ascending);
             transactionGrid.DataSource = null;
             transactionGrid.DataSource = sortedTransactions;
 
@@ -83,6 +85,19 @@ namespace Projekt.Forms
             refreshedColumn.HeaderText += ascending ? " ▲" : " ▼";
         }
 
+        // Ändrar muspekaren på datagridens kolumnrubriker vid hover
+        private void transactionGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 && e.ColumnIndex >= 0) // Hover på de faktiska kolumnrubrikerna (inte på celler)
+            {
+                transactionGrid.Cursor = Cursors.Hand; // Muspekaren -> hand
+            }
+            else
+            {
+                transactionGrid.Cursor = Cursors.Default; // Muspekaren -> standard
+            }
+        }
+
         // Går tillbaka till Mainform vid klick -> "Gå tillbaka" knapp
         private void transactionFormReturnBtn_Click(object sender, EventArgs e)
         {
@@ -92,7 +107,7 @@ namespace Projekt.Forms
         // Öppnar formuläret för att lägga till en ny transaktion vid klick -> "Lägg till"
         private void AddNewTransactionBtn_Click(object sender, EventArgs e)
         {
-            var addTransactionForm = new AddTransactionForm(_transaction);
+            var addTransactionForm = new AddTransactionForm(transaction);
             addTransactionForm.FormClosed += (s, args) =>
             {
                 this.Show(); // Laddar om transaktionerna när formuläret stängs
@@ -106,17 +121,29 @@ namespace Projekt.Forms
         {
             this.Close();
         }
-        // Ändrar muspekaren på datagridens kolumnrubriker vid hover
-        private void transactionGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        // Formaterar cellerna i datagriden för att visa "belopp" med röd/grön färg och +- beroende på om det är en utgift eller inkomst
+        private void transactionGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex == -1 && e.ColumnIndex >= 0) // Hover på de faktiska kolumnrubrikerna (inte på celler)
+            // Varje transaktionsrad i datagriden
+            var transaction = transactionGrid.Rows[e.RowIndex].DataBoundItem as Transaction;
+
+            // Om det inte är Belopp-kolumnen gör metoden inget..
+            if (e.RowIndex < 0 || transactionGrid.Columns[e.ColumnIndex].DataPropertyName != "Belopp")
+                return;
+
+            // Ändrar beloppets färg samt +- beroende på om transaktionen är utgift/inkomst
+            if (transaction.Typ == "Utgift")
             {
-                transactionGrid.Cursor = Cursors.Hand; // Muspekaren -> hand
+                e.Value = $"-{transaction.Belopp:N2} kr"; 
+                e.CellStyle.ForeColor = Color.Firebrick;
             }
             else
             {
-                transactionGrid.Cursor = Cursors.Default; // Muspekaren -> standard
+                e.Value = $"+{transaction.Belopp:N2} kr";
+                e.CellStyle.ForeColor = Color.SeaGreen;
             }
+            // Formateringen har gjorts
+            e.FormattingApplied = true;
         }
     }
 }

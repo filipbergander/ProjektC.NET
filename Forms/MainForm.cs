@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Data;
 using System.Drawing;
 using System.Text;
@@ -20,7 +21,7 @@ namespace Projekt.Forms
             InitializeComponent();
             transaction = new TransactionService();
             financeService = new FinanceService(transaction);
-            InsertValues();
+            InsertFinanceValues();
         }
 
         private void mainFormTransactionBtn_Click(object sender, EventArgs e)
@@ -34,20 +35,23 @@ namespace Projekt.Forms
             form.FormClosed += (s, args) =>
             {
                 this.Show();
-                InsertValues();
+                InsertFinanceValues();
             };
             form.Show();
             this.Hide();
         }
         // Hämtar in värdena som metoden i financeService kalkylerat och returnerar dem i labels ínom mainform
-        private async void InsertValues()
+        private async void InsertFinanceValues()
         {
+            string monthNow = DateTime.Now.ToString("MMMM", new CultureInfo("sv-SE"));
+            monthNow = char.ToUpper(monthNow[0]) + monthNow.Substring(1); // Gör första bokstaven i månadens namn som versal
             // Värdena från financeservice
             var (monthBalanceSum, incomeSum, expenseSum) = await financeService.InsertFinanceValues();
             // Labels inom layoutpanel
+            mainFormMonthLabel.Text = $"Totalt {monthNow}: ";
             monthValueLabel.Text = $"{monthBalanceSum:N2} kr";
-            totalIncomeLabel.Text = $"{incomeSum:N2} kr";
-            totalExpenseLabel.Text = $"{expenseSum:N2} kr";
-        }
+            totalIncomeLabel.Text = $"+ {incomeSum:N2} kr";
+            totalExpenseLabel.Text = $"- {expenseSum:N2} kr";
+                    }
     }
 }

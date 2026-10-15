@@ -14,13 +14,13 @@ namespace Projekt.Forms
     public partial class AddTransactionForm : Form
     {
         // Instans av TransactionService
-        private readonly TransactionService _transaction;
+        private readonly TransactionService transaction;
 
         // Konstruktor som initierar AddTransactionForm, samt instans av en ny Transaction
         public AddTransactionForm(TransactionService transaction)
         {
             InitializeComponent(); // Startar upp formuläret med alla komponenter
-            _transaction = transaction;
+            this.transaction = transaction;
         }
         // Vid klick på knappen "Spara" läggs den nya transaktionen till i listan av transaktioner & i databasen
         private async void SaveAddTransactionBtn_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace Projekt.Forms
             category = char.ToUpper(category[0]) + category.Substring(1);
 
             // Lägger till den specifika transaktionen i listan av transaktioner
-            await _transaction.AddTransaction(type, title, category, amount);
+            await transaction.AddTransaction(type, title, category, amount);
 
             // Återställer inputs
             ResetForm();

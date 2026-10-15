@@ -32,6 +32,7 @@
             transactionsHeaderLabel = new Label();
             transactionFormReturnBtn = new Button();
             AddNewTransactionBtn = new Button();
+            totalTransactionsPostLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)transactionGrid).BeginInit();
             SuspendLayout();
             // 
@@ -47,6 +48,7 @@
             transactionGrid.Name = "transactionGrid";
             transactionGrid.Size = new Size(835, 229);
             transactionGrid.TabIndex = 0;
+            transactionGrid.CellFormatting += transactionGrid_CellFormatting;
             transactionGrid.CellMouseEnter += transactionGrid_CellMouseEnter;
             transactionGrid.ColumnHeaderMouseClick += transactionGrid_ColumnHeaderMouseClick_1;
             // 
@@ -85,12 +87,22 @@
             AddNewTransactionBtn.UseVisualStyleBackColor = true;
             AddNewTransactionBtn.Click += AddNewTransactionBtn_Click;
             // 
+            // totalTransactionsPostLabel
+            // 
+            totalTransactionsPostLabel.AutoSize = true;
+            totalTransactionsPostLabel.Location = new Point(218, 432);
+            totalTransactionsPostLabel.Name = "totalTransactionsPostLabel";
+            totalTransactionsPostLabel.Size = new Size(56, 18);
+            totalTransactionsPostLabel.TabIndex = 4;
+            totalTransactionsPostLabel.Text = "label1";
+            // 
             // TransactionForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
+            Controls.Add(totalTransactionsPostLabel);
             Controls.Add(AddNewTransactionBtn);
             Controls.Add(transactionFormReturnBtn);
             Controls.Add(transactionsHeaderLabel);
@@ -111,5 +123,6 @@
         private Label transactionsHeaderLabel;
         private Button transactionFormReturnBtn;
         private Button AddNewTransactionBtn;
+        private Label totalTransactionsPostLabel;
     }
 }
