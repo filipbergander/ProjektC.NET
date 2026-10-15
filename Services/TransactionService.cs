@@ -34,21 +34,5 @@ namespace Projekt.Services
         {
             return await database.Set<Transaction>().ToListAsync();
         }
-
-        public async Task<List<Transaction>> GetSortedTransactions(string columnClicked, bool ascending)
-        {
-            var transactions = await GetTransactions();
-            IEnumerable<Transaction> sortedTranscations = columnClicked switch
-            {
-                nameof(Transaction.Id) => ascending ? transactions.OrderBy(t => t.Id) : transactions.OrderByDescending(t => t.Id),
-                nameof(Transaction.Typ) => ascending ? transactions.OrderBy(t => t.Typ) : transactions.OrderByDescending(t => t.Typ),
-                nameof(Transaction.Namn) => ascending ? transactions.OrderBy(t => t.Namn) : transactions.OrderByDescending(t => t.Namn),
-                nameof(Transaction.Kategori) => ascending ? transactions.OrderBy(t => t.Kategori) : transactions.OrderByDescending(t => t.Kategori),
-                nameof(Transaction.Belopp) => ascending ? transactions.OrderBy(t => t.Belopp) : transactions.OrderByDescending(t => t.Belopp),
-                nameof(Transaction.Datum) => ascending ? transactions.OrderBy(t => t.Datum) : transactions.OrderByDescending(t => t.Datum),
-                _ => transactions
-            };
-            return sortedTranscations.ToList();
-        }
     }
 }

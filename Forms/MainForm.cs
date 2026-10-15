@@ -45,13 +45,18 @@ namespace Projekt.Forms
         {
             string monthNow = DateTime.Now.ToString("MMMM", new CultureInfo("sv-SE"));
             monthNow = char.ToUpper(monthNow[0]) + monthNow.Substring(1); // Gör första bokstaven i månadens namn som versal
+
             // Värdena från financeservice
             var (monthBalanceSum, incomeSum, expenseSum) = await financeService.InsertFinanceValues();
+
             // Labels inom layoutpanel
             mainFormMonthLabel.Text = $"Totalt {monthNow}: ";
             monthValueLabel.Text = $"{monthBalanceSum:N2} kr";
             totalIncomeLabel.Text = $"+ {incomeSum:N2} kr";
             totalExpenseLabel.Text = $"- {expenseSum:N2} kr";
-                    }
+
+            // Om totala saldot för månaden är positivt -> visa värdet i grönt, annars rött
+            monthValueLabel.ForeColor = monthBalanceSum >= 0 ? Color.SeaGreen : Color.Firebrick;
+        }
     }
 }

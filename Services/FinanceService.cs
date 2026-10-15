@@ -8,25 +8,30 @@ namespace Projekt.Services
 {
     internal class FinanceService
     {
+        // Instans av Transactionsservicen
         private readonly TransactionService transaction;
 
         public FinanceService(TransactionService transaction)
         {
             this.transaction = transaction;
         }
-
-
-
+        // Beräknar för aktuell månad summan av inkomster, utgifter och totala saldo
         public async Task<(float MonthBalanceSum, float IncomeSum, float ExpenseSum)> InsertFinanceValues()
         {
+            // Hämtar in alla transaktioner
             List<Transaction> allTransactions = await transaction.GetTransactions();
-            string currentYearMonth = DateTime.Now.ToString("yyyy-MM");
-            var monthBalanceSum = allTransactions.Where(t => t.Datum != null && t.Datum.StartsWith(currentYearMonth) && t.Typ == "Inkomst").Sum(t => t.Belopp) -
-                allTransactions.Where(t => t.Datum != null && t.Datum.StartsWith(currentYearMonth) && t.Typ == "Utgift").Sum(t => t.Belopp);
 
+            // Aktuella månaden
+            string currentYearMonth = DateTime.Now.ToString("yyyy-MM");
+
+            // Summan inkomster
             var incomeSum = allTransactions.Where(t => t.Datum != null && t.Datum.StartsWith(currentYearMonth) && t.Typ == "Inkomst").Sum(t => t.Belopp);
 
+            // Summan utgifter
             var expenseSum = allTransactions.Where(t => t.Datum != null && t.Datum.StartsWith(currentYearMonth) && t.Typ == "Utgift").Sum(t => t.Belopp);
+
+            // Totala saldot
+            var monthBalanceSum = incomeSum - expenseSum;
 
             return (monthBalanceSum, incomeSum, expenseSum);
         }

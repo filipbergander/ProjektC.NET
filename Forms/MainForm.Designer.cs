@@ -54,11 +54,11 @@
             // mainFormMonthLabel
             // 
             mainFormMonthLabel.AutoSize = true;
-            mainFormMonthLabel.Font = new Font("Lucida Sans", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            mainFormMonthLabel.ForeColor = Color.Gray;
+            mainFormMonthLabel.Font = new Font("Lucida Sans", 12F);
+            mainFormMonthLabel.ForeColor = SystemColors.ControlText;
             mainFormMonthLabel.Location = new Point(13, 10);
             mainFormMonthLabel.Name = "mainFormMonthLabel";
-            mainFormMonthLabel.Size = new Size(119, 17);
+            mainFormMonthLabel.Size = new Size(127, 18);
             mainFormMonthLabel.TabIndex = 1;
             mainFormMonthLabel.Text = "Denna (månad):";
             // 
@@ -102,7 +102,7 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tableLayoutPanel1.BackColor = Color.Khaki;
+            tableLayoutPanel1.BackColor = Color.White;
             tableLayoutPanel1.BackgroundImageLayout = ImageLayout.None;
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
@@ -129,7 +129,7 @@
             totalIncomeLabel.AutoSize = true;
             totalIncomeLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             totalIncomeLabel.ForeColor = Color.SeaGreen;
-            totalIncomeLabel.Location = new Point(138, 57);
+            totalIncomeLabel.Location = new Point(146, 57);
             totalIncomeLabel.Name = "totalIncomeLabel";
             totalIncomeLabel.Size = new Size(56, 18);
             totalIncomeLabel.TabIndex = 8;
@@ -139,7 +139,7 @@
             // 
             monthValueLabel.AutoSize = true;
             monthValueLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            monthValueLabel.Location = new Point(138, 10);
+            monthValueLabel.Location = new Point(146, 10);
             monthValueLabel.Name = "monthValueLabel";
             monthValueLabel.Size = new Size(56, 18);
             monthValueLabel.TabIndex = 7;
@@ -150,7 +150,7 @@
             totalExpenseLabel.AutoSize = true;
             totalExpenseLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             totalExpenseLabel.ForeColor = Color.Firebrick;
-            totalExpenseLabel.Location = new Point(138, 104);
+            totalExpenseLabel.Location = new Point(146, 104);
             totalExpenseLabel.Name = "totalExpenseLabel";
             totalExpenseLabel.Size = new Size(56, 18);
             totalExpenseLabel.TabIndex = 9;

@@ -18,6 +18,7 @@ namespace Projekt.Forms
         private string currentSortColumn = ""; // Vilken kolumn som är sorterad i datagriden
         private bool ascending = true; // Sorteringsordningen för kolumnerna i datagriden
         private readonly TransactionService transaction;   // Instans av TransactionService
+        private readonly QueryService queryService; // Instans av TransactionQueryService
 
         private List<Transaction> transactions = new List<Transaction>();
         // Konstruktor som tar emot en instans av TransactionService (transaction) och sätter den till _transaction
@@ -26,14 +27,15 @@ namespace Projekt.Forms
             InitializeComponent();
             this.transaction = transaction;
             this.mainForm = mainForm;
-            LoadTransactions(); // Hämtar in alla sparade transaktioner
+            this.queryService = new QueryService(transaction);
+            LoadTransactions(); // Hämtar in alla sparade transaktioner 
         }
         // Hämtar in transaktioner sparade i databasen och visar i datagriden (listan av transaktioner)
         private async void LoadTransactions()
         {
             transactions = await transaction.GetTransactions();
-            transactionGrid.DataSource = null;
-            transactionGrid.DataSource = transactions;
+            resetTransactionGrid();
+            await AddFilterInfo();
             totalTransactionsPostLabel.Text = $"Visar {transactions.Count} transaktioner";
 
         }
@@ -59,9 +61,8 @@ namespace Projekt.Forms
                 currentSortColumn = columnName;
             }
             // Hämtar in de sorterade transaktionerna och visar dem i datagriden
-            var sortedTransactions = await transaction.GetSortedTransactions(columnName, ascending);
-            transactionGrid.DataSource = null;
-            transactionGrid.DataSource = sortedTransactions;
+            var sortedTransactions = await queryService.GetSortedTransactions(columnName, ascending);
+            resetTransactionGrid();
 
             //Återställer kolumnrubrikerna till sitt ordinarie namn varje gång vid klick, annars läggs text till på text
             foreach (DataGridViewColumn column in transactionGrid.Columns)
@@ -83,6 +84,14 @@ namespace Projekt.Forms
             // Lägger till pilen som visar sorteringsordningen (fallande/stigande) på den klickade kolumnen
             var refreshedColumn = transactionGrid.Columns[e.ColumnIndex];
             refreshedColumn.HeaderText += ascending ? " ▲" : " ▼";
+        }
+
+        // Uppdaterar & återställer datagriden med transaktionerna
+        private void resetTransactionGrid()
+        {
+            transactionGrid.DataSource = null;
+            transactionGrid.DataSource = transactions;
+            OrderColumns();
         }
 
         // Ändrar muspekaren på datagridens kolumnrubriker vid hover
@@ -132,18 +141,96 @@ namespace Projekt.Forms
                 return;
 
             // Ändrar beloppets färg samt +- beroende på om transaktionen är utgift/inkomst
-            if (transaction.Typ == "Utgift")
+            if (transaction?.Typ == "Utgift")
             {
-                e.Value = $"-{transaction.Belopp:N2} kr"; 
+                e.Value = $"-{transaction.Belopp:N2} kr";
                 e.CellStyle.ForeColor = Color.Firebrick;
             }
             else
             {
-                e.Value = $"+{transaction.Belopp:N2} kr";
+                e.Value = $"+{transaction?.Belopp:N2} kr";
                 e.CellStyle.ForeColor = Color.SeaGreen;
             }
             // Formateringen har gjorts
             e.FormattingApplied = true;
+        }
+        // Döljer id-kolumnen i datagriden och sätter en valfri ordning på resterande kolumner
+        private void OrderColumns()
+        {
+            // Dölj Id-kolumnen
+            if (transactionGrid.Columns["Id"] != null)
+            {
+                transactionGrid.Columns["Id"]?.Visible = false;
+            }
+            // Sätter ordningen i datagridens resterande kolumner
+            if (transactionGrid.Columns["Datum"] != null)
+            {
+                transactionGrid.Columns?["Datum"]?.DisplayIndex = 0;
+                transactionGrid.Columns?["Namn"]?.DisplayIndex = 1;
+                transactionGrid.Columns?["Kategori"]?.DisplayIndex = 2;
+                transactionGrid.Columns?["Typ"]?.DisplayIndex = 3;
+                transactionGrid.Columns?["Belopp"]?.DisplayIndex = 4;
+            }
+        }
+
+        //public async Task<List<Transaction>> FilterTransactions()
+        //{
+
+        //}
+
+        // Togglar mellan att visa och dölja filterpanelen vid klick -> "Filter" knapp
+        private void filterButton_Click(object sender, EventArgs e)
+        {
+            filterPanel.Visible = !filterPanel.Visible;
+        }
+        // Stänger filterpanelen vid klick -> "X" knappen inuti panelen
+        private void closeFilterPanelButton_Click_1(object sender, EventArgs e)
+        {
+            filterPanel.Visible = false;
+        }
+        private void filterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        // Lägger till alternativ i filterpanelen för att filtrera transaktionerna i datagriden
+        private async Task AddFilterInfo()
+        {
+            var categories = await queryService.GetCategoryValues();
+            categories.Insert(0, "Alla"); // Lägger till "Alla kategorier" som första alternativ i listan
+
+            var types = await queryService.GetTypeValues();
+            types.Insert(0, "Alla"); // Lägger till "Alla typer" som första alternativ i listan
+            filterCategoryListBox.DataSource = categories;
+            filterTypeComboBox.DataSource = types;
+        }
+        // Rensar filterpanelen till default-värden vid klick -> "Rensa" knapp
+        private void filterResetButton_Click(object sender, EventArgs e)
+        {
+            filterTypeComboBox.SelectedIndex = 0;
+            filterCategoryListBox.ClearSelected();
+            fromDatePicker.Value = DateTime.Now;
+            toDatePicker.Value = DateTime.Now;
+
+            resetTransactionGrid();
+        }
+        // Togglar kategorier vid klick på "Alla" i filterpanelens listbox
+        private void filterCategoryListBox_ItemCheck_1(object sender, ItemCheckEventArgs e)
+        {
+
+            // Om man inte klickar på "Alla" kategorier -> return
+            if (e.Index != 0)
+                return;
+            {
+                BeginInvoke(() =>
+                {
+                    bool checkState = e.NewValue == CheckState.Checked; // true/false om "Alla" är bockad eller inte
+
+                    for (int i = 1; i < filterCategoryListBox.Items.Count; i++) // Alla kategorier som finns
+                    {
+                        filterCategoryListBox.SetItemChecked(i, checkState); // Bockar/avbockar alla kategorier, beroende på om "Alla" är bockad eller inte
+                    }
+                });
+            }
         }
     }
 }
