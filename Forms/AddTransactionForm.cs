@@ -76,7 +76,13 @@ namespace Projekt.Forms
             category = char.ToUpper(category[0]) + category.Substring(1);
 
             // Lägger till den specifika transaktionen i listan av transaktioner
-            await transaction.AddTransaction(type, title, category, amount);
+            bool added = await transaction.AddTransaction(type, title, category, amount);
+
+            if (!added)
+            {errorLabel.ForeColor = Color.Red;
+                errorLabel.Text = "Transaktionen finns redan!";
+                return;
+            }
 
             // Återställer inputs
             ResetForm();

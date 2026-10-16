@@ -99,6 +99,7 @@
             transactionGrid.CellFormatting += transactionGrid_CellFormatting;
             transactionGrid.CellMouseEnter += transactionGrid_CellMouseEnter;
             transactionGrid.ColumnHeaderMouseClick += transactionGrid_ColumnHeaderMouseClick_1;
+            transactionGrid.SelectionChanged += transactionGrid_SelectionChanged;
             // 
             // transactionsHeaderLabel
             // 
@@ -378,8 +379,9 @@
             // 
             // deleteTransactionBtn
             // 
-            deleteTransactionBtn.BackColor = Color.Coral;
+            deleteTransactionBtn.BackColor = Color.LightGray;
             deleteTransactionBtn.Cursor = Cursors.Hand;
+            deleteTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
             deleteTransactionBtn.Location = new Point(550, 445);
             deleteTransactionBtn.Name = "deleteTransactionBtn";
             deleteTransactionBtn.Size = new Size(97, 46);
@@ -392,9 +394,10 @@
             // 
             updateTransactionBtn.BackColor = Color.FromArgb(128, 128, 255);
             updateTransactionBtn.Cursor = Cursors.Hand;
+            updateTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
             updateTransactionBtn.Location = new Point(699, 445);
             updateTransactionBtn.Name = "updateTransactionBtn";
-            updateTransactionBtn.Size = new Size(97, 46);
+            updateTransactionBtn.Size = new Size(106, 46);
             updateTransactionBtn.TabIndex = 20;
             updateTransactionBtn.Text = "Uppdatera";
             updateTransactionBtn.UseVisualStyleBackColor = false;
