@@ -10,7 +10,7 @@ namespace Projekt.Services
     {
         // Instans av Transactionsservicen
         private readonly TransactionService transaction;
-
+        // Konstruktor
         public FinanceService(TransactionService transaction)
         {
             this.transaction = transaction;

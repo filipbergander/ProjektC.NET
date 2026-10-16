@@ -82,6 +82,7 @@
             // 
             // mainFormTransactionBtn
             // 
+            mainFormTransactionBtn.Cursor = Cursors.Hand;
             mainFormTransactionBtn.Location = new Point(423, 410);
             mainFormTransactionBtn.Name = "mainFormTransactionBtn";
             mainFormTransactionBtn.Size = new Size(125, 40);
@@ -92,6 +93,7 @@
             // 
             // mainFormStatsBtn
             // 
+            mainFormStatsBtn.Cursor = Cursors.Hand;
             mainFormStatsBtn.Location = new Point(617, 410);
             mainFormStatsBtn.Name = "mainFormStatsBtn";
             mainFormStatsBtn.Size = new Size(125, 40);

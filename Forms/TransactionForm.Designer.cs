@@ -38,7 +38,7 @@
             totalTransactionsPostLabel = new Label();
             filterLabel = new Label();
             filterSearchLabel = new Label();
-            textBox1 = new TextBox();
+            searchTransactionBox = new TextBox();
             filterCategoryLabel = new Label();
             filterTypeLabel = new Label();
             filterFromDateLabel = new Label();
@@ -47,13 +47,22 @@
             toDatePicker = new DateTimePicker();
             filterButton = new Button();
             filterPanel = new Panel();
+            maxAmountNumeric = new NumericUpDown();
+            maxAmountLabel = new Label();
+            minAmountLabel = new Label();
+            minAmountNumeric = new NumericUpDown();
             closeFilterPanelButton = new Button();
             filterCategoryListBox = new CheckedListBox();
             filterApplyButton = new Button();
             filterResetButton = new Button();
             filterTypeComboBox = new ComboBox();
+            deleteTransactionBtn = new Button();
+            updateTransactionBtn = new Button();
+            modifyTransactionsLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)transactionGrid).BeginInit();
             filterPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)minAmountNumeric).BeginInit();
             SuspendLayout();
             // 
             // transactionGrid
@@ -106,6 +115,7 @@
             // 
             transactionFormReturnBtn.Anchor = AnchorStyles.Left;
             transactionFormReturnBtn.AutoSize = true;
+            transactionFormReturnBtn.Cursor = Cursors.Hand;
             transactionFormReturnBtn.Location = new Point(19, 504);
             transactionFormReturnBtn.Margin = new Padding(10);
             transactionFormReturnBtn.Name = "transactionFormReturnBtn";
@@ -118,12 +128,15 @@
             // 
             // AddNewTransactionBtn
             // 
-            AddNewTransactionBtn.Location = new Point(286, 409);
+            AddNewTransactionBtn.BackColor = Color.FromArgb(0, 192, 0);
+            AddNewTransactionBtn.Cursor = Cursors.Hand;
+            AddNewTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AddNewTransactionBtn.Location = new Point(414, 445);
             AddNewTransactionBtn.Name = "AddNewTransactionBtn";
             AddNewTransactionBtn.Size = new Size(97, 46);
             AddNewTransactionBtn.TabIndex = 3;
             AddNewTransactionBtn.Text = "Lägg till";
-            AddNewTransactionBtn.UseVisualStyleBackColor = true;
+            AddNewTransactionBtn.UseVisualStyleBackColor = false;
             AddNewTransactionBtn.Click += AddNewTransactionBtn_Click;
             // 
             // totalTransactionsPostLabel
@@ -156,18 +169,21 @@
             filterSearchLabel.TabIndex = 6;
             filterSearchLabel.Text = "Sök: ";
             // 
-            // textBox1
+            // searchTransactionBox
             // 
-            textBox1.Location = new Point(488, 133);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(246, 26);
-            textBox1.TabIndex = 7;
+            searchTransactionBox.Cursor = Cursors.IBeam;
+            searchTransactionBox.Location = new Point(488, 133);
+            searchTransactionBox.Name = "searchTransactionBox";
+            searchTransactionBox.PlaceholderText = "Sök efter transaktioner";
+            searchTransactionBox.Size = new Size(246, 26);
+            searchTransactionBox.TabIndex = 7;
+            searchTransactionBox.TextChanged += searchTransactionBox_TextChanged;
             // 
             // filterCategoryLabel
             // 
             filterCategoryLabel.AutoSize = true;
             filterCategoryLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            filterCategoryLabel.Location = new Point(6, 123);
+            filterCategoryLabel.Location = new Point(5, 102);
             filterCategoryLabel.Name = "filterCategoryLabel";
             filterCategoryLabel.Size = new Size(103, 18);
             filterCategoryLabel.TabIndex = 8;
@@ -177,7 +193,7 @@
             // 
             filterTypeLabel.AutoSize = true;
             filterTypeLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            filterTypeLabel.Location = new Point(6, 67);
+            filterTypeLabel.Location = new Point(5, 46);
             filterTypeLabel.Name = "filterTypeLabel";
             filterTypeLabel.Size = new Size(41, 18);
             filterTypeLabel.TabIndex = 9;
@@ -187,7 +203,7 @@
             // 
             filterFromDateLabel.AutoSize = true;
             filterFromDateLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            filterFromDateLabel.Location = new Point(6, 305);
+            filterFromDateLabel.Location = new Point(3, 377);
             filterFromDateLabel.Name = "filterFromDateLabel";
             filterFromDateLabel.Size = new Size(47, 18);
             filterFromDateLabel.TabIndex = 10;
@@ -197,7 +213,7 @@
             // 
             filterToDateLabel.AutoSize = true;
             filterToDateLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            filterToDateLabel.Location = new Point(12, 363);
+            filterToDateLabel.Location = new Point(9, 435);
             filterToDateLabel.Name = "filterToDateLabel";
             filterToDateLabel.Size = new Size(34, 18);
             filterToDateLabel.TabIndex = 11;
@@ -205,26 +221,29 @@
             // 
             // fromDatePicker
             // 
+            fromDatePicker.Cursor = Cursors.Hand;
             fromDatePicker.CustomFormat = "yyyy-MM-dd";
             fromDatePicker.Font = new Font("Lucida Sans", 10F);
             fromDatePicker.Format = DateTimePickerFormat.Short;
-            fromDatePicker.Location = new Point(6, 326);
+            fromDatePicker.Location = new Point(3, 398);
             fromDatePicker.Name = "fromDatePicker";
             fromDatePicker.Size = new Size(151, 23);
             fromDatePicker.TabIndex = 12;
             // 
             // toDatePicker
             // 
+            toDatePicker.Cursor = Cursors.Hand;
             toDatePicker.CustomFormat = "yyyy-MM-dd";
             toDatePicker.Font = new Font("Lucida Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             toDatePicker.Format = DateTimePickerFormat.Short;
-            toDatePicker.Location = new Point(6, 384);
+            toDatePicker.Location = new Point(3, 456);
             toDatePicker.Name = "toDatePicker";
             toDatePicker.Size = new Size(151, 23);
             toDatePicker.TabIndex = 13;
             // 
             // filterButton
             // 
+            filterButton.Cursor = Cursors.Hand;
             filterButton.Location = new Point(185, 123);
             filterButton.Name = "filterButton";
             filterButton.Size = new Size(97, 36);
@@ -236,6 +255,10 @@
             // filterPanel
             // 
             filterPanel.BackColor = Color.FromArgb(44, 62, 80);
+            filterPanel.Controls.Add(maxAmountNumeric);
+            filterPanel.Controls.Add(maxAmountLabel);
+            filterPanel.Controls.Add(minAmountLabel);
+            filterPanel.Controls.Add(minAmountNumeric);
             filterPanel.Controls.Add(closeFilterPanelButton);
             filterPanel.Controls.Add(filterCategoryListBox);
             filterPanel.Controls.Add(filterApplyButton);
@@ -252,12 +275,52 @@
             filterPanel.ForeColor = Color.White;
             filterPanel.Location = new Point(0, 0);
             filterPanel.Name = "filterPanel";
-            filterPanel.Size = new Size(179, 561);
+            filterPanel.Size = new Size(188, 561);
             filterPanel.TabIndex = 18;
             filterPanel.Visible = false;
             // 
+            // maxAmountNumeric
+            // 
+            maxAmountNumeric.Cursor = Cursors.Hand;
+            maxAmountNumeric.Location = new Point(5, 335);
+            maxAmountNumeric.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            maxAmountNumeric.Name = "maxAmountNumeric";
+            maxAmountNumeric.Size = new Size(151, 26);
+            maxAmountNumeric.TabIndex = 22;
+            maxAmountNumeric.Value = new decimal(new int[] { 100000, 0, 0, 0 });
+            // 
+            // maxAmountLabel
+            // 
+            maxAmountLabel.AutoSize = true;
+            maxAmountLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
+            maxAmountLabel.Location = new Point(2, 314);
+            maxAmountLabel.Name = "maxAmountLabel";
+            maxAmountLabel.Size = new Size(103, 18);
+            maxAmountLabel.TabIndex = 21;
+            maxAmountLabel.Text = "Max belopp";
+            // 
+            // minAmountLabel
+            // 
+            minAmountLabel.AutoSize = true;
+            minAmountLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
+            minAmountLabel.Location = new Point(5, 260);
+            minAmountLabel.Name = "minAmountLabel";
+            minAmountLabel.Size = new Size(98, 18);
+            minAmountLabel.TabIndex = 20;
+            minAmountLabel.Text = "Min belopp";
+            // 
+            // minAmountNumeric
+            // 
+            minAmountNumeric.Cursor = Cursors.Hand;
+            minAmountNumeric.Location = new Point(2, 281);
+            minAmountNumeric.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
+            minAmountNumeric.Name = "minAmountNumeric";
+            minAmountNumeric.Size = new Size(154, 26);
+            minAmountNumeric.TabIndex = 19;
+            // 
             // closeFilterPanelButton
             // 
+            closeFilterPanelButton.Cursor = Cursors.Hand;
             closeFilterPanelButton.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             closeFilterPanelButton.ForeColor = Color.Black;
             closeFilterPanelButton.Location = new Point(137, 12);
@@ -271,18 +334,20 @@
             // filterCategoryListBox
             // 
             filterCategoryListBox.CheckOnClick = true;
+            filterCategoryListBox.Cursor = Cursors.Hand;
             filterCategoryListBox.FormattingEnabled = true;
-            filterCategoryListBox.Location = new Point(3, 144);
+            filterCategoryListBox.Location = new Point(2, 123);
             filterCategoryListBox.Name = "filterCategoryListBox";
-            filterCategoryListBox.Size = new Size(162, 130);
+            filterCategoryListBox.Size = new Size(176, 130);
             filterCategoryListBox.TabIndex = 17;
             filterCategoryListBox.ItemCheck += filterCategoryListBox_ItemCheck_1;
             // 
             // filterApplyButton
             // 
+            filterApplyButton.Cursor = Cursors.Hand;
             filterApplyButton.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
             filterApplyButton.ForeColor = Color.Black;
-            filterApplyButton.Location = new Point(101, 460);
+            filterApplyButton.Location = new Point(104, 504);
             filterApplyButton.Name = "filterApplyButton";
             filterApplyButton.Size = new Size(75, 31);
             filterApplyButton.TabIndex = 15;
@@ -292,9 +357,10 @@
             // 
             // filterResetButton
             // 
+            filterResetButton.Cursor = Cursors.Hand;
             filterResetButton.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
             filterResetButton.ForeColor = Color.Black;
-            filterResetButton.Location = new Point(5, 460);
+            filterResetButton.Location = new Point(8, 504);
             filterResetButton.Name = "filterResetButton";
             filterResetButton.Size = new Size(80, 31);
             filterResetButton.TabIndex = 14;
@@ -305,10 +371,42 @@
             // filterTypeComboBox
             // 
             filterTypeComboBox.FormattingEnabled = true;
-            filterTypeComboBox.Location = new Point(6, 88);
+            filterTypeComboBox.Location = new Point(5, 67);
             filterTypeComboBox.Name = "filterTypeComboBox";
             filterTypeComboBox.Size = new Size(151, 26);
             filterTypeComboBox.TabIndex = 6;
+            // 
+            // deleteTransactionBtn
+            // 
+            deleteTransactionBtn.BackColor = Color.Coral;
+            deleteTransactionBtn.Cursor = Cursors.Hand;
+            deleteTransactionBtn.Location = new Point(550, 445);
+            deleteTransactionBtn.Name = "deleteTransactionBtn";
+            deleteTransactionBtn.Size = new Size(97, 46);
+            deleteTransactionBtn.TabIndex = 19;
+            deleteTransactionBtn.Text = "Radera";
+            deleteTransactionBtn.UseVisualStyleBackColor = false;
+            deleteTransactionBtn.Click += deleteTransactionBtn_Click;
+            // 
+            // updateTransactionBtn
+            // 
+            updateTransactionBtn.BackColor = Color.FromArgb(128, 128, 255);
+            updateTransactionBtn.Cursor = Cursors.Hand;
+            updateTransactionBtn.Location = new Point(699, 445);
+            updateTransactionBtn.Name = "updateTransactionBtn";
+            updateTransactionBtn.Size = new Size(97, 46);
+            updateTransactionBtn.TabIndex = 20;
+            updateTransactionBtn.Text = "Uppdatera";
+            updateTransactionBtn.UseVisualStyleBackColor = false;
+            // 
+            // modifyTransactionsLabel
+            // 
+            modifyTransactionsLabel.AutoSize = true;
+            modifyTransactionsLabel.Location = new Point(501, 409);
+            modifyTransactionsLabel.Name = "modifyTransactionsLabel";
+            modifyTransactionsLabel.Size = new Size(208, 18);
+            modifyTransactionsLabel.TabIndex = 21;
+            modifyTransactionsLabel.Text = "Hantera dina transaktioner";
             // 
             // TransactionForm
             // 
@@ -316,9 +414,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
+            Controls.Add(modifyTransactionsLabel);
+            Controls.Add(updateTransactionBtn);
+            Controls.Add(deleteTransactionBtn);
             Controls.Add(filterPanel);
             Controls.Add(filterButton);
-            Controls.Add(textBox1);
+            Controls.Add(searchTransactionBox);
             Controls.Add(filterSearchLabel);
             Controls.Add(totalTransactionsPostLabel);
             Controls.Add(AddNewTransactionBtn);
@@ -333,6 +434,8 @@
             ((System.ComponentModel.ISupportInitialize)transactionGrid).EndInit();
             filterPanel.ResumeLayout(false);
             filterPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).EndInit();
+            ((System.ComponentModel.ISupportInitialize)minAmountNumeric).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -346,7 +449,7 @@
         private Label totalTransactionsPostLabel;
         private Label filterLabel;
         private Label filterSearchLabel;
-        private TextBox textBox1;
+        private TextBox searchTransactionBox;
         private Label filterCategoryLabel;
         private Label filterTypeLabel;
         private Label filterFromDateLabel;
@@ -360,5 +463,12 @@
         private Button filterResetButton;
         private CheckedListBox filterCategoryListBox;
         private Button closeFilterPanelButton;
+        private Button deleteTransactionBtn;
+        private Button updateTransactionBtn;
+        private Label modifyTransactionsLabel;
+        private NumericUpDown minAmountNumeric;
+        private NumericUpDown maxAmountNumeric;
+        private Label maxAmountLabel;
+        private Label minAmountLabel;
     }
 }

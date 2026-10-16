@@ -11,6 +11,7 @@ namespace Projekt.Services
 
         //private readonly List<Transaction> transactions = new List<Transaction>();
 
+        // Instans för att hantera databasen
         private readonly ProjektDbContext database;
         // Konstruktor
         public TransactionService()
@@ -29,7 +30,7 @@ namespace Projekt.Services
             // Sparar ned ändringar till databasen
             await database.SaveChangesAsync();
         }
-
+        // Hämtar in alla transaktioner från databasen
         public async Task<List<Transaction>> GetTransactions()
         {
             return await database.Set<Transaction>().ToListAsync();

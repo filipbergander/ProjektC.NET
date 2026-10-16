@@ -79,20 +79,39 @@ namespace Projekt.Services
                 transactions = transactions.Where(t => filter.Kategori.Contains(t.Kategori!)).ToList();
             }
 
+            if (filter.minBelopp.HasValue)
+            {
+                // Filtrerar ut transaktioner som är större än eller lika med minbeloppet
+                transactions = transactions.Where(t => t.Belopp >= filter.minBelopp).ToList();
+            }
+            if (filter.maxBelopp.HasValue)
+            {
+                // Filtrerar ut transaktioner som är mindre än eller lika med maxbeloppet
+                transactions = transactions.Where(t => t.Belopp <= filter.maxBelopp).ToList();
+            }
+
             // Filtrerar ut från datum av transaktioner
-            if (filter.fDate.HasValue)
+            if (filter.fDatum.HasValue)
             {
                 // Alla transaktioner som ligger i framtiden eller samma dag som det valda datumet
-                transactions = transactions.Where(t => DateTime.Parse(t.Datum!) >= filter.fDate).ToList();
+                transactions = transactions.Where(t => DateTime.Parse(t.Datum!) >= filter.fDatum).ToList();
             }
 
             // Filtrerar ut till datum av transaktioner
-            if (filter.tDate.HasValue)
+            if (filter.tDatum.HasValue)
             {
                 // Tar alla transaktioner som ligger innan eller samma som det valda datumet
-                transactions = transactions.Where(t => DateTime.Parse(t.Datum!) <= filter.tDate).ToList();
+                transactions = transactions.Where(t => DateTime.Parse(t.Datum!) <= filter.tDatum).ToList();
             }
-                return transactions.ToList();
+            // Om man sökt på någonting -> ta med det i filtreringen
+            if (!string.IsNullOrWhiteSpace(filter.sFras))
+            {
+                // Filtrerar ut transaktioner som innehåller sökfrasen i Namn, Kategori eller Typ
+                transactions = transactions.Where(t => (t.Namn != null && t.Namn.Contains(filter.sFras, StringComparison.OrdinalIgnoreCase)) // Även för gemener och versaler
+                    || (t.Kategori?.Contains(filter.sFras, StringComparison.OrdinalIgnoreCase) ?? false)
+                    || (t.Typ?.Contains(filter.sFras, StringComparison.OrdinalIgnoreCase) ?? false)).ToList();
+            }
+            return transactions.ToList();
         }
     }
 }
