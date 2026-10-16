@@ -329,6 +329,7 @@ namespace Projekt.Forms
                         displayingTransactions = await transaction.GetTransactions(); // Hämtar in de transaktionerna igen efter raderingen
                         resetTransactionGrid(displayingTransactions); // Uppdaterar & återställer datagriden med de inhämtade transaktionerna
                         DisplayTotalTransactionsCount(); // Visar antalet transaktioner som visas i datagriden igen
+                        await DisplayNotification(deleteTransactionNotificationLabel,"Transaktionen raderades!", "ForestGreen"); // Visar en notifikation om att transaktionen har raderats
                     }
                 }
             }
@@ -349,6 +350,15 @@ namespace Projekt.Forms
                 deleteTransactionBtn.ForeColor = Color.Black; // Grå färg
                 deleteTransactionBtn.BackColor = Color.LightGray; // Bakgrundsfärgen ljusgrå
             }
+        }
+
+        private async Task DisplayNotification(Label label,string message, string color)
+        {
+            label.ForeColor = Color.FromName(color);
+            label.Text = message;
+            label.Visible = true;
+            await Task.Delay(2000); // Väntar i 2 sekunder
+            label.Visible = false;
         }
     }
 }

@@ -21,10 +21,10 @@ namespace Projekt.Services
         }
 
         // Lägga till en ny transaktion
-        public async Task<bool> AddTransaction(string? type, string? title, string? category, float amount)
+        public async Task<bool> AddTransaction(string? type, string? title, string? category, float amount, string date)
         {
             // Kollar om en transaktion redan finns i databasen
-            var existingTransaction = await database.Set<Transaction>().FirstOrDefaultAsync(t => t.Typ == type && t.Kategori == category && t.Belopp == amount);
+            var existingTransaction = await database.Set<Transaction>().FirstOrDefaultAsync(t => t.Typ == type && t.Kategori == category && t.Belopp == amount && t.Datum == date);
 
             // Transaktionen finns redan, kör inte vidare
             if (existingTransaction != null)
@@ -33,7 +33,7 @@ namespace Projekt.Services
             }
 
             // Lägger till en ny transaktion i listan av transaktioner
-            var transaction = new Transaction(type, title, category, amount);
+            var transaction = new Transaction(type, title, category, amount, date);
             // Lägger till ändringarna i minnet
             database.Set<Transaction>().Add(transaction);
             // Sparar ned ändringar till databasen

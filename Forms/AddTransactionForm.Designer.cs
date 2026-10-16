@@ -33,18 +33,22 @@
             addTransactionTitleText = new TextBox();
             addTransactionCategoryText = new TextBox();
             addTransactionAmountNum = new NumericUpDown();
-            saveAddTransactionBtn = new Button();
-            addTransactionCancelBtn = new Button();
             addTransactionTypeLabel = new Label();
             addTransactionNameLabel = new Label();
             addTransactionCategoryLabel = new Label();
             addTransactionAmountLabel = new Label();
             addTransactionPanel = new TableLayoutPanel();
+            addTransactionDatePicker = new DateTimePicker();
+            addTransactionDateLabel = new Label();
+            flowLayoutPanel2 = new FlowLayoutPanel();
+            saveAddTransactionBtn = new Button();
+            addTransactionCancelBtn = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             errorLabel = new Label();
             addTransactionFormReturnBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)addTransactionAmountNum).BeginInit();
             addTransactionPanel.SuspendLayout();
+            flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,7 +69,7 @@
             addTransactionTypeComboBox.Location = new Point(197, 30);
             addTransactionTypeComboBox.Margin = new Padding(10);
             addTransactionTypeComboBox.Name = "addTransactionTypeComboBox";
-            addTransactionTypeComboBox.Size = new Size(315, 26);
+            addTransactionTypeComboBox.Size = new Size(345, 26);
             addTransactionTypeComboBox.TabIndex = 1;
             addTransactionTypeComboBox.Tag = "";
             // 
@@ -75,8 +79,8 @@
             addTransactionTitleText.Location = new Point(197, 76);
             addTransactionTitleText.Margin = new Padding(10);
             addTransactionTitleText.Name = "addTransactionTitleText";
-            addTransactionTitleText.PlaceholderText = "Ange namn";
-            addTransactionTitleText.Size = new Size(315, 26);
+            addTransactionTitleText.PlaceholderText = "Skriv namn";
+            addTransactionTitleText.Size = new Size(345, 26);
             addTransactionTitleText.TabIndex = 2;
             // 
             // addTransactionCategoryText
@@ -85,8 +89,8 @@
             addTransactionCategoryText.Location = new Point(197, 122);
             addTransactionCategoryText.Margin = new Padding(10);
             addTransactionCategoryText.Name = "addTransactionCategoryText";
-            addTransactionCategoryText.PlaceholderText = "Ange kategori";
-            addTransactionCategoryText.Size = new Size(315, 26);
+            addTransactionCategoryText.PlaceholderText = "Skriv kategori";
+            addTransactionCategoryText.Size = new Size(345, 26);
             addTransactionCategoryText.TabIndex = 3;
             // 
             // addTransactionAmountNum
@@ -96,28 +100,8 @@
             addTransactionAmountNum.Margin = new Padding(10);
             addTransactionAmountNum.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             addTransactionAmountNum.Name = "addTransactionAmountNum";
-            addTransactionAmountNum.Size = new Size(315, 26);
+            addTransactionAmountNum.Size = new Size(345, 26);
             addTransactionAmountNum.TabIndex = 4;
-            // 
-            // saveAddTransactionBtn
-            // 
-            saveAddTransactionBtn.Location = new Point(140, 8);
-            saveAddTransactionBtn.Name = "saveAddTransactionBtn";
-            saveAddTransactionBtn.Size = new Size(120, 46);
-            saveAddTransactionBtn.TabIndex = 5;
-            saveAddTransactionBtn.Text = "Spara";
-            saveAddTransactionBtn.UseVisualStyleBackColor = true;
-            saveAddTransactionBtn.Click += SaveAddTransactionBtn_Click;
-            // 
-            // addTransactionCancelBtn
-            // 
-            addTransactionCancelBtn.Location = new Point(14, 8);
-            addTransactionCancelBtn.Name = "addTransactionCancelBtn";
-            addTransactionCancelBtn.Size = new Size(120, 46);
-            addTransactionCancelBtn.TabIndex = 6;
-            addTransactionCancelBtn.Text = "Avbryt";
-            addTransactionCancelBtn.UseVisualStyleBackColor = true;
-            addTransactionCancelBtn.Click += addTransactionCancelBtn_Click;
             // 
             // addTransactionTypeLabel
             // 
@@ -148,9 +132,9 @@
             addTransactionCategoryLabel.Location = new Point(30, 126);
             addTransactionCategoryLabel.Margin = new Padding(10);
             addTransactionCategoryLabel.Name = "addTransactionCategoryLabel";
-            addTransactionCategoryLabel.Size = new Size(128, 18);
+            addTransactionCategoryLabel.Size = new Size(137, 18);
             addTransactionCategoryLabel.TabIndex = 9;
-            addTransactionCategoryLabel.Text = "Välj en kategori";
+            addTransactionCategoryLabel.Text = "Ange en kategori";
             // 
             // addTransactionAmountLabel
             // 
@@ -169,41 +153,96 @@
             addTransactionPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             addTransactionPanel.BackColor = Color.Khaki;
             addTransactionPanel.ColumnCount = 2;
-            addTransactionPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            addTransactionPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.66667F));
+            addTransactionPanel.ColumnStyles.Add(new ColumnStyle());
+            addTransactionPanel.ColumnStyles.Add(new ColumnStyle());
             addTransactionPanel.Controls.Add(addTransactionTypeLabel, 0, 0);
             addTransactionPanel.Controls.Add(addTransactionAmountLabel, 0, 3);
             addTransactionPanel.Controls.Add(addTransactionTypeComboBox, 1, 0);
-            addTransactionPanel.Controls.Add(addTransactionAmountNum, 1, 3);
             addTransactionPanel.Controls.Add(addTransactionCategoryLabel, 0, 2);
             addTransactionPanel.Controls.Add(addTransactionNameLabel, 0, 1);
             addTransactionPanel.Controls.Add(addTransactionTitleText, 1, 1);
             addTransactionPanel.Controls.Add(addTransactionCategoryText, 1, 2);
-            addTransactionPanel.Controls.Add(flowLayoutPanel1, 1, 4);
-            addTransactionPanel.Location = new Point(356, 105);
+            addTransactionPanel.Controls.Add(addTransactionAmountNum, 1, 3);
+            addTransactionPanel.Controls.Add(addTransactionDatePicker, 1, 4);
+            addTransactionPanel.Controls.Add(addTransactionDateLabel, 0, 4);
+            addTransactionPanel.Controls.Add(flowLayoutPanel2, 1, 6);
+            addTransactionPanel.Controls.Add(flowLayoutPanel1, 1, 5);
+            addTransactionPanel.Location = new Point(352, 88);
             addTransactionPanel.Name = "addTransactionPanel";
             addTransactionPanel.Padding = new Padding(20);
-            addTransactionPanel.RowCount = 5;
+            addTransactionPanel.RowCount = 7;
             addTransactionPanel.RowStyles.Add(new RowStyle());
             addTransactionPanel.RowStyles.Add(new RowStyle());
             addTransactionPanel.RowStyles.Add(new RowStyle());
             addTransactionPanel.RowStyles.Add(new RowStyle());
             addTransactionPanel.RowStyles.Add(new RowStyle());
-            addTransactionPanel.Size = new Size(542, 296);
+            addTransactionPanel.RowStyles.Add(new RowStyle());
+            addTransactionPanel.RowStyles.Add(new RowStyle());
+            addTransactionPanel.Size = new Size(572, 382);
             addTransactionPanel.TabIndex = 11;
+            // 
+            // addTransactionDatePicker
+            // 
+            addTransactionDatePicker.Format = DateTimePickerFormat.Short;
+            addTransactionDatePicker.Location = new Point(197, 214);
+            addTransactionDatePicker.Margin = new Padding(10);
+            addTransactionDatePicker.Name = "addTransactionDatePicker";
+            addTransactionDatePicker.Size = new Size(315, 26);
+            addTransactionDatePicker.TabIndex = 4;
+            // 
+            // addTransactionDateLabel
+            // 
+            addTransactionDateLabel.AutoSize = true;
+            addTransactionDateLabel.Location = new Point(30, 214);
+            addTransactionDateLabel.Margin = new Padding(10);
+            addTransactionDateLabel.Name = "addTransactionDateLabel";
+            addTransactionDateLabel.Size = new Size(90, 18);
+            addTransactionDateLabel.TabIndex = 11;
+            addTransactionDateLabel.Text = "Välj datum";
+            // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.Controls.Add(saveAddTransactionBtn);
+            flowLayoutPanel2.Controls.Add(addTransactionCancelBtn);
+            flowLayoutPanel2.Location = new Point(190, 291);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new Size(345, 68);
+            flowLayoutPanel2.TabIndex = 13;
+            // 
+            // saveAddTransactionBtn
+            // 
+            saveAddTransactionBtn.Cursor = Cursors.Hand;
+            saveAddTransactionBtn.Location = new Point(10, 10);
+            saveAddTransactionBtn.Margin = new Padding(10);
+            saveAddTransactionBtn.Name = "saveAddTransactionBtn";
+            saveAddTransactionBtn.Size = new Size(167, 46);
+            saveAddTransactionBtn.TabIndex = 5;
+            saveAddTransactionBtn.Text = "Spara transaktionen";
+            saveAddTransactionBtn.UseVisualStyleBackColor = true;
+            saveAddTransactionBtn.Click += SaveAddTransactionBtn_Click;
+            // 
+            // addTransactionCancelBtn
+            // 
+            addTransactionCancelBtn.Cursor = Cursors.Hand;
+            addTransactionCancelBtn.Location = new Point(197, 10);
+            addTransactionCancelBtn.Margin = new Padding(10);
+            addTransactionCancelBtn.Name = "addTransactionCancelBtn";
+            addTransactionCancelBtn.Size = new Size(132, 46);
+            addTransactionCancelBtn.TabIndex = 6;
+            addTransactionCancelBtn.Text = "Avbryt";
+            addTransactionCancelBtn.UseVisualStyleBackColor = true;
+            addTransactionCancelBtn.Click += addTransactionCancelBtn_Click;
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             flowLayoutPanel1.Controls.Add(errorLabel);
-            flowLayoutPanel1.Controls.Add(addTransactionCancelBtn);
-            flowLayoutPanel1.Controls.Add(saveAddTransactionBtn);
-            flowLayoutPanel1.Location = new Point(192, 209);
+            flowLayoutPanel1.Location = new Point(192, 255);
             flowLayoutPanel1.Margin = new Padding(5);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(5);
-            flowLayoutPanel1.Size = new Size(268, 62);
+            flowLayoutPanel1.Size = new Size(16, 28);
             flowLayoutPanel1.TabIndex = 12;
             // 
             // errorLabel
@@ -246,6 +285,7 @@
             ((System.ComponentModel.ISupportInitialize)addTransactionAmountNum).EndInit();
             addTransactionPanel.ResumeLayout(false);
             addTransactionPanel.PerformLayout();
+            flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             ResumeLayout(false);
@@ -259,15 +299,18 @@
         private TextBox addTransactionTitleText;
         private TextBox addTransactionCategoryText;
         private NumericUpDown addTransactionAmountNum;
-        private Button saveAddTransactionBtn;
-        private Button addTransactionCancelBtn;
         private Label addTransactionTypeLabel;
         private Label addTransactionNameLabel;
         private Label addTransactionCategoryLabel;
         private Label addTransactionAmountLabel;
         private TableLayoutPanel addTransactionPanel;
-        private FlowLayoutPanel flowLayoutPanel1;
         private Button addTransactionFormReturnBtn;
+        private Label addTransactionDateLabel;
+        private DateTimePicker addTransactionDatePicker;
+        private Button addTransactionCancelBtn;
+        private Button saveAddTransactionBtn;
         private Label errorLabel;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flowLayoutPanel2;
     }
 }

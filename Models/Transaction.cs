@@ -17,13 +17,13 @@ namespace Projekt.Models
         public float Belopp { get; set; }
         public string? Datum { get; set; }
 
-        public Transaction(string? typ, string? namn, string? kategori, float belopp)
+        public Transaction(string? typ, string? namn, string? kategori, float belopp, string? datum)
         {
             Typ = typ;
             Namn = namn;
             Kategori = kategori;
             Belopp = belopp;
-            Datum = DateTime.Now.ToString("yyyy-MM-dd");
+            Datum = datum;
         }
     }
 }

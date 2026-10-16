@@ -70,16 +70,19 @@ namespace Projekt.Forms
             string? title = addTransactionTitleText.Text;
             string? category = addTransactionCategoryText.Text;
             float amount = (float)addTransactionAmountNum.Value;
+            DateTime date = addTransactionDatePicker.Value;
 
             // Gör första bokstaven till stor bokstav
             title = char.ToUpper(title[0]) + title.Substring(1);
             category = char.ToUpper(category[0]) + category.Substring(1);
+            string? dateStr = date.ToString("yyyy-MM-dd");
 
             // Lägger till den specifika transaktionen i listan av transaktioner
-            bool added = await transaction.AddTransaction(type, title, category, amount);
+            bool added = await transaction.AddTransaction(type, title, category, amount, dateStr);
 
             if (!added)
-            {errorLabel.ForeColor = Color.Red;
+            {
+                errorLabel.ForeColor = Color.Red;
                 errorLabel.Text = "Transaktionen finns redan!";
                 return;
             }
@@ -115,6 +118,7 @@ namespace Projekt.Forms
             addTransactionTypeComboBox.SelectedIndex = 0;
             addTransactionTitleText.Clear();
             addTransactionCategoryText.Clear();
+            addTransactionDatePicker.Value = DateTime.Now;
             errorLabel.Text = "";
         }
         private void btnClose_Click(object sender, EventArgs e)

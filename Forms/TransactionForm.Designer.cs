@@ -59,6 +59,7 @@
             deleteTransactionBtn = new Button();
             updateTransactionBtn = new Button();
             modifyTransactionsLabel = new Label();
+            deleteTransactionNotificationLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)transactionGrid).BeginInit();
             filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).BeginInit();
@@ -132,7 +133,7 @@
             AddNewTransactionBtn.BackColor = Color.FromArgb(0, 192, 0);
             AddNewTransactionBtn.Cursor = Cursors.Hand;
             AddNewTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AddNewTransactionBtn.Location = new Point(414, 445);
+            AddNewTransactionBtn.Location = new Point(414, 471);
             AddNewTransactionBtn.Name = "AddNewTransactionBtn";
             AddNewTransactionBtn.Size = new Size(97, 46);
             AddNewTransactionBtn.TabIndex = 3;
@@ -382,7 +383,7 @@
             deleteTransactionBtn.BackColor = Color.LightGray;
             deleteTransactionBtn.Cursor = Cursors.Hand;
             deleteTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
-            deleteTransactionBtn.Location = new Point(550, 445);
+            deleteTransactionBtn.Location = new Point(550, 471);
             deleteTransactionBtn.Name = "deleteTransactionBtn";
             deleteTransactionBtn.Size = new Size(97, 46);
             deleteTransactionBtn.TabIndex = 19;
@@ -395,7 +396,7 @@
             updateTransactionBtn.BackColor = Color.FromArgb(128, 128, 255);
             updateTransactionBtn.Cursor = Cursors.Hand;
             updateTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
-            updateTransactionBtn.Location = new Point(699, 445);
+            updateTransactionBtn.Location = new Point(699, 471);
             updateTransactionBtn.Name = "updateTransactionBtn";
             updateTransactionBtn.Size = new Size(106, 46);
             updateTransactionBtn.TabIndex = 20;
@@ -405,11 +406,22 @@
             // modifyTransactionsLabel
             // 
             modifyTransactionsLabel.AutoSize = true;
-            modifyTransactionsLabel.Location = new Point(501, 409);
+            modifyTransactionsLabel.Location = new Point(501, 435);
             modifyTransactionsLabel.Name = "modifyTransactionsLabel";
             modifyTransactionsLabel.Size = new Size(208, 18);
             modifyTransactionsLabel.TabIndex = 21;
             modifyTransactionsLabel.Text = "Hantera dina transaktioner";
+            // 
+            // deleteTransactionNotificationLabel
+            // 
+            deleteTransactionNotificationLabel.AutoSize = true;
+            deleteTransactionNotificationLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            deleteTransactionNotificationLabel.ForeColor = Color.ForestGreen;
+            deleteTransactionNotificationLabel.Location = new Point(501, 398);
+            deleteTransactionNotificationLabel.Name = "deleteTransactionNotificationLabel";
+            deleteTransactionNotificationLabel.Size = new Size(0, 18);
+            deleteTransactionNotificationLabel.TabIndex = 22;
+            deleteTransactionNotificationLabel.Visible = false;
             // 
             // TransactionForm
             // 
@@ -417,6 +429,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
+            Controls.Add(deleteTransactionNotificationLabel);
             Controls.Add(modifyTransactionsLabel);
             Controls.Add(updateTransactionBtn);
             Controls.Add(deleteTransactionBtn);
@@ -473,5 +486,6 @@
         private NumericUpDown maxAmountNumeric;
         private Label maxAmountLabel;
         private Label minAmountLabel;
+        private Label deleteTransactionNotificationLabel;
     }
 }
