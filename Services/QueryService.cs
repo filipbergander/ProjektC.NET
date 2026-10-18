@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Projekt.Data;
 using Projekt.Models;
 using Projekt.Services;
+using Projekt.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.Marshalling;
@@ -14,10 +15,10 @@ namespace Projekt.Services
     internal class QueryService
     {
         // Instans av Transactionsservicen
-        private readonly TransactionService transaction;
+        private readonly ITransactionService transaction;
 
         // Konstruktor
-        public QueryService(TransactionService transaction)
+        public QueryService(ITransactionService transaction)
         {
             this.transaction = transaction;
         }

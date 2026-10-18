@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Projekt.Services;
 using Projekt.Models;
 using Projekt.Forms;
+using Projekt.Interfaces;
 
 namespace Projekt.Forms
 {
@@ -17,14 +18,14 @@ namespace Projekt.Forms
         private readonly MainForm mainForm; // Instans av mainform
         private string currentSortColumn = ""; // Vilken kolumn som är sorterad i datagriden
         private bool ascending = true; // Sorteringsordningen för kolumnerna i datagriden
-        private readonly TransactionService transaction;   // Instans av TransactionService
+        private readonly ITransactionService transaction;   // Instans av TransactionService
         private readonly QueryService queryService; // Instans av TransactionQueryService
         private List<Transaction> displayingTransactions = []; // Sparar antalet transaktioner som visas i datagriden "nu" till denna variabel
         private readonly TransactionFilter filter = new TransactionFilter(); // Instans av TransactionFilter som används för filtrering & sökning av transaktioner
 
         //private List<Transaction> transactions = new List<Transaction>();
         // Konstruktor som tar emot en instans av TransactionService (transaction) och sätter den till _transaction
-        public TransactionForm(TransactionService transaction, MainForm mainForm)
+        public TransactionForm(ITransactionService transaction, MainForm mainForm)
         {
             InitializeComponent();
             this.transaction = transaction;
@@ -329,7 +330,7 @@ namespace Projekt.Forms
                         displayingTransactions = await transaction.GetTransactions(); // Hämtar in de transaktionerna igen efter raderingen
                         resetTransactionGrid(displayingTransactions); // Uppdaterar & återställer datagriden med de inhämtade transaktionerna
                         DisplayTotalTransactionsCount(); // Visar antalet transaktioner som visas i datagriden igen
-                        await DisplayNotification(deleteTransactionNotificationLabel,"Transaktionen raderades!", "ForestGreen"); // Visar en notifikation om att transaktionen har raderats
+                        await DisplayNotification(deleteTransactionNotificationLabel, "Transaktionen raderades!", "ForestGreen"); // Visar en notifikation om att transaktionen raderades
                     }
                 }
             }
@@ -351,8 +352,8 @@ namespace Projekt.Forms
                 deleteTransactionBtn.BackColor = Color.LightGray; // Bakgrundsfärgen ljusgrå
             }
         }
-
-        private async Task DisplayNotification(Label label,string message, string color)
+        // Visar en notifikation i formuläret som försvinner efter 2 sekunder
+        private async Task DisplayNotification(Label label, string message, string color)
         {
             label.ForeColor = Color.FromName(color);
             label.Text = message;
@@ -360,5 +361,23 @@ namespace Projekt.Forms
             await Task.Delay(2000); // Väntar i 2 sekunder
             label.Visible = false;
         }
+
+        //private async void updateTransactionBtn_Click(object sender, EventArgs e)
+        //{
+        //    // Är fler än noll rader markerade i datagriden -> fortsätt
+        //    if (transactionGrid.SelectedRows.Count > 0)
+        //    {
+        //        var selectedRow = transactionGrid.SelectedRows[0]; // Hämtar den markerade raden i datagriden
+        //        var selectedTransaction = selectedRow.DataBoundItem as Transaction; // Hämtar den markerade transaktionen i datagriden
+        //        if (selectedTransaction != null)
+        //        {
+        //            await transaction.UpdateTransaction(selectedTransaction.Id);// Uppdatera transaktionen i databasen
+        //            displayingTransactions = await transaction.GetTransactions(); // Hämtar in de transaktionerna igen efter uppdateringen
+        //            resetTransactionGrid(displayingTransactions); // Uppdaterar & återställer datagriden med de inhämtade transaktionerna
+        //            DisplayTotalTransactionsCount(); // Visar antalet transaktioner som visas i datagriden igen
+        //            await DisplayNotification(deleteTransactionNotificationLabel, "Transaktionen uppdaterades!", "ForestGreen"); // Visar en notifikation om att transaktionen uppdaterades
+        //        }
+        //    }
+        //}
     }
 }

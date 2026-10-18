@@ -8,16 +8,17 @@ using System.Windows.Forms;
 using Projekt.Forms;
 using Projekt.Models;
 using Projekt.Services;
+using Projekt.Interfaces;
 
 namespace Projekt.Forms
 {
     public partial class AddTransactionForm : Form
     {
         // Instans av TransactionService
-        private readonly TransactionService transaction;
+        private readonly ITransactionService transaction;
 
         // Konstruktor som initierar AddTransactionForm, samt instans av en ny Transaction
-        public AddTransactionForm(TransactionService transaction)
+        public AddTransactionForm(ITransactionService transaction)
         {
             InitializeComponent(); // Startar upp formuläret med alla komponenter
             this.transaction = transaction;
@@ -78,7 +79,8 @@ namespace Projekt.Forms
             string? dateStr = date.ToString("yyyy-MM-dd");
 
             // Lägger till den specifika transaktionen i listan av transaktioner
-            bool added = await transaction.AddTransaction(type, title, category, amount, dateStr);
+            var newTransaction = new Transaction(type, title, category, amount, dateStr);
+            bool added = await transaction.AddTransaction(newTransaction);
 
             if (!added)
             {

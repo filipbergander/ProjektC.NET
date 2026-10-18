@@ -176,7 +176,7 @@
             searchTransactionBox.Cursor = Cursors.IBeam;
             searchTransactionBox.Location = new Point(488, 133);
             searchTransactionBox.Name = "searchTransactionBox";
-            searchTransactionBox.PlaceholderText = "Sök efter transaktioner";
+            searchTransactionBox.PlaceholderText = "Skriv det du söker efter";
             searchTransactionBox.Size = new Size(246, 26);
             searchTransactionBox.TabIndex = 7;
             searchTransactionBox.TextChanged += searchTransactionBox_TextChanged;

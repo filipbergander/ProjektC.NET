@@ -3,12 +3,13 @@ using Projekt.Models;
 using Microsoft.EntityFrameworkCore;
 using Projekt.Data;
 using System.Runtime.InteropServices.Marshalling;
+using Projekt.Interfaces;
+using System.Data.Common;
 
 namespace Projekt.Services
 {
-    public class TransactionService
+    public class TransactionService : ITransactionService
     {
-
         //private readonly List<Transaction> transactions = new List<Transaction>();
 
         // Instans för att hantera databasen
@@ -21,19 +22,24 @@ namespace Projekt.Services
         }
 
         // Lägga till en ny transaktion
-        public async Task<bool> AddTransaction(string? type, string? title, string? category, float amount, string date)
+        public async Task<bool> AddTransaction(Transaction transaction)
         {
             // Kollar om en transaktion redan finns i databasen
-            var existingTransaction = await database.Set<Transaction>().FirstOrDefaultAsync(t => t.Typ == type && t.Kategori == category && t.Belopp == amount && t.Datum == date);
+            var existingTransaction = await database.Set<Transaction>()
+                .AnyAsync(dbTransaction => dbTransaction.Typ == transaction.Typ &&
+                dbTransaction.Namn == transaction.Namn &&
+                dbTransaction.Kategori == transaction.Kategori &&
+                dbTransaction.Belopp == transaction.Belopp &&
+                dbTransaction.Datum == transaction.Datum);
 
             // Transaktionen finns redan, kör inte vidare
-            if (existingTransaction != null)
+            if (existingTransaction)
             {
                 return false;
             }
 
             // Lägger till en ny transaktion i listan av transaktioner
-            var transaction = new Transaction(type, title, category, amount, date);
+            //var transaction = new Transaction(t.Typ, t.Namn, t.Kategori, t.Belopp, t.Datum);
             // Lägger till ändringarna i minnet
             database.Set<Transaction>().Add(transaction);
             // Sparar ned ändringar till databasen

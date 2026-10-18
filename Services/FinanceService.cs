@@ -1,5 +1,6 @@
 ﻿using static System.Console;
 using Projekt.Models;
+using Projekt.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Projekt.Data;
 using System.Runtime.InteropServices.Marshalling;
@@ -9,9 +10,9 @@ namespace Projekt.Services
     internal class FinanceService
     {
         // Instans av Transactionsservicen
-        private readonly TransactionService transaction;
+        private readonly ITransactionService transaction;
         // Konstruktor
-        public FinanceService(TransactionService transaction)
+        public FinanceService(ITransactionService transaction)
         {
             this.transaction = transaction;
         }
