@@ -55,7 +55,7 @@
             // addTransactionLabel
             // 
             addTransactionLabel.AutoSize = true;
-            addTransactionLabel.Location = new Point(550, 50);
+            addTransactionLabel.Location = new Point(550, 25);
             addTransactionLabel.Name = "addTransactionLabel";
             addTransactionLabel.Size = new Size(182, 18);
             addTransactionLabel.TabIndex = 0;

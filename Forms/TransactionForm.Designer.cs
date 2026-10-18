@@ -60,6 +60,7 @@
             updateTransactionBtn = new Button();
             modifyTransactionsLabel = new Label();
             deleteTransactionNotificationLabel = new Label();
+            sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             ((System.ComponentModel.ISupportInitialize)transactionGrid).BeginInit();
             filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).BeginInit();
@@ -73,6 +74,7 @@
             dataGridViewCellStyle1.BackColor = Color.FromArgb(245, 246, 250);
             transactionGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             transactionGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            transactionGrid.BackgroundColor = Color.White;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(44, 62, 80);
             dataGridViewCellStyle2.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -92,10 +94,10 @@
             transactionGrid.DefaultCellStyle = dataGridViewCellStyle3;
             transactionGrid.EnableHeadersVisualStyles = false;
             transactionGrid.GridColor = SystemColors.ActiveCaption;
-            transactionGrid.Location = new Point(185, 166);
+            transactionGrid.Location = new Point(195, 102);
             transactionGrid.Margin = new Padding(4);
             transactionGrid.Name = "transactionGrid";
-            transactionGrid.Size = new Size(835, 205);
+            transactionGrid.Size = new Size(835, 250);
             transactionGrid.TabIndex = 0;
             transactionGrid.CellFormatting += transactionGrid_CellFormatting;
             transactionGrid.CellMouseEnter += transactionGrid_CellMouseEnter;
@@ -133,7 +135,7 @@
             AddNewTransactionBtn.BackColor = Color.FromArgb(0, 192, 0);
             AddNewTransactionBtn.Cursor = Cursors.Hand;
             AddNewTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AddNewTransactionBtn.Location = new Point(414, 471);
+            AddNewTransactionBtn.Location = new Point(447, 435);
             AddNewTransactionBtn.Name = "AddNewTransactionBtn";
             AddNewTransactionBtn.Size = new Size(97, 46);
             AddNewTransactionBtn.TabIndex = 3;
@@ -146,7 +148,7 @@
             totalTransactionsPostLabel.AutoSize = true;
             totalTransactionsPostLabel.Font = new Font("Lucida Sans", 11F);
             totalTransactionsPostLabel.ForeColor = Color.FromArgb(64, 64, 64);
-            totalTransactionsPostLabel.Location = new Point(185, 375);
+            totalTransactionsPostLabel.Location = new Point(194, 356);
             totalTransactionsPostLabel.Name = "totalTransactionsPostLabel";
             totalTransactionsPostLabel.Size = new Size(145, 17);
             totalTransactionsPostLabel.TabIndex = 4;
@@ -165,7 +167,7 @@
             // filterSearchLabel
             // 
             filterSearchLabel.AutoSize = true;
-            filterSearchLabel.Location = new Point(448, 136);
+            filterSearchLabel.Location = new Point(458, 72);
             filterSearchLabel.Name = "filterSearchLabel";
             filterSearchLabel.Size = new Size(46, 18);
             filterSearchLabel.TabIndex = 6;
@@ -174,7 +176,7 @@
             // searchTransactionBox
             // 
             searchTransactionBox.Cursor = Cursors.IBeam;
-            searchTransactionBox.Location = new Point(488, 133);
+            searchTransactionBox.Location = new Point(498, 69);
             searchTransactionBox.Name = "searchTransactionBox";
             searchTransactionBox.PlaceholderText = "Skriv det du söker efter";
             searchTransactionBox.Size = new Size(246, 26);
@@ -246,7 +248,7 @@
             // filterButton
             // 
             filterButton.Cursor = Cursors.Hand;
-            filterButton.Location = new Point(185, 123);
+            filterButton.Location = new Point(195, 59);
             filterButton.Name = "filterButton";
             filterButton.Size = new Size(97, 36);
             filterButton.TabIndex = 17;
@@ -383,7 +385,7 @@
             deleteTransactionBtn.BackColor = Color.LightGray;
             deleteTransactionBtn.Cursor = Cursors.Hand;
             deleteTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
-            deleteTransactionBtn.Location = new Point(550, 471);
+            deleteTransactionBtn.Location = new Point(550, 435);
             deleteTransactionBtn.Name = "deleteTransactionBtn";
             deleteTransactionBtn.Size = new Size(97, 46);
             deleteTransactionBtn.TabIndex = 19;
@@ -396,7 +398,7 @@
             updateTransactionBtn.BackColor = Color.FromArgb(128, 128, 255);
             updateTransactionBtn.Cursor = Cursors.Hand;
             updateTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
-            updateTransactionBtn.Location = new Point(699, 471);
+            updateTransactionBtn.Location = new Point(653, 435);
             updateTransactionBtn.Name = "updateTransactionBtn";
             updateTransactionBtn.Size = new Size(106, 46);
             updateTransactionBtn.TabIndex = 20;
@@ -406,7 +408,7 @@
             // modifyTransactionsLabel
             // 
             modifyTransactionsLabel.AutoSize = true;
-            modifyTransactionsLabel.Location = new Point(501, 435);
+            modifyTransactionsLabel.Location = new Point(501, 399);
             modifyTransactionsLabel.Name = "modifyTransactionsLabel";
             modifyTransactionsLabel.Size = new Size(208, 18);
             modifyTransactionsLabel.TabIndex = 21;
@@ -417,11 +419,18 @@
             deleteTransactionNotificationLabel.AutoSize = true;
             deleteTransactionNotificationLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             deleteTransactionNotificationLabel.ForeColor = Color.ForestGreen;
-            deleteTransactionNotificationLabel.Location = new Point(501, 398);
+            deleteTransactionNotificationLabel.Location = new Point(500, 367);
             deleteTransactionNotificationLabel.Name = "deleteTransactionNotificationLabel";
             deleteTransactionNotificationLabel.Size = new Size(0, 18);
             deleteTransactionNotificationLabel.TabIndex = 22;
             deleteTransactionNotificationLabel.Visible = false;
+            // 
+            // sqliteCommand1
+            // 
+            sqliteCommand1.CommandTimeout = 30;
+            sqliteCommand1.Connection = null;
+            sqliteCommand1.Transaction = null;
+            sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
             // 
             // TransactionForm
             // 
@@ -487,5 +496,6 @@
         private Label maxAmountLabel;
         private Label minAmountLabel;
         private Label deleteTransactionNotificationLabel;
+        private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
     }
 }

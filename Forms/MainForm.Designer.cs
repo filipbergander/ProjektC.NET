@@ -35,16 +35,19 @@
             mainFormTransactionBtn = new Button();
             mainFormStatsBtn = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
+            monthQuantityLabel = new Label();
             totalIncomeLabel = new Label();
             monthValueLabel = new Label();
             totalExpenseLabel = new Label();
+            mainFormQuantityLabel = new Label();
+            chartPanel = new Panel();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // mainFormDashboardLabel
             // 
             mainFormDashboardLabel.AutoSize = true;
-            mainFormDashboardLabel.Location = new Point(550, 97);
+            mainFormDashboardLabel.Location = new Point(550, 25);
             mainFormDashboardLabel.Margin = new Padding(4, 0, 4, 0);
             mainFormDashboardLabel.Name = "mainFormDashboardLabel";
             mainFormDashboardLabel.Size = new Size(70, 18);
@@ -65,7 +68,7 @@
             // mainFormIncomeLabel
             // 
             mainFormIncomeLabel.AutoSize = true;
-            mainFormIncomeLabel.Location = new Point(13, 57);
+            mainFormIncomeLabel.Location = new Point(13, 37);
             mainFormIncomeLabel.Name = "mainFormIncomeLabel";
             mainFormIncomeLabel.Size = new Size(86, 18);
             mainFormIncomeLabel.TabIndex = 2;
@@ -74,7 +77,7 @@
             // mainFormExpenseLabel
             // 
             mainFormExpenseLabel.AutoSize = true;
-            mainFormExpenseLabel.Location = new Point(13, 104);
+            mainFormExpenseLabel.Location = new Point(13, 64);
             mainFormExpenseLabel.Name = "mainFormExpenseLabel";
             mainFormExpenseLabel.Size = new Size(69, 18);
             mainFormExpenseLabel.TabIndex = 3;
@@ -83,7 +86,7 @@
             // mainFormTransactionBtn
             // 
             mainFormTransactionBtn.Cursor = Cursors.Hand;
-            mainFormTransactionBtn.Location = new Point(423, 410);
+            mainFormTransactionBtn.Location = new Point(371, 261);
             mainFormTransactionBtn.Name = "mainFormTransactionBtn";
             mainFormTransactionBtn.Size = new Size(125, 40);
             mainFormTransactionBtn.TabIndex = 4;
@@ -94,7 +97,7 @@
             // mainFormStatsBtn
             // 
             mainFormStatsBtn.Cursor = Cursors.Hand;
-            mainFormStatsBtn.Location = new Point(617, 410);
+            mainFormStatsBtn.Location = new Point(371, 324);
             mainFormStatsBtn.Name = "mainFormStatsBtn";
             mainFormStatsBtn.Size = new Size(125, 40);
             mainFormStatsBtn.TabIndex = 5;
@@ -109,29 +112,41 @@
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.Controls.Add(monthQuantityLabel, 1, 3);
             tableLayoutPanel1.Controls.Add(totalIncomeLabel, 1, 1);
             tableLayoutPanel1.Controls.Add(monthValueLabel, 1, 0);
             tableLayoutPanel1.Controls.Add(mainFormIncomeLabel, 0, 1);
             tableLayoutPanel1.Controls.Add(mainFormExpenseLabel, 0, 2);
             tableLayoutPanel1.Controls.Add(mainFormMonthLabel, 0, 0);
             tableLayoutPanel1.Controls.Add(totalExpenseLabel, 1, 2);
-            tableLayoutPanel1.Location = new Point(372, 172);
+            tableLayoutPanel1.Controls.Add(mainFormQuantityLabel, 0, 3);
+            tableLayoutPanel1.Location = new Point(198, 95);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.Padding = new Padding(10);
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(422, 162);
+            tableLayoutPanel1.RowCount = 4;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.Size = new Size(422, 130);
             tableLayoutPanel1.TabIndex = 6;
+            // 
+            // monthQuantityLabel
+            // 
+            monthQuantityLabel.AutoSize = true;
+            monthQuantityLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            monthQuantityLabel.Location = new Point(173, 91);
+            monthQuantityLabel.Name = "monthQuantityLabel";
+            monthQuantityLabel.Size = new Size(56, 18);
+            monthQuantityLabel.TabIndex = 11;
+            monthQuantityLabel.Text = "label1";
             // 
             // totalIncomeLabel
             // 
             totalIncomeLabel.AutoSize = true;
             totalIncomeLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             totalIncomeLabel.ForeColor = Color.SeaGreen;
-            totalIncomeLabel.Location = new Point(146, 57);
+            totalIncomeLabel.Location = new Point(173, 37);
             totalIncomeLabel.Name = "totalIncomeLabel";
             totalIncomeLabel.Size = new Size(56, 18);
             totalIncomeLabel.TabIndex = 8;
@@ -141,7 +156,7 @@
             // 
             monthValueLabel.AutoSize = true;
             monthValueLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            monthValueLabel.Location = new Point(146, 10);
+            monthValueLabel.Location = new Point(173, 10);
             monthValueLabel.Name = "monthValueLabel";
             monthValueLabel.Size = new Size(56, 18);
             monthValueLabel.TabIndex = 7;
@@ -152,11 +167,28 @@
             totalExpenseLabel.AutoSize = true;
             totalExpenseLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             totalExpenseLabel.ForeColor = Color.Firebrick;
-            totalExpenseLabel.Location = new Point(146, 104);
+            totalExpenseLabel.Location = new Point(173, 64);
             totalExpenseLabel.Name = "totalExpenseLabel";
             totalExpenseLabel.Size = new Size(56, 18);
             totalExpenseLabel.TabIndex = 9;
             totalExpenseLabel.Text = "label1";
+            // 
+            // mainFormQuantityLabel
+            // 
+            mainFormQuantityLabel.AutoSize = true;
+            mainFormQuantityLabel.Location = new Point(13, 91);
+            mainFormQuantityLabel.Name = "mainFormQuantityLabel";
+            mainFormQuantityLabel.Size = new Size(154, 18);
+            mainFormQuantityLabel.TabIndex = 10;
+            mainFormQuantityLabel.Text = "Antal transaktioner:";
+            // 
+            // chartPanel
+            // 
+            chartPanel.BackColor = SystemColors.ButtonFace;
+            chartPanel.Location = new Point(636, 95);
+            chartPanel.Name = "chartPanel";
+            chartPanel.Size = new Size(536, 454);
+            chartPanel.TabIndex = 7;
             // 
             // MainForm
             // 
@@ -164,6 +196,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
+            Controls.Add(chartPanel);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(mainFormStatsBtn);
             Controls.Add(mainFormTransactionBtn);
@@ -191,5 +224,8 @@
         private Label monthValueLabel;
         private Label totalIncomeLabel;
         private Label totalExpenseLabel;
+        private Panel chartPanel;
+        private Label mainFormQuantityLabel;
+        private Label monthQuantityLabel;
     }
 }

@@ -17,7 +17,7 @@ namespace Projekt.Services
             this.transaction = transaction;
         }
         // Beräknar för aktuell månad summan av inkomster, utgifter och totala saldo
-        public async Task<(float MonthBalanceSum, float IncomeSum, float ExpenseSum)> InsertFinanceValues()
+        public async Task<(float MonthBalanceSum, float IncomeSum, float ExpenseSum, int Quantity)> InsertFinanceValues()
         {
             // Hämtar in alla transaktioner
             List<Transaction> allTransactions = await transaction.GetTransactions();
@@ -26,15 +26,28 @@ namespace Projekt.Services
             string currentYearMonth = DateTime.Now.ToString("yyyy-MM");
 
             // Summan inkomster
-            var incomeSum = allTransactions.Where(t => t.Datum != null && t.Datum.StartsWith(currentYearMonth) && t.Typ == "Inkomst").Sum(t => t.Belopp);
+            float incomeSum = allTransactions.Where(t => t.Datum != null && t.Datum.StartsWith(currentYearMonth) && t.Typ == "Inkomst").Sum(t => t.Belopp);
 
             // Summan utgifter
-            var expenseSum = allTransactions.Where(t => t.Datum != null && t.Datum.StartsWith(currentYearMonth) && t.Typ == "Utgift").Sum(t => t.Belopp);
+            float expenseSum = allTransactions.Where(t => t.Datum != null && t.Datum.StartsWith(currentYearMonth) && t.Typ == "Utgift").Sum(t => t.Belopp);
 
             // Totala saldot
-            var monthBalanceSum = incomeSum - expenseSum;
+            float monthBalanceSum = incomeSum - expenseSum;
 
-            return (monthBalanceSum, incomeSum, expenseSum);
+            int quantity = allTransactions.Count;
+
+            return (monthBalanceSum, incomeSum, expenseSum, quantity);
+        }
+
+        public async Task<List<(string Category, float Sum)>> GetExpensesByCategory()
+        {
+            var transactions = await this.transaction.GetTransactions();
+            return transactions
+                .Where(t => t.Typ == "Utgift")
+                .GroupBy(t => t.Kategori)
+                .Select(g => (Category: g.Key ?? "Okänd", Sum: g.Sum(t => t.Belopp)
+                ))
+                .ToList();
         }
     }
 }

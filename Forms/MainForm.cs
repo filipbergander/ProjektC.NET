@@ -7,56 +7,93 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Projekt.Models;
+using Projekt.Interfaces;
 using Projekt.Services;
 using Projekt.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Projekt.Forms
 {
     public partial class MainForm : Form
     {
-        private readonly TransactionService transaction;
-        private readonly FinanceService financeService;
-        public MainForm()
+        private readonly ITransactionService transaction; // Instans av TransactionService genom interfacet
+        private readonly FinanceService financeService; // Instans av financeservice för att hämta in "finansvärden" till mainform
+        public MainForm(ITransactionService transaction)
         {
             InitializeComponent();
-            transaction = new TransactionService();
-            financeService = new FinanceService(transaction);
-            InsertFinanceValues();
+            this.transaction = transaction;
+            this.financeService = new FinanceService(transaction);
+            MainFormLoad();
         }
-
+        // Metod som körs när formuläret laddas, hämtar in värdena från financeService och skapar diagrammet
+        private async void MainFormLoad()
+        {
+            await InsertFinanceValues();
+            await LoadDiagram();
+        }
+        // Öppnar formuläret TransactionForm när knappen "Transaktioner" klickas på
         private void mainFormTransactionBtn_Click(object sender, EventArgs e)
         {
             var transactionForm = new TransactionForm(transaction, this);
             OpenForm(transactionForm);
         }
-
         private void OpenForm(Form form)
         {
-            form.FormClosed += (s, args) =>
+            form.FormClosed += async (s, args) =>
             {
                 this.Show();
-                InsertFinanceValues();
+                MainFormLoad();
             };
             form.Show();
             this.Hide();
         }
         // Hämtar in värdena som metoden i financeService kalkylerat och returnerar dem i labels ínom mainform
-        private async void InsertFinanceValues()
+        private async Task InsertFinanceValues()
         {
             string monthNow = DateTime.Now.ToString("MMMM", new CultureInfo("sv-SE"));
             monthNow = char.ToUpper(monthNow[0]) + monthNow.Substring(1); // Gör första bokstaven i månadens namn som versal
 
             // Värdena från financeservice
-            var (monthBalanceSum, incomeSum, expenseSum) = await financeService.InsertFinanceValues();
+            var (monthBalanceSum, incomeSum, expenseSum, quantity) = await financeService.InsertFinanceValues();
 
             // Labels inom layoutpanel
             mainFormMonthLabel.Text = $"Totalt {monthNow}: ";
             monthValueLabel.Text = $"{monthBalanceSum:N2} kr";
             totalIncomeLabel.Text = $"+ {incomeSum:N2} kr";
             totalExpenseLabel.Text = $"- {expenseSum:N2} kr";
+            monthQuantityLabel.Text = $"{quantity} st";
 
             // Om totala saldot för månaden är positivt -> visa värdet i grönt, annars rött
             monthValueLabel.ForeColor = monthBalanceSum >= 0 ? Color.SeaGreen : Color.Firebrick;
+        }
+
+        // Skapar ett diagram som visar största utgifter per kategorier denna månad
+        private async Task LoadDiagram()
+        {
+            // Hämtar in kategorierna och summan av utgifterna per kategori
+            var transactionData = await financeService.GetExpensesByCategory();
+
+            Chart chart = new Chart(); // Skapar diagrammet
+            chart.ChartAreas.Add(new ChartArea()); // En chartarea läggs till i diagrammet
+            chartPanel.Controls.Add(chart); // Lägger till diagrammet i panelen, som skapades via designer
+            chart.Name = "chart1"; // Namn
+            chart.Dock = DockStyle.Fill; // Diagrammet fyller hela panelen
+            chartPanel.BackColor = Color.Transparent;
+            chart.BorderlineColor = Color.Transparent;
+            chart.Titles.Add("Månadens utgifter"); // Titel
+            chart.Titles[0].Font = new Font("Lucida Sans", 12, FontStyle.Bold); // Font för titeln
+            chart.Legends.Add(new Legend()); // Legened läggs till i diagrammet för att visa namn på kategorierna
+            var series = new Series(); // Data för diagrammet -> series
+
+            // Skriver ut varje kategori av utgifter och summa -> i diagrammet
+            foreach (var category in transactionData)
+            {
+                series.Points.AddXY(category.Category, category.Sum);
+            }
+            series.ChartType = SeriesChartType.Doughnut; // Typ av diagrammet -> Pie
+            series.IsValueShownAsLabel = true; // Visar värderna för kategorierna, Sum, i diagrammet
+
+            chart.Series.Add(series); // Lägger till series i diagrammet
         }
     }
 }
