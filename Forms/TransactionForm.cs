@@ -223,6 +223,7 @@ namespace Projekt.Forms
             searchTransactionBox.Text = string.Empty;
             minAmountNumeric.Value = 0;
             maxAmountNumeric.Value = 100000;
+            filter.sFras = null; // Sätter sökfrasen till null
             LoadTransactions(); // Hämtar in alla transaktioner igen och visar i datagriden
         }
         // Togglar kategorier vid klick på "Alla" i filterpanelens listbox
@@ -311,7 +312,14 @@ namespace Projekt.Forms
         // Hittar transaktioner i datagriden beroende på sökfras i sökfältet
         private async void searchTransactionBox_TextChanged(object sender, EventArgs e)
         {
-            filter.sFras = searchTransactionBox.Text; // Det som skrivits in i sökfältet
+            if (string.IsNullOrWhiteSpace(searchTransactionBox.Text))
+            {
+                filter.sFras = null; // Om sökfältet är tomt -> sätter sökfrasen till null
+            }
+            else
+            {
+                filter.sFras = searchTransactionBox.Text; // Det som skrivits in i sökfältet
+            }
 
             displayingTransactions = await queryService.FilterTransactions(filter); // Försöker matcha transaktioner med sökfrasen i sökfältet
 
