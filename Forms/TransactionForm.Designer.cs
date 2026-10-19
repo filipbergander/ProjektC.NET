@@ -131,7 +131,7 @@
             // 
             // AddNewTransactionBtn
             // 
-            AddNewTransactionBtn.BackColor = Color.FromArgb(0, 192, 0);
+            AddNewTransactionBtn.BackColor = Color.LimeGreen;
             AddNewTransactionBtn.Cursor = Cursors.Hand;
             AddNewTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             AddNewTransactionBtn.Location = new Point(447, 435);
@@ -394,7 +394,7 @@
             // 
             // updateTransactionBtn
             // 
-            updateTransactionBtn.BackColor = Color.FromArgb(128, 128, 255);
+            updateTransactionBtn.BackColor = Color.LightGray;
             updateTransactionBtn.Cursor = Cursors.Hand;
             updateTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
             updateTransactionBtn.Location = new Point(653, 435);

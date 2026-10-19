@@ -48,7 +48,7 @@ namespace Projekt.Forms
         {
             if (transactionGrid.SelectedRows.Count > 0)
             {
-                UpdateDeleteButton(); // Radera-knappen ändrar färg och blir enabled
+                ModifyButton(); // Radera-knappen ändrar färg och blir enabled
             }
         }
         // Sorterar kolumnerna i datagriden när man klickar på kolumnrubriken, och lägger till en pil som visar sorteringsordningen (fallande/stigande)
@@ -344,43 +344,60 @@ namespace Projekt.Forms
             }
 
         }
-        // Uppdaterar "Radera" knappen beroende på om en rad är markerad i datagriden eller inte
-        private void UpdateDeleteButton()
+        // Gör knapparna "Radera" och "Uppdatera" inaktiva och ändrar färgen på dem
+        private void DisableButton(Button button)
         {
+            button.Enabled = false;
+            button.ForeColor = Color.DimGray; // Grå färg
+            button.BackColor = Color.LightGray; // Bakgrundsfärgen ljusgrå
+        }
+        // Aktiverar knapparna för "Radera" och "Uppdatera" och ändrar färgen på dem
+        private void EnableButton(Button button, Color foreColor, Color backColor)
+        {
+            button.Enabled = true;
+            button.ForeColor = foreColor;
+            button.BackColor = backColor;
+        }
+
+        // Uppdaterar knapparna "Radera" och "Uppdatera" beroende på om en rad är markerad i datagriden eller inte
+        private void ModifyButton()
+        {
+            // Om ingen rad är markerad i datagriden -> inaktivera knapparna
             if (transactionGrid.SelectedRows.Count == 0)
             {
-                deleteTransactionBtn.Enabled = false; // Inaktiverar knappen om ingen rad är markerad
-                deleteTransactionBtn.ForeColor = Color.Black; // Grå färg
-                deleteTransactionBtn.BackColor = Color.LightGray; // Bakgrundsfärgen ljusgrå
+                DisableButton(deleteTransactionBtn);
+                DisableButton(updateTransactionBtn);
+                return;
             }
+            // Hämtar den markerade transaktionen i datagriden
+            var selectedTransaction = transactionGrid.SelectedRows[0].DataBoundItem as Transaction;
 
-            var selectedTransaction = transactionGrid.SelectedRows[0].DataBoundItem as Transaction; // Hämtar den markerade transaktionen i datagriden
+            // Inaktiverar knapparna om det är en spar-transaktion som är markerad
             bool protectedTransaction = selectedTransaction?.Kategori == "Sparande" && selectedTransaction.Namn?.Contains("Spar") == true;
 
+            // Om det inte är en spar-transaktion som är markerad -> aktivera knapparna
             if (!protectedTransaction)
             {
-                deleteTransactionBtn.Enabled = true; // Aktiverar "Radera" knappen om en rad är markerad
-                deleteTransactionBtn.ForeColor = Color.Firebrick; // Sätter färgen på "Radera" knappen till röd
-                deleteTransactionBtn.BackColor = Color.White; // Sätter bakgrundsfärgen på "Radera" knappen till vit
+                EnableButton(deleteTransactionBtn, Color.Firebrick, Color.White);
+                EnableButton(updateTransactionBtn, Color.Black, Color.FromArgb(128, 128, 255));
             }
-
+            // Inaktiverar knapparna om det är en spar-transaktion som är markerad
             else
             {
-                deleteTransactionBtn.Enabled = false; // Inaktiverar knappen om ingen rad är markerad
-                deleteTransactionBtn.ForeColor = Color.Black; // Grå färg
-                deleteTransactionBtn.BackColor = Color.LightGray; // Bakgrundsfärgen ljusgrå
+                DisableButton(deleteTransactionBtn);
+                DisableButton(updateTransactionBtn);
             }
         }
         // Visar en notifikation i formuläret som försvinner efter 2 sekunder
         private async Task DisplayNotification(Label label, string message, string color)
         {
-            label.ForeColor = Color.FromName(color);
-            label.Text = message;
-            label.Visible = true;
-            await Task.Delay(2000); // Väntar i 2 sekunder
-            label.Visible = false;
+            label.ForeColor = Color.FromName(color); // Sätter färgen på texten i labeln
+            label.Text = message; // Meddelandet
+            label.Visible = true; // Visar labeln
+            await Task.Delay(1800); // Väntar i 1,8 sekunder
+            label.Visible = false; // Döljer labeln igen
         }
-
+        // Öppnar formuläret för att uppdatera en transaktion vid klick -> "Uppdatera" knapp
         private void updateTransactionBtn_Click_1(object sender, EventArgs e)
         {
             // Är fler än noll rader markerade i datagriden -> fortsätt
@@ -397,7 +414,7 @@ namespace Projekt.Forms
                         LoadTransactions();
                     }
                     ;
-                    addTransactionForm.Show();
+                    addTransactionForm.Show(); // Öppnar formuläret
                     this.Hide();
                 }
             }
