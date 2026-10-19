@@ -55,11 +55,12 @@ namespace Projekt.Services
         // Tar bort en transaktion från databasen
         public async Task RemoveTransaction(int id)
         {
-            var transaction = await database.Set<Transaction>().FindAsync(id);
-            if (transaction != null)
+            var transaction = await database.Set<Transaction>().FindAsync(id); // Hittar transaktionen med det inskickade id:t
+            // Kollar om transaktionen finns och att den inte innehåller "Sparutmaning" i namnet
+            if (transaction != null && !(transaction.Namn?.Contains("Sparutmaning") ?? false)) // 
             {
-                database.Set<Transaction>().Remove(transaction);
-                await database.SaveChangesAsync();
+                database.Set<Transaction>().Remove(transaction); // Tar bort transaktionen från databasen
+                await database.SaveChangesAsync(); // Sparar ändringarna
             }
         }
     }

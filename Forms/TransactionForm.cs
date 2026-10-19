@@ -46,7 +46,10 @@ namespace Projekt.Forms
         // Känner efter ändringar i datagriden och uppdaterar "Radera" knappen beroende på om en rad är markerad eller inte
         private void transactionGrid_SelectionChanged(object sender, EventArgs e)
         {
-            UpdateDeleteButton(); // Radera-knappen ändrar färg och blir enabled
+            if (transactionGrid.SelectedRows.Count > 0)
+            {
+                UpdateDeleteButton(); // Radera-knappen ändrar färg och blir enabled
+            }
         }
         // Sorterar kolumnerna i datagriden när man klickar på kolumnrubriken, och lägger till en pil som visar sorteringsordningen (fallande/stigande)
         private async void transactionGrid_ColumnHeaderMouseClick_1(object sender, DataGridViewCellMouseEventArgs e)
@@ -247,10 +250,12 @@ namespace Projekt.Forms
             if (displayingTransactions?.Count >= 1)
             {
                 totalTransactionsPostLabel.Text = $"Visar {displayingTransactions?.Count} av {totalTransactions.Count} transaktioner";
+                totalTransactionsPostLabel.ForeColor = Color.FromArgb(64, 64, 64); // Sätter texten till svart färg om transaktioner hittades
             }
             else
             {
                 totalTransactionsPostLabel.Text = "Inga transaktioner hittades";
+                totalTransactionsPostLabel.ForeColor = Color.Firebrick; // Sätter texten till röd färg om inga transaktioner hittades
             }
         }
         // Visar de filtrerade transaktionerna i datagriden vid klick -> "Filtrera" knapp
@@ -339,12 +344,23 @@ namespace Projekt.Forms
         // Uppdaterar "Radera" knappen beroende på om en rad är markerad i datagriden eller inte
         private void UpdateDeleteButton()
         {
-            if (transactionGrid.SelectedRows.Count > 0)
+            if (transactionGrid.SelectedRows.Count == 0)
+            {
+                deleteTransactionBtn.Enabled = false; // Inaktiverar knappen om ingen rad är markerad
+                deleteTransactionBtn.ForeColor = Color.Black; // Grå färg
+                deleteTransactionBtn.BackColor = Color.LightGray; // Bakgrundsfärgen ljusgrå
+            }
+
+            var selectedTransaction = transactionGrid.SelectedRows[0].DataBoundItem as Transaction; // Hämtar den markerade transaktionen i datagriden
+            bool protectedTransaction = selectedTransaction?.Kategori == "Sparande" && selectedTransaction.Namn?.Contains("Spar") == true;
+
+            if (!protectedTransaction)
             {
                 deleteTransactionBtn.Enabled = true; // Aktiverar "Radera" knappen om en rad är markerad
                 deleteTransactionBtn.ForeColor = Color.Firebrick; // Sätter färgen på "Radera" knappen till röd
                 deleteTransactionBtn.BackColor = Color.White; // Sätter bakgrundsfärgen på "Radera" knappen till vit
             }
+
             else
             {
                 deleteTransactionBtn.Enabled = false; // Inaktiverar knappen om ingen rad är markerad

@@ -37,6 +37,12 @@ namespace Projekt.Forms
             var transactionForm = new TransactionForm(transaction, this);
             OpenForm(transactionForm);
         }
+        // Öppnar formuläret SavingsForm när knappen "Sparande" klickas på
+        private void mainFormSavingsBtn_Click(object sender, EventArgs e)
+        {
+            var savingsForm = new SavingsForm(transaction, this, financeService);
+            OpenForm(savingsForm);
+        }
         private void OpenForm(Form form)
         {
             form.FormClosed += async (s, args) =>
@@ -72,6 +78,8 @@ namespace Projekt.Forms
         {
             // Hämtar in kategorierna och summan av utgifterna per kategori
             var transactionData = await financeService.GetExpensesByCategory();
+            var monthNow = DateTime.Now.ToString("MMMM", new CultureInfo("sv-SE")); // Aktuell månad
+            monthNow = char.ToUpper(monthNow[0]) + monthNow.Substring(1); // Gör första bokstaven i månadens namn som versal
 
             Chart chart = new Chart(); // Skapar diagrammet
             chart.ChartAreas.Add(new ChartArea()); // En chartarea läggs till i diagrammet
@@ -80,9 +88,10 @@ namespace Projekt.Forms
             chart.Dock = DockStyle.Fill; // Diagrammet fyller hela panelen
             chartPanel.BackColor = Color.Transparent;
             chart.BorderlineColor = Color.Transparent;
-            chart.Titles.Add("Månadens utgifter"); // Titel
+            chart.Titles.Add($"{monthNow} \n Utgifter per kategori"); // Titel
             chart.Titles[0].Font = new Font("Lucida Sans", 12, FontStyle.Bold); // Font för titeln
             chart.Legends.Add(new Legend()); // Legened läggs till i diagrammet för att visa namn på kategorierna
+            chart.Legends[0].Font = new Font("Lucida Sans", 11, FontStyle.Regular); // Font för legend
             var series = new Series(); // Data för diagrammet -> series
 
             // Skriver ut varje kategori av utgifter och summa -> i diagrammet

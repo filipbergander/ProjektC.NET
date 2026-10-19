@@ -33,7 +33,7 @@
             mainFormIncomeLabel = new Label();
             mainFormExpenseLabel = new Label();
             mainFormTransactionBtn = new Button();
-            mainFormStatsBtn = new Button();
+            mainFormSavingsBtn = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             monthQuantityLabel = new Label();
             totalIncomeLabel = new Label();
@@ -94,15 +94,16 @@
             mainFormTransactionBtn.UseVisualStyleBackColor = true;
             mainFormTransactionBtn.Click += mainFormTransactionBtn_Click;
             // 
-            // mainFormStatsBtn
+            // mainFormSavingsBtn
             // 
-            mainFormStatsBtn.Cursor = Cursors.Hand;
-            mainFormStatsBtn.Location = new Point(371, 324);
-            mainFormStatsBtn.Name = "mainFormStatsBtn";
-            mainFormStatsBtn.Size = new Size(125, 40);
-            mainFormStatsBtn.TabIndex = 5;
-            mainFormStatsBtn.Text = "Statistik";
-            mainFormStatsBtn.UseVisualStyleBackColor = true;
+            mainFormSavingsBtn.Cursor = Cursors.Hand;
+            mainFormSavingsBtn.Location = new Point(371, 324);
+            mainFormSavingsBtn.Name = "mainFormSavingsBtn";
+            mainFormSavingsBtn.Size = new Size(125, 40);
+            mainFormSavingsBtn.TabIndex = 5;
+            mainFormSavingsBtn.Text = "Sparande";
+            mainFormSavingsBtn.UseVisualStyleBackColor = true;
+            mainFormSavingsBtn.Click += mainFormSavingsBtn_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -198,7 +199,7 @@
             ClientSize = new Size(1184, 561);
             Controls.Add(chartPanel);
             Controls.Add(tableLayoutPanel1);
-            Controls.Add(mainFormStatsBtn);
+            Controls.Add(mainFormSavingsBtn);
             Controls.Add(mainFormTransactionBtn);
             Controls.Add(mainFormDashboardLabel);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -219,7 +220,7 @@
         private Label mainFormIncomeLabel;
         private Label mainFormExpenseLabel;
         private Button mainFormTransactionBtn;
-        private Button mainFormStatsBtn;
+        private Button mainFormSavingsBtn;
         private TableLayoutPanel tableLayoutPanel1;
         private Label monthValueLabel;
         private Label totalIncomeLabel;

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices.Marshalling;
 
 namespace Projekt.Services
 {
-    internal class FinanceService
+    public class FinanceService
     {
         // Instans av Transactionsservicen
         private readonly ITransactionService transaction;
@@ -38,16 +38,31 @@ namespace Projekt.Services
 
             return (monthBalanceSum, incomeSum, expenseSum, quantity);
         }
-
+        // Beräknar summan av utgifter per kategori
         public async Task<List<(string Category, float Sum)>> GetExpensesByCategory()
         {
-            var transactions = await this.transaction.GetTransactions();
+            var transactions = await this.transaction.GetTransactions(); // Hämtar in transaktioner
+            // Filtrerar ut utgifterna och grupperar dem efter kategori, samt summerar beloppet för varje kategori
             return transactions
                 .Where(t => t.Typ == "Utgift")
                 .GroupBy(t => t.Kategori)
                 .Select(g => (Category: g.Key ?? "Okänd", Sum: g.Sum(t => t.Belopp)
                 ))
                 .ToList();
+        }
+        // Hämtar in hur många gånger man spelat på sparutmaningen under dagen -> för att avgöra om man kan spela eller inte
+        public async Task<bool> CanPlayToday()
+        {
+            var today = DateTime.Today.ToString("yyyy-MM-dd"); // Dagens datum
+
+            var transactions = await transaction.GetTransactions(); // Hämtar alla transaktioner
+
+            // Tittar om det finns två "Sparande" poster från samma dag 
+            if (transactions.Count(t => t.Kategori == "Sparande" && t.Datum == today) >= 2)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
