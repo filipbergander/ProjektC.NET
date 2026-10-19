@@ -21,7 +21,7 @@ namespace Projekt.Services
             database.Database.EnsureCreated();
         }
 
-        // Lägga till en ny transaktion
+        // Lägger till en ny transaktion
         public async Task<bool> AddTransaction(Transaction transaction)
         {
             // Kollar om en transaktion redan finns i databasen
@@ -62,6 +62,24 @@ namespace Projekt.Services
                 database.Set<Transaction>().Remove(transaction); // Tar bort transaktionen från databasen
                 await database.SaveChangesAsync(); // Sparar ändringarna
             }
+        }
+        // Uppdaterar en befintlig transaktion i databasen
+        public async Task UpdateTransaction(int id, Transaction updateTransaction)
+        {
+            var existingTransaction = await database.Set<Transaction>().FindAsync(id); // Hämtar in befintliga transaktionen genom ID
+            // Om transaktionen inte finns, returnera
+            if (existingTransaction == null)
+            {
+                return;
+            }
+            // Uppdaterar fälten i databasen med de värden som valdes att uppdateras
+            existingTransaction.Typ = updateTransaction.Typ;
+            existingTransaction.Namn = updateTransaction.Namn;
+            existingTransaction.Kategori = updateTransaction.Kategori;
+            existingTransaction.Belopp = updateTransaction.Belopp;
+            existingTransaction.Datum = updateTransaction.Datum;
+            // database.Set<Transaction>().Update(updateTransaction);
+            await database.SaveChangesAsync(); // Sparar ändringarna
         }
     }
 }

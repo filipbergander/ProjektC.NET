@@ -44,7 +44,7 @@
             saveAddTransactionBtn = new Button();
             addTransactionCancelBtn = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            errorLabel = new Label();
+            msgLabel = new Label();
             addTransactionFormReturnBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)addTransactionAmountNum).BeginInit();
             addTransactionPanel.SuspendLayout();
@@ -237,7 +237,7 @@
             // 
             flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            flowLayoutPanel1.Controls.Add(errorLabel);
+            flowLayoutPanel1.Controls.Add(msgLabel);
             flowLayoutPanel1.Location = new Point(192, 255);
             flowLayoutPanel1.Margin = new Padding(5);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -245,18 +245,19 @@
             flowLayoutPanel1.Size = new Size(16, 28);
             flowLayoutPanel1.TabIndex = 12;
             // 
-            // errorLabel
+            // msgLabel
             // 
-            errorLabel.AutoSize = true;
-            errorLabel.Location = new Point(8, 5);
-            errorLabel.Name = "errorLabel";
-            errorLabel.Size = new Size(0, 18);
-            errorLabel.TabIndex = 7;
+            msgLabel.AutoSize = true;
+            msgLabel.Location = new Point(8, 5);
+            msgLabel.Name = "msgLabel";
+            msgLabel.Size = new Size(0, 18);
+            msgLabel.TabIndex = 7;
             // 
             // addTransactionFormReturnBtn
             // 
             addTransactionFormReturnBtn.Anchor = AnchorStyles.Left;
             addTransactionFormReturnBtn.AutoSize = true;
+            addTransactionFormReturnBtn.Cursor = Cursors.Hand;
             addTransactionFormReturnBtn.Location = new Point(19, 514);
             addTransactionFormReturnBtn.Margin = new Padding(10);
             addTransactionFormReturnBtn.Name = "addTransactionFormReturnBtn";
@@ -309,7 +310,7 @@
         private DateTimePicker addTransactionDatePicker;
         private Button addTransactionCancelBtn;
         private Button saveAddTransactionBtn;
-        private Label errorLabel;
+        private Label msgLabel;
         private FlowLayoutPanel flowLayoutPanel1;
         private FlowLayoutPanel flowLayoutPanel2;
     }

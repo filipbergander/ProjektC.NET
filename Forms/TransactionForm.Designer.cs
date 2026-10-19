@@ -69,7 +69,6 @@
             // 
             // transactionGrid
             // 
-            transactionGrid.AllowUserToResizeColumns = false;
             transactionGrid.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(245, 246, 250);
             transactionGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -404,6 +403,7 @@
             updateTransactionBtn.TabIndex = 20;
             updateTransactionBtn.Text = "Uppdatera";
             updateTransactionBtn.UseVisualStyleBackColor = false;
+            updateTransactionBtn.Click += updateTransactionBtn_Click_1;
             // 
             // modifyTransactionsLabel
             // 

@@ -76,6 +76,8 @@ namespace Projekt.Forms
         // Skapar ett diagram som visar största utgifter per kategorier denna månad
         private async Task LoadDiagram()
         {
+            chartPanel.Controls.Clear(); // Rensar panelen innan diagrammet skapas, annars läggs diagram ovanpå varandra
+
             // Hämtar in kategorierna och summan av utgifterna per kategori
             var transactionData = await financeService.GetExpensesByCategory();
             var monthNow = DateTime.Now.ToString("MMMM", new CultureInfo("sv-SE")); // Aktuell månad
@@ -103,6 +105,12 @@ namespace Projekt.Forms
             series.IsValueShownAsLabel = true; // Visar värderna för kategorierna, Sum, i diagrammet
 
             chart.Series.Add(series); // Lägger till series i diagrammet
+        }
+
+        public async Task RefreshDashboard()
+        {
+            await InsertFinanceValues();
+            await LoadDiagram();
         }
     }
 }

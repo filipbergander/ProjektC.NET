@@ -120,15 +120,17 @@ namespace Projekt.Forms
         }
 
         // Går tillbaka till Mainform vid klick -> "Gå tillbaka" knapp
-        private void transactionFormReturnBtn_Click(object sender, EventArgs e)
+        private async void transactionFormReturnBtn_Click(object sender, EventArgs e)
         {
             mainForm.Show();
+            await mainForm.RefreshDashboard();
             this.Close();
+
         }
         // Öppnar formuläret för att lägga till en ny transaktion vid klick -> "Lägg till"
         private void AddNewTransactionBtn_Click(object sender, EventArgs e)
         {
-            var addTransactionForm = new AddTransactionForm(transaction);
+            var addTransactionForm = new AddTransactionForm(transaction, this);
             addTransactionForm.FormClosed += (s, args) =>
             {
                 this.Show(); // Laddar om transaktionerna när formuläret stängs
@@ -138,8 +140,9 @@ namespace Projekt.Forms
             this.Hide();
         }
         // Stänger formuläret vid klick -> "Stäng" (X-knappen i windows)
-        private void btnClose_Click(object sender, EventArgs e)
+        private async void btnClose_Click(object sender, EventArgs e)
         {
+            await mainForm.RefreshDashboard();
             this.Close();
         }
         // Formaterar cellerna i datagriden för att visa "belopp" med röd/grön färg och +- beroende på om det är en utgift eller inkomst
@@ -378,22 +381,26 @@ namespace Projekt.Forms
             label.Visible = false;
         }
 
-        //private async void updateTransactionBtn_Click(object sender, EventArgs e)
-        //{
-        //    // Är fler än noll rader markerade i datagriden -> fortsätt
-        //    if (transactionGrid.SelectedRows.Count > 0)
-        //    {
-        //        var selectedRow = transactionGrid.SelectedRows[0]; // Hämtar den markerade raden i datagriden
-        //        var selectedTransaction = selectedRow.DataBoundItem as Transaction; // Hämtar den markerade transaktionen i datagriden
-        //        if (selectedTransaction != null)
-        //        {
-        //            await transaction.UpdateTransaction(selectedTransaction.Id);// Uppdatera transaktionen i databasen
-        //            displayingTransactions = await transaction.GetTransactions(); // Hämtar in de transaktionerna igen efter uppdateringen
-        //            resetTransactionGrid(displayingTransactions); // Uppdaterar & återställer datagriden med de inhämtade transaktionerna
-        //            DisplayTotalTransactionsCount(); // Visar antalet transaktioner som visas i datagriden igen
-        //            await DisplayNotification(deleteTransactionNotificationLabel, "Transaktionen uppdaterades!", "ForestGreen"); // Visar en notifikation om att transaktionen uppdaterades
-        //        }
-        //    }
-        //}
+        private void updateTransactionBtn_Click_1(object sender, EventArgs e)
+        {
+            // Är fler än noll rader markerade i datagriden -> fortsätt
+            if (transactionGrid.SelectedRows.Count > 0)
+            {
+                var selectedTransaction = transactionGrid.SelectedRows[0].DataBoundItem as Transaction; // Hämtar den markerade transaktionen i datagriden
+
+                if (selectedTransaction != null)
+                {
+                    var addTransactionForm = new AddTransactionForm(transaction, this, selectedTransaction);
+                    addTransactionForm.FormClosed += (s, args) =>
+                    {
+                        this.Show(); // Laddar om transaktionerna när formuläret stängs
+                        LoadTransactions();
+                    }
+                    ;
+                    addTransactionForm.Show();
+                    this.Hide();
+                }
+            }
+        }
     }
 }
