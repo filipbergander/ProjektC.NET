@@ -66,6 +66,7 @@
             label1 = new Label();
             label2 = new Label();
             panelCalculatorHeaderLabel = new Label();
+            progressBar = new ProgressBar();
             totalSumSavingsText = new TextBox();
             totalSumSavingsLabel = new Label();
             totalSavingsPanel = new Panel();
@@ -487,6 +488,17 @@
             panelCalculatorHeaderLabel.TabIndex = 3;
             panelCalculatorHeaderLabel.Text = "Sparkalkylator";
             // 
+            // progressBar
+            // 
+            progressBar.Location = new Point(542, 535);
+            progressBar.MarqueeAnimationSpeed = 30;
+            progressBar.Name = "progressBar";
+            progressBar.Size = new Size(149, 23);
+            progressBar.Step = 5;
+            progressBar.Style = ProgressBarStyle.Marquee;
+            progressBar.TabIndex = 10;
+            progressBar.Visible = false;
+            // 
             // totalSumSavingsText
             // 
             totalSumSavingsText.Location = new Point(16, 39);
@@ -569,6 +581,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
+            Controls.Add(progressBar);
             Controls.Add(openToolsSavingBtn);
             Controls.Add(savingsPanel);
             Controls.Add(totalSavingsPanel);
@@ -649,5 +662,6 @@
         private Panel panel1;
         private Label label11;
         private Label totalResultLabel;
+        private ProgressBar progressBar;
     }
 }

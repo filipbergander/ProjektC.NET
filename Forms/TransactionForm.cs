@@ -19,6 +19,7 @@ namespace Projekt.Forms
         private string currentSortColumn = ""; // Vilken kolumn som är sorterad i datagriden
         private bool ascending = true; // Sorteringsordningen för kolumnerna i datagriden
         private readonly ITransactionService transaction;   // Instans av TransactionService
+        private readonly TransactionService transactionn;
         private readonly QueryService queryService; // Instans av TransactionQueryService
         private List<Transaction> displayingTransactions = []; // Sparar antalet transaktioner som visas i datagriden "nu" till denna variabel
         private readonly TransactionFilter filter = new TransactionFilter(); // Instans av TransactionFilter som används för filtrering & sökning av transaktioner
@@ -426,6 +427,12 @@ namespace Projekt.Forms
                     this.Hide();
                 }
             }
+        }
+
+        private async void removeAllSavingsBtn_Click(object sender, EventArgs e)
+        {
+            await transaction.RemoveChallengeTransactions();
+            LoadTransactions();
         }
     }
 }

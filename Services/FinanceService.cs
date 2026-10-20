@@ -59,6 +59,7 @@ namespace Projekt.Services
             return incomeSum - expenseSum; // Returnerar totala saldot
         }
 
+
         /// <summary>
         /// Räknar ut hur mycket pengar man kommer ha efter ett visst antal år, med startbelopp, avsättning per månad och årlig ränta.   
         /// </summary>
@@ -85,16 +86,17 @@ namespace Projekt.Services
             return Math.Round(totalAmount, 2);
         }
         // Hämtar in den största "vinsten" som användaren vunnít i sparutmaningen
-        public async Task<(float LargestWin, float TotalResult)> GetPlayerResult()
+        public async Task<(float LargestWin, float TotalResult)> GetUserResult()
         {
             List<Transaction> transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner
-            float largestWin = transactions.Where(t => t.Kategori == "Sparande" && t.Typ == "Inkomst").Max(t => t.Belopp); // Största vinsten
+
+            var winTransactions = transactions.Where(t => t.Kategori == "Sparande" && t.Typ == "Inkomst").ToList(); // Filtrerar ut alla vinster
+
+            float largestWin = winTransactions.Any() ? winTransactions.Max(t => t.Belopp) : 0; // Största vinsten, om inga vinster finns så sätts den till 0
             float totalLosses = transactions.Where(t => t.Kategori == "Sparande" && t.Typ == "Utgift").Sum(t => t.Belopp); // Totala förluster
-            float totalWin = transactions.Where(t => t.Kategori == "Sparande" && t.Typ == "Inkomst").Sum(t => t.Belopp); // Totala vinster
+            float totalWin = winTransactions.Sum(t => t.Belopp); // Totala vinster
             float totalResult = totalWin - totalLosses; // Beräknar totala resultatet av spelutmaningen
             return (largestWin, totalResult); // Returnerar största vinsten och de totala resultatet för spelaren
         }
-
-
     }
 }

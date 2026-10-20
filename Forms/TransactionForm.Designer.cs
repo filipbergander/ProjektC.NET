@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             transactionGrid = new DataGridView();
             transactionsHeaderLabel = new Label();
             transactionFormReturnBtn = new Button();
@@ -61,6 +61,7 @@
             modifyTransactionsLabel = new Label();
             deleteTransactionNotificationLabel = new Label();
             sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
+            removeAllSavingsBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)transactionGrid).BeginInit();
             filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).BeginInit();
@@ -70,27 +71,27 @@
             // transactionGrid
             // 
             transactionGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(245, 246, 250);
-            transactionGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(245, 246, 250);
+            transactionGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             transactionGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             transactionGrid.BackgroundColor = Color.White;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(44, 62, 80);
-            dataGridViewCellStyle2.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            transactionGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(44, 62, 80);
+            dataGridViewCellStyle5.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            transactionGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             transactionGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            transactionGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            transactionGrid.DefaultCellStyle = dataGridViewCellStyle6;
             transactionGrid.EnableHeadersVisualStyles = false;
             transactionGrid.GridColor = SystemColors.ActiveCaption;
             transactionGrid.Location = new Point(195, 102);
@@ -432,12 +433,23 @@
             sqliteCommand1.Transaction = null;
             sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
             // 
+            // removeAllSavingsBtn
+            // 
+            removeAllSavingsBtn.Location = new Point(825, 389);
+            removeAllSavingsBtn.Name = "removeAllSavingsBtn";
+            removeAllSavingsBtn.Size = new Size(133, 64);
+            removeAllSavingsBtn.TabIndex = 23;
+            removeAllSavingsBtn.Text = "ta bort sparposter";
+            removeAllSavingsBtn.UseVisualStyleBackColor = true;
+            removeAllSavingsBtn.Click += removeAllSavingsBtn_Click;
+            // 
             // TransactionForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
+            Controls.Add(removeAllSavingsBtn);
             Controls.Add(deleteTransactionNotificationLabel);
             Controls.Add(modifyTransactionsLabel);
             Controls.Add(updateTransactionBtn);
@@ -497,5 +509,6 @@
         private Label minAmountLabel;
         private Label deleteTransactionNotificationLabel;
         private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
+        private Button removeAllSavingsBtn;
     }
 }

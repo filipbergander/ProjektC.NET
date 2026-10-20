@@ -12,5 +12,7 @@ namespace Projekt.Interfaces
         Task RemoveTransaction(int id); // Metod för att ta bort en transaktion
         Task<List<Transaction>> GetTransactions(); // Metod för att hämta alla transaktioner
         Task UpdateTransaction(int id, Transaction transaction); // Metod för att uppdatera en befintlig transaktion
+
+        Task RemoveChallengeTransactions();
     }
 }

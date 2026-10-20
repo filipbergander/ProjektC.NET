@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Projekt.Models;
 using Projekt.Services;
+using Projekt.UI;
 
 namespace Projekt.Forms
 {
@@ -19,18 +20,20 @@ namespace Projekt.Forms
         //private readonly FinanceService finance;
         private readonly GamingService gaming;
         private readonly FinanceService finance;
+        private readonly BudgetMLService mlService;
 
         private int dailyPlayCount = 0; // Hur många gånger som användaren har spelat/dag
         private DateTime playDate = DateTime.Today; // Datumet för när användaren spelade senast
 
         // Konstruktor
-        public SavingsForm(ITransactionService transaction, MainForm mainForm, GamingService gaming, FinanceService finance)
+        public SavingsForm(ITransactionService transaction, MainForm mainForm, GamingService gaming, FinanceService finance, BudgetMLService mlService)
         {
             InitializeComponent();
             this.transaction = transaction;
             this.mainForm = mainForm;
             this.gaming = gaming;
             this.finance = finance;
+            this.mlService = mlService;
         }
 
         // Går tillbaka till Mainform vid klick -> "Gå tillbaka" knapp
@@ -48,12 +51,12 @@ namespace Projekt.Forms
         }
 
 
-        private void playChallangeBtn_Click(object sender, EventArgs e)
+        private async void playChallangeBtn_Click(object sender, EventArgs e)
         {
             panel2.Visible = false;
             panel3.Visible = false;
             challengePanel.Visible = true; // Visar panelen med sparutmaningen
-            InsertChallengeValues(); // Hämtar in data för spelaren i sparutmaningen
+            await InsertChallengeValues(); // Hämtar in data för spelaren i sparutmaningen
         }
         // Vid klick på "Starta utmaning"-knappen startas utmaningsspelet, där användaren kan vinna eller förlora pengar. Användaren kan spela max 2 gånger/dag.
         private async void initiateChallengeBtn_Click_1(object sender, EventArgs e)
@@ -70,17 +73,33 @@ namespace Projekt.Forms
                 MessageBox.Show("Du har redan spelat 2 gånger idag. Välkommen åter imorgon!", "Begränsning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            /* progressBar.Visible = true; // Visar progressbaren
+             initiateChallengeBtn.Enabled = false; // Inaktiverar knappen så att det inte går att spamma när eventet körs
+            */
+            float playerTotalBalance = await finance.GetTotalBalance(); // Hämtar in spelarens totala saldo i "Budgetappen"
 
-            dailyPlayCount++; // Ökar spelräknaren när användaren genomfört ett spel
+            // Spelarens totala saldo som omvandlas så att modellen i Mlservice kan använda det
+            var playerBalance = gaming.GetPlayerBalanceTransformToModel(decimal.Parse(playerTotalBalance.ToString()));
 
             Random randomNumb = new Random(); // För att kunna generera ett random-nummer
-            int fee = 300; // Kostnaden för att spela
 
-            int reward = randomNumb.Next(200, 600); // Random-nummer mellan 200 och 600
-            int netWin = reward - fee; // Vinsten i sek
+            float luckFactor = randomNumb.Next(1, 11); // Random-nummer mellan 1 och 10, som sedan används för att påverka vinstchansen
+            float currentDay = DateTime.Now.Day; // Dagens dag som en siffra
+
+            // Anropar mlservicen med argumenten
+            float predictedPayout = mlService.PredictGameBonus(playerBalance, currentDay, luckFactor);
+
+            int gameFee = 300; // Kostnaden för att spela
+            //int reward = randomNumb.Next(200, 600); // Random-nummer mellan 200 och 600
+            float netWin = (float)Math.Round(predictedPayout) - gameFee; // Vinsten avrundat i kr
 
             string resultMsg = ""; // Nollställer meddelandet
 
+            await UIEnhancer.RunLoadingBar(progressBar, initiateChallengeBtn); // Kör progressbaren)
+            /* await Task.Delay(1000);
+             progressBar.Visible = false; // Visar progressbaren
+             initiateChallengeBtn.Enabled = true; // Inaktiverar knappen så att det inte går att spamma när eventet körs
+            */
             // Om vinsten är positiv
             if (netWin > 0)
             {
@@ -106,12 +125,14 @@ namespace Projekt.Forms
                 var looseTransaction = new Transaction("Utgift", "Sparutmaning (förlust)", "Sparande", (float)Math.Abs(netWin), DateTime.Today.ToString("yyyy-MM-dd"));
                 await transaction.AddTransaction(looseTransaction);
             }
-            ShowToolsPanel();
+            await InsertChallengeValues(); // Uppdaterar värdena i sparutmaningen efter att användaren spelat
+            dailyPlayCount++; // Ökar spelräknaren när användaren genomfört ett spel
+
+            ShowToolsPanel(); // Visar sparverktygen igen och döljer sparutmaningen
         }
         // Vid klick på "Beräkna"-knappen räknas det totala beloppet ut som man kommer ha efter ett visst antal år, med startbelopp, avsättning per månad och årlig ränta.
-        private void calculateSavingsButton_Click(object sender, EventArgs e)
+        private async void calculateSavingsButton_Click(object sender, EventArgs e)
         {
-
             // Hämtar in värdena från inputs
             decimal startAmount = startAmountNum.Value; // Startbelopp
             decimal monthlyInvest = monthlyAmountNum.Value;// Avsättning per månad
@@ -123,7 +144,7 @@ namespace Projekt.Forms
 
             decimal totalDeposit = startAmount + (monthlyInvest * years * 12); // Totalt insatt belopp
             decimal totalInterest = futureSavings - totalDeposit; // Total ränta
-
+            await UIEnhancer.RunLoadingBar(progressBar, calculateSavingsButton); // Kör progressbaren)
             totalSumSavingsText.Text = $"{futureSavings:N2} kr"; // Visar det totala beloppet i labeln med två decimaler
             equityLabelText.Text = $"{totalDeposit:N2} kr";
             interestSumText.Text = $"{totalInterest:N2} kr";
@@ -132,9 +153,7 @@ namespace Projekt.Forms
         // Känner av när användaren kryssar i checkboxen för att kunna spela sparutmaningen, aktiverar knappen för att gå vidare och ändrar färger
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
             initiateChallengeBtn.Enabled = checkBox1.Checked; // Aktiverar knappen för att kunna spela sparutmaningen
-
             if (checkBox1.Checked)
             {
                 initiateChallengeBtn.BackColor = Color.Green; // Ändrar färgen på knappen
@@ -157,42 +176,18 @@ namespace Projekt.Forms
         private void closeCalculatorPanelBtn_Click(object sender, EventArgs e)
         {
             ShowToolsPanel();
-            /*
-            anticipateSavingsPanel.Visible = false; // Döljer panelen
-            totalSavingsPanel.Visible = false; // Dölj "beräknings-resultatet"
-            savingsPanel.Visible = true; // Visar panelen med sparutmaningen
-            openToolsSavingBtn.Visible = false; // Döljer knappen
-            */
         }
         // Öppnar stora panelen för sparverktygen igen, döljer sparkalkylatorn
         private void openToolsSavingBtn_Click(object sender, EventArgs e)
         {
-            anticipateSavingsPanel.Visible = false; // Döljer panelen
-            totalSavingsPanel.Visible = false; // Dölj "beräknings-resultatet"
-            savingsPanel.Visible = true; // Visar panelen med sparutmaningen
-            openToolsSavingBtn.Visible = false; // Döljer knappen
-        }
-        // Vid klick hämtas det totala saldot från FinanceService och visas i ett meddelande
-        private void displayBalanceBtn_Click(object sender, EventArgs e)
-        {
-            var totalBalance = finance.GetTotalBalance(); // Totala saldot
-            MessageBox.Show($"Totala saldot är: {totalBalance.Result:N2} kr", "Totalt saldo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        // Hämtar och visar värden för utmaningen
-        private async void InsertChallengeValues()
-        {
-            var amountPlayedToday = await gaming.GetAmountsPlayedToday(); // Hämtar in hur många gånger spelaren spelat idag
-            var playerData = await finance.GetPlayerResult(); // Hämtar in data för spelaren, största vinst och totalt resultat
-            amountPlayedTodayLabel.Text = $"Spel idag: {amountPlayedToday}/2 st"; // Antal gånger spelat idag
-            bestWinLabel.Text = $"Största vinsten: {playerData.LargestWin:N2} kr"; // Största vinsten
-            totalResultLabel.Text = $"Totalt spelresultat: {playerData.TotalResult:N2} kr"; // Totalt resultat för spelaren, vinst minus förlust
+            ShowToolsPanel();
         }
         // Vid klick på "Avbryt"-knappen i sparutmaningen, visas sparverktygen igen och sparutmaningen döljs
         private void addTransactionCancelBtn_Click(object sender, EventArgs e)
         {
             ShowToolsPanel();
         }
-
+        // Visar sparverktygen och döljer sparutmaning, samt sparkalkylatorn
         private void ShowToolsPanel()
         {
             anticipateSavingsPanel.Visible = false; // Döljer panelen
@@ -202,6 +197,32 @@ namespace Projekt.Forms
             panel2.Visible = true;
             panel3.Visible = true;
             challengePanel.Visible = false; // Döljer panelen med sparutmaningen
+            checkBox1.Checked = false; // Avmarkerar checkboxen
+        }
+        // Vid klick hämtas det totala saldot från FinanceService och visas i ett meddelande
+        private void displayBalanceBtn_Click(object sender, EventArgs e)
+        {
+            var totalBalance = finance.GetTotalBalance(); // Totala saldot
+            MessageBox.Show($"Totala saldot är: {totalBalance.Result:N2} kr", "Totalt saldo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        // Hämtar och visar värden för utmaningen
+        private async Task InsertChallengeValues()
+        {
+            var amountPlayedToday = await gaming.GetAmountsPlayedToday(); // Hämtar in hur många gånger spelaren spelat idag
+            var playerData = await finance.GetUserResult(); // Hämtar in data för spelaren, största vinst och totalt resultat
+            amountPlayedTodayLabel.Text = $"Spel idag: {amountPlayedToday}/2 st" ?? "Spel idag: 0/2 st"; // Antal gånger spelat idag
+            bestWinLabel.Text = $"Största vinsten: {playerData.LargestWin:N2} kr" ?? "Största vinsten: 0.00 kr"; // Största vinsten
+            totalResultLabel.Text = $"Totalt spelresultat: {playerData.TotalResult:N2} kr" ?? "Totalt spelresultat: 0.00 kr"; // Totalt resultat för spelaren, vinst minus förlust
+
+            // Ändrar färgen på texten beroende på hur många gånger man spelat idag
+            if (amountPlayedToday >= 2)
+            {
+                amountPlayedTodayLabel.ForeColor = Color.Red;
+            }
+            else
+            {
+                amountPlayedTodayLabel.ForeColor = Color.Black;
+            }
         }
     }
 }

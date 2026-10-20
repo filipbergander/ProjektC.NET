@@ -56,12 +56,19 @@ namespace Projekt.Services
         public async Task RemoveTransaction(int id)
         {
             var transaction = await database.Set<Transaction>().FindAsync(id); // Hittar transaktionen med det inskickade id:t
-            // Kollar om transaktionen finns och att den inte innehåller "Sparutmaning" i namnet
-            if (transaction != null && !(transaction.Namn?.Contains("Sparutmaning") ?? false)) // 
+                                                                               // Kollar om transaktionen finns och att den inte innehåller "Sparutmaning" i namnet
+            if (transaction != null)
             {
                 database.Set<Transaction>().Remove(transaction); // Tar bort transaktionen från databasen
                 await database.SaveChangesAsync(); // Sparar ändringarna
             }
+            /* database.Set<Transaction>().Remove(transaction); // Tar bort transaktionen från databasen
+             await database.SaveChangesAsync(); // Sparar ändringarna
+             if (transaction != null && !(transaction.Namn?.Contains("Sparutmaning") ?? false)) // 
+             {
+                 database.Set<Transaction>().Remove(transaction); // Tar bort transaktionen från databasen
+                 await database.SaveChangesAsync(); // Sparar ändringarna
+             }*/
         }
         // Uppdaterar en befintlig transaktion i databasen
         public async Task UpdateTransaction(int id, Transaction updateTransaction)
@@ -79,6 +86,17 @@ namespace Projekt.Services
             existingTransaction.Belopp = updateTransaction.Belopp;
             existingTransaction.Datum = updateTransaction.Datum;
             // database.Set<Transaction>().Update(updateTransaction);
+            await database.SaveChangesAsync(); // Sparar ändringarna
+        }
+
+        public async Task RemoveChallengeTransactions()
+        {
+            var transactions = await database.Set<Transaction>().Where(t => t.Namn != null && t.Namn.Contains("Sparutmaning") == true).ToListAsync(); // Hämtar alla transaktioner som innehåller "Sparutmaning" i namnet
+            if (transactions.Count == 0)
+            {
+                return;
+            }
+            database.Set<Transaction>().RemoveRange(transactions); // Tar bort alla transaktioner som innehåller "Sparutmaning" i namnet
             await database.SaveChangesAsync(); // Sparar ändringarna
         }
     }

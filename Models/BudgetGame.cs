@@ -31,6 +31,6 @@ namespace Projekt.Models
     public class SavingsGamePrediction
     {
         [ColumnName("Score")]
-        public float PredictedBonus { get; set; }
+        public float BonusReward { get; set; }
     }
 }

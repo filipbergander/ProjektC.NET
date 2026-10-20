@@ -37,7 +37,17 @@ namespace Projekt.Services
         {
             var transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner från databasen
             // Returnerar antalet transaktioner som innehåller "Sparutmaning" i namnet och har dagens datum
-            return transactions.Count(t => t.Namn?.Contains("Sparutmaning") == true && t.Datum == DateTime.Today.ToString("yyyy-MM-dd"));
+            return transactions.Count(t => t.Namn?.Contains("Sparutmaning") == true && DateTime.TryParse(t.Datum, out DateTime date) && date.Date == DateTime.Today);
         }
-    }
+
+        public float GetPlayerBalanceTransformToModel(decimal actualBalance)
+        {
+            if (actualBalance <= 2000) return 1;
+            else if (actualBalance <= 5000) return 2;
+            else if (actualBalance <= 10000) return 3;
+            else if (actualBalance <= 20000) return 4;
+            else return 5;
+        }
+
+            }
 }
