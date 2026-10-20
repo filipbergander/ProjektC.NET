@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Testa din lycka i sparutmaningen och se om du går med vinst eller förlust.
+
+• Max 2 spel per dag
+• Resultatet sparas som en transaktion
+• Kostnad: 300 kr
+• Möjlig vinst: 600 kr
+
+Är du redo att anta utmaningen?
+
+</value>
+  </data>
 </root>

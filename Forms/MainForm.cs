@@ -18,11 +18,13 @@ namespace Projekt.Forms
     {
         private readonly ITransactionService transaction; // Instans av TransactionService genom interfacet
         private readonly FinanceService financeService; // Instans av financeservice för att hämta in "finansvärden" till mainform
+        private readonly SavingsService savingsService; // Instans av savingsservice för att hämta in "sparvärden" till mainform
         public MainForm(ITransactionService transaction)
         {
             InitializeComponent();
             this.transaction = transaction;
             this.financeService = new FinanceService(transaction);
+            this.savingsService = new SavingsService(transaction);
             MainFormLoad();
         }
         // Metod som körs när formuläret laddas, hämtar in värdena från financeService och skapar diagrammet
@@ -40,7 +42,7 @@ namespace Projekt.Forms
         // Öppnar formuläret SavingsForm när knappen "Sparande" klickas på
         private void mainFormSavingsBtn_Click(object sender, EventArgs e)
         {
-            var savingsForm = new SavingsForm(transaction, this, financeService);
+            var savingsForm = new SavingsForm(transaction, this, savingsService);
             OpenForm(savingsForm);
         }
         private void OpenForm(Form form)

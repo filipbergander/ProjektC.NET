@@ -50,19 +50,5 @@ namespace Projekt.Services
                 ))
                 .ToList();
         }
-        // Hämtar in hur många gånger man spelat på sparutmaningen under dagen -> för att avgöra om man kan spela eller inte
-        public async Task<bool> CanPlayToday()
-        {
-            var today = DateTime.Today.ToString("yyyy-MM-dd"); // Dagens datum
-
-            var transactions = await transaction.GetTransactions(); // Hämtar alla transaktioner
-
-            // Tittar om det finns två "Sparande" poster från samma dag 
-            if (transactions.Count(t => t.Kategori == "Sparande" && t.Datum == today) >= 2)
-            {
-                return false;
-            }
-            return true;
-        }
     }
 }
