@@ -15,7 +15,7 @@ namespace Projekt.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=budgetapp.db")
+            optionsBuilder.UseSqlite("Data Source=budget-app.db")
      .LogTo(
                 action: message =>
                 {
@@ -34,5 +34,7 @@ namespace Projekt.Data
             )
             .EnableSensitiveDataLogging();
         }
+
+ 
     }
 }

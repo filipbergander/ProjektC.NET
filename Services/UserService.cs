@@ -18,6 +18,7 @@ namespace Projekt.Services
         {
             database = new ProjektDbContext();
             database.Database.EnsureCreated();
+            SeedInitialData.SeedData(database);
         }
         // Lägger till en ny användare i databasen
         public async Task<bool> CreateUser(User user)

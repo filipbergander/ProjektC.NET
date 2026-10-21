@@ -11,7 +11,7 @@ namespace Projekt.Models
         public string? Username { get; set; }
         public string? Role { get; set; }
         public string? Password { get; set; }
-        public string? SaltedHashPassword { get; set; }
+        public string? HashPassword { get; set; }
         public User()
         {
 

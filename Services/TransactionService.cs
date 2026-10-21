@@ -19,6 +19,7 @@ namespace Projekt.Services
         {
             database = new ProjektDbContext();
             database.Database.EnsureCreated();
+            SeedInitialData.SeedData(database); // Lägger till initial data i databasen om den är tom vid start
         }
 
         // Lägger till en ny transaktion

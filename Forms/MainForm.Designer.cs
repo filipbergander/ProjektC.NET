@@ -201,13 +201,13 @@
             // noTransactionsLabel
             // 
             noTransactionsLabel.AutoSize = true;
-            noTransactionsLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            noTransactionsLabel.Font = new Font("Lucida Sans", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             noTransactionsLabel.ForeColor = Color.Red;
-            noTransactionsLabel.Location = new Point(219, 239);
+            noTransactionsLabel.Location = new Point(823, 67);
             noTransactionsLabel.Name = "noTransactionsLabel";
-            noTransactionsLabel.Size = new Size(267, 18);
+            noTransactionsLabel.Size = new Size(197, 17);
             noTransactionsLabel.TabIndex = 8;
-            noTransactionsLabel.Text = "Inga transaktioner finns tillagda";
+            noTransactionsLabel.Text = "Inga utgifter är tillagda..";
             noTransactionsLabel.Visible = false;
             // 
             // mainFormRegisterBtn
