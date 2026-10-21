@@ -91,7 +91,7 @@ namespace Projekt.Forms
             string? dateStr = date.ToString("yyyy-MM-dd");
 
             // Lägger till den specifika transaktionen i listan av transaktioner
-            var newTransaction = new Transaction(type, title, category, amount, dateStr);
+            Transaction newTransaction = new Transaction(type, title, category, amount, dateStr);
 
             if (transactionToEdit == null)
             {

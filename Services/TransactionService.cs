@@ -47,10 +47,7 @@ namespace Projekt.Services
             return true;
         }
         // Hämtar in alla transaktioner från databasen
-        public async Task<List<Transaction>> GetTransactions()
-        {
-            return await database.Set<Transaction>().ToListAsync();
-        }
+        public async Task<List<Transaction>> GetTransactions() => await database.Set<Transaction>().ToListAsync();
 
         // Tar bort en transaktion från databasen
         public async Task RemoveTransaction(int id)

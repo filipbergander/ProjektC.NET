@@ -42,7 +42,7 @@ namespace Projekt.Forms
             // userNameLabel
             // 
             userNameLabel.AutoSize = true;
-            userNameLabel.Location = new Point(490, 164);
+            userNameLabel.Location = new Point(441, 110);
             userNameLabel.Margin = new Padding(4, 0, 4, 0);
             userNameLabel.Name = "userNameLabel";
             userNameLabel.Size = new Size(125, 18);
@@ -52,7 +52,7 @@ namespace Projekt.Forms
             // passwordLabel
             // 
             passwordLabel.AutoSize = true;
-            passwordLabel.Location = new Point(490, 242);
+            passwordLabel.Location = new Point(441, 188);
             passwordLabel.Name = "passwordLabel";
             passwordLabel.Size = new Size(84, 18);
             passwordLabel.TabIndex = 1;
@@ -61,7 +61,7 @@ namespace Projekt.Forms
             // newUserButton
             // 
             newUserButton.BackColor = SystemColors.ActiveCaption;
-            newUserButton.Location = new Point(469, 331);
+            newUserButton.Location = new Point(420, 277);
             newUserButton.Name = "newUserButton";
             newUserButton.Size = new Size(128, 44);
             newUserButton.TabIndex = 2;
@@ -71,7 +71,7 @@ namespace Projekt.Forms
             // loginButton
             // 
             loginButton.BackColor = Color.DarkSeaGreen;
-            loginButton.Location = new Point(619, 331);
+            loginButton.Location = new Point(570, 277);
             loginButton.Name = "loginButton";
             loginButton.Size = new Size(128, 44);
             loginButton.TabIndex = 3;
@@ -81,7 +81,7 @@ namespace Projekt.Forms
             // 
             // userNameText
             // 
-            userNameText.Location = new Point(490, 185);
+            userNameText.Location = new Point(441, 131);
             userNameText.Name = "userNameText";
             userNameText.PlaceholderText = "Skriv användarnamn";
             userNameText.Size = new Size(228, 26);
@@ -89,7 +89,7 @@ namespace Projekt.Forms
             // 
             // passwordText
             // 
-            passwordText.Location = new Point(490, 263);
+            passwordText.Location = new Point(441, 209);
             passwordText.Name = "passwordText";
             passwordText.PlaceholderText = "Skriv lösenord";
             passwordText.Size = new Size(228, 26);
@@ -98,7 +98,7 @@ namespace Projekt.Forms
             // loginFormHeaderLabel
             // 
             loginFormHeaderLabel.AutoSize = true;
-            loginFormHeaderLabel.Location = new Point(573, 65);
+            loginFormHeaderLabel.Location = new Point(515, 25);
             loginFormHeaderLabel.Name = "loginFormHeaderLabel";
             loginFormHeaderLabel.Size = new Size(75, 18);
             loginFormHeaderLabel.TabIndex = 6;

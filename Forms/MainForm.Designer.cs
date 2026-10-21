@@ -41,7 +41,14 @@
             totalExpenseLabel = new Label();
             mainFormQuantityLabel = new Label();
             chartPanel = new Panel();
+            noTransactionsLabel = new Label();
+            mainFormRegisterBtn = new Button();
+            panel1 = new Panel();
+            label2 = new Label();
+            panel2 = new Panel();
+            label1 = new Label();
             tableLayoutPanel1.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // mainFormDashboardLabel
@@ -86,22 +93,22 @@
             // mainFormTransactionBtn
             // 
             mainFormTransactionBtn.Cursor = Cursors.Hand;
-            mainFormTransactionBtn.Location = new Point(371, 261);
+            mainFormTransactionBtn.Location = new Point(10, 67);
             mainFormTransactionBtn.Name = "mainFormTransactionBtn";
-            mainFormTransactionBtn.Size = new Size(125, 40);
+            mainFormTransactionBtn.Size = new Size(157, 40);
             mainFormTransactionBtn.TabIndex = 4;
-            mainFormTransactionBtn.Text = "Transaktioner";
+            mainFormTransactionBtn.Text = "Dina transaktioner";
             mainFormTransactionBtn.UseVisualStyleBackColor = true;
             mainFormTransactionBtn.Click += mainFormTransactionBtn_Click;
             // 
             // mainFormSavingsBtn
             // 
             mainFormSavingsBtn.Cursor = Cursors.Hand;
-            mainFormSavingsBtn.Location = new Point(371, 324);
+            mainFormSavingsBtn.Location = new Point(10, 132);
             mainFormSavingsBtn.Name = "mainFormSavingsBtn";
-            mainFormSavingsBtn.Size = new Size(125, 40);
+            mainFormSavingsBtn.Size = new Size(157, 40);
             mainFormSavingsBtn.TabIndex = 5;
-            mainFormSavingsBtn.Text = "Sparande";
+            mainFormSavingsBtn.Text = "Ditt sparande";
             mainFormSavingsBtn.UseVisualStyleBackColor = true;
             mainFormSavingsBtn.Click += mainFormSavingsBtn_Click;
             // 
@@ -121,7 +128,7 @@
             tableLayoutPanel1.Controls.Add(mainFormMonthLabel, 0, 0);
             tableLayoutPanel1.Controls.Add(totalExpenseLabel, 1, 2);
             tableLayoutPanel1.Controls.Add(mainFormQuantityLabel, 0, 3);
-            tableLayoutPanel1.Location = new Point(198, 95);
+            tableLayoutPanel1.Location = new Point(206, 95);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.Padding = new Padding(10);
             tableLayoutPanel1.RowCount = 4;
@@ -191,16 +198,80 @@
             chartPanel.Size = new Size(536, 454);
             chartPanel.TabIndex = 7;
             // 
+            // noTransactionsLabel
+            // 
+            noTransactionsLabel.AutoSize = true;
+            noTransactionsLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            noTransactionsLabel.ForeColor = Color.Red;
+            noTransactionsLabel.Location = new Point(219, 239);
+            noTransactionsLabel.Name = "noTransactionsLabel";
+            noTransactionsLabel.Size = new Size(267, 18);
+            noTransactionsLabel.TabIndex = 8;
+            noTransactionsLabel.Text = "Inga transaktioner finns tillagda";
+            noTransactionsLabel.Visible = false;
+            // 
+            // mainFormRegisterBtn
+            // 
+            mainFormRegisterBtn.Cursor = Cursors.Hand;
+            mainFormRegisterBtn.Location = new Point(10, 199);
+            mainFormRegisterBtn.Name = "mainFormRegisterBtn";
+            mainFormRegisterBtn.Size = new Size(157, 49);
+            mainFormRegisterBtn.TabIndex = 8;
+            mainFormRegisterBtn.Text = "Skapa ny användare";
+            mainFormRegisterBtn.UseVisualStyleBackColor = true;
+            mainFormRegisterBtn.Click += mainFormRegisterBtn_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(panel2);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(mainFormRegisterBtn);
+            panel1.Controls.Add(mainFormSavingsBtn);
+            panel1.Controls.Add(mainFormTransactionBtn);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(185, 561);
+            panel1.TabIndex = 9;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(32, 477);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(118, 18);
+            label2.TabIndex = 12;
+            label2.Text = "Inloggad som:";
+            // 
+            // panel2
+            // 
+            panel2.Location = new Point(28, 464);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(139, 74);
+            panel2.TabIndex = 11;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(63, 25);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(48, 18);
+            label1.TabIndex = 10;
+            label1.Text = "Meny";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
+            Controls.Add(noTransactionsLabel);
+            Controls.Add(panel1);
             Controls.Add(chartPanel);
             Controls.Add(tableLayoutPanel1);
-            Controls.Add(mainFormSavingsBtn);
-            Controls.Add(mainFormTransactionBtn);
             Controls.Add(mainFormDashboardLabel);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
@@ -209,6 +280,8 @@
             Text = "Översikt konto";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -228,5 +301,11 @@
         private Panel chartPanel;
         private Label mainFormQuantityLabel;
         private Label monthQuantityLabel;
+        private Button mainFormRegisterBtn;
+        private Panel panel1;
+        private Label label1;
+        private Label label2;
+        private Panel panel2;
+        private Label noTransactionsLabel;
     }
 }

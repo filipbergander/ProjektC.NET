@@ -19,11 +19,13 @@ namespace Projekt.Forms
         private readonly ITransactionService transaction; // Instans av TransactionService genom interfacet
         private readonly FinanceService financeService; // Instans av financeservice för att hämta in "finansvärden" till mainform
         private readonly GamingService savingsService; // Instans av savingsservice för att hämta in "sparvärden" till mainform
+        private readonly UserService userService;
         private readonly BudgetMLService mlService;
         public MainForm(ITransactionService transaction)
         {
             InitializeComponent();
             this.transaction = transaction;
+            this.userService = new UserService();
             this.financeService = new FinanceService(transaction);
             this.savingsService = new GamingService(transaction);
             this.mlService = mlService ?? new BudgetMLService(new SavingsGameInput());
@@ -47,6 +49,13 @@ namespace Projekt.Forms
             var savingsForm = new SavingsForm(transaction, this, savingsService, financeService, mlService);
             OpenForm(savingsForm);
         }
+        // Öppnar formuläret RegisterForm när knappen "Skapa ny användare" klickas på
+        private void mainFormRegisterBtn_Click(object sender, EventArgs e)
+        {
+            var registerForm = new newUserRegisterForm(userService);
+            OpenForm(registerForm);
+        }
+        // Öppnar formulär och döljer mainform, när sedan formuläret stängs öppnas mainform igen
         private void OpenForm(Form form)
         {
             form.FormClosed += async (s, args) =>
@@ -81,9 +90,10 @@ namespace Projekt.Forms
         private async Task LoadDiagram()
         {
             chartPanel.Controls.Clear(); // Rensar panelen innan diagrammet skapas, annars läggs diagram ovanpå varandra
-
+            noTransactionsLabel.Visible = false; // Visar inte label
             // Hämtar in kategorierna och summan av utgifterna per kategori
             var transactionData = await financeService.GetExpensesByCategory();
+
             var monthNow = DateTime.Now.ToString("MMMM", new CultureInfo("sv-SE")); // Aktuell månad
             monthNow = char.ToUpper(monthNow[0]) + monthNow.Substring(1); // Gör första bokstaven i månadens namn som versal
 
@@ -97,17 +107,45 @@ namespace Projekt.Forms
             chart.Titles.Add($"{monthNow} \n Utgifter per kategori"); // Titel
             chart.Titles[0].Font = new Font("Lucida Sans", 12, FontStyle.Bold); // Font för titeln
             chart.Legends.Add(new Legend()); // Legened läggs till i diagrammet för att visa namn på kategorierna
-            chart.Legends[0].Font = new Font("Lucida Sans", 11, FontStyle.Regular); // Font för legend
+            chart.Legends[0].Font = new Font("Lucida Sans", 11, FontStyle.Bold); // Font för legend
+
+            chart.GetToolTipText += (sender, e) =>
+            {
+                if (e.HitTestResult.ChartElementType == ChartElementType.DataPoint || e.HitTestResult.ChartElementType == ChartElementType.LegendItem)
+                {
+                    var point = e.HitTestResult.Series.Points[e.HitTestResult.PointIndex];
+                    e.Text = $"{point.AxisLabel}: {point.YValues[0]:N2} kr"; // Tooltip som visas när man hovrar över kategorierna i diagrammet
+                }
+            };
+
             var series = new Series(); // Data för diagrammet -> series
+            if (transactionData == null || !transactionData.Any())
+            {
+                noTransactionsLabel.Visible = true; // Visar labeln för att visa att inga transaktioner finns tillagda
+                return;
+            }
+            if (transactionData.Count() > 7)
+            {
+                // Om det finns fler än 7 kategorier -> Bar-diagram
+                series.ChartType = SeriesChartType.Pie;
+                chart.Legends[0].Enabled = true;
+            }
+            else
+            {
+                series.ChartType = SeriesChartType.Doughnut;
+                chart.Legends[0].Enabled = true;
+            }
 
             // Skriver ut varje kategori av utgifter och summa -> i diagrammet
             foreach (var category in transactionData)
             {
                 series.Points.AddXY(category.Category, category.Sum);
             }
-            series.ChartType = SeriesChartType.Doughnut; // Typ av diagrammet -> Pie
-            series.IsValueShownAsLabel = true; // Visar värderna för kategorierna, Sum, i diagrammet
-
+            series.IsValueShownAsLabel = false; // Visar värderna för kategorierna, Sum, i diagrammet
+            series.Label = "";
+            series["PieLabelStyle"] = "Disabled"; // Inaktiverar labels för pie-diagrammet
+            series.LabelForeColor = Color.Black; // Färg på värderna i diagrammet
+            series.Font = new Font("Lucida Sans", 10, FontStyle.Bold); // Font för värderna i diagrammet
             chart.Series.Add(series); // Lägger till series i diagrammet
         }
 

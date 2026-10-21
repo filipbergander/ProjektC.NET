@@ -17,7 +17,7 @@ namespace Projekt.Models
         public float Belopp { get; set; }
         public string? Datum { get; set; }
 
-        public Transaction(string? typ, string? namn, string? kategori, float belopp, string? datum)
+        public Transaction(string typ, string namn, string kategori, float belopp, string datum)
         {
             Typ = typ;
             Namn = namn;

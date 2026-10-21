@@ -11,9 +11,11 @@ namespace Projekt.Data
     {
         public DbSet<Transaction> Transactions => Set<Transaction>();
 
+        public DbSet<User> Users => Set<User>();
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=transactions.db")
+            optionsBuilder.UseSqlite("Data Source=budgetapp.db")
      .LogTo(
                 action: message =>
                 {
