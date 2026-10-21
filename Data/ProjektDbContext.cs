@@ -15,7 +15,9 @@ namespace Projekt.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=budget-app.db")
+            // Skapar databasfilen i bin-filen samma som där applikationen körs från
+            string dbPath = Path.Combine(AppContext.BaseDirectory, "budget-app.db");
+            optionsBuilder.UseSqlite($"Data Source={dbPath}")
      .LogTo(
                 action: message =>
                 {
@@ -35,6 +37,6 @@ namespace Projekt.Data
             .EnableSensitiveDataLogging();
         }
 
- 
+
     }
 }

@@ -41,7 +41,7 @@ namespace Projekt.Forms
             }
 
             // Tittar om lösenorden är tomma 
-            if (string.IsNullOrEmpty(newUsernameText.Text) || string.IsNullOrEmpty(newUserPasswordText.Text) || string.IsNullOrEmpty(newUserConfirmPasswordText.Text))
+            if (string.IsNullOrEmpty(newUserPasswordText.Text) || string.IsNullOrEmpty(newUserConfirmPasswordText.Text))
             {
                 errors.Add("* Fyll i lösenorden!");
             }
@@ -71,17 +71,17 @@ namespace Projekt.Forms
             string password = newUserPasswordText.Text.Trim();
             //string confirmPassword = newUserConfirmPasswordText.Text.Trim();
 
-            // Gör första bokstaven i användarnamnet till stor bokstav
-            //username = char.ToUpper(username[0]) + username.Substring(1);
+            // Skapar en ny användare genom den inmatade informationen
             User newUser = new User(username, role, password);
 
             // Provar lägga till användaren i databasen
             bool added = await userService.CreateUser(newUser);
             await UIEnhancer.RunLoadingBar(progressBar, createUserButton); // Kör progressbaren
+            // Om användaren inte kunde läggas till -> visa felmeddelande
             if (!added)
             {
                 userMsgPanel.Visible = true; // Visar panelen med felmeddelanden
-                msgLabel.Text = "Användaren kunde inte skapas. Användarnamnet finns redan...";
+                msgLabel.Text = "* Användaren kunde inte skapas.\n* Användarnamnet finns redan...";
                 return;
             }
             // Skapar användaren i databasen
@@ -103,7 +103,7 @@ namespace Projekt.Forms
             newUserRoleCombo.Items.Add("Lärare");
             newUserRoleCombo.Items.Add("Student");
         }
-
+        // Nollställer textfälten & felmeddelanden
         private void ResetForm()
         {
             newUsernameText.Clear();

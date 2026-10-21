@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using Projekt.Models;
 using Projekt.Data;
+using Projekt.Authentication;
 
 namespace Projekt.Data
 {
@@ -11,15 +12,17 @@ namespace Projekt.Data
     {
         public static void SeedData(ProjektDbContext db)
         {
+            string salt = PasswordAuthentication.GenerateSalt();
             if (!db.Users.Any())
             {
-                var adminUser = new User
+                User adminUser = new User
                 {
                     Username = "AdminMiun",
                     Role = "Lärare",
-                    HashPassword = "rootroot123!"
+                    Salt = salt,
+                    PasswordHash = PasswordAuthentication.HashPassword("rootroot123!", salt)
                 };
-
+                MessageBox.Show($"Salt: {salt}");
                 db.Users.Add(adminUser);
             }
             if (!db.Transactions.Any())
@@ -30,6 +33,14 @@ namespace Projekt.Data
                     Namn = "Jobbet",
                     Kategori = "Lön",
                     Belopp = 25000,
+                    Datum = "2026-10-01"
+                },
+                new Transaction
+                {
+                    Typ = "Inkomst",
+                    Namn = "Sålde bil",
+                    Kategori = "Bil",
+                    Belopp = 3000,
                     Datum = "2026-10-01"
                 },
                     new Transaction
@@ -45,7 +56,7 @@ namespace Projekt.Data
                             Typ = "Utgift",
                             Namn = "Handlade på ICA",
                             Kategori = "Mat",
-                            Belopp = 1500.0f,
+                            Belopp = 1500,
                             Datum = "2026-10-01"
                         },
                         new Transaction
@@ -55,7 +66,15 @@ namespace Projekt.Data
                             Kategori = "Räkningar",
                             Belopp = 250,
                             Datum = "2026-10-01"
-                        }
+                        },
+                            new Transaction
+                            {
+                                Typ = "Utgift",
+                                Namn = "Köpte ny bil",
+                                Kategori = "Bil",
+                                Belopp = 15000,
+                                Datum = "2026-10-01"
+                            }
                 );
             }
             db.SaveChanges();

@@ -48,13 +48,13 @@ namespace ProjektC_.NET.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Role")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("SaltedHashPassword")
+                    b.Property<string>("Salt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Username")

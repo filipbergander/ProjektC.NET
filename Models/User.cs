@@ -10,18 +10,18 @@ namespace Projekt.Models
         public int Id { get; set; }
         public string? Username { get; set; }
         public string? Role { get; set; }
-        public string? Password { get; set; }
-        public string? HashPassword { get; set; }
+        public string? Salt { get; set; }
+        public string? PasswordHash { get; set; }
         public User()
         {
 
         }
 
-        public User(string username, string role, string password)
+        public User(string username, string role, string passwordHash)
         {
             Username = username;
             Role = role;
-            Password = password;
+            PasswordHash = passwordHash;
         }
     }
 

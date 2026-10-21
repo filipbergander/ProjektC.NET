@@ -92,7 +92,8 @@
             newUserPasswordText.Name = "newUserPasswordText";
             newUserPasswordText.PlaceholderText = "Skriv lösenord";
             newUserPasswordText.Size = new Size(228, 26);
-            newUserPasswordText.TabIndex = 5;
+            newUserPasswordText.TabIndex = 6;
+            newUserPasswordText.UseSystemPasswordChar = true;
             // 
             // newUserConfirmPasswordText
             // 
@@ -101,7 +102,8 @@
             newUserConfirmPasswordText.Name = "newUserConfirmPasswordText";
             newUserConfirmPasswordText.PlaceholderText = "Bekräfta lösenordet";
             newUserConfirmPasswordText.Size = new Size(228, 26);
-            newUserConfirmPasswordText.TabIndex = 6;
+            newUserConfirmPasswordText.TabIndex = 7;
+            newUserConfirmPasswordText.UseSystemPasswordChar = true;
             // 
             // createUserButton
             // 
@@ -112,7 +114,7 @@
             createUserButton.Margin = new Padding(4);
             createUserButton.Name = "createUserButton";
             createUserButton.Size = new Size(228, 48);
-            createUserButton.TabIndex = 7;
+            createUserButton.TabIndex = 8;
             createUserButton.Text = "Skapa användare";
             createUserButton.UseVisualStyleBackColor = false;
             createUserButton.Click += createUserButton_Click;
@@ -145,7 +147,7 @@
             newUserRoleCombo.Location = new Point(489, 165);
             newUserRoleCombo.Name = "newUserRoleCombo";
             newUserRoleCombo.Size = new Size(228, 26);
-            newUserRoleCombo.TabIndex = 10;
+            newUserRoleCombo.TabIndex = 5;
             newUserRoleCombo.ValueMember = "Admin";
             // 
             // addTransactionFormReturnBtn
@@ -168,9 +170,9 @@
             userMsgPanel.BackColor = SystemColors.Info;
             userMsgPanel.Controls.Add(label1);
             userMsgPanel.Controls.Add(msgLabel);
-            userMsgPanel.Location = new Point(221, 99);
+            userMsgPanel.Location = new Point(198, 99);
             userMsgPanel.Name = "userMsgPanel";
-            userMsgPanel.Size = new Size(244, 237);
+            userMsgPanel.Size = new Size(284, 237);
             userMsgPanel.TabIndex = 12;
             userMsgPanel.Visible = false;
             // 
@@ -178,7 +180,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(56, 13);
+            label1.Location = new Point(77, 8);
             label1.Name = "label1";
             label1.Size = new Size(129, 18);
             label1.TabIndex = 1;

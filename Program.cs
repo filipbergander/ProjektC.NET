@@ -15,8 +15,9 @@ namespace Projekt
         static void Main()
         {
             ApplicationConfiguration.Initialize();
+            IUserService userService = new UserService();
             ITransactionService transactionService = new TransactionService();
-            Application.Run(new MainForm(transactionService));
+            Application.Run(new LoginForm(userService));
         }
     }
 }

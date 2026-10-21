@@ -8,6 +8,7 @@ using Projekt.Data;
 using System.Runtime.InteropServices.Marshalling;
 using Projekt.Interfaces;
 using System.Data.Common;
+using Projekt.Authentication;
 
 namespace Projekt.Services
 {
@@ -31,14 +32,40 @@ namespace Projekt.Services
             {
                 return false;
             }
+            // Skapar salt och hashar lösenordet med saltet
+            string salt = PasswordAuthentication.GenerateSalt();
+            string passwordHash = PasswordAuthentication.HashPassword(user.PasswordHash!, salt);
+
+            // Skapar ny användare utifrån inmatning samt salt och hashen
+            User createNewUser = new User
+            {
+                Username = user.Username,
+                Role = user.Role,
+                Salt = salt,
+                PasswordHash = passwordHash
+            };
+
             // Lägger till användaren i databasen och sparar
-            database.Set<User>().Add(user);
+            database.Set<User>().Add(createNewUser);
             await database.SaveChangesAsync();
 
             return true;
         }
 
+        // Hämtar in en användare från databasen genom användarnamnet
         public async Task<User?> GetUser(string username) => await database.Users.FirstOrDefaultAsync(u => u.Username == username);
+        // Autentiserar en användare genom att hitta användaren i databasen genom användarnamnet, och jämför hashen med det inmatade lösenordet
+        public async Task<bool> AuthenticateUser(string username, string password)
+        {
+            var user = await database.Users.FirstOrDefaultAsync(u => u.Username == username); // Försöker hämta användare från databas
+            if (user == null)
+            {
+                return false;
+            }
+            // Hashar det inmatade lösenordet med salt och jämför med hashen i databasen
+            string loginHash = PasswordAuthentication.HashPassword(password, user.Salt!);
+            return loginHash == user.PasswordHash;
+        }
     }
 
 }
