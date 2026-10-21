@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(newUserRegisterForm));
             newUserNameLabel = new Label();
             newUserPasswordLabel = new Label();
             newUserConfirmPasswordLabel = new Label();
@@ -43,13 +44,15 @@
             label1 = new Label();
             msgLabel = new Label();
             progressBar = new ProgressBar();
+            panel1 = new Panel();
             userMsgPanel.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // newUserNameLabel
             // 
             newUserNameLabel.AutoSize = true;
-            newUserNameLabel.Location = new Point(489, 77);
+            newUserNameLabel.Location = new Point(45, 14);
             newUserNameLabel.Margin = new Padding(4, 0, 4, 0);
             newUserNameLabel.Name = "newUserNameLabel";
             newUserNameLabel.Size = new Size(125, 18);
@@ -59,7 +62,7 @@
             // newUserPasswordLabel
             // 
             newUserPasswordLabel.AutoSize = true;
-            newUserPasswordLabel.Location = new Point(489, 214);
+            newUserPasswordLabel.Location = new Point(45, 151);
             newUserPasswordLabel.Margin = new Padding(4, 0, 4, 0);
             newUserPasswordLabel.Name = "newUserPasswordLabel";
             newUserPasswordLabel.Size = new Size(84, 18);
@@ -69,7 +72,7 @@
             // newUserConfirmPasswordLabel
             // 
             newUserConfirmPasswordLabel.AutoSize = true;
-            newUserConfirmPasswordLabel.Location = new Point(489, 288);
+            newUserConfirmPasswordLabel.Location = new Point(45, 225);
             newUserConfirmPasswordLabel.Margin = new Padding(4, 0, 4, 0);
             newUserConfirmPasswordLabel.Name = "newUserConfirmPasswordLabel";
             newUserConfirmPasswordLabel.Size = new Size(146, 18);
@@ -78,7 +81,7 @@
             // 
             // newUsernameText
             // 
-            newUsernameText.Location = new Point(489, 99);
+            newUsernameText.Location = new Point(45, 36);
             newUsernameText.Margin = new Padding(4);
             newUsernameText.Name = "newUsernameText";
             newUsernameText.PlaceholderText = "Skriv användarnamn";
@@ -87,7 +90,7 @@
             // 
             // newUserPasswordText
             // 
-            newUserPasswordText.Location = new Point(489, 236);
+            newUserPasswordText.Location = new Point(45, 173);
             newUserPasswordText.Margin = new Padding(4);
             newUserPasswordText.Name = "newUserPasswordText";
             newUserPasswordText.PlaceholderText = "Skriv lösenord";
@@ -97,7 +100,7 @@
             // 
             // newUserConfirmPasswordText
             // 
-            newUserConfirmPasswordText.Location = new Point(489, 310);
+            newUserConfirmPasswordText.Location = new Point(45, 247);
             newUserConfirmPasswordText.Margin = new Padding(4);
             newUserConfirmPasswordText.Name = "newUserConfirmPasswordText";
             newUserConfirmPasswordText.PlaceholderText = "Bekräfta lösenordet";
@@ -107,10 +110,11 @@
             // 
             // createUserButton
             // 
-            createUserButton.BackColor = SystemColors.GradientActiveCaption;
+            createUserButton.BackColor = Color.FromArgb(67, 97, 170);
             createUserButton.Cursor = Cursors.Hand;
-            createUserButton.ForeColor = SystemColors.WindowText;
-            createUserButton.Location = new Point(489, 376);
+            createUserButton.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            createUserButton.ForeColor = Color.White;
+            createUserButton.Location = new Point(45, 313);
             createUserButton.Margin = new Padding(4);
             createUserButton.Name = "createUserButton";
             createUserButton.Size = new Size(228, 48);
@@ -121,7 +125,7 @@
             // 
             // addNewUserHeaderLabel
             // 
-            addNewUserHeaderLabel.Location = new Point(515, 25);
+            addNewUserHeaderLabel.Location = new Point(505, 26);
             addNewUserHeaderLabel.Name = "addNewUserHeaderLabel";
             addNewUserHeaderLabel.Size = new Size(178, 18);
             addNewUserHeaderLabel.TabIndex = 8;
@@ -131,7 +135,7 @@
             // newUserRoleLabel
             // 
             newUserRoleLabel.AutoSize = true;
-            newUserRoleLabel.Location = new Point(489, 144);
+            newUserRoleLabel.Location = new Point(45, 81);
             newUserRoleLabel.Margin = new Padding(4, 0, 4, 0);
             newUserRoleLabel.Name = "newUserRoleLabel";
             newUserRoleLabel.Size = new Size(44, 18);
@@ -144,7 +148,7 @@
             newUserRoleCombo.DisplayMember = "Admin";
             newUserRoleCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             newUserRoleCombo.FormattingEnabled = true;
-            newUserRoleCombo.Location = new Point(489, 165);
+            newUserRoleCombo.Location = new Point(45, 102);
             newUserRoleCombo.Name = "newUserRoleCombo";
             newUserRoleCombo.Size = new Size(228, 26);
             newUserRoleCombo.TabIndex = 5;
@@ -170,7 +174,7 @@
             userMsgPanel.BackColor = SystemColors.Info;
             userMsgPanel.Controls.Add(label1);
             userMsgPanel.Controls.Add(msgLabel);
-            userMsgPanel.Location = new Point(198, 99);
+            userMsgPanel.Location = new Point(142, 99);
             userMsgPanel.Name = "userMsgPanel";
             userMsgPanel.Size = new Size(284, 237);
             userMsgPanel.TabIndex = 12;
@@ -198,7 +202,7 @@
             // 
             // progressBar
             // 
-            progressBar.Location = new Point(542, 535);
+            progressBar.Location = new Point(515, 529);
             progressBar.MarqueeAnimationSpeed = 30;
             progressBar.Name = "progressBar";
             progressBar.Size = new Size(149, 23);
@@ -207,33 +211,46 @@
             progressBar.TabIndex = 13;
             progressBar.Visible = false;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(newUserNameLabel);
+            panel1.Controls.Add(newUserPasswordLabel);
+            panel1.Controls.Add(newUserConfirmPasswordLabel);
+            panel1.Controls.Add(newUsernameText);
+            panel1.Controls.Add(newUserRoleCombo);
+            panel1.Controls.Add(newUserPasswordText);
+            panel1.Controls.Add(newUserRoleLabel);
+            panel1.Controls.Add(newUserConfirmPasswordText);
+            panel1.Controls.Add(createUserButton);
+            panel1.Location = new Point(432, 76);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(318, 374);
+            panel1.TabIndex = 14;
+            // 
             // newUserRegisterForm
             // 
+            AcceptButton = createUserButton;
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
+            BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
+            Controls.Add(panel1);
             Controls.Add(progressBar);
             Controls.Add(userMsgPanel);
             Controls.Add(addTransactionFormReturnBtn);
-            Controls.Add(newUserRoleCombo);
-            Controls.Add(newUserRoleLabel);
             Controls.Add(addNewUserHeaderLabel);
-            Controls.Add(createUserButton);
-            Controls.Add(newUserConfirmPasswordText);
-            Controls.Add(newUserPasswordText);
-            Controls.Add(newUsernameText);
-            Controls.Add(newUserConfirmPasswordLabel);
-            Controls.Add(newUserPasswordLabel);
-            Controls.Add(newUserNameLabel);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "newUserRegisterForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Skapa ny användare";
+            Text = "Fickan - Ny användare";
             Load += newUserRegisterForm_Load;
             userMsgPanel.ResumeLayout(false);
             userMsgPanel.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -255,5 +272,6 @@
         private Label msgLabel;
         private ProgressBar progressBar;
         private Label label1;
+        private Panel panel1;
     }
 }

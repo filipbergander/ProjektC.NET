@@ -30,6 +30,7 @@ namespace Projekt.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             userNameLabel = new Label();
             passwordLabel = new Label();
             loginButton = new Button();
@@ -39,13 +40,15 @@ namespace Projekt.Forms
             userMsgPanel = new Panel();
             label1 = new Label();
             msgLabel = new Label();
+            panel1 = new Panel();
             userMsgPanel.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // userNameLabel
             // 
             userNameLabel.AutoSize = true;
-            userNameLabel.Location = new Point(481, 107);
+            userNameLabel.Location = new Point(13, 17);
             userNameLabel.Margin = new Padding(4, 0, 4, 0);
             userNameLabel.Name = "userNameLabel";
             userNameLabel.Size = new Size(125, 18);
@@ -55,7 +58,7 @@ namespace Projekt.Forms
             // passwordLabel
             // 
             passwordLabel.AutoSize = true;
-            passwordLabel.Location = new Point(481, 185);
+            passwordLabel.Location = new Point(13, 95);
             passwordLabel.Name = "passwordLabel";
             passwordLabel.Size = new Size(84, 18);
             passwordLabel.TabIndex = 1;
@@ -63,9 +66,11 @@ namespace Projekt.Forms
             // 
             // loginButton
             // 
-            loginButton.BackColor = Color.DarkSeaGreen;
+            loginButton.BackColor = Color.FromArgb(67, 97, 170);
             loginButton.Cursor = Cursors.Hand;
-            loginButton.Location = new Point(481, 264);
+            loginButton.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            loginButton.ForeColor = Color.White;
+            loginButton.Location = new Point(13, 174);
             loginButton.Name = "loginButton";
             loginButton.Size = new Size(228, 47);
             loginButton.TabIndex = 3;
@@ -75,7 +80,7 @@ namespace Projekt.Forms
             // 
             // userNameText
             // 
-            userNameText.Location = new Point(481, 128);
+            userNameText.Location = new Point(13, 38);
             userNameText.Name = "userNameText";
             userNameText.PlaceholderText = "Skriv användarnamn";
             userNameText.Size = new Size(228, 26);
@@ -83,7 +88,7 @@ namespace Projekt.Forms
             // 
             // passwordText
             // 
-            passwordText.Location = new Point(481, 206);
+            passwordText.Location = new Point(13, 116);
             passwordText.Name = "passwordText";
             passwordText.PlaceholderText = "Skriv lösenord";
             passwordText.Size = new Size(228, 26);
@@ -104,7 +109,7 @@ namespace Projekt.Forms
             userMsgPanel.BackColor = SystemColors.Info;
             userMsgPanel.Controls.Add(label1);
             userMsgPanel.Controls.Add(msgLabel);
-            userMsgPanel.Location = new Point(191, 107);
+            userMsgPanel.Location = new Point(179, 131);
             userMsgPanel.Name = "userMsgPanel";
             userMsgPanel.Size = new Size(284, 125);
             userMsgPanel.TabIndex = 13;
@@ -130,26 +135,39 @@ namespace Projekt.Forms
             msgLabel.TabIndex = 0;
             msgLabel.Text = "label1";
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(loginButton);
+            panel1.Controls.Add(userNameLabel);
+            panel1.Controls.Add(passwordLabel);
+            panel1.Controls.Add(passwordText);
+            panel1.Controls.Add(userNameText);
+            panel1.Location = new Point(469, 93);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(253, 234);
+            panel1.TabIndex = 14;
+            // 
             // LoginForm
             // 
+            AcceptButton = loginButton;
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
+            BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
+            Controls.Add(panel1);
             Controls.Add(userMsgPanel);
             Controls.Add(loginFormHeaderLabel);
-            Controls.Add(passwordText);
-            Controls.Add(userNameText);
-            Controls.Add(loginButton);
-            Controls.Add(passwordLabel);
-            Controls.Add(userNameLabel);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Logga in";
             userMsgPanel.ResumeLayout(false);
             userMsgPanel.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -165,5 +183,6 @@ namespace Projekt.Forms
         private Panel userMsgPanel;
         private Label label1;
         private Label msgLabel;
+        private Panel panel1;
     }
 }

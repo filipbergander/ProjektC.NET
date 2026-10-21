@@ -156,7 +156,7 @@ namespace Projekt.Forms
             initiateChallengeBtn.Enabled = checkBox1.Checked; // Aktiverar knappen för att kunna spela sparutmaningen
             if (checkBox1.Checked)
             {
-                initiateChallengeBtn.BackColor = Color.Green; // Ändrar färgen på knappen
+                initiateChallengeBtn.BackColor = Color.FromArgb(1, 170, 50); // Ändrar färgen på knappen
                 initiateChallengeBtn.ForeColor = Color.Black; // Ändrar färgen på texten på knappen
             }
             else

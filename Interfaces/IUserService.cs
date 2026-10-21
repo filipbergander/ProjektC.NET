@@ -11,6 +11,6 @@ namespace Projekt.Interfaces
 
         Task<User?> GetUser(string username); // Hämtar en befintlig användare
 
-        Task<bool> AuthenticateUser(string username, string password); // Autentiserar en användare
+        Task<User?> AuthenticateUser(string username, string password); // Autentiserar en användare
     }
 }

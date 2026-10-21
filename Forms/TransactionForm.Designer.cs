@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionForm));
             transactionGrid = new DataGridView();
             transactionsHeaderLabel = new Label();
             transactionFormReturnBtn = new Button();
@@ -62,6 +63,9 @@
             deleteTransactionNotificationLabel = new Label();
             sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             removeAllSavingsBtn = new Button();
+            iconButton1 = new FontAwesome.Sharp.IconButton();
+            iconButton2 = new FontAwesome.Sharp.IconButton();
+            iconButton3 = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)transactionGrid).BeginInit();
             filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).BeginInit();
@@ -71,27 +75,27 @@
             // transactionGrid
             // 
             transactionGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(245, 246, 250);
-            transactionGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(245, 246, 250);
+            transactionGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             transactionGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             transactionGrid.BackgroundColor = Color.White;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(44, 62, 80);
-            dataGridViewCellStyle5.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            transactionGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(44, 62, 80);
+            dataGridViewCellStyle2.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            transactionGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             transactionGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            transactionGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            transactionGrid.DefaultCellStyle = dataGridViewCellStyle3;
             transactionGrid.EnableHeadersVisualStyles = false;
             transactionGrid.GridColor = SystemColors.ActiveCaption;
             transactionGrid.Location = new Point(195, 102);
@@ -132,14 +136,14 @@
             // 
             // AddNewTransactionBtn
             // 
-            AddNewTransactionBtn.BackColor = Color.LimeGreen;
+            AddNewTransactionBtn.BackColor = Color.FromArgb(1, 170, 50);
             AddNewTransactionBtn.Cursor = Cursors.Hand;
             AddNewTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AddNewTransactionBtn.Location = new Point(447, 435);
+            AddNewTransactionBtn.Location = new Point(360, 426);
             AddNewTransactionBtn.Name = "AddNewTransactionBtn";
-            AddNewTransactionBtn.Size = new Size(97, 46);
+            AddNewTransactionBtn.Size = new Size(140, 64);
             AddNewTransactionBtn.TabIndex = 3;
-            AddNewTransactionBtn.Text = "Lägg till";
+            AddNewTransactionBtn.Text = "Lägg till transaktion";
             AddNewTransactionBtn.UseVisualStyleBackColor = false;
             AddNewTransactionBtn.Click += AddNewTransactionBtn_Click;
             // 
@@ -443,12 +447,60 @@
             removeAllSavingsBtn.UseVisualStyleBackColor = true;
             removeAllSavingsBtn.Click += removeAllSavingsBtn_Click;
             // 
+            // iconButton1
+            // 
+            iconButton1.BackColor = Color.FromArgb(1, 170, 50);
+            iconButton1.IconChar = FontAwesome.Sharp.IconChar.Add;
+            iconButton1.IconColor = Color.Black;
+            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton1.IconSize = 24;
+            iconButton1.Location = new Point(360, 504);
+            iconButton1.Name = "iconButton1";
+            iconButton1.Size = new Size(140, 49);
+            iconButton1.TabIndex = 24;
+            iconButton1.Text = "Lägg till transaktion";
+            iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton1.UseVisualStyleBackColor = true;
+            // 
+            // iconButton2
+            // 
+            iconButton2.BackColor = Color.LightGray;
+            iconButton2.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
+            iconButton2.IconColor = Color.Black;
+            iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton2.IconSize = 24;
+            iconButton2.Location = new Point(549, 504);
+            iconButton2.Name = "iconButton2";
+            iconButton2.Size = new Size(110, 49);
+            iconButton2.TabIndex = 25;
+            iconButton2.Text = "Ta bort";
+            iconButton2.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton2.UseVisualStyleBackColor = false;
+            // 
+            // iconButton3
+            // 
+            iconButton3.BackColor = Color.LightGray;
+            iconButton3.IconChar = FontAwesome.Sharp.IconChar.Pencil;
+            iconButton3.IconColor = Color.Black;
+            iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton3.IconSize = 24;
+            iconButton3.Location = new Point(692, 504);
+            iconButton3.Name = "iconButton3";
+            iconButton3.Size = new Size(134, 45);
+            iconButton3.TabIndex = 26;
+            iconButton3.Text = "Uppdatera";
+            iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton3.UseVisualStyleBackColor = false;
+            // 
             // TransactionForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
+            BackColor = Color.FromArgb(244, 245, 247);
             ClientSize = new Size(1184, 561);
+            Controls.Add(iconButton3);
+            Controls.Add(iconButton2);
+            Controls.Add(iconButton1);
             Controls.Add(removeAllSavingsBtn);
             Controls.Add(deleteTransactionNotificationLabel);
             Controls.Add(modifyTransactionsLabel);
@@ -464,6 +516,7 @@
             Controls.Add(transactionsHeaderLabel);
             Controls.Add(transactionGrid);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "TransactionForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -510,5 +563,8 @@
         private Label deleteTransactionNotificationLabel;
         private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
         private Button removeAllSavingsBtn;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton iconButton3;
     }
 }

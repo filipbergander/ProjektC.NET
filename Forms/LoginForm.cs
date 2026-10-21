@@ -17,6 +17,8 @@ namespace Projekt.Forms
 {
     public partial class LoginForm : Form
     {
+        public string LoggedInUsername { get; private set; } = string.Empty;
+        public string LoggedInRole { get; private set; } = string.Empty;
         // Instanser
         //private readonly MainForm mainForm;
         private readonly IUserService userService;
@@ -60,14 +62,15 @@ namespace Projekt.Forms
             string username = userNameText.Text.Trim();
             string password = passwordText.Text.Trim();
 
-            bool authenticated = await userService.AuthenticateUser(username, password);
-            if (!authenticated)
+            var user = await userService.AuthenticateUser(username, password);
+            if (user == null)
             {
                 userMsgPanel.Visible = true; // Visar panelen med felmeddelanden
                 msgLabel.Text = "* Felaktigt användarnamn eller \n lösenord!";
                 return;
             }
-
+            LoggedInUsername = user.Username ?? string.Empty;
+            LoggedInRole = user.Role ?? string.Empty;
             // Öppnar MainForm
             this.DialogResult = DialogResult.OK;
             this.Close();

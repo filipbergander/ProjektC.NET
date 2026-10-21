@@ -21,7 +21,9 @@ namespace Projekt.Forms
         private readonly GamingService savingsService; // Instans av savingsservice för att hämta in "sparvärden" till mainform
         private readonly UserService userService;
         private readonly BudgetMLService mlService;
-        public MainForm(ITransactionService transaction)
+        private readonly string loggedInUser;
+        private readonly string loggedInRole;
+        public MainForm(ITransactionService transaction, string username, string role)
         {
             InitializeComponent();
             this.transaction = transaction;
@@ -29,6 +31,8 @@ namespace Projekt.Forms
             this.financeService = new FinanceService(transaction);
             this.savingsService = new GamingService(transaction);
             this.mlService = mlService ?? new BudgetMLService(new SavingsGameInput());
+            this.loggedInUser = username;
+            this.loggedInRole = role;
             MainFormLoad();
         }
         // Metod som körs när formuläret laddas, hämtar in värdena från financeService och skapar diagrammet
@@ -36,6 +40,17 @@ namespace Projekt.Forms
         {
             await InsertFinanceValues();
             await LoadDiagram();
+            if (loggedInRole == null || loggedInUser == null)
+            {
+                loggedInPanel.Visible = false;
+            }
+            else
+            {
+                loggedInPanel.Visible = true;
+                usernameLabel.Text = $"{loggedInUser}";
+                roleLabel.Text = $"{loggedInRole}";
+            }
+
         }
         // Öppnar formuläret TransactionForm när knappen "Transaktioner" klickas på
         private void mainFormTransactionBtn_Click(object sender, EventArgs e)

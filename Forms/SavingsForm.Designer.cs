@@ -114,7 +114,7 @@
             // 
             // anticipateSavingsBtn
             // 
-            anticipateSavingsBtn.BackColor = SystemColors.ActiveCaption;
+            anticipateSavingsBtn.BackColor = Color.FromArgb(72, 202, 228);
             anticipateSavingsBtn.Cursor = Cursors.Hand;
             anticipateSavingsBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             anticipateSavingsBtn.Location = new Point(77, 293);
@@ -127,7 +127,7 @@
             // 
             // playChallangeBtn
             // 
-            playChallangeBtn.BackColor = Color.MediumSeaGreen;
+            playChallangeBtn.BackColor = Color.FromArgb(1, 170, 50);
             playChallangeBtn.Cursor = Cursors.Hand;
             playChallangeBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             playChallangeBtn.Location = new Point(103, 293);
@@ -173,9 +173,9 @@
             // 
             // calculateSavingsButton
             // 
-            calculateSavingsButton.BackColor = Color.FromArgb(0, 192, 0);
+            calculateSavingsButton.BackColor = Color.FromArgb(1, 170, 50);
             calculateSavingsButton.Cursor = Cursors.Hand;
-            calculateSavingsButton.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            calculateSavingsButton.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             calculateSavingsButton.Location = new Point(19, 421);
             calculateSavingsButton.Name = "calculateSavingsButton";
             calculateSavingsButton.Padding = new Padding(2);
@@ -268,7 +268,7 @@
             // savingsPanel
             // 
             savingsPanel.Anchor = AnchorStyles.None;
-            savingsPanel.BackColor = Color.Beige;
+            savingsPanel.BackColor = Color.FromArgb(244, 245, 245);
             savingsPanel.Controls.Add(challengePanel);
             savingsPanel.Controls.Add(panel3);
             savingsPanel.Controls.Add(panel2);
@@ -279,7 +279,7 @@
             // 
             // challengePanel
             // 
-            challengePanel.BackColor = Color.Honeydew;
+            challengePanel.BackColor = Color.White;
             challengePanel.BackgroundImageLayout = ImageLayout.Center;
             challengePanel.BorderStyle = BorderStyle.FixedSingle;
             challengePanel.Controls.Add(panel1);
@@ -302,15 +302,15 @@
             panel1.Controls.Add(label11);
             panel1.Controls.Add(bestWinLabel);
             panel1.Controls.Add(amountPlayedTodayLabel);
-            panel1.Location = new Point(97, 46);
+            panel1.Location = new Point(10, 46);
             panel1.Name = "panel1";
-            panel1.Size = new Size(251, 167);
+            panel1.Size = new Size(412, 167);
             panel1.TabIndex = 10;
             // 
             // totalResultLabel
             // 
             totalResultLabel.AutoSize = true;
-            totalResultLabel.Location = new Point(3, 121);
+            totalResultLabel.Location = new Point(13, 117);
             totalResultLabel.Name = "totalResultLabel";
             totalResultLabel.Size = new Size(38, 18);
             totalResultLabel.TabIndex = 14;
@@ -320,7 +320,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(60, 12);
+            label11.Location = new Point(154, 12);
             label11.Name = "label11";
             label11.Size = new Size(107, 18);
             label11.TabIndex = 0;
@@ -329,7 +329,7 @@
             // bestWinLabel
             // 
             bestWinLabel.AutoSize = true;
-            bestWinLabel.Location = new Point(3, 82);
+            bestWinLabel.Location = new Point(13, 80);
             bestWinLabel.Name = "bestWinLabel";
             bestWinLabel.Size = new Size(38, 18);
             bestWinLabel.TabIndex = 12;
@@ -338,7 +338,7 @@
             // amountPlayedTodayLabel
             // 
             amountPlayedTodayLabel.AutoSize = true;
-            amountPlayedTodayLabel.Location = new Point(3, 43);
+            amountPlayedTodayLabel.Location = new Point(13, 37);
             amountPlayedTodayLabel.Name = "amountPlayedTodayLabel";
             amountPlayedTodayLabel.Size = new Size(38, 18);
             amountPlayedTodayLabel.TabIndex = 11;
@@ -372,6 +372,7 @@
             // 
             // checkBox1
             // 
+            checkBox1.Cursor = Cursors.Hand;
             checkBox1.Font = new Font("Lucida Sans", 11F);
             checkBox1.Location = new Point(52, 217);
             checkBox1.Name = "checkBox1";
@@ -565,13 +566,15 @@
             // 
             // openToolsSavingBtn
             // 
+            openToolsSavingBtn.BackColor = Color.FromArgb(64, 64, 64);
             openToolsSavingBtn.Cursor = Cursors.Hand;
+            openToolsSavingBtn.ForeColor = Color.White;
             openToolsSavingBtn.Location = new Point(528, 52);
             openToolsSavingBtn.Name = "openToolsSavingBtn";
             openToolsSavingBtn.Size = new Size(195, 48);
             openToolsSavingBtn.TabIndex = 5;
             openToolsSavingBtn.Text = "Öppna verktygspanelen";
-            openToolsSavingBtn.UseVisualStyleBackColor = true;
+            openToolsSavingBtn.UseVisualStyleBackColor = false;
             openToolsSavingBtn.Visible = false;
             openToolsSavingBtn.Click += openToolsSavingBtn_Click;
             // 
@@ -579,7 +582,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
+            BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
             Controls.Add(progressBar);
             Controls.Add(openToolsSavingBtn);
@@ -589,10 +592,11 @@
             Controls.Add(anticipateSavingsPanel);
             Controls.Add(savingsFormReturnBtn);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "SavingsForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Sparande";
+            Text = "Ditt sparande";
             anticipateSavingsPanel.ResumeLayout(false);
             anticipateSavingsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)savingsYearGoalNum).EndInit();

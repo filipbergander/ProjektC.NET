@@ -121,4 +121,7 @@
   <data name="5dfa8bde-6113-4c5f-8643-8eb93b3a500f" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5dfa8bde-6113-4c5f-8643-8eb93b3a500f.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ikon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ikon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

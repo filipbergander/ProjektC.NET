@@ -1,7 +1,9 @@
 using Projekt.Forms;
-using static System.Console;
-using Projekt.Services;
 using Projekt.Interfaces;
+using Projekt.Services;
+using System.Data;
+using static System.Console;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Projekt
 {
@@ -17,11 +19,14 @@ namespace Projekt
             ApplicationConfiguration.Initialize();
             IUserService userService = new UserService();
             ITransactionService transactionService = new TransactionService();
-            LoginForm loginForm = new LoginForm(userService, transactionService);
-            if (loginForm.ShowDialog() == DialogResult.OK)
-            {
-                Application.Run(new MainForm(transactionService));
-            }
+            Application.Run(new MainForm(transactionService, "null", "null"));
+            /* LoginForm loginForm = new LoginForm(userService, transactionService);
+             if (loginForm.ShowDialog() == DialogResult.OK)
+             {
+                 string username = loginForm.LoggedInUsername;
+                 string role = loginForm.LoggedInRole;
+                 Application.Run(new MainForm(transactionService, username, role));
+             }*/
         }
     }
 }

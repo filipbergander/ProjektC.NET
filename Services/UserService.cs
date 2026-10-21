@@ -55,16 +55,20 @@ namespace Projekt.Services
         // Hämtar in en användare från databasen genom användarnamnet
         public async Task<User?> GetUser(string username) => await database.Users.FirstOrDefaultAsync(u => u.Username == username);
         // Autentiserar en användare genom att hitta användaren i databasen genom användarnamnet, och jämför hashen med det inmatade lösenordet
-        public async Task<bool> AuthenticateUser(string username, string password)
+        public async Task<User?> AuthenticateUser(string username, string password)
         {
             var user = await database.Users.FirstOrDefaultAsync(u => u.Username == username); // Försöker hämta användare från databas
             if (user == null)
             {
-                return false;
+                return null;
             }
             // Hashar det inmatade lösenordet med salt och jämför med hashen i databasen
             string loginHash = PasswordAuthentication.HashPassword(password, user.Salt!);
-            return loginHash == user.PasswordHash;
+            if (loginHash == user.PasswordHash)
+            {
+                return user;
+            }
+            return null;
         }
     }
 

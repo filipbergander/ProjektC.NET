@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             mainFormDashboardLabel = new Label();
             mainFormMonthLabel = new Label();
             mainFormIncomeLabel = new Label();
@@ -44,20 +45,27 @@
             noTransactionsLabel = new Label();
             mainFormRegisterBtn = new Button();
             panel1 = new Panel();
+            loggedInPanel = new Panel();
+            roleLabel = new Label();
+            usernameLabel = new Label();
             label2 = new Label();
-            panel2 = new Panel();
             label1 = new Label();
+            pictureBox1 = new PictureBox();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
+            loggedInPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // mainFormDashboardLabel
             // 
             mainFormDashboardLabel.AutoSize = true;
+            mainFormDashboardLabel.Font = new Font("Lucida Sans", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            mainFormDashboardLabel.ForeColor = Color.FromArgb(43, 45, 66);
             mainFormDashboardLabel.Location = new Point(550, 25);
             mainFormDashboardLabel.Margin = new Padding(4, 0, 4, 0);
             mainFormDashboardLabel.Name = "mainFormDashboardLabel";
-            mainFormDashboardLabel.Size = new Size(70, 18);
+            mainFormDashboardLabel.Size = new Size(102, 23);
             mainFormDashboardLabel.TabIndex = 0;
             mainFormDashboardLabel.Text = "Översikt";
             // 
@@ -92,24 +100,26 @@
             // 
             // mainFormTransactionBtn
             // 
+            mainFormTransactionBtn.BackColor = Color.FromArgb(227, 150, 100);
             mainFormTransactionBtn.Cursor = Cursors.Hand;
-            mainFormTransactionBtn.Location = new Point(10, 67);
+            mainFormTransactionBtn.Location = new Point(10, 80);
             mainFormTransactionBtn.Name = "mainFormTransactionBtn";
-            mainFormTransactionBtn.Size = new Size(157, 40);
+            mainFormTransactionBtn.Size = new Size(157, 43);
             mainFormTransactionBtn.TabIndex = 4;
             mainFormTransactionBtn.Text = "Dina transaktioner";
-            mainFormTransactionBtn.UseVisualStyleBackColor = true;
+            mainFormTransactionBtn.UseVisualStyleBackColor = false;
             mainFormTransactionBtn.Click += mainFormTransactionBtn_Click;
             // 
             // mainFormSavingsBtn
             // 
+            mainFormSavingsBtn.BackColor = Color.FromArgb(1, 170, 50);
             mainFormSavingsBtn.Cursor = Cursors.Hand;
             mainFormSavingsBtn.Location = new Point(10, 132);
             mainFormSavingsBtn.Name = "mainFormSavingsBtn";
-            mainFormSavingsBtn.Size = new Size(157, 40);
+            mainFormSavingsBtn.Size = new Size(157, 43);
             mainFormSavingsBtn.TabIndex = 5;
             mainFormSavingsBtn.Text = "Ditt sparande";
-            mainFormSavingsBtn.UseVisualStyleBackColor = true;
+            mainFormSavingsBtn.UseVisualStyleBackColor = false;
             mainFormSavingsBtn.Click += mainFormSavingsBtn_Click;
             // 
             // tableLayoutPanel1
@@ -128,7 +138,7 @@
             tableLayoutPanel1.Controls.Add(mainFormMonthLabel, 0, 0);
             tableLayoutPanel1.Controls.Add(totalExpenseLabel, 1, 2);
             tableLayoutPanel1.Controls.Add(mainFormQuantityLabel, 0, 3);
-            tableLayoutPanel1.Location = new Point(206, 95);
+            tableLayoutPanel1.Location = new Point(208, 95);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.Padding = new Padding(10);
             tableLayoutPanel1.RowCount = 4;
@@ -212,19 +222,20 @@
             // 
             // mainFormRegisterBtn
             // 
+            mainFormRegisterBtn.BackColor = Color.FromArgb(72, 202, 228);
             mainFormRegisterBtn.Cursor = Cursors.Hand;
-            mainFormRegisterBtn.Location = new Point(10, 199);
+            mainFormRegisterBtn.Location = new Point(10, 186);
             mainFormRegisterBtn.Name = "mainFormRegisterBtn";
-            mainFormRegisterBtn.Size = new Size(157, 49);
+            mainFormRegisterBtn.Size = new Size(157, 57);
             mainFormRegisterBtn.TabIndex = 8;
             mainFormRegisterBtn.Text = "Skapa ny användare";
-            mainFormRegisterBtn.UseVisualStyleBackColor = true;
+            mainFormRegisterBtn.UseVisualStyleBackColor = false;
             mainFormRegisterBtn.Click += mainFormRegisterBtn_Click;
             // 
             // panel1
             // 
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(panel2);
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(loggedInPanel);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(mainFormRegisterBtn);
             panel1.Controls.Add(mainFormSavingsBtn);
@@ -235,53 +246,100 @@
             panel1.Size = new Size(185, 561);
             panel1.TabIndex = 9;
             // 
+            // loggedInPanel
+            // 
+            loggedInPanel.BackColor = Color.Gainsboro;
+            loggedInPanel.Controls.Add(roleLabel);
+            loggedInPanel.Controls.Add(usernameLabel);
+            loggedInPanel.Controls.Add(label2);
+            loggedInPanel.Location = new Point(12, 456);
+            loggedInPanel.Name = "loggedInPanel";
+            loggedInPanel.Size = new Size(157, 78);
+            loggedInPanel.TabIndex = 11;
+            loggedInPanel.Visible = false;
+            // 
+            // roleLabel
+            // 
+            roleLabel.AutoSize = true;
+            roleLabel.Font = new Font("Lucida Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            roleLabel.ForeColor = Color.FromArgb(43, 45, 66);
+            roleLabel.Location = new Point(20, 55);
+            roleLabel.Margin = new Padding(4, 0, 4, 0);
+            roleLabel.Name = "roleLabel";
+            roleLabel.Size = new Size(46, 15);
+            roleLabel.TabIndex = 14;
+            roleLabel.Text = "Admin";
+            // 
+            // usernameLabel
+            // 
+            usernameLabel.AutoSize = true;
+            usernameLabel.Font = new Font("Lucida Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            usernameLabel.ForeColor = Color.FromArgb(43, 45, 66);
+            usernameLabel.Location = new Point(20, 31);
+            usernameLabel.Margin = new Padding(4, 0, 4, 0);
+            usernameLabel.Name = "usernameLabel";
+            usernameLabel.Size = new Size(36, 15);
+            usernameLabel.TabIndex = 13;
+            usernameLabel.Text = "User";
+            // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(32, 477);
+            label2.Font = new Font("Lucida Sans", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(43, 45, 66);
+            label2.Location = new Point(20, 9);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(118, 18);
+            label2.Size = new Size(107, 17);
             label2.TabIndex = 12;
-            label2.Text = "Inloggad som:";
-            // 
-            // panel2
-            // 
-            panel2.Location = new Point(28, 464);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(139, 74);
-            panel2.TabIndex = 11;
+            label2.Text = "Inloggad som";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(63, 25);
+            label1.Font = new Font("Lucida Sans", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(43, 45, 66);
+            label1.Location = new Point(59, 38);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(48, 18);
+            label1.Size = new Size(60, 22);
             label1.TabIndex = 10;
             label1.Text = "Meny";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(191, 2);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(200, 58);
+            pictureBox1.TabIndex = 10;
+            pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
+            BackColor = Color.FromArgb(244, 245, 247);
             ClientSize = new Size(1184, 561);
+            Controls.Add(pictureBox1);
             Controls.Add(noTransactionsLabel);
             Controls.Add(panel1);
             Controls.Add(chartPanel);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(mainFormDashboardLabel);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Översikt konto";
+            Text = "Fickan - Översikt";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            loggedInPanel.ResumeLayout(false);
+            loggedInPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -305,7 +363,10 @@
         private Panel panel1;
         private Label label1;
         private Label label2;
-        private Panel panel2;
+        private Panel loggedInPanel;
         private Label noTransactionsLabel;
+        private Label usernameLabel;
+        private Label roleLabel;
+        private PictureBox pictureBox1;
     }
 }
