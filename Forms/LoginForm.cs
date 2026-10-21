@@ -17,11 +17,15 @@ namespace Projekt.Forms
 {
     public partial class LoginForm : Form
     {
+        // Instanser
+        //private readonly MainForm mainForm;
         private readonly IUserService userService;
-        public LoginForm(IUserService userService)
+        private readonly ITransactionService transaction;
+        public LoginForm(IUserService userService, ITransactionService transaction)
         {
             InitializeComponent();
             this.userService = userService;
+            this.transaction = new TransactionService();
         }
 
         private async void loginButton_Click(object sender, EventArgs e)
@@ -52,28 +56,24 @@ namespace Projekt.Forms
                 msgLabel.Text = string.Join("\n", errors); // Radbryter varje felmeddelande
                 return;
             }
-            await UIEnhancer.RunLoadingBar(progressBar, loginButton); // Kör progressbaren
             // Sparar ned inmatade användarnamnet och lösenordet
             string username = userNameText.Text.Trim();
             string password = passwordText.Text.Trim();
 
-            // Tittar om användarnamn och lösenord är tomma 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            bool authenticated = await userService.AuthenticateUser(username, password);
+            if (!authenticated)
             {
-                MessageBox.Show("Fyll i både användarnamn och lösenord!");
+                userMsgPanel.Visible = true; // Visar panelen med felmeddelanden
+                msgLabel.Text = "* Felaktigt användarnamn eller \n lösenord!";
                 return;
             }
 
+            // Öppnar MainForm
+            this.DialogResult = DialogResult.OK;
+            this.Close();
             // Nollställer textfälten vid lyckad inloggning
             userNameText.Text = string.Empty;
             passwordText.Text = string.Empty;
-
-
-        }
-
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

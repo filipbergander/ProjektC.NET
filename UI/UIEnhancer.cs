@@ -24,8 +24,6 @@ namespace Projekt.UI
             // Döljer progressbar och aktiverar knapp igen
             progressBar?.Visible = false;
             button?.Enabled = true;
-
-
-        }
+                    }
     }
 }

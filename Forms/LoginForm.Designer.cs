@@ -39,7 +39,6 @@ namespace Projekt.Forms
             userMsgPanel = new Panel();
             label1 = new Label();
             msgLabel = new Label();
-            progressBar = new ProgressBar();
             userMsgPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,6 +64,7 @@ namespace Projekt.Forms
             // loginButton
             // 
             loginButton.BackColor = Color.DarkSeaGreen;
+            loginButton.Cursor = Cursors.Hand;
             loginButton.Location = new Point(481, 264);
             loginButton.Name = "loginButton";
             loginButton.Size = new Size(228, 47);
@@ -130,20 +130,12 @@ namespace Projekt.Forms
             msgLabel.TabIndex = 0;
             msgLabel.Text = "label1";
             // 
-            // progressBar
-            // 
-            progressBar.Location = new Point(520, 535);
-            progressBar.Name = "progressBar";
-            progressBar.Size = new Size(149, 23);
-            progressBar.TabIndex = 14;
-            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1184, 561);
-            Controls.Add(progressBar);
             Controls.Add(userMsgPanel);
             Controls.Add(loginFormHeaderLabel);
             Controls.Add(passwordText);
@@ -156,7 +148,6 @@ namespace Projekt.Forms
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Logga in";
-            Load += LoginForm_Load;
             userMsgPanel.ResumeLayout(false);
             userMsgPanel.PerformLayout();
             ResumeLayout(false);
@@ -174,6 +165,5 @@ namespace Projekt.Forms
         private Panel userMsgPanel;
         private Label label1;
         private Label msgLabel;
-        private ProgressBar progressBar;
     }
 }

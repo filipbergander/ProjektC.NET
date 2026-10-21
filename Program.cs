@@ -17,7 +17,11 @@ namespace Projekt
             ApplicationConfiguration.Initialize();
             IUserService userService = new UserService();
             ITransactionService transactionService = new TransactionService();
-            Application.Run(new LoginForm(userService));
+            LoginForm loginForm = new LoginForm(userService, transactionService);
+            if (loginForm.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new MainForm(transactionService));
+            }
         }
     }
 }
