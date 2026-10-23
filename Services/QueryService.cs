@@ -12,7 +12,7 @@ using static System.Console;
 
 namespace Projekt.Services
 {
-    internal class QueryService
+    public class QueryService
     {
         // Instans av Transactionsservicen
         private readonly ITransactionService transaction;
@@ -47,7 +47,7 @@ namespace Projekt.Services
             // Filtrerar ut kategorier
             return transactions
                 .Select(t => t.Kategori)
-                .Where(k => !string.IsNullOrEmpty(k))
+                .Where(k => !string.IsNullOrWhiteSpace(k))
                 .Distinct()
                 .OrderBy(c => c)
                 .ToList()!;
@@ -59,7 +59,7 @@ namespace Projekt.Services
             // Filtrerar ut typ
             return transactions
                 .Select(t => t.Typ)
-                .Where(t => !string.IsNullOrEmpty(t))
+                .Where(t => !string.IsNullOrWhiteSpace(t))
                 .Distinct()
                 .OrderBy(t => t)
                 .ToList()!;

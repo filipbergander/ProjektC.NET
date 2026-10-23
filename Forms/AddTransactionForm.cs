@@ -18,19 +18,23 @@ namespace Projekt.Forms
         private readonly ITransactionService transaction;
         private readonly Transaction? transactionToEdit;
         private readonly TransactionForm transactionForm;
+        private readonly QueryService queryService;
 
         // Konstruktor som initierar AddTransactionForm, samt instans av en ny Transaction
-        public AddTransactionForm(ITransactionService transaction, TransactionForm transactionForm, Transaction? transactionToEdit = null)
+        public AddTransactionForm(ITransactionService transaction, TransactionForm transactionForm, QueryService queryService, Transaction? transactionToEdit = null)
         {
             InitializeComponent(); // Startar upp formuläret med alla komponenter
             this.transaction = transaction;
             this.transactionForm = transactionForm;
+            this.queryService = queryService;
             this.transactionToEdit = transactionToEdit;
+           LoadCategories();
             if (transactionToEdit != null)
             {
                 addTransactionLabel.Text = "Redigera transaktion";
                 saveAddTransactionBtn.Text = "Spara ändringar";
                 LoadTransactionsToEdit(transactionToEdit.Id, transactionToEdit);
+
             }
 
         }
@@ -56,7 +60,7 @@ namespace Projekt.Forms
                 errors.Add("* Ange titel för transaktionen!");
             }
             // Kategori
-            if (string.IsNullOrWhiteSpace(addTransactionCategoryText.Text))
+            if (string.IsNullOrWhiteSpace(addTransactionCategoryCombo.Text))
             {
                 errors.Add("* Ange kategori för transaktionen!");
             }
@@ -81,7 +85,7 @@ namespace Projekt.Forms
             // Hämtar in värdena i inputsen 
             string? type = addTransactionTypeComboBox.SelectedItem?.ToString()!;
             string? title = addTransactionTitleText.Text;
-            string? category = addTransactionCategoryText.Text;
+            string? category = addTransactionCategoryCombo.Text;
             float amount = (float)addTransactionAmountNum.Value;
             DateTime date = addTransactionDatePicker.Value;
 
@@ -139,7 +143,7 @@ namespace Projekt.Forms
             addTransactionAmountNum.Value = 0;
             addTransactionTypeComboBox.SelectedIndex = 0;
             addTransactionTitleText.Clear();
-            addTransactionCategoryText.Clear();
+            addTransactionCategoryCombo.Text = "";
             addTransactionDatePicker.Value = DateTime.Now;
             msgLabel.Text = "";
         }
@@ -154,9 +158,18 @@ namespace Projekt.Forms
             // Uppdaterar inputs med värdena från den transaktion som ska redigeras
             addTransactionTypeComboBox.SelectedItem = transactionToEdit.Typ;
             addTransactionTitleText.Text = transactionToEdit.Namn;
-            addTransactionCategoryText.Text = transactionToEdit.Kategori;
+            addTransactionCategoryCombo.Text = transactionToEdit.Kategori;
             addTransactionAmountNum.Value = (decimal)transactionToEdit.Belopp;
             addTransactionDatePicker.Value = DateTime.Parse(transactionToEdit.Datum ?? DateTime.Now.ToString());
+        }
+
+        private async void LoadCategories()
+        {
+            var categories = await queryService.GetCategoryValues();
+            addTransactionCategoryCombo.BeginUpdate();
+            addTransactionCategoryCombo.Items.Clear();
+            addTransactionCategoryCombo.Items.AddRange(categories.ToArray());
+            addTransactionCategoryCombo.EndUpdate();
         }
     }
 }

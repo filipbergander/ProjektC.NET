@@ -30,10 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SavingsForm));
             savingsHeaderLabel = new Label();
-            savingsFormReturnBtn = new Button();
             anticipateSavingsBtn = new Button();
             playChallangeBtn = new Button();
             anticipateSavingsPanel = new Panel();
+            label13 = new Label();
+            label12 = new Label();
+            label10 = new Label();
+            label7 = new Label();
             closeCalculatorPanelBtn = new Button();
             calculateSavingsButton = new Button();
             savingsYearGoalLabel = new Label();
@@ -46,6 +49,10 @@
             startAmountNum = new NumericUpDown();
             anticipateSavingsLabel = new Label();
             savingsPanel = new Panel();
+            panel3 = new Panel();
+            label4 = new Label();
+            label5 = new Label();
+            label3 = new Label();
             challengePanel = new Panel();
             panel1 = new Panel();
             totalResultLabel = new Label();
@@ -58,10 +65,6 @@
             label9 = new Label();
             label8 = new Label();
             label6 = new Label();
-            panel3 = new Panel();
-            label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
             panel2 = new Panel();
             label1 = new Label();
             label2 = new Label();
@@ -75,15 +78,16 @@
             equityLabel = new Label();
             equityLabelText = new TextBox();
             openToolsSavingBtn = new Button();
+            savingsFormReturnBtn = new FontAwesome.Sharp.IconButton();
             anticipateSavingsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)savingsYearGoalNum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)yearlyInterestNum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)monthlyAmountNum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)startAmountNum).BeginInit();
             savingsPanel.SuspendLayout();
+            panel3.SuspendLayout();
             challengePanel.SuspendLayout();
             panel1.SuspendLayout();
-            panel3.SuspendLayout();
             panel2.SuspendLayout();
             totalSavingsPanel.SuspendLayout();
             SuspendLayout();
@@ -91,26 +95,12 @@
             // savingsHeaderLabel
             // 
             savingsHeaderLabel.AutoSize = true;
-            savingsHeaderLabel.Location = new Point(526, 19);
+            savingsHeaderLabel.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            savingsHeaderLabel.Location = new Point(496, 15);
             savingsHeaderLabel.Name = "savingsHeaderLabel";
-            savingsHeaderLabel.Size = new Size(197, 18);
+            savingsHeaderLabel.Size = new Size(264, 22);
             savingsHeaderLabel.TabIndex = 0;
             savingsHeaderLabel.Text = "Verktyg för ditt sparande";
-            // 
-            // savingsFormReturnBtn
-            // 
-            savingsFormReturnBtn.Anchor = AnchorStyles.Left;
-            savingsFormReturnBtn.AutoSize = true;
-            savingsFormReturnBtn.Cursor = Cursors.Hand;
-            savingsFormReturnBtn.Location = new Point(19, 504);
-            savingsFormReturnBtn.Margin = new Padding(10);
-            savingsFormReturnBtn.Name = "savingsFormReturnBtn";
-            savingsFormReturnBtn.Padding = new Padding(5);
-            savingsFormReturnBtn.Size = new Size(111, 38);
-            savingsFormReturnBtn.TabIndex = 1;
-            savingsFormReturnBtn.Text = "Gå tillbaka";
-            savingsFormReturnBtn.UseVisualStyleBackColor = true;
-            savingsFormReturnBtn.Click += savingsFormReturnBtn_Click;
             // 
             // anticipateSavingsBtn
             // 
@@ -141,6 +131,10 @@
             // anticipateSavingsPanel
             // 
             anticipateSavingsPanel.BackColor = SystemColors.ActiveCaption;
+            anticipateSavingsPanel.Controls.Add(label13);
+            anticipateSavingsPanel.Controls.Add(label12);
+            anticipateSavingsPanel.Controls.Add(label10);
+            anticipateSavingsPanel.Controls.Add(label7);
             anticipateSavingsPanel.Controls.Add(closeCalculatorPanelBtn);
             anticipateSavingsPanel.Controls.Add(calculateSavingsButton);
             anticipateSavingsPanel.Controls.Add(savingsYearGoalLabel);
@@ -157,6 +151,46 @@
             anticipateSavingsPanel.Size = new Size(200, 488);
             anticipateSavingsPanel.TabIndex = 4;
             anticipateSavingsPanel.Visible = false;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Lucida Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label13.Location = new Point(13, 99);
+            label13.Name = "label13";
+            label13.Size = new Size(109, 15);
+            label13.TabIndex = 23;
+            label13.Text = "(Max 1 000 000)";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Lucida Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label12.Location = new Point(13, 181);
+            label12.Name = "label12";
+            label12.Size = new Size(89, 15);
+            label12.TabIndex = 22;
+            label12.Text = "(Max 15 000)";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Lucida Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(12, 266);
+            label10.Name = "label10";
+            label10.Size = new Size(69, 15);
+            label10.TabIndex = 21;
+            label10.Text = "(Max 50%)";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Lucida Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(12, 354);
+            label7.Name = "label7";
+            label7.Size = new Size(77, 15);
+            label7.TabIndex = 20;
+            label7.Text = "(Max 40 år)";
             // 
             // closeCalculatorPanelBtn
             // 
@@ -188,7 +222,7 @@
             // savingsYearGoalLabel
             // 
             savingsYearGoalLabel.AutoSize = true;
-            savingsYearGoalLabel.Location = new Point(12, 296);
+            savingsYearGoalLabel.Location = new Point(11, 304);
             savingsYearGoalLabel.Name = "savingsYearGoalLabel";
             savingsYearGoalLabel.Size = new Size(91, 18);
             savingsYearGoalLabel.TabIndex = 8;
@@ -196,7 +230,8 @@
             // 
             // savingsYearGoalNum
             // 
-            savingsYearGoalNum.Location = new Point(12, 317);
+            savingsYearGoalNum.Location = new Point(11, 325);
+            savingsYearGoalNum.Maximum = new decimal(new int[] { 40, 0, 0, 0 });
             savingsYearGoalNum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             savingsYearGoalNum.Name = "savingsYearGoalNum";
             savingsYearGoalNum.Size = new Size(138, 26);
@@ -206,7 +241,7 @@
             // yearlyInterestLabel
             // 
             yearlyInterestLabel.AutoSize = true;
-            yearlyInterestLabel.Location = new Point(11, 216);
+            yearlyInterestLabel.Location = new Point(12, 216);
             yearlyInterestLabel.Name = "yearlyInterestLabel";
             yearlyInterestLabel.Size = new Size(129, 18);
             yearlyInterestLabel.TabIndex = 6;
@@ -214,7 +249,8 @@
             // 
             // yearlyInterestNum
             // 
-            yearlyInterestNum.Location = new Point(11, 237);
+            yearlyInterestNum.Location = new Point(12, 237);
+            yearlyInterestNum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             yearlyInterestNum.Name = "yearlyInterestNum";
             yearlyInterestNum.Size = new Size(138, 26);
             yearlyInterestNum.TabIndex = 5;
@@ -223,7 +259,7 @@
             // monthlyAmountLabel
             // 
             monthlyAmountLabel.AutoSize = true;
-            monthlyAmountLabel.Location = new Point(12, 129);
+            monthlyAmountLabel.Location = new Point(13, 131);
             monthlyAmountLabel.Name = "monthlyAmountLabel";
             monthlyAmountLabel.Size = new Size(137, 18);
             monthlyAmountLabel.TabIndex = 4;
@@ -231,8 +267,8 @@
             // 
             // monthlyAmountNum
             // 
-            monthlyAmountNum.Location = new Point(12, 150);
-            monthlyAmountNum.Maximum = new decimal(new int[] { 20000, 0, 0, 0 });
+            monthlyAmountNum.Location = new Point(13, 152);
+            monthlyAmountNum.Maximum = new decimal(new int[] { 15000, 0, 0, 0 });
             monthlyAmountNum.Name = "monthlyAmountNum";
             monthlyAmountNum.Size = new Size(138, 26);
             monthlyAmountNum.TabIndex = 3;
@@ -250,11 +286,10 @@
             // startAmountNum
             // 
             startAmountNum.Location = new Point(12, 70);
-            startAmountNum.Maximum = new decimal(new int[] { 1500000, 0, 0, 0 });
+            startAmountNum.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             startAmountNum.Name = "startAmountNum";
             startAmountNum.Size = new Size(138, 26);
             startAmountNum.TabIndex = 1;
-            startAmountNum.Value = new decimal(new int[] { 5000, 0, 0, 0 });
             // 
             // anticipateSavingsLabel
             // 
@@ -269,13 +304,52 @@
             // 
             savingsPanel.Anchor = AnchorStyles.None;
             savingsPanel.BackColor = Color.FromArgb(244, 245, 245);
-            savingsPanel.Controls.Add(challengePanel);
             savingsPanel.Controls.Add(panel3);
+            savingsPanel.Controls.Add(challengePanel);
             savingsPanel.Controls.Add(panel2);
             savingsPanel.Location = new Point(206, 105);
             savingsPanel.Name = "savingsPanel";
             savingsPanel.Size = new Size(852, 424);
             savingsPanel.TabIndex = 9;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.White;
+            panel3.Controls.Add(label4);
+            panel3.Controls.Add(label5);
+            panel3.Controls.Add(label3);
+            panel3.Controls.Add(playChallangeBtn);
+            panel3.Location = new Point(429, 30);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(371, 373);
+            panel3.TabIndex = 5;
+            // 
+            // label4
+            // 
+            label4.Location = new Point(15, 46);
+            label4.Name = "label4";
+            label4.Size = new Size(345, 231);
+            label4.TabIndex = 5;
+            label4.Text = resources.GetString("label4.Text");
+            // 
+            // label5
+            // 
+            label5.Font = new Font("Lucida Sans", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(39, 3);
+            label5.Name = "label5";
+            label5.Size = new Size(37, 35);
+            label5.TabIndex = 6;
+            label5.Text = "🎯";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Lucida Sans", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(82, 14);
+            label3.Name = "label3";
+            label3.Size = new Size(212, 22);
+            label3.TabIndex = 4;
+            label3.Text = "Utmana ditt sparande";
             // 
             // challengePanel
             // 
@@ -410,45 +484,6 @@
             label6.TabIndex = 5;
             label6.Text = "Sparutmaning";
             // 
-            // panel3
-            // 
-            panel3.BackColor = Color.White;
-            panel3.Controls.Add(label5);
-            panel3.Controls.Add(label4);
-            panel3.Controls.Add(label3);
-            panel3.Controls.Add(playChallangeBtn);
-            panel3.Location = new Point(429, 30);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(371, 373);
-            panel3.TabIndex = 5;
-            // 
-            // label5
-            // 
-            label5.Font = new Font("Lucida Sans", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(39, 3);
-            label5.Name = "label5";
-            label5.Size = new Size(37, 35);
-            label5.TabIndex = 6;
-            label5.Text = "🎯";
-            // 
-            // label4
-            // 
-            label4.Location = new Point(15, 46);
-            label4.Name = "label4";
-            label4.Size = new Size(345, 181);
-            label4.TabIndex = 5;
-            label4.Text = resources.GetString("label4.Text");
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Lucida Sans", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(82, 14);
-            label3.Name = "label3";
-            label3.Size = new Size(212, 22);
-            label3.TabIndex = 4;
-            label3.Text = "Utmana ditt sparande";
-            // 
             // panel2
             // 
             panel2.BackColor = Color.White;
@@ -502,16 +537,16 @@
             // 
             // totalSumSavingsText
             // 
-            totalSumSavingsText.Location = new Point(16, 39);
+            totalSumSavingsText.Location = new Point(5, 40);
             totalSumSavingsText.Name = "totalSumSavingsText";
-            totalSumSavingsText.Size = new Size(181, 26);
+            totalSumSavingsText.Size = new Size(233, 26);
             totalSumSavingsText.TabIndex = 5;
             // 
             // totalSumSavingsLabel
             // 
             totalSumSavingsLabel.AutoSize = true;
             totalSumSavingsLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            totalSumSavingsLabel.Location = new Point(14, 13);
+            totalSumSavingsLabel.Location = new Point(-1, 13);
             totalSumSavingsLabel.Name = "totalSumSavingsLabel";
             totalSumSavingsLabel.Size = new Size(196, 18);
             totalSumSavingsLabel.TabIndex = 7;
@@ -528,14 +563,14 @@
             totalSavingsPanel.Controls.Add(totalSumSavingsText);
             totalSavingsPanel.Location = new Point(206, 240);
             totalSavingsPanel.Name = "totalSavingsPanel";
-            totalSavingsPanel.Size = new Size(216, 251);
+            totalSavingsPanel.Size = new Size(249, 251);
             totalSavingsPanel.TabIndex = 8;
             totalSavingsPanel.Visible = false;
             // 
             // interestSumLabel
             // 
             interestSumLabel.AutoSize = true;
-            interestSumLabel.Location = new Point(18, 154);
+            interestSumLabel.Location = new Point(0, 145);
             interestSumLabel.Name = "interestSumLabel";
             interestSumLabel.Size = new Size(163, 18);
             interestSumLabel.TabIndex = 11;
@@ -543,15 +578,15 @@
             // 
             // interestSumText
             // 
-            interestSumText.Location = new Point(20, 180);
+            interestSumText.Location = new Point(2, 171);
             interestSumText.Name = "interestSumText";
-            interestSumText.Size = new Size(181, 26);
+            interestSumText.Size = new Size(233, 26);
             interestSumText.TabIndex = 10;
             // 
             // equityLabel
             // 
             equityLabel.AutoSize = true;
-            equityLabel.Location = new Point(16, 80);
+            equityLabel.Location = new Point(1, 80);
             equityLabel.Name = "equityLabel";
             equityLabel.Size = new Size(139, 18);
             equityLabel.TabIndex = 9;
@@ -559,9 +594,9 @@
             // 
             // equityLabelText
             // 
-            equityLabelText.Location = new Point(18, 106);
+            equityLabelText.Location = new Point(5, 101);
             equityLabelText.Name = "equityLabelText";
-            equityLabelText.Size = new Size(181, 26);
+            equityLabelText.Size = new Size(233, 26);
             equityLabelText.TabIndex = 8;
             // 
             // openToolsSavingBtn
@@ -578,19 +613,36 @@
             openToolsSavingBtn.Visible = false;
             openToolsSavingBtn.Click += openToolsSavingBtn_Click;
             // 
+            // savingsFormReturnBtn
+            // 
+            savingsFormReturnBtn.Cursor = Cursors.Hand;
+            savingsFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
+            savingsFormReturnBtn.IconColor = Color.Black;
+            savingsFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            savingsFormReturnBtn.IconSize = 30;
+            savingsFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            savingsFormReturnBtn.Location = new Point(0, 520);
+            savingsFormReturnBtn.Name = "savingsFormReturnBtn";
+            savingsFormReturnBtn.Size = new Size(127, 38);
+            savingsFormReturnBtn.TabIndex = 11;
+            savingsFormReturnBtn.Text = "Gå tillbaka";
+            savingsFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
+            savingsFormReturnBtn.UseVisualStyleBackColor = true;
+            savingsFormReturnBtn.Click += savingsFormReturnBtn_Click;
+            // 
             // SavingsForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
+            Controls.Add(totalSavingsPanel);
+            Controls.Add(savingsFormReturnBtn);
             Controls.Add(progressBar);
             Controls.Add(openToolsSavingBtn);
             Controls.Add(savingsPanel);
-            Controls.Add(totalSavingsPanel);
             Controls.Add(savingsHeaderLabel);
             Controls.Add(anticipateSavingsPanel);
-            Controls.Add(savingsFormReturnBtn);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
@@ -604,12 +656,12 @@
             ((System.ComponentModel.ISupportInitialize)monthlyAmountNum).EndInit();
             ((System.ComponentModel.ISupportInitialize)startAmountNum).EndInit();
             savingsPanel.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             challengePanel.ResumeLayout(false);
             challengePanel.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             totalSavingsPanel.ResumeLayout(false);
@@ -621,7 +673,6 @@
         #endregion
 
         private Label savingsHeaderLabel;
-        private Button savingsFormReturnBtn;
         private Button anticipateSavingsBtn;
         private Button playChallangeBtn;
         private Panel anticipateSavingsPanel;
@@ -667,5 +718,10 @@
         private Label label11;
         private Label totalResultLabel;
         private ProgressBar progressBar;
+        private FontAwesome.Sharp.IconButton savingsFormReturnBtn;
+        private Label label10;
+        private Label label7;
+        private Label label12;
+        private Label label13;
     }
 }

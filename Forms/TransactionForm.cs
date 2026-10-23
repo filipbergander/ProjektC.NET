@@ -131,7 +131,7 @@ namespace Projekt.Forms
         // Öppnar formuläret för att lägga till en ny transaktion vid klick -> "Lägg till"
         private void AddNewTransactionBtn_Click(object sender, EventArgs e)
         {
-            var addTransactionForm = new AddTransactionForm(transaction, this);
+            var addTransactionForm = new AddTransactionForm(transaction, this, queryService);
             addTransactionForm.FormClosed += (s, args) =>
             {
                 this.Show(); // Laddar om transaktionerna när formuläret stängs
@@ -249,8 +249,9 @@ namespace Projekt.Forms
         // Skriver ut antalet transaktioner som visas i datagriden
         private void DisplayTotalTransactionsCount()
         {
-            var totalTransactions = transaction.GetTransactions().Result;
+            var totalTransactions = transaction.GetTransactions().Result; // Alla transaktioner i databasen
             var displayingTransactions = transactionGrid.DataSource as List<Transaction>; // Hämtar in transaktionerna som visas i datagriden just nu
+            totalSumTransactions.Text = $"Summa: {displayingTransactions?.Sum(t => t.Typ == "Utgift" ? -t.Belopp : t.Belopp):N2} kr"; // Visar summan av transaktionerna som visas i datagriden, t.ex vid filtrering
             // Beroende på hur många transaktioner som visas i datagriden, skrivs texten ut olika i labeln
             if (displayingTransactions?.Count >= 1)
             {
@@ -416,7 +417,7 @@ namespace Projekt.Forms
 
                 if (selectedTransaction != null)
                 {
-                    var addTransactionForm = new AddTransactionForm(transaction, this, selectedTransaction);
+                    var addTransactionForm = new AddTransactionForm(transaction, this, queryService, selectedTransaction);
                     addTransactionForm.FormClosed += (s, args) =>
                     {
                         this.Show(); // Laddar om transaktionerna när formuläret stängs

@@ -49,5 +49,19 @@ namespace Projekt.Services
             else return 5;
         }
 
-            }
+        // Hämtar in den största "vinsten" som användaren vunnít i sparutmaningen
+        public async Task<(float LargestWin, float TotalResult)> GetUserResult()
+        {
+            List<Transaction> transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner
+
+            var winTransactions = transactions.Where(t => t.Kategori == "Sparande" && t.Typ == "Inkomst").ToList(); // Filtrerar ut alla vinster
+
+            float largestWin = winTransactions.Any() ? winTransactions.Max(t => t.Belopp) : 0; // Största vinsten, om inga vinster finns så sätts den till 0
+            float totalLosses = transactions.Where(t => t.Kategori == "Sparande" && t.Typ == "Utgift").Sum(t => t.Belopp); // Totala förluster
+            float totalWin = winTransactions.Sum(t => t.Belopp); // Totala vinster
+            float totalResult = totalWin - totalLosses; // Beräknar totala resultatet av spelutmaningen
+            return (largestWin, totalResult); // Returnerar största vinsten och de totala resultatet för spelaren
+        }
+
+    }
 }

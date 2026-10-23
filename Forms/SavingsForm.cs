@@ -209,7 +209,7 @@ namespace Projekt.Forms
         private async Task InsertChallengeValues()
         {
             var amountPlayedToday = await gaming.GetAmountsPlayedToday(); // Hämtar in hur många gånger spelaren spelat idag
-            var playerData = await finance.GetUserResult(); // Hämtar in data för spelaren, största vinst och totalt resultat
+            var playerData = await gaming.GetUserResult(); // Hämtar in data för spelaren, största vinst och totalt resultat
             amountPlayedTodayLabel.Text = $"Spel idag: {amountPlayedToday}/2 st" ?? "Spel idag: 0/2 st"; // Antal gånger spelat idag
             bestWinLabel.Text = $"Största vinsten: {playerData.LargestWin:N2} kr" ?? "Största vinsten: 0.00 kr"; // Största vinsten
             totalResultLabel.Text = $"Totalt spelresultat: {playerData.TotalResult:N2} kr" ?? "Totalt spelresultat: 0.00 kr"; // Totalt resultat för spelaren, vinst minus förlust

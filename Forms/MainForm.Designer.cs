@@ -33,8 +33,6 @@
             mainFormMonthLabel = new Label();
             mainFormIncomeLabel = new Label();
             mainFormExpenseLabel = new Label();
-            mainFormTransactionBtn = new Button();
-            mainFormSavingsBtn = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             monthQuantityLabel = new Label();
             totalIncomeLabel = new Label();
@@ -43,9 +41,12 @@
             mainFormQuantityLabel = new Label();
             chartPanel = new Panel();
             noTransactionsLabel = new Label();
-            mainFormRegisterBtn = new Button();
             panel1 = new Panel();
+            mainFormRegisterBtn = new FontAwesome.Sharp.IconButton();
+            mainFormTransactionBtn = new FontAwesome.Sharp.IconButton();
+            mainFormSavingsBtn = new FontAwesome.Sharp.IconButton();
             loggedInPanel = new Panel();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             roleLabel = new Label();
             usernameLabel = new Label();
             label2 = new Label();
@@ -54,6 +55,7 @@
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             loggedInPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -74,7 +76,7 @@
             mainFormMonthLabel.AutoSize = true;
             mainFormMonthLabel.Font = new Font("Lucida Sans", 12F);
             mainFormMonthLabel.ForeColor = SystemColors.ControlText;
-            mainFormMonthLabel.Location = new Point(13, 10);
+            mainFormMonthLabel.Location = new Point(8, 5);
             mainFormMonthLabel.Name = "mainFormMonthLabel";
             mainFormMonthLabel.Size = new Size(127, 18);
             mainFormMonthLabel.TabIndex = 1;
@@ -83,7 +85,7 @@
             // mainFormIncomeLabel
             // 
             mainFormIncomeLabel.AutoSize = true;
-            mainFormIncomeLabel.Location = new Point(13, 37);
+            mainFormIncomeLabel.Location = new Point(8, 35);
             mainFormIncomeLabel.Name = "mainFormIncomeLabel";
             mainFormIncomeLabel.Size = new Size(86, 18);
             mainFormIncomeLabel.TabIndex = 2;
@@ -92,35 +94,11 @@
             // mainFormExpenseLabel
             // 
             mainFormExpenseLabel.AutoSize = true;
-            mainFormExpenseLabel.Location = new Point(13, 64);
+            mainFormExpenseLabel.Location = new Point(8, 65);
             mainFormExpenseLabel.Name = "mainFormExpenseLabel";
             mainFormExpenseLabel.Size = new Size(69, 18);
             mainFormExpenseLabel.TabIndex = 3;
             mainFormExpenseLabel.Text = "Utgifter:";
-            // 
-            // mainFormTransactionBtn
-            // 
-            mainFormTransactionBtn.BackColor = Color.FromArgb(227, 150, 100);
-            mainFormTransactionBtn.Cursor = Cursors.Hand;
-            mainFormTransactionBtn.Location = new Point(10, 80);
-            mainFormTransactionBtn.Name = "mainFormTransactionBtn";
-            mainFormTransactionBtn.Size = new Size(157, 43);
-            mainFormTransactionBtn.TabIndex = 4;
-            mainFormTransactionBtn.Text = "Dina transaktioner";
-            mainFormTransactionBtn.UseVisualStyleBackColor = false;
-            mainFormTransactionBtn.Click += mainFormTransactionBtn_Click;
-            // 
-            // mainFormSavingsBtn
-            // 
-            mainFormSavingsBtn.BackColor = Color.FromArgb(1, 170, 50);
-            mainFormSavingsBtn.Cursor = Cursors.Hand;
-            mainFormSavingsBtn.Location = new Point(10, 132);
-            mainFormSavingsBtn.Name = "mainFormSavingsBtn";
-            mainFormSavingsBtn.Size = new Size(157, 43);
-            mainFormSavingsBtn.TabIndex = 5;
-            mainFormSavingsBtn.Text = "Ditt sparande";
-            mainFormSavingsBtn.UseVisualStyleBackColor = false;
-            mainFormSavingsBtn.Click += mainFormSavingsBtn_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -138,9 +116,10 @@
             tableLayoutPanel1.Controls.Add(mainFormMonthLabel, 0, 0);
             tableLayoutPanel1.Controls.Add(totalExpenseLabel, 1, 2);
             tableLayoutPanel1.Controls.Add(mainFormQuantityLabel, 0, 3);
+            tableLayoutPanel1.ImeMode = ImeMode.Disable;
             tableLayoutPanel1.Location = new Point(208, 95);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.Padding = new Padding(10);
+            tableLayoutPanel1.Padding = new Padding(5);
             tableLayoutPanel1.RowCount = 4;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
@@ -153,7 +132,7 @@
             // 
             monthQuantityLabel.AutoSize = true;
             monthQuantityLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            monthQuantityLabel.Location = new Point(173, 91);
+            monthQuantityLabel.Location = new Point(168, 95);
             monthQuantityLabel.Name = "monthQuantityLabel";
             monthQuantityLabel.Size = new Size(56, 18);
             monthQuantityLabel.TabIndex = 11;
@@ -164,7 +143,7 @@
             totalIncomeLabel.AutoSize = true;
             totalIncomeLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             totalIncomeLabel.ForeColor = Color.SeaGreen;
-            totalIncomeLabel.Location = new Point(173, 37);
+            totalIncomeLabel.Location = new Point(168, 35);
             totalIncomeLabel.Name = "totalIncomeLabel";
             totalIncomeLabel.Size = new Size(56, 18);
             totalIncomeLabel.TabIndex = 8;
@@ -174,7 +153,7 @@
             // 
             monthValueLabel.AutoSize = true;
             monthValueLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            monthValueLabel.Location = new Point(173, 10);
+            monthValueLabel.Location = new Point(168, 5);
             monthValueLabel.Name = "monthValueLabel";
             monthValueLabel.Size = new Size(56, 18);
             monthValueLabel.TabIndex = 7;
@@ -185,7 +164,7 @@
             totalExpenseLabel.AutoSize = true;
             totalExpenseLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             totalExpenseLabel.ForeColor = Color.Firebrick;
-            totalExpenseLabel.Location = new Point(173, 64);
+            totalExpenseLabel.Location = new Point(168, 65);
             totalExpenseLabel.Name = "totalExpenseLabel";
             totalExpenseLabel.Size = new Size(56, 18);
             totalExpenseLabel.TabIndex = 9;
@@ -194,7 +173,7 @@
             // mainFormQuantityLabel
             // 
             mainFormQuantityLabel.AutoSize = true;
-            mainFormQuantityLabel.Location = new Point(13, 91);
+            mainFormQuantityLabel.Location = new Point(8, 95);
             mainFormQuantityLabel.Name = "mainFormQuantityLabel";
             mainFormQuantityLabel.Size = new Size(154, 18);
             mainFormQuantityLabel.TabIndex = 10;
@@ -207,6 +186,7 @@
             chartPanel.Name = "chartPanel";
             chartPanel.Size = new Size(536, 454);
             chartPanel.TabIndex = 7;
+            chartPanel.TabStop = true;
             // 
             // noTransactionsLabel
             // 
@@ -220,35 +200,80 @@
             noTransactionsLabel.Text = "Inga utgifter är tillagda..";
             noTransactionsLabel.Visible = false;
             // 
-            // mainFormRegisterBtn
-            // 
-            mainFormRegisterBtn.BackColor = Color.FromArgb(72, 202, 228);
-            mainFormRegisterBtn.Cursor = Cursors.Hand;
-            mainFormRegisterBtn.Location = new Point(10, 186);
-            mainFormRegisterBtn.Name = "mainFormRegisterBtn";
-            mainFormRegisterBtn.Size = new Size(157, 57);
-            mainFormRegisterBtn.TabIndex = 8;
-            mainFormRegisterBtn.Text = "Skapa ny användare";
-            mainFormRegisterBtn.UseVisualStyleBackColor = false;
-            mainFormRegisterBtn.Click += mainFormRegisterBtn_Click;
-            // 
             // panel1
             // 
-            panel1.BackColor = Color.White;
+            panel1.BackColor = SystemColors.Menu;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(mainFormRegisterBtn);
+            panel1.Controls.Add(mainFormTransactionBtn);
+            panel1.Controls.Add(mainFormSavingsBtn);
             panel1.Controls.Add(loggedInPanel);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(mainFormRegisterBtn);
-            panel1.Controls.Add(mainFormSavingsBtn);
-            panel1.Controls.Add(mainFormTransactionBtn);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(185, 561);
             panel1.TabIndex = 9;
             // 
+            // mainFormRegisterBtn
+            // 
+            mainFormRegisterBtn.BackColor = Color.FromArgb(72, 202, 228);
+            mainFormRegisterBtn.Cursor = Cursors.Hand;
+            mainFormRegisterBtn.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            mainFormRegisterBtn.IconColor = Color.Black;
+            mainFormRegisterBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            mainFormRegisterBtn.IconSize = 30;
+            mainFormRegisterBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            mainFormRegisterBtn.Location = new Point(22, 225);
+            mainFormRegisterBtn.Name = "mainFormRegisterBtn";
+            mainFormRegisterBtn.Padding = new Padding(5, 0, 0, 0);
+            mainFormRegisterBtn.Size = new Size(147, 57);
+            mainFormRegisterBtn.TabIndex = 3;
+            mainFormRegisterBtn.Text = "Skapa ny användare";
+            mainFormRegisterBtn.UseVisualStyleBackColor = false;
+            mainFormRegisterBtn.Click += mainFormRegisterBtn_Click;
+            // 
+            // mainFormTransactionBtn
+            // 
+            mainFormTransactionBtn.BackColor = Color.FromArgb(227, 150, 100);
+            mainFormTransactionBtn.Cursor = Cursors.Hand;
+            mainFormTransactionBtn.IconChar = FontAwesome.Sharp.IconChar.ExchangeAlt;
+            mainFormTransactionBtn.IconColor = Color.Black;
+            mainFormTransactionBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            mainFormTransactionBtn.IconSize = 30;
+            mainFormTransactionBtn.ImageAlign = ContentAlignment.TopLeft;
+            mainFormTransactionBtn.Location = new Point(22, 80);
+            mainFormTransactionBtn.Name = "mainFormTransactionBtn";
+            mainFormTransactionBtn.Padding = new Padding(5, 0, 0, 0);
+            mainFormTransactionBtn.Size = new Size(147, 51);
+            mainFormTransactionBtn.TabIndex = 1;
+            mainFormTransactionBtn.Text = "Dina transaktioner";
+            mainFormTransactionBtn.UseVisualStyleBackColor = false;
+            mainFormTransactionBtn.Click += mainFormTransactionBtn_Click;
+            // 
+            // mainFormSavingsBtn
+            // 
+            mainFormSavingsBtn.BackColor = Color.FromArgb(1, 170, 50);
+            mainFormSavingsBtn.Cursor = Cursors.Hand;
+            mainFormSavingsBtn.IconChar = FontAwesome.Sharp.IconChar.PiggyBank;
+            mainFormSavingsBtn.IconColor = Color.Black;
+            mainFormSavingsBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            mainFormSavingsBtn.IconSize = 30;
+            mainFormSavingsBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            mainFormSavingsBtn.Location = new Point(22, 150);
+            mainFormSavingsBtn.Name = "mainFormSavingsBtn";
+            mainFormSavingsBtn.Padding = new Padding(5, 0, 0, 0);
+            mainFormSavingsBtn.Size = new Size(147, 54);
+            mainFormSavingsBtn.TabIndex = 2;
+            mainFormSavingsBtn.Text = "Ditt sparande";
+            mainFormSavingsBtn.TextAlign = ContentAlignment.MiddleRight;
+            mainFormSavingsBtn.UseVisualStyleBackColor = false;
+            mainFormSavingsBtn.Click += mainFormSavingsBtn_Click;
+            // 
             // loggedInPanel
             // 
             loggedInPanel.BackColor = Color.Gainsboro;
+            loggedInPanel.Controls.Add(iconPictureBox1);
             loggedInPanel.Controls.Add(roleLabel);
             loggedInPanel.Controls.Add(usernameLabel);
             loggedInPanel.Controls.Add(label2);
@@ -257,6 +282,20 @@
             loggedInPanel.Size = new Size(157, 78);
             loggedInPanel.TabIndex = 11;
             loggedInPanel.Visible = false;
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.Gainsboro;
+            iconPictureBox1.ForeColor = SystemColors.ControlText;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.UserSecret;
+            iconPictureBox1.IconColor = SystemColors.ControlText;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 21;
+            iconPictureBox1.Location = new Point(3, 6);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(21, 23);
+            iconPictureBox1.TabIndex = 15;
+            iconPictureBox1.TabStop = false;
             // 
             // roleLabel
             // 
@@ -309,9 +348,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(191, 2);
+            pictureBox1.Location = new Point(221, 462);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(200, 58);
+            pictureBox1.Size = new Size(352, 87);
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
             // 
@@ -332,13 +371,14 @@
             Margin = new Padding(4);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Fickan - Översikt";
+            Text = "BudgetKoll - Översikt";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             loggedInPanel.ResumeLayout(false);
             loggedInPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -350,8 +390,6 @@
         private Label mainFormMonthLabel;
         private Label mainFormIncomeLabel;
         private Label mainFormExpenseLabel;
-        private Button mainFormTransactionBtn;
-        private Button mainFormSavingsBtn;
         private TableLayoutPanel tableLayoutPanel1;
         private Label monthValueLabel;
         private Label totalIncomeLabel;
@@ -359,7 +397,6 @@
         private Panel chartPanel;
         private Label mainFormQuantityLabel;
         private Label monthQuantityLabel;
-        private Button mainFormRegisterBtn;
         private Panel panel1;
         private Label label1;
         private Label label2;
@@ -368,5 +405,9 @@
         private Label usernameLabel;
         private Label roleLabel;
         private PictureBox pictureBox1;
+        private FontAwesome.Sharp.IconButton mainFormSavingsBtn;
+        private FontAwesome.Sharp.IconButton mainFormTransactionBtn;
+        private FontAwesome.Sharp.IconButton mainFormRegisterBtn;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

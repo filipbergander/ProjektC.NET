@@ -41,8 +41,10 @@ namespace Projekt.Forms
             label1 = new Label();
             msgLabel = new Label();
             panel1 = new Panel();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             userMsgPanel.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // userNameLabel
@@ -98,9 +100,10 @@ namespace Projekt.Forms
             // loginFormHeaderLabel
             // 
             loginFormHeaderLabel.AutoSize = true;
-            loginFormHeaderLabel.Location = new Point(559, 24);
+            loginFormHeaderLabel.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            loginFormHeaderLabel.Location = new Point(543, 23);
             loginFormHeaderLabel.Name = "loginFormHeaderLabel";
-            loginFormHeaderLabel.Size = new Size(75, 18);
+            loginFormHeaderLabel.Size = new Size(98, 22);
             loginFormHeaderLabel.TabIndex = 6;
             loginFormHeaderLabel.Text = "Logga in";
             // 
@@ -148,6 +151,20 @@ namespace Projekt.Forms
             panel1.Size = new Size(253, 234);
             panel1.TabIndex = 14;
             // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.FromArgb(244, 245, 245);
+            iconPictureBox1.ForeColor = SystemColors.ControlText;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.RightToBracket;
+            iconPictureBox1.IconColor = SystemColors.ControlText;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 30;
+            iconPictureBox1.Location = new Point(505, 23);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(32, 32);
+            iconPictureBox1.TabIndex = 15;
+            iconPictureBox1.TabStop = false;
+            // 
             // LoginForm
             // 
             AcceptButton = loginButton;
@@ -155,6 +172,7 @@ namespace Projekt.Forms
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
+            Controls.Add(iconPictureBox1);
             Controls.Add(panel1);
             Controls.Add(userMsgPanel);
             Controls.Add(loginFormHeaderLabel);
@@ -168,6 +186,7 @@ namespace Projekt.Forms
             userMsgPanel.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -184,5 +203,6 @@ namespace Projekt.Forms
         private Label label1;
         private Label msgLabel;
         private Panel panel1;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

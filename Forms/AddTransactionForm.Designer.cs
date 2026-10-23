@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddTransactionForm));
             addTransactionLabel = new Label();
             addTransactionTypeComboBox = new ComboBox();
             addTransactionTitleText = new TextBox();
-            addTransactionCategoryText = new TextBox();
             addTransactionAmountNum = new NumericUpDown();
             addTransactionTypeLabel = new Label();
             addTransactionNameLabel = new Label();
@@ -45,7 +45,8 @@
             addTransactionCancelBtn = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             msgLabel = new Label();
-            addTransactionFormReturnBtn = new Button();
+            addTransactionCategoryCombo = new ComboBox();
+            AddTransactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)addTransactionAmountNum).BeginInit();
             addTransactionPanel.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
@@ -55,9 +56,10 @@
             // addTransactionLabel
             // 
             addTransactionLabel.AutoSize = true;
-            addTransactionLabel.Location = new Point(550, 25);
+            addTransactionLabel.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            addTransactionLabel.Location = new Point(519, 24);
             addTransactionLabel.Name = "addTransactionLabel";
-            addTransactionLabel.Size = new Size(182, 18);
+            addTransactionLabel.Size = new Size(247, 22);
             addTransactionLabel.TabIndex = 0;
             addTransactionLabel.Text = "Lägg till en transaktion";
             // 
@@ -82,16 +84,6 @@
             addTransactionTitleText.PlaceholderText = "Skriv namn";
             addTransactionTitleText.Size = new Size(345, 26);
             addTransactionTitleText.TabIndex = 2;
-            // 
-            // addTransactionCategoryText
-            // 
-            addTransactionCategoryText.Dock = DockStyle.Fill;
-            addTransactionCategoryText.Location = new Point(197, 122);
-            addTransactionCategoryText.Margin = new Padding(10);
-            addTransactionCategoryText.Name = "addTransactionCategoryText";
-            addTransactionCategoryText.PlaceholderText = "Skriv kategori";
-            addTransactionCategoryText.Size = new Size(345, 26);
-            addTransactionCategoryText.TabIndex = 3;
             // 
             // addTransactionAmountNum
             // 
@@ -132,9 +124,9 @@
             addTransactionCategoryLabel.Location = new Point(30, 126);
             addTransactionCategoryLabel.Margin = new Padding(10);
             addTransactionCategoryLabel.Name = "addTransactionCategoryLabel";
-            addTransactionCategoryLabel.Size = new Size(137, 18);
+            addTransactionCategoryLabel.Size = new Size(114, 18);
             addTransactionCategoryLabel.TabIndex = 9;
-            addTransactionCategoryLabel.Text = "Ange en kategori";
+            addTransactionCategoryLabel.Text = "Ange kategori";
             // 
             // addTransactionAmountLabel
             // 
@@ -151,7 +143,7 @@
             // 
             addTransactionPanel.AutoSize = true;
             addTransactionPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            addTransactionPanel.BackColor = Color.Khaki;
+            addTransactionPanel.BackColor = Color.White;
             addTransactionPanel.ColumnCount = 2;
             addTransactionPanel.ColumnStyles.Add(new ColumnStyle());
             addTransactionPanel.ColumnStyles.Add(new ColumnStyle());
@@ -161,12 +153,12 @@
             addTransactionPanel.Controls.Add(addTransactionCategoryLabel, 0, 2);
             addTransactionPanel.Controls.Add(addTransactionNameLabel, 0, 1);
             addTransactionPanel.Controls.Add(addTransactionTitleText, 1, 1);
-            addTransactionPanel.Controls.Add(addTransactionCategoryText, 1, 2);
             addTransactionPanel.Controls.Add(addTransactionAmountNum, 1, 3);
             addTransactionPanel.Controls.Add(addTransactionDatePicker, 1, 4);
             addTransactionPanel.Controls.Add(addTransactionDateLabel, 0, 4);
             addTransactionPanel.Controls.Add(flowLayoutPanel2, 1, 6);
             addTransactionPanel.Controls.Add(flowLayoutPanel1, 1, 5);
+            addTransactionPanel.Controls.Add(addTransactionCategoryCombo, 1, 2);
             addTransactionPanel.Location = new Point(352, 88);
             addTransactionPanel.Name = "addTransactionPanel";
             addTransactionPanel.Padding = new Padding(20);
@@ -187,7 +179,7 @@
             addTransactionDatePicker.Location = new Point(197, 214);
             addTransactionDatePicker.Margin = new Padding(10);
             addTransactionDatePicker.Name = "addTransactionDatePicker";
-            addTransactionDatePicker.Size = new Size(315, 26);
+            addTransactionDatePicker.Size = new Size(345, 26);
             addTransactionDatePicker.TabIndex = 4;
             // 
             // addTransactionDateLabel
@@ -253,35 +245,50 @@
             msgLabel.Size = new Size(0, 18);
             msgLabel.TabIndex = 7;
             // 
-            // addTransactionFormReturnBtn
+            // addTransactionCategoryCombo
             // 
-            addTransactionFormReturnBtn.Anchor = AnchorStyles.Left;
-            addTransactionFormReturnBtn.AutoSize = true;
-            addTransactionFormReturnBtn.Cursor = Cursors.Hand;
-            addTransactionFormReturnBtn.Location = new Point(19, 514);
-            addTransactionFormReturnBtn.Margin = new Padding(10);
-            addTransactionFormReturnBtn.Name = "addTransactionFormReturnBtn";
-            addTransactionFormReturnBtn.Padding = new Padding(5);
-            addTransactionFormReturnBtn.Size = new Size(111, 38);
-            addTransactionFormReturnBtn.TabIndex = 0;
-            addTransactionFormReturnBtn.Text = "Gå tillbaka";
-            addTransactionFormReturnBtn.UseVisualStyleBackColor = true;
-            addTransactionFormReturnBtn.Click += AddTransactionFormReturnBtn_Click;
+            addTransactionCategoryCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            addTransactionCategoryCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            addTransactionCategoryCombo.FormattingEnabled = true;
+            addTransactionCategoryCombo.Location = new Point(197, 122);
+            addTransactionCategoryCombo.Margin = new Padding(10);
+            addTransactionCategoryCombo.MaxDropDownItems = 20;
+            addTransactionCategoryCombo.Name = "addTransactionCategoryCombo";
+            addTransactionCategoryCombo.Size = new Size(345, 26);
+            addTransactionCategoryCombo.TabIndex = 3;
+            // 
+            // AddTransactionFormReturnBtn
+            // 
+            AddTransactionFormReturnBtn.Cursor = Cursors.Hand;
+            AddTransactionFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
+            AddTransactionFormReturnBtn.IconColor = Color.Black;
+            AddTransactionFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            AddTransactionFormReturnBtn.IconSize = 30;
+            AddTransactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            AddTransactionFormReturnBtn.Location = new Point(0, 520);
+            AddTransactionFormReturnBtn.Name = "AddTransactionFormReturnBtn";
+            AddTransactionFormReturnBtn.Size = new Size(127, 38);
+            AddTransactionFormReturnBtn.TabIndex = 12;
+            AddTransactionFormReturnBtn.Text = "Gå tillbaka";
+            AddTransactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
+            AddTransactionFormReturnBtn.UseVisualStyleBackColor = true;
+            AddTransactionFormReturnBtn.Click += AddTransactionFormReturnBtn_Click;
             // 
             // AddTransactionForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
+            BackColor = Color.FromArgb(244, 245, 247);
             ClientSize = new Size(1184, 561);
-            Controls.Add(addTransactionFormReturnBtn);
+            Controls.Add(AddTransactionFormReturnBtn);
             Controls.Add(addTransactionPanel);
             Controls.Add(addTransactionLabel);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "AddTransactionForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Lägg till transaktion";
+            Text = "Ny transaktion";
             Load += AddTransactionForm_Load;
             ((System.ComponentModel.ISupportInitialize)addTransactionAmountNum).EndInit();
             addTransactionPanel.ResumeLayout(false);
@@ -298,14 +305,12 @@
         private Label addTransactionLabel;
         private ComboBox addTransactionTypeComboBox;
         private TextBox addTransactionTitleText;
-        private TextBox addTransactionCategoryText;
         private NumericUpDown addTransactionAmountNum;
         private Label addTransactionTypeLabel;
         private Label addTransactionNameLabel;
         private Label addTransactionCategoryLabel;
         private Label addTransactionAmountLabel;
         private TableLayoutPanel addTransactionPanel;
-        private Button addTransactionFormReturnBtn;
         private Label addTransactionDateLabel;
         private DateTimePicker addTransactionDatePicker;
         private Button addTransactionCancelBtn;
@@ -313,5 +318,7 @@
         private Label msgLabel;
         private FlowLayoutPanel flowLayoutPanel1;
         private FlowLayoutPanel flowLayoutPanel2;
+        private FontAwesome.Sharp.IconButton AddTransactionFormReturnBtn;
+        private ComboBox addTransactionCategoryCombo;
     }
 }

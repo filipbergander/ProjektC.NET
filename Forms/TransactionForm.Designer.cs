@@ -34,8 +34,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionForm));
             transactionGrid = new DataGridView();
             transactionsHeaderLabel = new Label();
-            transactionFormReturnBtn = new Button();
-            AddNewTransactionBtn = new Button();
             totalTransactionsPostLabel = new Label();
             filterLabel = new Label();
             filterSearchLabel = new Label();
@@ -46,7 +44,6 @@
             filterToDateLabel = new Label();
             fromDatePicker = new DateTimePicker();
             toDatePicker = new DateTimePicker();
-            filterButton = new Button();
             filterPanel = new Panel();
             maxAmountNumeric = new NumericUpDown();
             maxAmountLabel = new Label();
@@ -57,19 +54,22 @@
             filterApplyButton = new Button();
             filterResetButton = new Button();
             filterTypeComboBox = new ComboBox();
-            deleteTransactionBtn = new Button();
-            updateTransactionBtn = new Button();
             modifyTransactionsLabel = new Label();
             deleteTransactionNotificationLabel = new Label();
             sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             removeAllSavingsBtn = new Button();
-            iconButton1 = new FontAwesome.Sharp.IconButton();
-            iconButton2 = new FontAwesome.Sharp.IconButton();
-            iconButton3 = new FontAwesome.Sharp.IconButton();
+            AddNewTransactionBtn = new FontAwesome.Sharp.IconButton();
+            deleteTransactionBtn = new FontAwesome.Sharp.IconButton();
+            updateTransactionBtn = new FontAwesome.Sharp.IconButton();
+            filterButton = new FontAwesome.Sharp.IconButton();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            transactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
+            totalSumTransactions = new Label();
             ((System.ComponentModel.ISupportInitialize)transactionGrid).BeginInit();
             filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)minAmountNumeric).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // transactionGrid
@@ -100,9 +100,12 @@
             transactionGrid.GridColor = SystemColors.ActiveCaption;
             transactionGrid.Location = new Point(195, 102);
             transactionGrid.Margin = new Padding(4);
+            transactionGrid.MultiSelect = false;
             transactionGrid.Name = "transactionGrid";
+            transactionGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             transactionGrid.Size = new Size(835, 250);
             transactionGrid.TabIndex = 0;
+            transactionGrid.TabStop = false;
             transactionGrid.CellFormatting += transactionGrid_CellFormatting;
             transactionGrid.CellMouseEnter += transactionGrid_CellMouseEnter;
             transactionGrid.ColumnHeaderMouseClick += transactionGrid_ColumnHeaderMouseClick_1;
@@ -111,41 +114,14 @@
             // transactionsHeaderLabel
             // 
             transactionsHeaderLabel.AutoSize = true;
-            transactionsHeaderLabel.Location = new Point(550, 25);
+            transactionsHeaderLabel.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            transactionsHeaderLabel.Location = new Point(521, 21);
             transactionsHeaderLabel.Margin = new Padding(4, 0, 4, 0);
             transactionsHeaderLabel.Name = "transactionsHeaderLabel";
-            transactionsHeaderLabel.Size = new Size(109, 18);
+            transactionsHeaderLabel.Size = new Size(152, 22);
             transactionsHeaderLabel.TabIndex = 1;
             transactionsHeaderLabel.Text = "Transaktioner";
             transactionsHeaderLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // transactionFormReturnBtn
-            // 
-            transactionFormReturnBtn.Anchor = AnchorStyles.Left;
-            transactionFormReturnBtn.AutoSize = true;
-            transactionFormReturnBtn.Cursor = Cursors.Hand;
-            transactionFormReturnBtn.Location = new Point(19, 504);
-            transactionFormReturnBtn.Margin = new Padding(10);
-            transactionFormReturnBtn.Name = "transactionFormReturnBtn";
-            transactionFormReturnBtn.Padding = new Padding(5);
-            transactionFormReturnBtn.Size = new Size(111, 38);
-            transactionFormReturnBtn.TabIndex = 2;
-            transactionFormReturnBtn.Text = "Gå tillbaka";
-            transactionFormReturnBtn.UseVisualStyleBackColor = true;
-            transactionFormReturnBtn.Click += transactionFormReturnBtn_Click;
-            // 
-            // AddNewTransactionBtn
-            // 
-            AddNewTransactionBtn.BackColor = Color.FromArgb(1, 170, 50);
-            AddNewTransactionBtn.Cursor = Cursors.Hand;
-            AddNewTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AddNewTransactionBtn.Location = new Point(360, 426);
-            AddNewTransactionBtn.Name = "AddNewTransactionBtn";
-            AddNewTransactionBtn.Size = new Size(140, 64);
-            AddNewTransactionBtn.TabIndex = 3;
-            AddNewTransactionBtn.Text = "Lägg till transaktion";
-            AddNewTransactionBtn.UseVisualStyleBackColor = false;
-            AddNewTransactionBtn.Click += AddNewTransactionBtn_Click;
             // 
             // totalTransactionsPostLabel
             // 
@@ -162,7 +138,7 @@
             // 
             filterLabel.AutoSize = true;
             filterLabel.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            filterLabel.Location = new Point(66, 21);
+            filterLabel.Location = new Point(56, 16);
             filterLabel.Name = "filterLabel";
             filterLabel.Size = new Size(64, 22);
             filterLabel.TabIndex = 5;
@@ -248,17 +224,6 @@
             toDatePicker.Name = "toDatePicker";
             toDatePicker.Size = new Size(151, 23);
             toDatePicker.TabIndex = 13;
-            // 
-            // filterButton
-            // 
-            filterButton.Cursor = Cursors.Hand;
-            filterButton.Location = new Point(195, 59);
-            filterButton.Name = "filterButton";
-            filterButton.Size = new Size(97, 36);
-            filterButton.TabIndex = 17;
-            filterButton.Text = "Filter";
-            filterButton.UseVisualStyleBackColor = true;
-            filterButton.Click += filterButton_Click;
             // 
             // filterPanel
             // 
@@ -365,6 +330,7 @@
             // 
             // filterResetButton
             // 
+            filterResetButton.BackColor = Color.White;
             filterResetButton.Cursor = Cursors.Hand;
             filterResetButton.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
             filterResetButton.ForeColor = Color.Black;
@@ -373,7 +339,7 @@
             filterResetButton.Size = new Size(80, 31);
             filterResetButton.TabIndex = 14;
             filterResetButton.Text = "Rensa";
-            filterResetButton.UseVisualStyleBackColor = true;
+            filterResetButton.UseVisualStyleBackColor = false;
             filterResetButton.Click += filterResetButton_Click;
             // 
             // filterTypeComboBox
@@ -384,38 +350,13 @@
             filterTypeComboBox.Size = new Size(151, 26);
             filterTypeComboBox.TabIndex = 6;
             // 
-            // deleteTransactionBtn
-            // 
-            deleteTransactionBtn.BackColor = Color.LightGray;
-            deleteTransactionBtn.Cursor = Cursors.Hand;
-            deleteTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
-            deleteTransactionBtn.Location = new Point(550, 435);
-            deleteTransactionBtn.Name = "deleteTransactionBtn";
-            deleteTransactionBtn.Size = new Size(97, 46);
-            deleteTransactionBtn.TabIndex = 19;
-            deleteTransactionBtn.Text = "Radera";
-            deleteTransactionBtn.UseVisualStyleBackColor = false;
-            deleteTransactionBtn.Click += deleteTransactionBtn_Click;
-            // 
-            // updateTransactionBtn
-            // 
-            updateTransactionBtn.BackColor = Color.LightGray;
-            updateTransactionBtn.Cursor = Cursors.Hand;
-            updateTransactionBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold);
-            updateTransactionBtn.Location = new Point(653, 435);
-            updateTransactionBtn.Name = "updateTransactionBtn";
-            updateTransactionBtn.Size = new Size(106, 46);
-            updateTransactionBtn.TabIndex = 20;
-            updateTransactionBtn.Text = "Uppdatera";
-            updateTransactionBtn.UseVisualStyleBackColor = false;
-            updateTransactionBtn.Click += updateTransactionBtn_Click_1;
-            // 
             // modifyTransactionsLabel
             // 
             modifyTransactionsLabel.AutoSize = true;
-            modifyTransactionsLabel.Location = new Point(501, 399);
+            modifyTransactionsLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            modifyTransactionsLabel.Location = new Point(481, 399);
             modifyTransactionsLabel.Name = "modifyTransactionsLabel";
-            modifyTransactionsLabel.Size = new Size(208, 18);
+            modifyTransactionsLabel.Size = new Size(229, 18);
             modifyTransactionsLabel.TabIndex = 21;
             modifyTransactionsLabel.Text = "Hantera dina transaktioner";
             // 
@@ -424,7 +365,7 @@
             deleteTransactionNotificationLabel.AutoSize = true;
             deleteTransactionNotificationLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             deleteTransactionNotificationLabel.ForeColor = Color.ForestGreen;
-            deleteTransactionNotificationLabel.Location = new Point(500, 367);
+            deleteTransactionNotificationLabel.Location = new Point(480, 367);
             deleteTransactionNotificationLabel.Name = "deleteTransactionNotificationLabel";
             deleteTransactionNotificationLabel.Size = new Size(0, 18);
             deleteTransactionNotificationLabel.TabIndex = 22;
@@ -439,7 +380,7 @@
             // 
             // removeAllSavingsBtn
             // 
-            removeAllSavingsBtn.Location = new Point(825, 389);
+            removeAllSavingsBtn.Location = new Point(956, 399);
             removeAllSavingsBtn.Name = "removeAllSavingsBtn";
             removeAllSavingsBtn.Size = new Size(133, 64);
             removeAllSavingsBtn.TabIndex = 23;
@@ -447,50 +388,114 @@
             removeAllSavingsBtn.UseVisualStyleBackColor = true;
             removeAllSavingsBtn.Click += removeAllSavingsBtn_Click;
             // 
-            // iconButton1
+            // AddNewTransactionBtn
             // 
-            iconButton1.BackColor = Color.FromArgb(1, 170, 50);
-            iconButton1.IconChar = FontAwesome.Sharp.IconChar.Add;
-            iconButton1.IconColor = Color.Black;
-            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton1.IconSize = 24;
-            iconButton1.Location = new Point(360, 504);
-            iconButton1.Name = "iconButton1";
-            iconButton1.Size = new Size(140, 49);
-            iconButton1.TabIndex = 24;
-            iconButton1.Text = "Lägg till transaktion";
-            iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton1.UseVisualStyleBackColor = true;
+            AddNewTransactionBtn.BackColor = Color.FromArgb(1, 170, 51);
+            AddNewTransactionBtn.Cursor = Cursors.Hand;
+            AddNewTransactionBtn.IconChar = FontAwesome.Sharp.IconChar.Add;
+            AddNewTransactionBtn.IconColor = Color.Black;
+            AddNewTransactionBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            AddNewTransactionBtn.IconSize = 24;
+            AddNewTransactionBtn.Location = new Point(395, 424);
+            AddNewTransactionBtn.Name = "AddNewTransactionBtn";
+            AddNewTransactionBtn.Size = new Size(140, 55);
+            AddNewTransactionBtn.TabIndex = 24;
+            AddNewTransactionBtn.Text = "Lägg till transaktion";
+            AddNewTransactionBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            AddNewTransactionBtn.UseVisualStyleBackColor = false;
+            AddNewTransactionBtn.Click += AddNewTransactionBtn_Click;
             // 
-            // iconButton2
+            // deleteTransactionBtn
             // 
-            iconButton2.BackColor = Color.LightGray;
-            iconButton2.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
-            iconButton2.IconColor = Color.Black;
-            iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton2.IconSize = 24;
-            iconButton2.Location = new Point(549, 504);
-            iconButton2.Name = "iconButton2";
-            iconButton2.Size = new Size(110, 49);
-            iconButton2.TabIndex = 25;
-            iconButton2.Text = "Ta bort";
-            iconButton2.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton2.UseVisualStyleBackColor = false;
+            deleteTransactionBtn.BackColor = Color.LightGray;
+            deleteTransactionBtn.Cursor = Cursors.Hand;
+            deleteTransactionBtn.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
+            deleteTransactionBtn.IconColor = Color.Black;
+            deleteTransactionBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            deleteTransactionBtn.IconSize = 24;
+            deleteTransactionBtn.Location = new Point(550, 424);
+            deleteTransactionBtn.Name = "deleteTransactionBtn";
+            deleteTransactionBtn.Size = new Size(110, 55);
+            deleteTransactionBtn.TabIndex = 25;
+            deleteTransactionBtn.Text = "Ta bort";
+            deleteTransactionBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            deleteTransactionBtn.UseVisualStyleBackColor = false;
+            deleteTransactionBtn.Click += deleteTransactionBtn_Click;
             // 
-            // iconButton3
+            // updateTransactionBtn
             // 
-            iconButton3.BackColor = Color.LightGray;
-            iconButton3.IconChar = FontAwesome.Sharp.IconChar.Pencil;
-            iconButton3.IconColor = Color.Black;
-            iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton3.IconSize = 24;
-            iconButton3.Location = new Point(692, 504);
-            iconButton3.Name = "iconButton3";
-            iconButton3.Size = new Size(134, 45);
-            iconButton3.TabIndex = 26;
-            iconButton3.Text = "Uppdatera";
-            iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton3.UseVisualStyleBackColor = false;
+            updateTransactionBtn.BackColor = Color.LightGray;
+            updateTransactionBtn.Cursor = Cursors.Hand;
+            updateTransactionBtn.IconChar = FontAwesome.Sharp.IconChar.Pencil;
+            updateTransactionBtn.IconColor = Color.Black;
+            updateTransactionBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            updateTransactionBtn.IconSize = 24;
+            updateTransactionBtn.Location = new Point(687, 424);
+            updateTransactionBtn.Name = "updateTransactionBtn";
+            updateTransactionBtn.Size = new Size(134, 55);
+            updateTransactionBtn.TabIndex = 26;
+            updateTransactionBtn.Text = "Uppdatera";
+            updateTransactionBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            updateTransactionBtn.UseVisualStyleBackColor = false;
+            updateTransactionBtn.Click += updateTransactionBtn_Click_1;
+            // 
+            // filterButton
+            // 
+            filterButton.Cursor = Cursors.Hand;
+            filterButton.IconChar = FontAwesome.Sharp.IconChar.Filter;
+            filterButton.IconColor = Color.Black;
+            filterButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            filterButton.IconSize = 25;
+            filterButton.ImageAlign = ContentAlignment.MiddleLeft;
+            filterButton.Location = new Point(195, 61);
+            filterButton.Name = "filterButton";
+            filterButton.Size = new Size(103, 34);
+            filterButton.TabIndex = 28;
+            filterButton.Text = "Filter";
+            filterButton.UseVisualStyleBackColor = true;
+            filterButton.Click += filterButton_Click;
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.FromArgb(244, 245, 247);
+            iconPictureBox1.ForeColor = SystemColors.ControlText;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.Search;
+            iconPictureBox1.IconColor = SystemColors.ControlText;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.IconSize = 23;
+            iconPictureBox1.Location = new Point(438, 69);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(23, 26);
+            iconPictureBox1.TabIndex = 29;
+            iconPictureBox1.TabStop = false;
+            // 
+            // transactionFormReturnBtn
+            // 
+            transactionFormReturnBtn.Cursor = Cursors.Hand;
+            transactionFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
+            transactionFormReturnBtn.IconColor = Color.Black;
+            transactionFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            transactionFormReturnBtn.IconSize = 30;
+            transactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            transactionFormReturnBtn.Location = new Point(0, 520);
+            transactionFormReturnBtn.Name = "transactionFormReturnBtn";
+            transactionFormReturnBtn.Size = new Size(127, 38);
+            transactionFormReturnBtn.TabIndex = 31;
+            transactionFormReturnBtn.Text = "Gå tillbaka";
+            transactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
+            transactionFormReturnBtn.UseVisualStyleBackColor = true;
+            transactionFormReturnBtn.Click += transactionFormReturnBtn_Click;
+            // 
+            // totalSumTransactions
+            // 
+            totalSumTransactions.AutoSize = true;
+            totalSumTransactions.Font = new Font("Lucida Sans", 11F);
+            totalSumTransactions.ForeColor = Color.FromArgb(64, 64, 64);
+            totalSumTransactions.Location = new Point(866, 356);
+            totalSumTransactions.Name = "totalSumTransactions";
+            totalSumTransactions.Size = new Size(64, 17);
+            totalSumTransactions.TabIndex = 32;
+            totalSumTransactions.Text = "Summa:";
             // 
             // TransactionForm
             // 
@@ -498,23 +503,22 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 247);
             ClientSize = new Size(1184, 561);
-            Controls.Add(iconButton3);
-            Controls.Add(iconButton2);
-            Controls.Add(iconButton1);
+            Controls.Add(totalSumTransactions);
+            Controls.Add(iconPictureBox1);
+            Controls.Add(filterButton);
+            Controls.Add(updateTransactionBtn);
+            Controls.Add(deleteTransactionBtn);
+            Controls.Add(AddNewTransactionBtn);
             Controls.Add(removeAllSavingsBtn);
             Controls.Add(deleteTransactionNotificationLabel);
             Controls.Add(modifyTransactionsLabel);
-            Controls.Add(updateTransactionBtn);
-            Controls.Add(deleteTransactionBtn);
             Controls.Add(filterPanel);
-            Controls.Add(filterButton);
             Controls.Add(searchTransactionBox);
             Controls.Add(filterSearchLabel);
             Controls.Add(totalTransactionsPostLabel);
-            Controls.Add(AddNewTransactionBtn);
-            Controls.Add(transactionFormReturnBtn);
             Controls.Add(transactionsHeaderLabel);
             Controls.Add(transactionGrid);
+            Controls.Add(transactionFormReturnBtn);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
@@ -526,6 +530,7 @@
             filterPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)minAmountNumeric).EndInit();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -534,8 +539,6 @@
 
         private DataGridView transactionGrid;
         private Label transactionsHeaderLabel;
-        private Button transactionFormReturnBtn;
-        private Button AddNewTransactionBtn;
         private Label totalTransactionsPostLabel;
         private Label filterLabel;
         private Label filterSearchLabel;
@@ -547,14 +550,11 @@
         private DateTimePicker fromDatePicker;
         private DateTimePicker toDatePicker;
         private Button filterApplyButton;
-        private Button filterButton;
         private Panel filterPanel;
         private ComboBox filterTypeComboBox;
         private Button filterResetButton;
         private CheckedListBox filterCategoryListBox;
         private Button closeFilterPanelButton;
-        private Button deleteTransactionBtn;
-        private Button updateTransactionBtn;
         private Label modifyTransactionsLabel;
         private NumericUpDown minAmountNumeric;
         private NumericUpDown maxAmountNumeric;
@@ -563,8 +563,12 @@
         private Label deleteTransactionNotificationLabel;
         private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
         private Button removeAllSavingsBtn;
-        private FontAwesome.Sharp.IconButton iconButton1;
-        private FontAwesome.Sharp.IconButton iconButton2;
-        private FontAwesome.Sharp.IconButton iconButton3;
+        private FontAwesome.Sharp.IconButton AddNewTransactionBtn;
+        private FontAwesome.Sharp.IconButton deleteTransactionBtn;
+        private FontAwesome.Sharp.IconButton updateTransactionBtn;
+        private FontAwesome.Sharp.IconButton filterButton;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private FontAwesome.Sharp.IconButton transactionFormReturnBtn;
+        private Label totalSumTransactions;
     }
 }

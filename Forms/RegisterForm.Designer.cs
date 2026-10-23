@@ -39,12 +39,12 @@
             addNewUserHeaderLabel = new Label();
             newUserRoleLabel = new Label();
             newUserRoleCombo = new ComboBox();
-            addTransactionFormReturnBtn = new Button();
             userMsgPanel = new Panel();
             label1 = new Label();
             msgLabel = new Label();
             progressBar = new ProgressBar();
             panel1 = new Panel();
+            addTransactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
             userMsgPanel.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -125,9 +125,10 @@
             // 
             // addNewUserHeaderLabel
             // 
-            addNewUserHeaderLabel.Location = new Point(505, 26);
+            addNewUserHeaderLabel.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            addNewUserHeaderLabel.Location = new Point(457, 25);
             addNewUserHeaderLabel.Name = "addNewUserHeaderLabel";
-            addNewUserHeaderLabel.Size = new Size(178, 18);
+            addNewUserHeaderLabel.Size = new Size(257, 28);
             addNewUserHeaderLabel.TabIndex = 8;
             addNewUserHeaderLabel.Text = "Lägg till ny användare";
             addNewUserHeaderLabel.TextAlign = ContentAlignment.TopCenter;
@@ -153,21 +154,6 @@
             newUserRoleCombo.Size = new Size(228, 26);
             newUserRoleCombo.TabIndex = 5;
             newUserRoleCombo.ValueMember = "Admin";
-            // 
-            // addTransactionFormReturnBtn
-            // 
-            addTransactionFormReturnBtn.Anchor = AnchorStyles.Left;
-            addTransactionFormReturnBtn.AutoSize = true;
-            addTransactionFormReturnBtn.Cursor = Cursors.Hand;
-            addTransactionFormReturnBtn.Location = new Point(19, 514);
-            addTransactionFormReturnBtn.Margin = new Padding(10);
-            addTransactionFormReturnBtn.Name = "addTransactionFormReturnBtn";
-            addTransactionFormReturnBtn.Padding = new Padding(5);
-            addTransactionFormReturnBtn.Size = new Size(111, 38);
-            addTransactionFormReturnBtn.TabIndex = 11;
-            addTransactionFormReturnBtn.Text = "Gå tillbaka";
-            addTransactionFormReturnBtn.UseVisualStyleBackColor = true;
-            addTransactionFormReturnBtn.Click += addTransactionFormReturnBtn_Click;
             // 
             // userMsgPanel
             // 
@@ -228,6 +214,23 @@
             panel1.Size = new Size(318, 374);
             panel1.TabIndex = 14;
             // 
+            // addTransactionFormReturnBtn
+            // 
+            addTransactionFormReturnBtn.Cursor = Cursors.Hand;
+            addTransactionFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
+            addTransactionFormReturnBtn.IconColor = Color.Black;
+            addTransactionFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            addTransactionFormReturnBtn.IconSize = 30;
+            addTransactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            addTransactionFormReturnBtn.Location = new Point(0, 520);
+            addTransactionFormReturnBtn.Name = "addTransactionFormReturnBtn";
+            addTransactionFormReturnBtn.Size = new Size(127, 38);
+            addTransactionFormReturnBtn.TabIndex = 15;
+            addTransactionFormReturnBtn.Text = "Gå tillbaka";
+            addTransactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
+            addTransactionFormReturnBtn.UseVisualStyleBackColor = true;
+            addTransactionFormReturnBtn.Click += addTransactionFormReturnBtn_Click;
+            // 
             // newUserRegisterForm
             // 
             AcceptButton = createUserButton;
@@ -235,24 +238,23 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
+            Controls.Add(addTransactionFormReturnBtn);
             Controls.Add(panel1);
             Controls.Add(progressBar);
             Controls.Add(userMsgPanel);
-            Controls.Add(addTransactionFormReturnBtn);
             Controls.Add(addNewUserHeaderLabel);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "newUserRegisterForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Fickan - Ny användare";
+            Text = "Ny användare";
             Load += newUserRegisterForm_Load;
             userMsgPanel.ResumeLayout(false);
             userMsgPanel.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -267,11 +269,11 @@
         private Label addNewUserHeaderLabel;
         private Label newUserRoleLabel;
         private ComboBox newUserRoleCombo;
-        private Button addTransactionFormReturnBtn;
         private Panel userMsgPanel;
         private Label msgLabel;
         private ProgressBar progressBar;
         private Label label1;
         private Panel panel1;
+        private FontAwesome.Sharp.IconButton addTransactionFormReturnBtn;
     }
 }

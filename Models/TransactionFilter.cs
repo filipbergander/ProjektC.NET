@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Projekt.Models
 {
-    internal class TransactionFilter
+    public class TransactionFilter
     {
         public string? Typ { get; set; }
         //public string? Namn { get; set; }
