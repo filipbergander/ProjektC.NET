@@ -17,7 +17,6 @@ namespace Projekt.Forms
         //Instanser
         private readonly MainForm mainForm;
         private readonly ITransactionService transaction;
-        //private readonly FinanceService finance;
         private readonly GamingService gaming;
         private readonly FinanceService finance;
         private readonly BudgetMLService mlService;
@@ -223,6 +222,17 @@ namespace Projekt.Forms
             {
                 amountPlayedTodayLabel.ForeColor = Color.Black;
             }
+        }
+        private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void omToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm aboutForm = new AboutForm(this);
+            aboutForm.Show();
+            this.Hide();
         }
     }
 }

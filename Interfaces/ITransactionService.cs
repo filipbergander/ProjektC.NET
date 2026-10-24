@@ -13,6 +13,7 @@ namespace Projekt.Interfaces
         Task<List<Transaction>> GetTransactions(); // Metod för att hämta alla transaktioner
         Task UpdateTransaction(int id, Transaction transaction); // Metod för att uppdatera en befintlig transaktion
 
-        Task RemoveChallengeTransactions();
+        //Tillfällig metod: för att kunna ta bort alla transaktioner som innehåller "Sparutmaning" i namnet
+        //Task RemoveChallengeTransactions();
     }
 }

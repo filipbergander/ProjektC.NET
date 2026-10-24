@@ -79,6 +79,11 @@
             equityLabelText = new TextBox();
             openToolsSavingBtn = new Button();
             savingsFormReturnBtn = new FontAwesome.Sharp.IconButton();
+            menuStrip1 = new MenuStrip();
+            appToolStripMenuItem = new ToolStripMenuItem();
+            avslutaToolStripMenuItem = new ToolStripMenuItem();
+            hjälpToolStripMenuItem = new ToolStripMenuItem();
+            omToolStripMenuItem = new ToolStripMenuItem();
             anticipateSavingsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)savingsYearGoalNum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)yearlyInterestNum).BeginInit();
@@ -90,13 +95,14 @@
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             totalSavingsPanel.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // savingsHeaderLabel
             // 
             savingsHeaderLabel.AutoSize = true;
             savingsHeaderLabel.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            savingsHeaderLabel.Location = new Point(496, 15);
+            savingsHeaderLabel.Location = new Point(496, 24);
             savingsHeaderLabel.Name = "savingsHeaderLabel";
             savingsHeaderLabel.Size = new Size(264, 22);
             savingsHeaderLabel.TabIndex = 0;
@@ -604,7 +610,7 @@
             openToolsSavingBtn.BackColor = Color.FromArgb(64, 64, 64);
             openToolsSavingBtn.Cursor = Cursors.Hand;
             openToolsSavingBtn.ForeColor = Color.White;
-            openToolsSavingBtn.Location = new Point(528, 52);
+            openToolsSavingBtn.Location = new Point(524, 60);
             openToolsSavingBtn.Name = "openToolsSavingBtn";
             openToolsSavingBtn.Size = new Size(195, 48);
             openToolsSavingBtn.TabIndex = 5;
@@ -623,12 +629,52 @@
             savingsFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
             savingsFormReturnBtn.Location = new Point(0, 520);
             savingsFormReturnBtn.Name = "savingsFormReturnBtn";
-            savingsFormReturnBtn.Size = new Size(127, 38);
+            savingsFormReturnBtn.Size = new Size(107, 38);
             savingsFormReturnBtn.TabIndex = 11;
-            savingsFormReturnBtn.Text = "Gå tillbaka";
+            savingsFormReturnBtn.Text = "Översikt";
             savingsFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
             savingsFormReturnBtn.UseVisualStyleBackColor = true;
             savingsFormReturnBtn.Click += savingsFormReturnBtn_Click;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.Dock = DockStyle.None;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
+            menuStrip1.Location = new Point(968, 3);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(216, 24);
+            menuStrip1.TabIndex = 12;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // appToolStripMenuItem
+            // 
+            appToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { avslutaToolStripMenuItem });
+            appToolStripMenuItem.Name = "appToolStripMenuItem";
+            appToolStripMenuItem.Size = new Size(41, 20);
+            appToolStripMenuItem.Text = "&App";
+            // 
+            // avslutaToolStripMenuItem
+            // 
+            avslutaToolStripMenuItem.Name = "avslutaToolStripMenuItem";
+            avslutaToolStripMenuItem.Size = new Size(180, 22);
+            avslutaToolStripMenuItem.Text = "A&vsluta";
+            avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
+            // 
+            // hjälpToolStripMenuItem
+            // 
+            hjälpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { omToolStripMenuItem });
+            hjälpToolStripMenuItem.Name = "hjälpToolStripMenuItem";
+            hjälpToolStripMenuItem.Size = new Size(47, 20);
+            hjälpToolStripMenuItem.Text = "&Hjälp";
+            // 
+            // omToolStripMenuItem
+            // 
+            omToolStripMenuItem.Name = "omToolStripMenuItem";
+            omToolStripMenuItem.Size = new Size(180, 22);
+            omToolStripMenuItem.Text = "&Om";
+            omToolStripMenuItem.Click += omToolStripMenuItem_Click;
             // 
             // SavingsForm
             // 
@@ -636,6 +682,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
+            Controls.Add(menuStrip1);
             Controls.Add(totalSavingsPanel);
             Controls.Add(savingsFormReturnBtn);
             Controls.Add(progressBar);
@@ -666,6 +713,8 @@
             panel2.PerformLayout();
             totalSavingsPanel.ResumeLayout(false);
             totalSavingsPanel.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -723,5 +772,10 @@
         private Label label7;
         private Label label12;
         private Label label13;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem appToolStripMenuItem;
+        private ToolStripMenuItem avslutaToolStripMenuItem;
+        private ToolStripMenuItem hjälpToolStripMenuItem;
+        private ToolStripMenuItem omToolStripMenuItem;
     }
 }

@@ -12,14 +12,16 @@ using Projekt.Authentication;
 
 namespace Projekt.Services
 {
+    // Implementerar interfacet för att kunna hantera användare i databasen
     public class UserService : IUserService
     {
+        // Instans
         private readonly ProjektDbContext database;
         public UserService()
         {
             database = new ProjektDbContext();
             database.Database.EnsureCreated();
-            SeedInitialData.SeedData(database);
+            SeedInitialData.SeedData(database); // Fyller på med data initialt om databasen är tom vid start
         }
         // Lägger till en ny användare i databasen
         public async Task<bool> CreateUser(User user)
@@ -27,7 +29,7 @@ namespace Projekt.Services
             // Kollar om användaren redan finns i databasen
             var existingUser = await database.Set<User>()
                 .AnyAsync(existingUser => existingUser.Username == user.Username);
-
+            // Finns användaren redan?
             if (existingUser)
             {
                 return false;
@@ -57,7 +59,8 @@ namespace Projekt.Services
         // Autentiserar en användare genom att hitta användaren i databasen genom användarnamnet, och jämför hashen med det inmatade lösenordet
         public async Task<User?> AuthenticateUser(string username, string password)
         {
-            var user = await database.Users.FirstOrDefaultAsync(u => u.Username == username); // Försöker hämta användare från databas
+            // Försöker hämta användare från databas
+            var user = await database.Users.FirstOrDefaultAsync(u => u.Username == username);
             if (user == null)
             {
                 return null;

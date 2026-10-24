@@ -67,7 +67,7 @@ namespace Projekt.Forms
         // Öppnar formuläret RegisterForm när knappen "Skapa ny användare" klickas på
         private void mainFormRegisterBtn_Click(object sender, EventArgs e)
         {
-            var registerForm = new newUserRegisterForm(userService);
+            var registerForm = new newUserRegisterForm(userService, this);
             OpenForm(registerForm);
         }
         // Öppnar formulär och döljer mainform, när sedan formuläret stängs öppnas mainform igen
@@ -168,6 +168,18 @@ namespace Projekt.Forms
         {
             await InsertFinanceValues();
             await LoadDiagram();
+        }
+
+        private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void omToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm aboutForm = new AboutForm(this);
+            aboutForm.Show();
+            this.Hide();
         }
     }
 }

@@ -42,9 +42,13 @@ namespace Projekt.Forms
             msgLabel = new Label();
             panel1 = new Panel();
             iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            menuStrip1 = new MenuStrip();
+            appToolStripMenuItem = new ToolStripMenuItem();
+            ExitAppMenu = new ToolStripMenuItem();
             userMsgPanel.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // userNameLabel
@@ -165,6 +169,32 @@ namespace Projekt.Forms
             iconPictureBox1.TabIndex = 15;
             iconPictureBox1.TabStop = false;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.Dock = DockStyle.None;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem });
+            menuStrip1.Location = new Point(1006, 9);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(169, 24);
+            menuStrip1.TabIndex = 16;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // appToolStripMenuItem
+            // 
+            appToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ExitAppMenu });
+            appToolStripMenuItem.Name = "appToolStripMenuItem";
+            appToolStripMenuItem.Size = new Size(41, 20);
+            appToolStripMenuItem.Text = "&App";
+            // 
+            // ExitAppMenu
+            // 
+            ExitAppMenu.Name = "ExitAppMenu";
+            ExitAppMenu.Size = new Size(180, 22);
+            ExitAppMenu.Text = "A&vsluta";
+            ExitAppMenu.Click += ExitAppMenu_Click;
+            // 
             // LoginForm
             // 
             AcceptButton = loginButton;
@@ -172,6 +202,7 @@ namespace Projekt.Forms
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
+            Controls.Add(menuStrip1);
             Controls.Add(iconPictureBox1);
             Controls.Add(panel1);
             Controls.Add(userMsgPanel);
@@ -187,6 +218,8 @@ namespace Projekt.Forms
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -204,5 +237,8 @@ namespace Projekt.Forms
         private Label msgLabel;
         private Panel panel1;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem appToolStripMenuItem;
+        private ToolStripMenuItem ExitAppMenu;
     }
 }

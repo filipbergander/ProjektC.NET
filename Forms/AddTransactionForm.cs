@@ -14,21 +14,24 @@ namespace Projekt.Forms
 {
     public partial class AddTransactionForm : Form
     {
-        // Instans av TransactionService
+        // Instanser
         private readonly ITransactionService transaction;
         private readonly Transaction? transactionToEdit;
         private readonly TransactionForm transactionForm;
         private readonly QueryService queryService;
+        private readonly MainForm mainForm;
 
-        // Konstruktor som initierar AddTransactionForm, samt instans av en ny Transaction
-        public AddTransactionForm(ITransactionService transaction, TransactionForm transactionForm, QueryService queryService, Transaction? transactionToEdit = null)
-        {
-            InitializeComponent(); // Startar upp formuläret med alla komponenter
+        // Konstruktor
+        public AddTransactionForm(ITransactionService transaction, TransactionForm transactionForm, QueryService queryService, MainForm mainForm, Transaction? transactionToEdit = null)
+        {// Startar upp formuläret med alla komponenter
+            InitializeComponent();
             this.transaction = transaction;
             this.transactionForm = transactionForm;
             this.queryService = queryService;
+            this.mainForm = mainForm;
             this.transactionToEdit = transactionToEdit;
-           LoadCategories();
+            LoadCategories();
+            // Ifall en transaktion har skickats in som parameter, -> så är det uppdatering av transaktion
             if (transactionToEdit != null)
             {
                 addTransactionLabel.Text = "Redigera transaktion";
@@ -53,6 +56,10 @@ namespace Projekt.Forms
             if (addTransactionTypeComboBox.SelectedItem == null)
             {
                 errors.Add("* Välj typ för transaktionen!");
+            }
+            else if (addTransactionTypeComboBox.SelectedItem.ToString() != "Utgift" && addTransactionTypeComboBox.SelectedItem.ToString() != "Inkomst")
+            {
+                errors.Add("* Välj utgift eller inkomst för transaktionen!");
             }
             // Titel
             if (string.IsNullOrWhiteSpace(addTransactionTitleText.Text))
@@ -97,10 +104,10 @@ namespace Projekt.Forms
             // Lägger till den specifika transaktionen i listan av transaktioner
             Transaction newTransaction = new Transaction(type, title, category, amount, dateStr);
 
+            // Lägger till en transaktion
             if (transactionToEdit == null)
             {
                 bool added = await transaction.AddTransaction(newTransaction);
-
                 if (!added)
                 {
                     msgLabel.ForeColor = Color.Red;
@@ -108,6 +115,7 @@ namespace Projekt.Forms
                     return;
                 }
             }
+            // Annars uppdaterar den befintliga transaktionen
             else if (transactionToEdit != null)
             {
                 await transaction.UpdateTransaction(transactionToEdit.Id, newTransaction);
@@ -163,6 +171,7 @@ namespace Projekt.Forms
             addTransactionDatePicker.Value = DateTime.Parse(transactionToEdit.Datum ?? DateTime.Now.ToString());
         }
 
+        // Hämtar in kategorierna från databasen och lägger till dem i comboboxen
         private async void LoadCategories()
         {
             var categories = await queryService.GetCategoryValues();
@@ -170,6 +179,18 @@ namespace Projekt.Forms
             addTransactionCategoryCombo.Items.Clear();
             addTransactionCategoryCombo.Items.AddRange(categories.ToArray());
             addTransactionCategoryCombo.EndUpdate();
+        }
+        // Stänger av applikationen
+        private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        // Går till about-sidan
+        private void omToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm aboutForm = new AboutForm(this);
+            aboutForm.Show();
+            this.Hide();
         }
     }
 }

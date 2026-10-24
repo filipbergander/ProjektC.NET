@@ -9,10 +9,11 @@ namespace Projekt.Data
 {
     internal class ProjektDbContext : DbContext
     {
+        // DbSet för transaktioner och användare
         public DbSet<Transaction> Transactions => Set<Transaction>();
 
         public DbSet<User> Users => Set<User>();
-
+        // Databasanslutning samt konfiguration av databasfilen
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Skapar databasfilen i bin-filen samma som där applikationen körs från

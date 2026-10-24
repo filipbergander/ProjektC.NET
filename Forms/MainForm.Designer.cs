@@ -52,11 +52,17 @@
             label2 = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            menuStrip1 = new MenuStrip();
+            appToolStripMenuItem = new ToolStripMenuItem();
+            avslutaToolStripMenuItem = new ToolStripMenuItem();
+            hjälpToolStripMenuItem = new ToolStripMenuItem();
+            omToolStripMenuItem = new ToolStripMenuItem();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             loggedInPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // mainFormDashboardLabel
@@ -64,7 +70,7 @@
             mainFormDashboardLabel.AutoSize = true;
             mainFormDashboardLabel.Font = new Font("Lucida Sans", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             mainFormDashboardLabel.ForeColor = Color.FromArgb(43, 45, 66);
-            mainFormDashboardLabel.Location = new Point(550, 25);
+            mainFormDashboardLabel.Location = new Point(550, 35);
             mainFormDashboardLabel.Margin = new Padding(4, 0, 4, 0);
             mainFormDashboardLabel.Name = "mainFormDashboardLabel";
             mainFormDashboardLabel.Size = new Size(102, 23);
@@ -354,6 +360,46 @@
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.Dock = DockStyle.None;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
+            menuStrip1.Location = new Point(959, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(216, 24);
+            menuStrip1.TabIndex = 11;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // appToolStripMenuItem
+            // 
+            appToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { avslutaToolStripMenuItem });
+            appToolStripMenuItem.Name = "appToolStripMenuItem";
+            appToolStripMenuItem.Size = new Size(41, 20);
+            appToolStripMenuItem.Text = "&App";
+            // 
+            // avslutaToolStripMenuItem
+            // 
+            avslutaToolStripMenuItem.Name = "avslutaToolStripMenuItem";
+            avslutaToolStripMenuItem.Size = new Size(113, 22);
+            avslutaToolStripMenuItem.Text = "A&vsluta";
+            avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
+            // 
+            // hjälpToolStripMenuItem
+            // 
+            hjälpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { omToolStripMenuItem });
+            hjälpToolStripMenuItem.Name = "hjälpToolStripMenuItem";
+            hjälpToolStripMenuItem.Size = new Size(47, 20);
+            hjälpToolStripMenuItem.Text = "&Hjälp";
+            // 
+            // omToolStripMenuItem
+            // 
+            omToolStripMenuItem.Name = "omToolStripMenuItem";
+            omToolStripMenuItem.Size = new Size(180, 22);
+            omToolStripMenuItem.Text = "&Om";
+            omToolStripMenuItem.Click += omToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
@@ -366,8 +412,10 @@
             Controls.Add(chartPanel);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(mainFormDashboardLabel);
+            Controls.Add(menuStrip1);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = menuStrip1;
             Margin = new Padding(4);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -380,6 +428,8 @@
             loggedInPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -409,5 +459,10 @@
         private FontAwesome.Sharp.IconButton mainFormTransactionBtn;
         private FontAwesome.Sharp.IconButton mainFormRegisterBtn;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem appToolStripMenuItem;
+        private ToolStripMenuItem avslutaToolStripMenuItem;
+        private ToolStripMenuItem hjälpToolStripMenuItem;
+        private ToolStripMenuItem omToolStripMenuItem;
     }
 }

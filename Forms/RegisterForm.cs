@@ -18,11 +18,13 @@ namespace Projekt.Forms
     {
         // Instanser
         private readonly IUserService userService;
+        private readonly MainForm mainForm;
 
-        public newUserRegisterForm(IUserService userService)
+        public newUserRegisterForm(IUserService userService, MainForm mainForm)
         {
             InitializeComponent();
             this.userService = userService;
+            this.mainForm = mainForm;
         }
 
         private async void createUserButton_Click(object sender, EventArgs e)
@@ -100,8 +102,7 @@ namespace Projekt.Forms
         {
             // Specifika roller
             newUserRoleCombo.Items.Add("Admin");
-            newUserRoleCombo.Items.Add("Lärare");
-            newUserRoleCombo.Items.Add("Student");
+            newUserRoleCombo.Items.Add("Privat");
         }
         // Nollställer textfälten & felmeddelanden
         private void ResetForm()
@@ -112,6 +113,18 @@ namespace Projekt.Forms
             newUserConfirmPasswordText.Clear();
             msgLabel.Text = string.Empty;
             userMsgPanel.Visible = false;
+        }
+
+        private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void omToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm aboutForm = new AboutForm(this);
+            aboutForm.Show();
+            this.Hide();
         }
     }
 }

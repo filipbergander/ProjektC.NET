@@ -65,11 +65,17 @@
             iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             transactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
             totalSumTransactions = new Label();
+            menuStrip1 = new MenuStrip();
+            appToolStripMenuItem = new ToolStripMenuItem();
+            avslutaToolStripMenuItem = new ToolStripMenuItem();
+            hjälpToolStripMenuItem = new ToolStripMenuItem();
+            omToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)transactionGrid).BeginInit();
             filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)minAmountNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // transactionGrid
@@ -378,15 +384,6 @@
             sqliteCommand1.Transaction = null;
             sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
             // 
-            // removeAllSavingsBtn
-            // 
-            removeAllSavingsBtn.Location = new Point(956, 399);
-            removeAllSavingsBtn.Name = "removeAllSavingsBtn";
-            removeAllSavingsBtn.Size = new Size(133, 64);
-            removeAllSavingsBtn.TabIndex = 23;
-            removeAllSavingsBtn.Text = "ta bort sparposter";
-            removeAllSavingsBtn.UseVisualStyleBackColor = true;
-            removeAllSavingsBtn.Click += removeAllSavingsBtn_Click;
             // 
             // AddNewTransactionBtn
             // 
@@ -479,9 +476,9 @@
             transactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
             transactionFormReturnBtn.Location = new Point(0, 520);
             transactionFormReturnBtn.Name = "transactionFormReturnBtn";
-            transactionFormReturnBtn.Size = new Size(127, 38);
+            transactionFormReturnBtn.Size = new Size(107, 38);
             transactionFormReturnBtn.TabIndex = 31;
-            transactionFormReturnBtn.Text = "Gå tillbaka";
+            transactionFormReturnBtn.Text = "Översikt";
             transactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
             transactionFormReturnBtn.UseVisualStyleBackColor = true;
             transactionFormReturnBtn.Click += transactionFormReturnBtn_Click;
@@ -497,12 +494,53 @@
             totalSumTransactions.TabIndex = 32;
             totalSumTransactions.Text = "Summa:";
             // 
+            // menuStrip1
+            // 
+            menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.Dock = DockStyle.None;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
+            menuStrip1.Location = new Point(959, 9);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(216, 24);
+            menuStrip1.TabIndex = 33;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // appToolStripMenuItem
+            // 
+            appToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { avslutaToolStripMenuItem });
+            appToolStripMenuItem.Name = "appToolStripMenuItem";
+            appToolStripMenuItem.Size = new Size(41, 20);
+            appToolStripMenuItem.Text = "&App";
+            // 
+            // avslutaToolStripMenuItem
+            // 
+            avslutaToolStripMenuItem.Name = "avslutaToolStripMenuItem";
+            avslutaToolStripMenuItem.Size = new Size(180, 22);
+            avslutaToolStripMenuItem.Text = "A&vsluta";
+            avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
+            // 
+            // hjälpToolStripMenuItem
+            // 
+            hjälpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { omToolStripMenuItem });
+            hjälpToolStripMenuItem.Name = "hjälpToolStripMenuItem";
+            hjälpToolStripMenuItem.Size = new Size(47, 20);
+            hjälpToolStripMenuItem.Text = "&Hjälp";
+            // 
+            // omToolStripMenuItem
+            // 
+            omToolStripMenuItem.Name = "omToolStripMenuItem";
+            omToolStripMenuItem.Size = new Size(180, 22);
+            omToolStripMenuItem.Text = "&Om";
+            omToolStripMenuItem.Click += omToolStripMenuItem_Click;
+            // 
             // TransactionForm
             // 
             AutoScaleDimensions = new SizeF(10F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 247);
             ClientSize = new Size(1184, 561);
+            Controls.Add(menuStrip1);
             Controls.Add(totalSumTransactions);
             Controls.Add(iconPictureBox1);
             Controls.Add(filterButton);
@@ -531,6 +569,8 @@
             ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)minAmountNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -570,5 +610,10 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private FontAwesome.Sharp.IconButton transactionFormReturnBtn;
         private Label totalSumTransactions;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem appToolStripMenuItem;
+        private ToolStripMenuItem avslutaToolStripMenuItem;
+        private ToolStripMenuItem hjälpToolStripMenuItem;
+        private ToolStripMenuItem omToolStripMenuItem;
     }
 }

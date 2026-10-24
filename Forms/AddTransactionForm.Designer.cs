@@ -47,10 +47,16 @@
             msgLabel = new Label();
             addTransactionCategoryCombo = new ComboBox();
             AddTransactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
+            menuStrip1 = new MenuStrip();
+            appToolStripMenuItem = new ToolStripMenuItem();
+            avslutaToolStripMenuItem = new ToolStripMenuItem();
+            hjälpToolStripMenuItem = new ToolStripMenuItem();
+            omToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)addTransactionAmountNum).BeginInit();
             addTransactionPanel.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // addTransactionLabel
@@ -67,6 +73,7 @@
             // 
             addTransactionTypeComboBox.AccessibleDescription = "Typ av transaktion";
             addTransactionTypeComboBox.Dock = DockStyle.Fill;
+            addTransactionTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             addTransactionTypeComboBox.FormattingEnabled = true;
             addTransactionTypeComboBox.Location = new Point(197, 30);
             addTransactionTypeComboBox.Margin = new Padding(10);
@@ -203,6 +210,7 @@
             // 
             // saveAddTransactionBtn
             // 
+            saveAddTransactionBtn.BackColor = Color.FromArgb(1, 170, 50);
             saveAddTransactionBtn.Cursor = Cursors.Hand;
             saveAddTransactionBtn.Location = new Point(10, 10);
             saveAddTransactionBtn.Margin = new Padding(10);
@@ -210,7 +218,7 @@
             saveAddTransactionBtn.Size = new Size(167, 46);
             saveAddTransactionBtn.TabIndex = 5;
             saveAddTransactionBtn.Text = "Spara transaktionen";
-            saveAddTransactionBtn.UseVisualStyleBackColor = true;
+            saveAddTransactionBtn.UseVisualStyleBackColor = false;
             saveAddTransactionBtn.Click += SaveAddTransactionBtn_Click;
             // 
             // addTransactionCancelBtn
@@ -221,7 +229,7 @@
             addTransactionCancelBtn.Name = "addTransactionCancelBtn";
             addTransactionCancelBtn.Size = new Size(132, 46);
             addTransactionCancelBtn.TabIndex = 6;
-            addTransactionCancelBtn.Text = "Avbryt";
+            addTransactionCancelBtn.Text = "Återställ";
             addTransactionCancelBtn.UseVisualStyleBackColor = true;
             addTransactionCancelBtn.Click += addTransactionCancelBtn_Click;
             // 
@@ -267,12 +275,52 @@
             AddTransactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
             AddTransactionFormReturnBtn.Location = new Point(0, 520);
             AddTransactionFormReturnBtn.Name = "AddTransactionFormReturnBtn";
-            AddTransactionFormReturnBtn.Size = new Size(127, 38);
+            AddTransactionFormReturnBtn.Size = new Size(147, 38);
             AddTransactionFormReturnBtn.TabIndex = 12;
-            AddTransactionFormReturnBtn.Text = "Gå tillbaka";
+            AddTransactionFormReturnBtn.Text = "Transaktioner";
             AddTransactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
             AddTransactionFormReturnBtn.UseVisualStyleBackColor = true;
             AddTransactionFormReturnBtn.Click += AddTransactionFormReturnBtn_Click;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.Dock = DockStyle.None;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
+            menuStrip1.Location = new Point(1079, 9);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(96, 24);
+            menuStrip1.TabIndex = 13;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // appToolStripMenuItem
+            // 
+            appToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { avslutaToolStripMenuItem });
+            appToolStripMenuItem.Name = "appToolStripMenuItem";
+            appToolStripMenuItem.Size = new Size(41, 20);
+            appToolStripMenuItem.Text = "&App";
+            // 
+            // avslutaToolStripMenuItem
+            // 
+            avslutaToolStripMenuItem.Name = "avslutaToolStripMenuItem";
+            avslutaToolStripMenuItem.Size = new Size(113, 22);
+            avslutaToolStripMenuItem.Text = "A&vsluta";
+            avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
+            // 
+            // hjälpToolStripMenuItem
+            // 
+            hjälpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { omToolStripMenuItem });
+            hjälpToolStripMenuItem.Name = "hjälpToolStripMenuItem";
+            hjälpToolStripMenuItem.Size = new Size(47, 20);
+            hjälpToolStripMenuItem.Text = "&Hjälp";
+            // 
+            // omToolStripMenuItem
+            // 
+            omToolStripMenuItem.Name = "omToolStripMenuItem";
+            omToolStripMenuItem.Size = new Size(94, 22);
+            omToolStripMenuItem.Text = "&Om";
+            omToolStripMenuItem.Click += omToolStripMenuItem_Click;
             // 
             // AddTransactionForm
             // 
@@ -280,6 +328,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 247);
             ClientSize = new Size(1184, 561);
+            Controls.Add(menuStrip1);
             Controls.Add(AddTransactionFormReturnBtn);
             Controls.Add(addTransactionPanel);
             Controls.Add(addTransactionLabel);
@@ -296,6 +345,8 @@
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -320,5 +371,10 @@
         private FlowLayoutPanel flowLayoutPanel2;
         private FontAwesome.Sharp.IconButton AddTransactionFormReturnBtn;
         private ComboBox addTransactionCategoryCombo;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem appToolStripMenuItem;
+        private ToolStripMenuItem avslutaToolStripMenuItem;
+        private ToolStripMenuItem hjälpToolStripMenuItem;
+        private ToolStripMenuItem omToolStripMenuItem;
     }
 }

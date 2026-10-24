@@ -131,7 +131,7 @@ namespace Projekt.Forms
         // Öppnar formuläret för att lägga till en ny transaktion vid klick -> "Lägg till"
         private void AddNewTransactionBtn_Click(object sender, EventArgs e)
         {
-            var addTransactionForm = new AddTransactionForm(transaction, this, queryService);
+            var addTransactionForm = new AddTransactionForm(transaction, this, queryService, mainForm, null);
             addTransactionForm.FormClosed += (s, args) =>
             {
                 this.Show(); // Laddar om transaktionerna när formuläret stängs
@@ -389,7 +389,7 @@ namespace Projekt.Forms
             if (!protectedTransaction)
             {
                 EnableButton(deleteTransactionBtn, Color.Firebrick, Color.White);
-                EnableButton(updateTransactionBtn, Color.Black, Color.FromArgb(128, 128, 255));
+                EnableButton(updateTransactionBtn, Color.Black, Color.FromArgb(141, 141, 232));
             }
             // Inaktiverar knapparna om det är en spar-transaktion som är markerad
             else
@@ -417,7 +417,7 @@ namespace Projekt.Forms
 
                 if (selectedTransaction != null)
                 {
-                    var addTransactionForm = new AddTransactionForm(transaction, this, queryService, selectedTransaction);
+                    var addTransactionForm = new AddTransactionForm(transaction, this, queryService, mainForm, selectedTransaction);
                     addTransactionForm.FormClosed += (s, args) =>
                     {
                         this.Show(); // Laddar om transaktionerna när formuläret stängs
@@ -429,11 +429,23 @@ namespace Projekt.Forms
                 }
             }
         }
+        // Tillfällig funktion: Tar bort alla transaktioner som innehåller "Sparutmaning"
+        /* private async void removeAllSavingsBtn_Click(object sender, EventArgs e)
+         {
+             await transaction.RemoveChallengeTransactions();
+             LoadTransactions();
+         }*/
 
-        private async void removeAllSavingsBtn_Click(object sender, EventArgs e)
+        private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await transaction.RemoveChallengeTransactions();
-            LoadTransactions();
+            Application.Exit();
+        }
+
+        private void omToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm aboutForm = new AboutForm(this);
+            aboutForm.Show();
+            this.Hide();
         }
     }
 }

@@ -12,28 +12,30 @@ namespace Projekt.Data
     {
         public static void SeedData(ProjektDbContext db)
         {
+            // För att hasha lösenordet och skapa salt, -> dölja lösenordet i databasen
             string salt = PasswordAuthentication.GenerateSalt();
             if (!db.Users.Any())
             {
                 User adminUser = new User
                 {
                     Username = "AdminMiun",
-                    Role = "Lärare",
+                    Role = "Admin",
                     Salt = salt,
                     PasswordHash = PasswordAuthentication.HashPassword("rootroot123!", salt)
                 };
-                MessageBox.Show($"Salt: {salt}");
                 db.Users.Add(adminUser);
             }
+
+            // Om inga transaktioner finns i databasen, läggs det till några transaktioner
             if (!db.Transactions.Any())
             {
                 db.Transactions.AddRange(new Transaction
                 {
                     Typ = "Inkomst",
-                    Namn = "Jobbet",
+                    Namn = "Försvarsmakten",
                     Kategori = "Lön",
                     Belopp = 25000,
-                    Datum = "2026-10-01"
+                    Datum = "2026-11-01"
                 },
                 new Transaction
                 {

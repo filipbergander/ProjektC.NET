@@ -17,19 +17,19 @@ namespace Projekt.Forms
 {
     public partial class LoginForm : Form
     {
+        // Variabler för att hålla reda på inloggad användare och roll
         public string LoggedInUsername { get; private set; } = string.Empty;
         public string LoggedInRole { get; private set; } = string.Empty;
-        // Instanser
-        //private readonly MainForm mainForm;
+        // Instans
         private readonly IUserService userService;
-        private readonly ITransactionService transaction;
-        public LoginForm(IUserService userService, ITransactionService transaction)
+        //private readonly ITransactionService transaction;
+        public LoginForm(IUserService userService)
         {
             InitializeComponent();
             this.userService = userService;
-            this.transaction = new TransactionService();
+            //this.transaction = transaction;
         }
-
+        // Vid klick på logga in-knappen
         private async void loginButton_Click(object sender, EventArgs e)
         {
             // Sätter felmeddelandet till rött
@@ -39,7 +39,7 @@ namespace Projekt.Forms
             // Skapar en lista av alla felmeddelanden
             List<string> errors = new List<string>();
 
-            // Användarnamn
+            // Validerar inputs
             if (string.IsNullOrEmpty(userNameText.Text))
             {
                 errors.Add("* Fyll i användarnamn!");
@@ -62,6 +62,7 @@ namespace Projekt.Forms
             string username = userNameText.Text.Trim();
             string password = passwordText.Text.Trim();
 
+            // Autentiserar den inmatade användaren
             var user = await userService.AuthenticateUser(username, password);
             if (user == null)
             {
@@ -77,6 +78,11 @@ namespace Projekt.Forms
             // Nollställer textfälten vid lyckad inloggning
             userNameText.Text = string.Empty;
             passwordText.Text = string.Empty;
+        }
+        // Stänger av applikationen
+        private void ExitAppMenu_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

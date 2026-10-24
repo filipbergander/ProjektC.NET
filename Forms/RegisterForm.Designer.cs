@@ -45,8 +45,14 @@
             progressBar = new ProgressBar();
             panel1 = new Panel();
             addTransactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
+            menuStrip1 = new MenuStrip();
+            appToolStripMenuItem = new ToolStripMenuItem();
+            avslutaToolStripMenuItem = new ToolStripMenuItem();
+            hjälpToolStripMenuItem = new ToolStripMenuItem();
+            omToolStripMenuItem = new ToolStripMenuItem();
             userMsgPanel.SuspendLayout();
             panel1.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // newUserNameLabel
@@ -224,12 +230,52 @@
             addTransactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
             addTransactionFormReturnBtn.Location = new Point(0, 520);
             addTransactionFormReturnBtn.Name = "addTransactionFormReturnBtn";
-            addTransactionFormReturnBtn.Size = new Size(127, 38);
+            addTransactionFormReturnBtn.Size = new Size(107, 38);
             addTransactionFormReturnBtn.TabIndex = 15;
-            addTransactionFormReturnBtn.Text = "Gå tillbaka";
+            addTransactionFormReturnBtn.Text = "Översikt";
             addTransactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
             addTransactionFormReturnBtn.UseVisualStyleBackColor = true;
             addTransactionFormReturnBtn.Click += addTransactionFormReturnBtn_Click;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.Dock = DockStyle.None;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
+            menuStrip1.Location = new Point(959, 9);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(216, 24);
+            menuStrip1.TabIndex = 16;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // appToolStripMenuItem
+            // 
+            appToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { avslutaToolStripMenuItem });
+            appToolStripMenuItem.Name = "appToolStripMenuItem";
+            appToolStripMenuItem.Size = new Size(41, 20);
+            appToolStripMenuItem.Text = "&App";
+            // 
+            // avslutaToolStripMenuItem
+            // 
+            avslutaToolStripMenuItem.Name = "avslutaToolStripMenuItem";
+            avslutaToolStripMenuItem.Size = new Size(180, 22);
+            avslutaToolStripMenuItem.Text = "A&vsluta";
+            avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
+            // 
+            // hjälpToolStripMenuItem
+            // 
+            hjälpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { omToolStripMenuItem });
+            hjälpToolStripMenuItem.Name = "hjälpToolStripMenuItem";
+            hjälpToolStripMenuItem.Size = new Size(47, 20);
+            hjälpToolStripMenuItem.Text = "&Hjälp";
+            // 
+            // omToolStripMenuItem
+            // 
+            omToolStripMenuItem.Name = "omToolStripMenuItem";
+            omToolStripMenuItem.Size = new Size(180, 22);
+            omToolStripMenuItem.Text = "&Om";
+            omToolStripMenuItem.Click += omToolStripMenuItem_Click;
             // 
             // newUserRegisterForm
             // 
@@ -238,6 +284,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
+            Controls.Add(menuStrip1);
             Controls.Add(addTransactionFormReturnBtn);
             Controls.Add(panel1);
             Controls.Add(progressBar);
@@ -254,7 +301,10 @@
             userMsgPanel.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -275,5 +325,10 @@
         private Label label1;
         private Panel panel1;
         private FontAwesome.Sharp.IconButton addTransactionFormReturnBtn;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem appToolStripMenuItem;
+        private ToolStripMenuItem avslutaToolStripMenuItem;
+        private ToolStripMenuItem hjälpToolStripMenuItem;
+        private ToolStripMenuItem omToolStripMenuItem;
     }
 }
