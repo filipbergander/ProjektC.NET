@@ -19,10 +19,11 @@
 För att köra projektet behöver .NET SDK samt EF Core CLI-verktyget (dotnet ef) vara installerade.
 Installera .NET SDK och dotnet-ef CLI-verktyget med kommandot:   
 `dotnet tool install --global dotnet-ef`
-1. Klona ned repot och kör däreftert: `dotnet restore`
-2. Skapa den initiala migreringen: `dotnet ef migrations add InitialCreate`
-3. Skapa och uppdatera databasen: `dotnet ef database update`
-4. Starta projektet, exempelvis i Visual Studio med: `Ctrl + F5`   
+1. Klona ned repot och gå in i projektets mapp med: `cd ProjektC.NET`
+2. Kör därefter: `dotnet restore`
+3. Skapa den initiala migreringen: `dotnet ef migrations add InitialCreate`
+4. Skapa och uppdatera databasen: `dotnet ef database update`
+5. Öppna och kör projektet via csproj-filen samt starta därefter applikationen, exempelvis i Visual Studio med: `Ctrl + F5`   
 När applikationen startas skapas SQLite-databasen automatiskt och initial testdata läggs till genom SeedInitialData.
 
 ## Struktur   
