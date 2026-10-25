@@ -15,7 +15,7 @@ namespace Projekt
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static async Task Main()
+        static void Main()
         {
             ApplicationConfiguration.Initialize();
             // Instanser av services genom interfaces
