@@ -59,25 +59,5 @@ namespace ProjektC_.NET.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _5dfa8bde_6113_4c5f_8643_8eb93b3a500f {
-            get {
-                object obj = ResourceManager.GetObject("5dfa8bde-6113-4c5f-8643-8eb93b3a500f", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ikon {
-            get {
-                object obj = ResourceManager.GetObject("ikon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

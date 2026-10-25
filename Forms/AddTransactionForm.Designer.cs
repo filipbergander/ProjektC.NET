@@ -267,25 +267,26 @@
             // 
             // AddTransactionFormReturnBtn
             // 
+            AddTransactionFormReturnBtn.BackColor = Color.FromArgb(230, 128, 0);
             AddTransactionFormReturnBtn.Cursor = Cursors.Hand;
             AddTransactionFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
             AddTransactionFormReturnBtn.IconColor = Color.Black;
             AddTransactionFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             AddTransactionFormReturnBtn.IconSize = 30;
             AddTransactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            AddTransactionFormReturnBtn.Location = new Point(0, 520);
+            AddTransactionFormReturnBtn.Location = new Point(0, 500);
             AddTransactionFormReturnBtn.Name = "AddTransactionFormReturnBtn";
-            AddTransactionFormReturnBtn.Size = new Size(147, 38);
+            AddTransactionFormReturnBtn.Size = new Size(147, 58);
             AddTransactionFormReturnBtn.TabIndex = 12;
             AddTransactionFormReturnBtn.Text = "Transaktioner";
             AddTransactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
-            AddTransactionFormReturnBtn.UseVisualStyleBackColor = true;
+            AddTransactionFormReturnBtn.UseVisualStyleBackColor = false;
             AddTransactionFormReturnBtn.Click += AddTransactionFormReturnBtn_Click;
             // 
             // menuStrip1
             // 
             menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.BackColor = Color.FromArgb(192, 255, 192);
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
             menuStrip1.Location = new Point(1079, 9);

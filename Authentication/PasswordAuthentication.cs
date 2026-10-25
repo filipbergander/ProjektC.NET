@@ -7,6 +7,7 @@ namespace Projekt.Authentication
 {
     internal class PasswordAuthentication
     {
+        // En random salt-sträng skapas när användaren registreras
         public static string GenerateSalt()
         {
             var rng = RandomNumberGenerator.Create();
@@ -15,7 +16,7 @@ namespace Projekt.Authentication
             string saltText = Convert.ToBase64String(saltBytes);
             return saltText;
         }
-
+        // Lösenordet hashas genom saltet
         public static string HashPassword(string password, string salt)
         {
             var sha = SHA256.Create();

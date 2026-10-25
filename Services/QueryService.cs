@@ -14,7 +14,7 @@ namespace Projekt.Services
 {
     public class QueryService
     {
-        // Instans av Transactionsservicen
+        // Instans
         private readonly ITransactionService transaction;
 
         // Konstruktor

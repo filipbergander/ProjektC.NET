@@ -6,6 +6,7 @@ namespace Projekt.UI
 {
     public static class UIEnhancer
     {
+        // Visar progressbar och inaktiverar den knapp som användaren klickade på
         public static async Task RunLoadingBar(ProgressBar progressBar, Control button)
         {
             // Visar progressbar
@@ -24,6 +25,6 @@ namespace Projekt.UI
             // Döljer progressbar och aktiverar knapp igen
             progressBar?.Visible = false;
             button?.Enabled = true;
-                    }
+        }
     }
 }

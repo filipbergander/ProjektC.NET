@@ -47,6 +47,7 @@
             label13 = new Label();
             label2 = new Label();
             panel2 = new Panel();
+            label29 = new Label();
             label23 = new Label();
             label12 = new Label();
             label11 = new Label();
@@ -65,7 +66,6 @@
             hjälpToolStripMenuItem = new ToolStripMenuItem();
             AboutMenu = new ToolStripMenuItem();
             savingsFormReturnBtn = new FontAwesome.Sharp.IconButton();
-            label29 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -277,6 +277,16 @@
             panel2.Size = new Size(505, 381);
             panel2.TabIndex = 1;
             // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Font = new Font("Lucida Sans", 9.75F);
+            label29.Location = new Point(34, 136);
+            label29.Name = "label29";
+            label29.Size = new Size(82, 15);
+            label29.TabIndex = 14;
+            label29.Text = "uppdateras.";
+            // 
             // label23
             // 
             label23.AutoSize = true;
@@ -400,7 +410,7 @@
             // menuStrip1
             // 
             menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.BackColor = Color.FromArgb(192, 255, 192);
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
             menuStrip1.Location = new Point(1079, 9);
@@ -438,7 +448,7 @@
             // 
             // savingsFormReturnBtn
             // 
-            savingsFormReturnBtn.BackColor = Color.FromArgb(244, 245, 245);
+            savingsFormReturnBtn.BackColor = Color.FromArgb(230, 128, 0);
             savingsFormReturnBtn.Cursor = Cursors.Hand;
             savingsFormReturnBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             savingsFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
@@ -446,24 +456,14 @@
             savingsFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             savingsFormReturnBtn.IconSize = 30;
             savingsFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            savingsFormReturnBtn.Location = new Point(0, 520);
+            savingsFormReturnBtn.Location = new Point(0, 502);
             savingsFormReturnBtn.Name = "savingsFormReturnBtn";
-            savingsFormReturnBtn.Size = new Size(107, 38);
+            savingsFormReturnBtn.Size = new Size(109, 56);
             savingsFormReturnBtn.TabIndex = 15;
             savingsFormReturnBtn.Text = "Tillbaka";
             savingsFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
             savingsFormReturnBtn.UseVisualStyleBackColor = false;
             savingsFormReturnBtn.Click += savingsFormReturnBtn_Click;
-            // 
-            // label29
-            // 
-            label29.AutoSize = true;
-            label29.Font = new Font("Lucida Sans", 9.75F);
-            label29.Location = new Point(34, 136);
-            label29.Name = "label29";
-            label29.Size = new Size(82, 15);
-            label29.TabIndex = 14;
-            label29.Text = "uppdateras.";
             // 
             // AboutForm
             // 

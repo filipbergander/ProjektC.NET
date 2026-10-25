@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Projekt.Models
 {
+    //  Klass för att filtrera transaktionerna i transaktionsformuläret
     public class TransactionFilter
     {
         public string? Typ { get; set; }
-        //public string? Namn { get; set; }
         public List<string> Kategori { get; set; } 
         public DateTime? fDatum { get; set; } // Från datum
         public DateTime? tDatum { get; set; } // Till datum
@@ -22,7 +22,6 @@ namespace Projekt.Models
         public TransactionFilter()
         {
             Typ = null;
-            //Namn = null;
             Kategori = [];
             fDatum = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             tDatum = null;

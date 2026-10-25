@@ -17,6 +17,8 @@ namespace Projekt.Services
     {
         // Instans
         private readonly ProjektDbContext database;
+
+        // Konstruktor
         public UserService()
         {
             database = new ProjektDbContext();

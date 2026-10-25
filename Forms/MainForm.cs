@@ -16,9 +16,10 @@ namespace Projekt.Forms
 {
     public partial class MainForm : Form
     {
-        private readonly ITransactionService transaction; // Instans av TransactionService genom interfacet
-        private readonly FinanceService financeService; // Instans av financeservice för att hämta in "finansvärden" till mainform
-        private readonly GamingService savingsService; // Instans av savingsservice för att hämta in "sparvärden" till mainform
+        // Instanser
+        private readonly ITransactionService transaction;
+        private readonly FinanceService financeService;
+        private readonly GamingService savingsService;
         private readonly UserService userService;
         private readonly BudgetMLService mlService;
         private readonly string loggedInUser;
@@ -40,6 +41,7 @@ namespace Projekt.Forms
         {
             await InsertFinanceValues();
             await LoadDiagram();
+            // Visar eller döljer användarens roll och användarnamn i en panel inom formuläret
             if (loggedInRole == null || loggedInUser == null)
             {
                 loggedInPanel.Visible = false;
@@ -84,6 +86,7 @@ namespace Projekt.Forms
         // Hämtar in värdena som metoden i financeService kalkylerat och returnerar dem i labels ínom mainform
         private async Task InsertFinanceValues()
         {
+            // Månaden nu som en sträng
             string monthNow = DateTime.Now.ToString("MMMM", new CultureInfo("sv-SE"));
             monthNow = char.ToUpper(monthNow[0]) + monthNow.Substring(1); // Gör första bokstaven i månadens namn som versal
 
@@ -124,12 +127,13 @@ namespace Projekt.Forms
             chart.Legends.Add(new Legend()); // Legened läggs till i diagrammet för att visa namn på kategorierna
             chart.Legends[0].Font = new Font("Lucida Sans", 11, FontStyle.Bold); // Font för legend
 
+            // Tooltip som visas när man hovrar över kategorierna i diagrammet
             chart.GetToolTipText += (sender, e) =>
             {
                 if (e.HitTestResult.ChartElementType == ChartElementType.DataPoint || e.HitTestResult.ChartElementType == ChartElementType.LegendItem)
                 {
                     var point = e.HitTestResult.Series.Points[e.HitTestResult.PointIndex];
-                    e.Text = $"{point.AxisLabel}: {point.YValues[0]:N2} kr"; // Tooltip som visas när man hovrar över kategorierna i diagrammet
+                    e.Text = $"{point.AxisLabel}: {point.YValues[0]:N2} kr";
                 }
             };
 
@@ -147,6 +151,7 @@ namespace Projekt.Forms
             }
             else
             {
+                // Annars -> Doughnut-diagram
                 series.ChartType = SeriesChartType.Doughnut;
                 chart.Legends[0].Enabled = true;
             }
@@ -163,18 +168,18 @@ namespace Projekt.Forms
             series.Font = new Font("Lucida Sans", 10, FontStyle.Bold); // Font för värderna i diagrammet
             chart.Series.Add(series); // Lägger till series i diagrammet
         }
-
+        // Uppdaterar formuläret med värden 
         public async Task RefreshDashboard()
         {
             await InsertFinanceValues();
             await LoadDiagram();
         }
-
+        // Stänger av appen
         private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
+        // Navigerar till om-sidan
         private void omToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm aboutForm = new AboutForm(this);

@@ -11,9 +11,9 @@ namespace Projekt.Services
 {
     public class GamingService
     {
-        // Instans av Transactionsservicen
+        // Instans
         private readonly ITransactionService transaction;
-
+        // Konstruktor
         public GamingService(ITransactionService transaction)
         {
             this.transaction = transaction;
@@ -39,7 +39,7 @@ namespace Projekt.Services
             // Returnerar antalet transaktioner som innehåller "Sparutmaning" i namnet och har dagens datum
             return transactions.Count(t => t.Namn?.Contains("Sparutmaning") == true && DateTime.TryParse(t.Datum, out DateTime date) && date.Date == DateTime.Today);
         }
-
+        // Det saldo som användaren har görs om till en siffra och sparnivå, 1-5, för att använda i spelet och ML
         public float GetPlayerBalanceTransformToModel(decimal actualBalance)
         {
             if (actualBalance <= 2000) return 1;

@@ -57,19 +57,18 @@
             modifyTransactionsLabel = new Label();
             deleteTransactionNotificationLabel = new Label();
             sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
-            removeAllSavingsBtn = new Button();
             AddNewTransactionBtn = new FontAwesome.Sharp.IconButton();
             deleteTransactionBtn = new FontAwesome.Sharp.IconButton();
             updateTransactionBtn = new FontAwesome.Sharp.IconButton();
             filterButton = new FontAwesome.Sharp.IconButton();
             iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
-            transactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
             totalSumTransactions = new Label();
             menuStrip1 = new MenuStrip();
             appToolStripMenuItem = new ToolStripMenuItem();
             avslutaToolStripMenuItem = new ToolStripMenuItem();
             hjälpToolStripMenuItem = new ToolStripMenuItem();
             omToolStripMenuItem = new ToolStripMenuItem();
+            transactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)transactionGrid).BeginInit();
             filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)maxAmountNumeric).BeginInit();
@@ -80,6 +79,8 @@
             // 
             // transactionGrid
             // 
+            transactionGrid.AllowUserToAddRows = false;
+            transactionGrid.AllowUserToDeleteRows = false;
             transactionGrid.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(245, 246, 250);
             transactionGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -108,6 +109,7 @@
             transactionGrid.Margin = new Padding(4);
             transactionGrid.MultiSelect = false;
             transactionGrid.Name = "transactionGrid";
+            transactionGrid.ReadOnly = true;
             transactionGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             transactionGrid.Size = new Size(835, 250);
             transactionGrid.TabIndex = 0;
@@ -254,7 +256,7 @@
             filterPanel.ForeColor = Color.White;
             filterPanel.Location = new Point(0, 0);
             filterPanel.Name = "filterPanel";
-            filterPanel.Size = new Size(188, 561);
+            filterPanel.Size = new Size(197, 561);
             filterPanel.TabIndex = 18;
             filterPanel.Visible = false;
             // 
@@ -315,7 +317,7 @@
             filterCategoryListBox.CheckOnClick = true;
             filterCategoryListBox.Cursor = Cursors.Hand;
             filterCategoryListBox.FormattingEnabled = true;
-            filterCategoryListBox.Location = new Point(2, 123);
+            filterCategoryListBox.Location = new Point(3, 124);
             filterCategoryListBox.Name = "filterCategoryListBox";
             filterCategoryListBox.Size = new Size(176, 130);
             filterCategoryListBox.TabIndex = 17;
@@ -384,7 +386,6 @@
             sqliteCommand1.Transaction = null;
             sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
             // 
-            // 
             // AddNewTransactionBtn
             // 
             AddNewTransactionBtn.BackColor = Color.FromArgb(1, 170, 51);
@@ -427,7 +428,7 @@
             updateTransactionBtn.IconColor = Color.Black;
             updateTransactionBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             updateTransactionBtn.IconSize = 24;
-            updateTransactionBtn.Location = new Point(687, 424);
+            updateTransactionBtn.Location = new Point(679, 424);
             updateTransactionBtn.Name = "updateTransactionBtn";
             updateTransactionBtn.Size = new Size(134, 55);
             updateTransactionBtn.TabIndex = 26;
@@ -466,23 +467,6 @@
             iconPictureBox1.TabIndex = 29;
             iconPictureBox1.TabStop = false;
             // 
-            // transactionFormReturnBtn
-            // 
-            transactionFormReturnBtn.Cursor = Cursors.Hand;
-            transactionFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
-            transactionFormReturnBtn.IconColor = Color.Black;
-            transactionFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            transactionFormReturnBtn.IconSize = 30;
-            transactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            transactionFormReturnBtn.Location = new Point(0, 520);
-            transactionFormReturnBtn.Name = "transactionFormReturnBtn";
-            transactionFormReturnBtn.Size = new Size(107, 38);
-            transactionFormReturnBtn.TabIndex = 31;
-            transactionFormReturnBtn.Text = "Översikt";
-            transactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
-            transactionFormReturnBtn.UseVisualStyleBackColor = true;
-            transactionFormReturnBtn.Click += transactionFormReturnBtn_Click;
-            // 
             // totalSumTransactions
             // 
             totalSumTransactions.AutoSize = true;
@@ -497,12 +481,12 @@
             // menuStrip1
             // 
             menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.BackColor = Color.FromArgb(192, 255, 192);
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
-            menuStrip1.Location = new Point(959, 9);
+            menuStrip1.Location = new Point(1079, 9);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(216, 24);
+            menuStrip1.Size = new Size(96, 24);
             menuStrip1.TabIndex = 33;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -516,7 +500,7 @@
             // avslutaToolStripMenuItem
             // 
             avslutaToolStripMenuItem.Name = "avslutaToolStripMenuItem";
-            avslutaToolStripMenuItem.Size = new Size(180, 22);
+            avslutaToolStripMenuItem.Size = new Size(113, 22);
             avslutaToolStripMenuItem.Text = "A&vsluta";
             avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
             // 
@@ -530,9 +514,27 @@
             // omToolStripMenuItem
             // 
             omToolStripMenuItem.Name = "omToolStripMenuItem";
-            omToolStripMenuItem.Size = new Size(180, 22);
+            omToolStripMenuItem.Size = new Size(94, 22);
             omToolStripMenuItem.Text = "&Om";
             omToolStripMenuItem.Click += omToolStripMenuItem_Click;
+            // 
+            // transactionFormReturnBtn
+            // 
+            transactionFormReturnBtn.BackColor = Color.FromArgb(230, 128, 0);
+            transactionFormReturnBtn.Cursor = Cursors.Hand;
+            transactionFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.House;
+            transactionFormReturnBtn.IconColor = Color.Black;
+            transactionFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            transactionFormReturnBtn.IconSize = 30;
+            transactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            transactionFormReturnBtn.Location = new Point(0, 500);
+            transactionFormReturnBtn.Name = "transactionFormReturnBtn";
+            transactionFormReturnBtn.Size = new Size(197, 61);
+            transactionFormReturnBtn.TabIndex = 34;
+            transactionFormReturnBtn.Text = "Startsida && Översikt";
+            transactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
+            transactionFormReturnBtn.UseVisualStyleBackColor = false;
+            transactionFormReturnBtn.Click += transactionFormReturnBtn_Click;
             // 
             // TransactionForm
             // 
@@ -540,6 +542,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 247);
             ClientSize = new Size(1184, 561);
+            Controls.Add(filterPanel);
+            Controls.Add(transactionFormReturnBtn);
             Controls.Add(menuStrip1);
             Controls.Add(totalSumTransactions);
             Controls.Add(iconPictureBox1);
@@ -547,16 +551,13 @@
             Controls.Add(updateTransactionBtn);
             Controls.Add(deleteTransactionBtn);
             Controls.Add(AddNewTransactionBtn);
-            Controls.Add(removeAllSavingsBtn);
             Controls.Add(deleteTransactionNotificationLabel);
             Controls.Add(modifyTransactionsLabel);
-            Controls.Add(filterPanel);
             Controls.Add(searchTransactionBox);
             Controls.Add(filterSearchLabel);
             Controls.Add(totalTransactionsPostLabel);
             Controls.Add(transactionsHeaderLabel);
             Controls.Add(transactionGrid);
-            Controls.Add(transactionFormReturnBtn);
             Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
@@ -602,18 +603,17 @@
         private Label minAmountLabel;
         private Label deleteTransactionNotificationLabel;
         private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
-        private Button removeAllSavingsBtn;
         private FontAwesome.Sharp.IconButton AddNewTransactionBtn;
         private FontAwesome.Sharp.IconButton deleteTransactionBtn;
         private FontAwesome.Sharp.IconButton updateTransactionBtn;
         private FontAwesome.Sharp.IconButton filterButton;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
-        private FontAwesome.Sharp.IconButton transactionFormReturnBtn;
         private Label totalSumTransactions;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem appToolStripMenuItem;
         private ToolStripMenuItem avslutaToolStripMenuItem;
         private ToolStripMenuItem hjälpToolStripMenuItem;
         private ToolStripMenuItem omToolStripMenuItem;
+        private FontAwesome.Sharp.IconButton transactionFormReturnBtn;
     }
 }

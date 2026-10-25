@@ -10,7 +10,6 @@ namespace Projekt.Services
 {
     public class TransactionService : ITransactionService
     {
-        //private readonly List<Transaction> transactions = new List<Transaction>();
 
         // Instans för att hantera databasen
         private readonly ProjektDbContext database;
@@ -79,15 +78,15 @@ namespace Projekt.Services
         }
 
         // Tillfällig funktion: Tar bort alla transaktioner som innehåller "Sparutmaning"
-       /* public async Task RemoveChallengeTransactions()
-        {
-            var transactions = await database.Set<Transaction>().Where(t => t.Namn != null && t.Namn.Contains("Sparutmaning") == true).ToListAsync(); // Hämtar alla transaktioner som innehåller "Sparutmaning" i namnet
-            if (transactions.Count == 0)
-            {
-                return;
-            }
-            database.Set<Transaction>().RemoveRange(transactions); // Tar bort alla transaktioner som innehåller "Sparutmaning" i namnet
-            await database.SaveChangesAsync(); // Sparar ändringarna
-        }*/
+        /* public async Task RemoveChallengeTransactions()
+         {
+             var transactions = await database.Set<Transaction>().Where(t => t.Namn != null && t.Namn.Contains("Sparutmaning") == true).ToListAsync(); // Hämtar alla transaktioner som innehåller "Sparutmaning" i namnet
+             if (transactions.Count == 0)
+             {
+                 return;
+             }
+             database.Set<Transaction>().RemoveRange(transactions); // Tar bort alla transaktioner som innehåller "Sparutmaning" i namnet
+             await database.SaveChangesAsync(); // Sparar ändringarna
+         }*/
     }
 }

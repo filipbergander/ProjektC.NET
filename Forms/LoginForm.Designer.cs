@@ -172,7 +172,7 @@ namespace Projekt.Forms
             // menuStrip1
             // 
             menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.BackColor = Color.FromArgb(192, 255, 192);
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem });
             menuStrip1.Location = new Point(1006, 9);
@@ -191,7 +191,7 @@ namespace Projekt.Forms
             // ExitAppMenu
             // 
             ExitAppMenu.Name = "ExitAppMenu";
-            ExitAppMenu.Size = new Size(180, 22);
+            ExitAppMenu.Size = new Size(113, 22);
             ExitAppMenu.Text = "A&vsluta";
             ExitAppMenu.Click += ExitAppMenu_Click;
             // 

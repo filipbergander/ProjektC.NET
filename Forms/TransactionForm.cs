@@ -15,23 +15,22 @@ namespace Projekt.Forms
     public partial class TransactionForm : Form
 
     {
-        private readonly MainForm mainForm; // Instans av mainform
+        // Instaner
+        private readonly MainForm mainForm;
+        private readonly ITransactionService transaction;
+        private readonly QueryService queryService;
+        private readonly TransactionFilter filter = new TransactionFilter(); // Instans av TransactionFilter som används för filtrering & sökning av transaktioner
         private string currentSortColumn = ""; // Vilken kolumn som är sorterad i datagriden
         private bool ascending = true; // Sorteringsordningen för kolumnerna i datagriden
-        private readonly ITransactionService transaction;   // Instans av TransactionService
-        private readonly TransactionService transactionn;
-        private readonly QueryService queryService; // Instans av TransactionQueryService
         private List<Transaction> displayingTransactions = []; // Sparar antalet transaktioner som visas i datagriden "nu" till denna variabel
-        private readonly TransactionFilter filter = new TransactionFilter(); // Instans av TransactionFilter som används för filtrering & sökning av transaktioner
 
-        //private List<Transaction> transactions = new List<Transaction>();
         // Konstruktor som tar emot en instans av TransactionService (transaction) och sätter den till _transaction
         public TransactionForm(ITransactionService transaction, MainForm mainForm)
         {
             InitializeComponent();
             this.transaction = transaction;
             this.mainForm = mainForm;
-            this.queryService = new QueryService(transaction);
+            this.queryService = new QueryService(transaction); // Använder interfacet för att skapa instansen
             LoadTransactions(); // Hämtar in alla sparade transaktioner 
             fromDatePicker.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1); // Sätter default-värde på "från datumet" för filtrering till första dagen i månaden
         }
@@ -430,17 +429,17 @@ namespace Projekt.Forms
             }
         }
         // Tillfällig funktion: Tar bort alla transaktioner som innehåller "Sparutmaning"
-        /* private async void removeAllSavingsBtn_Click(object sender, EventArgs e)
-         {
-             await transaction.RemoveChallengeTransactions();
-             LoadTransactions();
-         }*/
-
+        /*private async void removeAllSavingsBtn_Click(object sender, EventArgs e)
+        {
+            await transaction.RemoveChallengeTransactions();
+            LoadTransactions();
+        }*/
+        // Avslutar appen vid klick -> "Avsluta" i menyn
         private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
+        // Navigerar till om-sidan vid klick -> "Om" i menyn
         private void omToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm aboutForm = new AboutForm(this);

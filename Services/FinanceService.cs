@@ -60,14 +60,8 @@ namespace Projekt.Services
         }
 
 
-        /// <summary>
-        /// Räknar ut hur mycket pengar man kommer ha efter ett visst antal år, med startbelopp, avsättning per månad och årlig ränta.   
-        /// </summary>
-        /// <param name="startAmount"> Startbelopp av pengar</param>
-        /// <param name="monthlyInvest"> Hur mycket pengar som avsätts varje månad</param>
-        /// <param name="annualInterestRate">Årliga räntan</param>
-        /// <param name="years"> Antal år som man vill spara</param>
-        /// <returns> Det totala beloppet efter angivet antal år</returns>
+
+        // Räknar ut hur mycket pengar man kommer ha efter ett visst antal år, med startbelopp, avsättning per månad och den årliga räntan.   
         public decimal CalculateFutureSavings(decimal startAmount, decimal monthlyInvest, double annualInterestRate, int years)
         {
             double monthlyRate = annualInterestRate / 12; // Ränta per månad, t.ex om förväntad ränta per år för avkastningen är 6% så är månadsräntan: 0.5%

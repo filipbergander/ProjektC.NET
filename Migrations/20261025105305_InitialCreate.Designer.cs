@@ -10,7 +10,7 @@ using Projekt.Data;
 namespace ProjektC_.NET.Migrations
 {
     [DbContext(typeof(ProjektDbContext))]
-    [Migration("20261021134235_InitialCreate")]
+    [Migration("20261025105305_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

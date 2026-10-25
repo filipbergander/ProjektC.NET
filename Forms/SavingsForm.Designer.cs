@@ -49,6 +49,10 @@
             startAmountNum = new NumericUpDown();
             anticipateSavingsLabel = new Label();
             savingsPanel = new Panel();
+            panel2 = new Panel();
+            label1 = new Label();
+            label2 = new Label();
+            panelCalculatorHeaderLabel = new Label();
             panel3 = new Panel();
             label4 = new Label();
             label5 = new Label();
@@ -65,10 +69,6 @@
             label9 = new Label();
             label8 = new Label();
             label6 = new Label();
-            panel2 = new Panel();
-            label1 = new Label();
-            label2 = new Label();
-            panelCalculatorHeaderLabel = new Label();
             progressBar = new ProgressBar();
             totalSumSavingsText = new TextBox();
             totalSumSavingsLabel = new Label();
@@ -77,7 +77,6 @@
             interestSumText = new TextBox();
             equityLabel = new Label();
             equityLabelText = new TextBox();
-            openToolsSavingBtn = new Button();
             savingsFormReturnBtn = new FontAwesome.Sharp.IconButton();
             menuStrip1 = new MenuStrip();
             appToolStripMenuItem = new ToolStripMenuItem();
@@ -90,10 +89,10 @@
             ((System.ComponentModel.ISupportInitialize)monthlyAmountNum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)startAmountNum).BeginInit();
             savingsPanel.SuspendLayout();
+            panel2.SuspendLayout();
             panel3.SuspendLayout();
             challengePanel.SuspendLayout();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
             totalSavingsPanel.SuspendLayout();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -110,7 +109,7 @@
             // 
             // anticipateSavingsBtn
             // 
-            anticipateSavingsBtn.BackColor = Color.FromArgb(72, 202, 228);
+            anticipateSavingsBtn.BackColor = Color.FromArgb(1, 170, 50);
             anticipateSavingsBtn.Cursor = Cursors.Hand;
             anticipateSavingsBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             anticipateSavingsBtn.Location = new Point(77, 293);
@@ -123,7 +122,7 @@
             // 
             // playChallangeBtn
             // 
-            playChallangeBtn.BackColor = Color.FromArgb(1, 170, 50);
+            playChallangeBtn.BackColor = Color.FromArgb(72, 202, 228);
             playChallangeBtn.Cursor = Cursors.Hand;
             playChallangeBtn.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             playChallangeBtn.Location = new Point(103, 293);
@@ -310,13 +309,53 @@
             // 
             savingsPanel.Anchor = AnchorStyles.None;
             savingsPanel.BackColor = Color.FromArgb(244, 245, 245);
+            savingsPanel.Controls.Add(panel2);
             savingsPanel.Controls.Add(panel3);
             savingsPanel.Controls.Add(challengePanel);
-            savingsPanel.Controls.Add(panel2);
             savingsPanel.Location = new Point(206, 105);
             savingsPanel.Name = "savingsPanel";
             savingsPanel.Size = new Size(852, 424);
             savingsPanel.TabIndex = 9;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.White;
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(panelCalculatorHeaderLabel);
+            panel2.Controls.Add(anticipateSavingsBtn);
+            panel2.Location = new Point(45, 30);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(347, 373);
+            panel2.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.Font = new Font("Lucida Sans", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(62, 3);
+            label1.Name = "label1";
+            label1.Size = new Size(37, 35);
+            label1.TabIndex = 5;
+            label1.Text = "💰";
+            // 
+            // label2
+            // 
+            label2.Location = new Point(24, 46);
+            label2.Name = "label2";
+            label2.Size = new Size(303, 181);
+            label2.TabIndex = 4;
+            label2.Text = "Beräkna hur ditt sparande kan växa över tid med hjälp av ränta på ränta-effekten.\r\n\r\nKalkylen baseras på:\r\n• Startbelopp\r\n• Månadssparande\r\n• Avkastning per år (%)\r\n• Spartid (år)\r\n";
+            // 
+            // panelCalculatorHeaderLabel
+            // 
+            panelCalculatorHeaderLabel.Anchor = AnchorStyles.None;
+            panelCalculatorHeaderLabel.AutoSize = true;
+            panelCalculatorHeaderLabel.Font = new Font("Lucida Sans", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            panelCalculatorHeaderLabel.Location = new Point(105, 14);
+            panelCalculatorHeaderLabel.Name = "panelCalculatorHeaderLabel";
+            panelCalculatorHeaderLabel.Size = new Size(143, 22);
+            panelCalculatorHeaderLabel.TabIndex = 3;
+            panelCalculatorHeaderLabel.Text = "Sparkalkylator";
             // 
             // panel3
             // 
@@ -490,46 +529,6 @@
             label6.TabIndex = 5;
             label6.Text = "Sparutmaning";
             // 
-            // panel2
-            // 
-            panel2.BackColor = Color.White;
-            panel2.Controls.Add(label1);
-            panel2.Controls.Add(label2);
-            panel2.Controls.Add(panelCalculatorHeaderLabel);
-            panel2.Controls.Add(anticipateSavingsBtn);
-            panel2.Location = new Point(45, 30);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(347, 373);
-            panel2.TabIndex = 4;
-            // 
-            // label1
-            // 
-            label1.Font = new Font("Lucida Sans", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(62, 3);
-            label1.Name = "label1";
-            label1.Size = new Size(37, 35);
-            label1.TabIndex = 5;
-            label1.Text = "💰";
-            // 
-            // label2
-            // 
-            label2.Location = new Point(24, 46);
-            label2.Name = "label2";
-            label2.Size = new Size(303, 181);
-            label2.TabIndex = 4;
-            label2.Text = "Beräkna hur ditt sparande kan växa över tid med hjälp av ränta på ränta-effekten.\r\n\r\nKalkylen baseras på:\r\n• Startbelopp\r\n• Månadssparande\r\n• Avkastning per år (%)\r\n• Spartid (år)\r\n";
-            // 
-            // panelCalculatorHeaderLabel
-            // 
-            panelCalculatorHeaderLabel.Anchor = AnchorStyles.None;
-            panelCalculatorHeaderLabel.AutoSize = true;
-            panelCalculatorHeaderLabel.Font = new Font("Lucida Sans", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            panelCalculatorHeaderLabel.Location = new Point(105, 14);
-            panelCalculatorHeaderLabel.Name = "panelCalculatorHeaderLabel";
-            panelCalculatorHeaderLabel.Size = new Size(143, 22);
-            panelCalculatorHeaderLabel.TabIndex = 3;
-            panelCalculatorHeaderLabel.Text = "Sparkalkylator";
-            // 
             // progressBar
             // 
             progressBar.Location = new Point(542, 535);
@@ -605,46 +604,33 @@
             equityLabelText.Size = new Size(233, 26);
             equityLabelText.TabIndex = 8;
             // 
-            // openToolsSavingBtn
-            // 
-            openToolsSavingBtn.BackColor = Color.FromArgb(64, 64, 64);
-            openToolsSavingBtn.Cursor = Cursors.Hand;
-            openToolsSavingBtn.ForeColor = Color.White;
-            openToolsSavingBtn.Location = new Point(524, 60);
-            openToolsSavingBtn.Name = "openToolsSavingBtn";
-            openToolsSavingBtn.Size = new Size(195, 48);
-            openToolsSavingBtn.TabIndex = 5;
-            openToolsSavingBtn.Text = "Öppna verktygspanelen";
-            openToolsSavingBtn.UseVisualStyleBackColor = false;
-            openToolsSavingBtn.Visible = false;
-            openToolsSavingBtn.Click += openToolsSavingBtn_Click;
-            // 
             // savingsFormReturnBtn
             // 
+            savingsFormReturnBtn.BackColor = Color.FromArgb(230, 128, 0);
             savingsFormReturnBtn.Cursor = Cursors.Hand;
-            savingsFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
+            savingsFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.House;
             savingsFormReturnBtn.IconColor = Color.Black;
             savingsFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             savingsFormReturnBtn.IconSize = 30;
             savingsFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            savingsFormReturnBtn.Location = new Point(0, 520);
+            savingsFormReturnBtn.Location = new Point(0, 497);
             savingsFormReturnBtn.Name = "savingsFormReturnBtn";
-            savingsFormReturnBtn.Size = new Size(107, 38);
+            savingsFormReturnBtn.Size = new Size(197, 61);
             savingsFormReturnBtn.TabIndex = 11;
-            savingsFormReturnBtn.Text = "Översikt";
+            savingsFormReturnBtn.Text = "Startsida && Översikt";
             savingsFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
-            savingsFormReturnBtn.UseVisualStyleBackColor = true;
+            savingsFormReturnBtn.UseVisualStyleBackColor = false;
             savingsFormReturnBtn.Click += savingsFormReturnBtn_Click;
             // 
             // menuStrip1
             // 
             menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.BackColor = Color.FromArgb(192, 255, 192);
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
-            menuStrip1.Location = new Point(968, 3);
+            menuStrip1.Location = new Point(1088, 3);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(216, 24);
+            menuStrip1.Size = new Size(96, 24);
             menuStrip1.TabIndex = 12;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -658,7 +644,7 @@
             // avslutaToolStripMenuItem
             // 
             avslutaToolStripMenuItem.Name = "avslutaToolStripMenuItem";
-            avslutaToolStripMenuItem.Size = new Size(180, 22);
+            avslutaToolStripMenuItem.Size = new Size(113, 22);
             avslutaToolStripMenuItem.Text = "A&vsluta";
             avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
             // 
@@ -672,7 +658,7 @@
             // omToolStripMenuItem
             // 
             omToolStripMenuItem.Name = "omToolStripMenuItem";
-            omToolStripMenuItem.Size = new Size(180, 22);
+            omToolStripMenuItem.Size = new Size(94, 22);
             omToolStripMenuItem.Text = "&Om";
             omToolStripMenuItem.Click += omToolStripMenuItem_Click;
             // 
@@ -686,7 +672,6 @@
             Controls.Add(totalSavingsPanel);
             Controls.Add(savingsFormReturnBtn);
             Controls.Add(progressBar);
-            Controls.Add(openToolsSavingBtn);
             Controls.Add(savingsPanel);
             Controls.Add(savingsHeaderLabel);
             Controls.Add(anticipateSavingsPanel);
@@ -703,14 +688,14 @@
             ((System.ComponentModel.ISupportInitialize)monthlyAmountNum).EndInit();
             ((System.ComponentModel.ISupportInitialize)startAmountNum).EndInit();
             savingsPanel.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             challengePanel.ResumeLayout(false);
             challengePanel.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             totalSavingsPanel.ResumeLayout(false);
             totalSavingsPanel.PerformLayout();
             menuStrip1.ResumeLayout(false);
@@ -736,7 +721,7 @@
         private NumericUpDown savingsYearGoalNum;
         private Button calculateSavingsButton;
         private TextBox totalSumSavingsText;
-        private TextBox textBox2;
+       // private TextBox textBox2;
         private Label totalSumSavingsLabel;
         private Panel totalSavingsPanel;
         private Label equityLabel;
@@ -752,7 +737,6 @@
         private Label panelCalculatorHeaderLabel;
         private CheckBox checkBox1;
         private Button closeCalculatorPanelBtn;
-        private Button openToolsSavingBtn;
         private Label label1;
         private Label label5;
         private Panel challengePanel;

@@ -18,7 +18,7 @@ namespace Projekt.Data
             {
                 User adminUser = new User
                 {
-                    Username = "AdminMiun",
+                    Username = "Miun",
                     Role = "Admin",
                     Salt = salt,
                     PasswordHash = PasswordAuthentication.HashPassword("rootroot123!", salt)

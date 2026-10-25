@@ -17,17 +17,15 @@ namespace Projekt.Forms
 {
     public partial class LoginForm : Form
     {
-        // Variabler för att hålla reda på inloggad användare och roll
+        // Variabler för att hålla reda på inloggad användare och sin roll
         public string LoggedInUsername { get; private set; } = string.Empty;
         public string LoggedInRole { get; private set; } = string.Empty;
         // Instans
         private readonly IUserService userService;
-        //private readonly ITransactionService transaction;
         public LoginForm(IUserService userService)
         {
             InitializeComponent();
             this.userService = userService;
-            //this.transaction = transaction;
         }
         // Vid klick på logga in-knappen
         private async void loginButton_Click(object sender, EventArgs e)

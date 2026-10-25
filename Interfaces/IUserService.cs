@@ -5,6 +5,7 @@ using Projekt.Models;
 
 namespace Projekt.Interfaces
 {
+    // Interface för UserService
     public interface IUserService
     {
         Task<bool> CreateUser(User user); // Lägger till en ny användare

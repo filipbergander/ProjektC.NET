@@ -5,6 +5,7 @@ using Projekt.Forms;
 
 namespace Projekt.Models
 {
+    // Användare i applikationen
     public class User
     {
         public int Id { get; set; }
@@ -12,7 +13,8 @@ namespace Projekt.Models
         public string? Role { get; set; }
         public string? Salt { get; set; }
         public string? PasswordHash { get; set; }
-        public User()
+
+        public User() // Tom konstruktor som används när man skapar seedningsdata
         {
 
         }

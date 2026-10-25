@@ -44,12 +44,12 @@
             msgLabel = new Label();
             progressBar = new ProgressBar();
             panel1 = new Panel();
-            addTransactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
             menuStrip1 = new MenuStrip();
             appToolStripMenuItem = new ToolStripMenuItem();
             avslutaToolStripMenuItem = new ToolStripMenuItem();
             hjälpToolStripMenuItem = new ToolStripMenuItem();
             omToolStripMenuItem = new ToolStripMenuItem();
+            addTransactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
             userMsgPanel.SuspendLayout();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -220,32 +220,15 @@
             panel1.Size = new Size(318, 374);
             panel1.TabIndex = 14;
             // 
-            // addTransactionFormReturnBtn
-            // 
-            addTransactionFormReturnBtn.Cursor = Cursors.Hand;
-            addTransactionFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
-            addTransactionFormReturnBtn.IconColor = Color.Black;
-            addTransactionFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            addTransactionFormReturnBtn.IconSize = 30;
-            addTransactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            addTransactionFormReturnBtn.Location = new Point(0, 520);
-            addTransactionFormReturnBtn.Name = "addTransactionFormReturnBtn";
-            addTransactionFormReturnBtn.Size = new Size(107, 38);
-            addTransactionFormReturnBtn.TabIndex = 15;
-            addTransactionFormReturnBtn.Text = "Översikt";
-            addTransactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
-            addTransactionFormReturnBtn.UseVisualStyleBackColor = true;
-            addTransactionFormReturnBtn.Click += addTransactionFormReturnBtn_Click;
-            // 
             // menuStrip1
             // 
             menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.BackColor = Color.FromArgb(192, 255, 192);
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
-            menuStrip1.Location = new Point(959, 9);
+            menuStrip1.Location = new Point(1079, 9);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(216, 24);
+            menuStrip1.Size = new Size(96, 24);
             menuStrip1.TabIndex = 16;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -259,7 +242,7 @@
             // avslutaToolStripMenuItem
             // 
             avslutaToolStripMenuItem.Name = "avslutaToolStripMenuItem";
-            avslutaToolStripMenuItem.Size = new Size(180, 22);
+            avslutaToolStripMenuItem.Size = new Size(113, 22);
             avslutaToolStripMenuItem.Text = "A&vsluta";
             avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
             // 
@@ -273,9 +256,27 @@
             // omToolStripMenuItem
             // 
             omToolStripMenuItem.Name = "omToolStripMenuItem";
-            omToolStripMenuItem.Size = new Size(180, 22);
+            omToolStripMenuItem.Size = new Size(94, 22);
             omToolStripMenuItem.Text = "&Om";
             omToolStripMenuItem.Click += omToolStripMenuItem_Click;
+            // 
+            // addTransactionFormReturnBtn
+            // 
+            addTransactionFormReturnBtn.BackColor = Color.FromArgb(230, 128, 0);
+            addTransactionFormReturnBtn.Cursor = Cursors.Hand;
+            addTransactionFormReturnBtn.IconChar = FontAwesome.Sharp.IconChar.House;
+            addTransactionFormReturnBtn.IconColor = Color.Black;
+            addTransactionFormReturnBtn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            addTransactionFormReturnBtn.IconSize = 30;
+            addTransactionFormReturnBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            addTransactionFormReturnBtn.Location = new Point(-2, 501);
+            addTransactionFormReturnBtn.Name = "addTransactionFormReturnBtn";
+            addTransactionFormReturnBtn.Size = new Size(197, 61);
+            addTransactionFormReturnBtn.TabIndex = 17;
+            addTransactionFormReturnBtn.Text = "Startsida && Översikt";
+            addTransactionFormReturnBtn.TextAlign = ContentAlignment.MiddleRight;
+            addTransactionFormReturnBtn.UseVisualStyleBackColor = false;
+            addTransactionFormReturnBtn.Click += addTransactionFormReturnBtn_Click;
             // 
             // newUserRegisterForm
             // 
@@ -284,8 +285,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
-            Controls.Add(menuStrip1);
             Controls.Add(addTransactionFormReturnBtn);
+            Controls.Add(menuStrip1);
             Controls.Add(panel1);
             Controls.Add(progressBar);
             Controls.Add(userMsgPanel);
@@ -324,11 +325,11 @@
         private ProgressBar progressBar;
         private Label label1;
         private Panel panel1;
-        private FontAwesome.Sharp.IconButton addTransactionFormReturnBtn;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem appToolStripMenuItem;
         private ToolStripMenuItem avslutaToolStripMenuItem;
         private ToolStripMenuItem hjälpToolStripMenuItem;
         private ToolStripMenuItem omToolStripMenuItem;
+        private FontAwesome.Sharp.IconButton addTransactionFormReturnBtn;
     }
 }

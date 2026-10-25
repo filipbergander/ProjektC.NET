@@ -49,11 +49,13 @@ namespace Projekt.Forms
             this.Close();
         }
 
-
+        // Vid klick på "Spela sparutmaning"-knappen, visas panelen med sparutmaningen
         private async void playChallangeBtn_Click(object sender, EventArgs e)
         {
             panel2.Visible = false;
             panel3.Visible = false;
+            anticipateSavingsPanel.Visible = false; // Döljer sparkalkylatorn
+            totalSavingsPanel.Visible = false; // Döljer resultatet av beräkningen i sparkalkylatorn
             challengePanel.Visible = true; // Visar panelen med sparutmaningen
             await InsertChallengeValues(); // Hämtar in data för spelaren i sparutmaningen
         }
@@ -72,9 +74,7 @@ namespace Projekt.Forms
                 MessageBox.Show("Du har redan spelat 2 gånger idag. Välkommen åter imorgon!", "Begränsning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            /* progressBar.Visible = true; // Visar progressbaren
-             initiateChallengeBtn.Enabled = false; // Inaktiverar knappen så att det inte går att spamma när eventet körs
-            */
+
             float playerTotalBalance = await finance.GetTotalBalance(); // Hämtar in spelarens totala saldo i "Budgetappen"
 
             // Spelarens totala saldo som omvandlas så att modellen i Mlservice kan använda det
@@ -89,16 +89,12 @@ namespace Projekt.Forms
             float predictedPayout = mlService.PredictGameBonus(playerBalance, currentDay, luckFactor);
 
             int gameFee = 300; // Kostnaden för att spela
-            //int reward = randomNumb.Next(200, 600); // Random-nummer mellan 200 och 600
             float netWin = (float)Math.Round(predictedPayout) - gameFee; // Vinsten avrundat i kr
 
             string resultMsg = ""; // Nollställer meddelandet
 
-            await UIEnhancer.RunLoadingBar(progressBar, initiateChallengeBtn); // Kör progressbaren)
-            /* await Task.Delay(1000);
-             progressBar.Visible = false; // Visar progressbaren
-             initiateChallengeBtn.Enabled = true; // Inaktiverar knappen så att det inte går att spamma när eventet körs
-            */
+            await UIEnhancer.RunLoadingBar(progressBar, initiateChallengeBtn); // Kör progressbaren
+
             // Om vinsten är positiv
             if (netWin > 0)
             {
@@ -168,8 +164,8 @@ namespace Projekt.Forms
         private void anticipateSavingsBtn_Click(object sender, EventArgs e)
         {
             anticipateSavingsPanel.Visible = true; // Visar panelen
-            savingsPanel.Visible = false; // Döljer den stora panelen för verktygen
-            openToolsSavingBtn.Visible = true; // Visar knappen för att kunna se sparverktygen igen
+            savingsPanel.Visible = true; // Döljer den stora panelen för verktygen
+            panel2.Visible = false; // Döljer panelen för sparkalkylator
         }
         // Stänger ned panelen för sparkalkylator och döljer även resultatet av beräkningen
         private void closeCalculatorPanelBtn_Click(object sender, EventArgs e)
@@ -192,9 +188,8 @@ namespace Projekt.Forms
             anticipateSavingsPanel.Visible = false; // Döljer panelen
             totalSavingsPanel.Visible = false; // Dölj "beräknings-resultatet"
             savingsPanel.Visible = true; // Visar panelen med sparutmaningen
-            openToolsSavingBtn.Visible = false; // Döljer knappen
-            panel2.Visible = true;
-            panel3.Visible = true;
+            panel2.Visible = true; // Visar panelen för sparkalkylator
+            panel3.Visible = true; // Visar panelen för sparutmaningen
             challengePanel.Visible = false; // Döljer panelen med sparutmaningen
             checkBox1.Checked = false; // Avmarkerar checkboxen
         }
@@ -223,11 +218,12 @@ namespace Projekt.Forms
                 amountPlayedTodayLabel.ForeColor = Color.Black;
             }
         }
+        // Stänger av appen
         private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
+        // Navigerar till om-sidan
         private void omToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm aboutForm = new AboutForm(this);

@@ -308,7 +308,7 @@
             roleLabel.AutoSize = true;
             roleLabel.Font = new Font("Lucida Sans", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             roleLabel.ForeColor = Color.FromArgb(43, 45, 66);
-            roleLabel.Location = new Point(20, 55);
+            roleLabel.Location = new Point(20, 46);
             roleLabel.Margin = new Padding(4, 0, 4, 0);
             roleLabel.Name = "roleLabel";
             roleLabel.Size = new Size(46, 15);
@@ -363,12 +363,12 @@
             // menuStrip1
             // 
             menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            menuStrip1.BackColor = Color.FromArgb(244, 245, 247);
+            menuStrip1.BackColor = Color.FromArgb(192, 255, 192);
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem, hjälpToolStripMenuItem });
-            menuStrip1.Location = new Point(959, 0);
+            menuStrip1.Location = new Point(1079, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(216, 24);
+            menuStrip1.Size = new Size(96, 24);
             menuStrip1.TabIndex = 11;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -396,7 +396,7 @@
             // omToolStripMenuItem
             // 
             omToolStripMenuItem.Name = "omToolStripMenuItem";
-            omToolStripMenuItem.Size = new Size(180, 22);
+            omToolStripMenuItem.Size = new Size(94, 22);
             omToolStripMenuItem.Text = "&Om";
             omToolStripMenuItem.Click += omToolStripMenuItem_Click;
             // 

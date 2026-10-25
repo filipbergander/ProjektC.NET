@@ -26,7 +26,7 @@ namespace Projekt.Forms
             this.userService = userService;
             this.mainForm = mainForm;
         }
-
+        // Vid klick på skapa användare
         private async void createUserButton_Click(object sender, EventArgs e)
         {
             // Sätter felmeddelandet till rött
@@ -114,17 +114,18 @@ namespace Projekt.Forms
             msgLabel.Text = string.Empty;
             userMsgPanel.Visible = false;
         }
-
+        // Stänger av appen
         private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
+        // Navigerar till om-sidan
         private void omToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm aboutForm = new AboutForm(this);
             aboutForm.Show();
             this.Hide();
         }
+
     }
 }
