@@ -13,10 +13,10 @@ namespace Projekt.Services
 {
     public class BudgetMLService
     {
-        private readonly SavingsGameInput gameSchema;
+        private readonly BudgetGameInput gameSchema;
         private readonly string dataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "budget-data.csv"); // Filsökvägen för datafilen
 
-        public BudgetMLService(SavingsGameInput gameSchema)
+        public BudgetMLService(BudgetGameInput gameSchema)
         {
             this.gameSchema = gameSchema;
         }
@@ -32,27 +32,27 @@ namespace Projekt.Services
             }
 
             // Laddar in datafilen med tidigare data om sparutmaningen som modellen ska tränas på
-            IDataView data = mlContext.Data.LoadFromTextFile<SavingsGameInput>(dataPath, hasHeader: true, separatorChar: ',');
+            IDataView data = mlContext.Data.LoadFromTextFile<BudgetGameInput>(dataPath, hasHeader: true, separatorChar: ',');
 
             // Skapar en pipeline utifrån 
             var pipeline = mlContext
                 .Transforms.Concatenate("Features",
-                nameof(SavingsGameInput.CurrentBalance),
-                nameof(SavingsGameInput.DayOfMonth),
-                nameof(SavingsGameInput.LuckFactor))
+                nameof(BudgetGameInput.CurrentBalance),
+                nameof(BudgetGameInput.DayOfMonth),
+                nameof(BudgetGameInput.LuckFactor))
                 .Append(mlContext.Regression.Trainers.FastTree(  // Använder FastTree-trainern
-                    labelColumnName: nameof(SavingsGameInput.BonusReward),
+                    labelColumnName: nameof(BudgetGameInput.BonusReward),
                     numberOfLeaves: 4,
                     numberOfTrees: 10));
 
            /* Testresultat för att utvärdera hur bra modellen faktiskt fungerar
-            * var cvResults = mlContext.Regression.CrossValidate(data, pipeline, numberOfFolds: 5, labelColumnName: nameof(SavingsGameInput.BonusReward)); // 5-faldig korsvalidering för att utvärdera modellen
+            * var cvResults = mlContext.Regression.CrossValidate(data, pipeline, numberOfFolds: 5, labelColumnName: nameof(BudgetGameInput.BonusReward)); // 5-faldig korsvalidering för att utvärdera modellen
 
             double averageMAE = cvResults.Average(r => r.Metrics.MeanAbsoluteError); // Medelvärdet av Mean Absolute Error
             double averageRMSE = cvResults.Average(r => r.Metrics.RootMeanSquaredError); // Medelvärdet av Root Mean Squared Error
             double averageR2 = cvResults.Average(r => r.Metrics.RSquared); // Medelvärdet av R^2
 
-            var testMetrics = mlContext.Regression.Evaluate(cvResults[0].Model.Transform(data), labelColumnName: nameof(SavingsGameInput.BonusReward)); // Utvärderar modellen med testdata
+            var testMetrics = mlContext.Regression.Evaluate(cvResults[0].Model.Transform(data), labelColumnName: nameof(BudgetGameInput.BonusReward)); // Utvärderar modellen med testdata
             MessageBox.Show($"Testresultat\n" +
                 $"MAE: {averageMAE:F2}\n" +
                 $"MSE: {averageRMSE:F2}\n" +
@@ -61,10 +61,10 @@ namespace Projekt.Services
             // Tränar modellen på data från datasetet
             var model = pipeline.Fit(data);
 
-            var predictionEngine = mlContext.Model.CreatePredictionEngine<SavingsGameInput, SavingsGamePrediction>(model);
+            var predictionEngine = mlContext.Model.CreatePredictionEngine<BudgetGameInput, BudgetGamePrediction>(model);
 
             // Användarens data som modellen ska utvärdera för att generera ett resultat
-            var userData = new SavingsGameInput
+            var userData = new BudgetGameInput
             {
                 CurrentBalance = currentBalance,
                 DayOfMonth = dayOfMonth,

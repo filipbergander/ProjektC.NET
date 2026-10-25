@@ -13,7 +13,7 @@ using Microsoft.ML.Data;
 namespace Projekt.Models
 {
     // Det modellen kommer tränas på
-    public class SavingsGameInput
+    public class BudgetGameInput
     {
         [LoadColumn(0)]
         public float CurrentBalance { get; set; } // Pengar på kontot just nu
@@ -28,7 +28,7 @@ namespace Projekt.Models
         public float BonusReward { get; set; } // Det som modellen ska avgöra, hur mycket bonus man kan få på sparutmaningen
     }
     // Det som modellen ska avgöra och generera -> i detta fall hur mycket bonus man kan få på sparutmaningen
-    public class SavingsGamePrediction
+    public class BudgetGamePrediction
     {
         [ColumnName("Score")]
         public float BonusReward { get; set; }

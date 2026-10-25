@@ -31,7 +31,7 @@ namespace Projekt.Forms
             this.userService = new UserService();
             this.financeService = new FinanceService(transaction);
             this.savingsService = new GamingService(transaction);
-            this.mlService = mlService ?? new BudgetMLService(new SavingsGameInput());
+            this.mlService = mlService ?? new BudgetMLService(new BudgetGameInput());
             this.loggedInUser = username;
             this.loggedInRole = role;
             MainFormLoad();
