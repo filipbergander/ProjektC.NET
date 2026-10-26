@@ -45,10 +45,12 @@ namespace Projekt.Forms
             menuStrip1 = new MenuStrip();
             appToolStripMenuItem = new ToolStripMenuItem();
             ExitAppMenu = new ToolStripMenuItem();
+            iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             userMsgPanel.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox2).BeginInit();
             SuspendLayout();
             // 
             // userNameLabel
@@ -114,6 +116,7 @@ namespace Projekt.Forms
             // userMsgPanel
             // 
             userMsgPanel.BackColor = SystemColors.Info;
+            userMsgPanel.Controls.Add(iconPictureBox2);
             userMsgPanel.Controls.Add(label1);
             userMsgPanel.Controls.Add(msgLabel);
             userMsgPanel.Location = new Point(179, 131);
@@ -126,7 +129,7 @@ namespace Projekt.Forms
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(77, 8);
+            label1.Location = new Point(86, 8);
             label1.Name = "label1";
             label1.Size = new Size(129, 18);
             label1.TabIndex = 1;
@@ -175,9 +178,9 @@ namespace Projekt.Forms
             menuStrip1.BackColor = Color.FromArgb(192, 255, 192);
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.Items.AddRange(new ToolStripItem[] { appToolStripMenuItem });
-            menuStrip1.Location = new Point(1006, 9);
+            menuStrip1.Location = new Point(1126, 9);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(169, 24);
+            menuStrip1.Size = new Size(49, 24);
             menuStrip1.TabIndex = 16;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -194,6 +197,19 @@ namespace Projekt.Forms
             ExitAppMenu.Size = new Size(113, 22);
             ExitAppMenu.Text = "A&vsluta";
             ExitAppMenu.Click += ExitAppMenu_Click;
+            // 
+            // iconPictureBox2
+            // 
+            iconPictureBox2.BackColor = SystemColors.Info;
+            iconPictureBox2.ForeColor = Color.Firebrick;
+            iconPictureBox2.IconChar = FontAwesome.Sharp.IconChar.CircleExclamation;
+            iconPictureBox2.IconColor = Color.Firebrick;
+            iconPictureBox2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox2.Location = new Point(57, 3);
+            iconPictureBox2.Name = "iconPictureBox2";
+            iconPictureBox2.Size = new Size(32, 32);
+            iconPictureBox2.TabIndex = 3;
+            iconPictureBox2.TabStop = false;
             // 
             // LoginForm
             // 
@@ -220,6 +236,7 @@ namespace Projekt.Forms
             ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -240,5 +257,6 @@ namespace Projekt.Forms
         private MenuStrip menuStrip1;
         private ToolStripMenuItem appToolStripMenuItem;
         private ToolStripMenuItem ExitAppMenu;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox2;
     }
 }

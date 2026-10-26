@@ -50,9 +50,11 @@
             hjälpToolStripMenuItem = new ToolStripMenuItem();
             omToolStripMenuItem = new ToolStripMenuItem();
             addTransactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             userMsgPanel.SuspendLayout();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // newUserNameLabel
@@ -164,11 +166,12 @@
             // userMsgPanel
             // 
             userMsgPanel.BackColor = SystemColors.Info;
+            userMsgPanel.Controls.Add(iconPictureBox1);
             userMsgPanel.Controls.Add(label1);
             userMsgPanel.Controls.Add(msgLabel);
-            userMsgPanel.Location = new Point(142, 99);
+            userMsgPanel.Location = new Point(66, 99);
             userMsgPanel.Name = "userMsgPanel";
-            userMsgPanel.Size = new Size(284, 237);
+            userMsgPanel.Size = new Size(360, 296);
             userMsgPanel.TabIndex = 12;
             userMsgPanel.Visible = false;
             // 
@@ -176,7 +179,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(77, 8);
+            label1.Location = new Point(114, 13);
             label1.Name = "label1";
             label1.Size = new Size(129, 18);
             label1.TabIndex = 1;
@@ -278,6 +281,19 @@
             addTransactionFormReturnBtn.UseVisualStyleBackColor = false;
             addTransactionFormReturnBtn.Click += addTransactionFormReturnBtn_Click;
             // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = SystemColors.Info;
+            iconPictureBox1.ForeColor = Color.Firebrick;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.CircleExclamation;
+            iconPictureBox1.IconColor = Color.Firebrick;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.Location = new Point(85, 7);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(32, 32);
+            iconPictureBox1.TabIndex = 2;
+            iconPictureBox1.TabStop = false;
+            // 
             // newUserRegisterForm
             // 
             AcceptButton = createUserButton;
@@ -304,6 +320,7 @@
             panel1.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -331,5 +348,6 @@
         private ToolStripMenuItem hjälpToolStripMenuItem;
         private ToolStripMenuItem omToolStripMenuItem;
         private FontAwesome.Sharp.IconButton addTransactionFormReturnBtn;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

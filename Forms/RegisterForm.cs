@@ -41,11 +41,27 @@ namespace Projekt.Forms
             {
                 errors.Add("* Fyll i användarnamn!");
             }
+            else if (newUsernameText.Text.Length < 3)
+            {
+                errors.Add("* Användarnamnet kräver minst 3 tecken!");
+            }
+            else if (newUsernameText.Text.Length > 12)
+            {
+                errors.Add("* Användarnamnet får max vara 12 tecken!");
+            }
 
-            // Tittar om lösenorden är tomma 
+            // Tittar om lösenorden är tomma samt giltig längd
             if (string.IsNullOrEmpty(newUserPasswordText.Text) || string.IsNullOrEmpty(newUserConfirmPasswordText.Text))
             {
                 errors.Add("* Fyll i lösenorden!");
+            }
+            else if (newUserPasswordText.Text.Length < 6 || newUserConfirmPasswordText.Text.Length < 6)
+            {
+                errors.Add("* Lösenordet kräver minst 6 tecken!");
+            }
+            else if (newUserPasswordText.Text.Length > 12 || newUserConfirmPasswordText.Text.Length > 12)
+            {
+                errors.Add("* Lösenordet får max vara 12 tecken!");
             }
             // Om inte en roll har valts
             if (string.IsNullOrEmpty(newUserRoleCombo.SelectedItem?.ToString() ?? string.Empty))
@@ -71,7 +87,6 @@ namespace Projekt.Forms
             string username = newUsernameText.Text.Trim();
             string role = newUserRoleCombo.SelectedItem?.ToString() ?? string.Empty;
             string password = newUserPasswordText.Text.Trim();
-            //string confirmPassword = newUserConfirmPasswordText.Text.Trim();
 
             // Skapar en ny användare genom den inmatade informationen
             User newUser = new User(username, role, password);

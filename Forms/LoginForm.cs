@@ -80,7 +80,7 @@ namespace Projekt.Forms
         // Stänger av applikationen
         private void ExitAppMenu_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(0);
         }
     }
 }
