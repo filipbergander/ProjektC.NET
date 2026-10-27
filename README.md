@@ -1,6 +1,6 @@
 # Projektuppgift | Programmering i C#.NET DT071G
 ## Budgetkoll
-**Budgetkoll** skapades i Windows Forms för att ge användaren en tydlig översikt över sin privatekonomi genom att samla utgifter och inkomster i en och samma applikation. Inspiration till projektet hämtades från tidigare budgetkalkyler skapade i Microsoft Excel. För hantering av data används LINQ-syntax genom .NET-ramverket i stora delar av applikationen. Projektet skapades med utvecklingsverktyget Microsoft Visual Studio 2026 Preview och .NET.    
+**Budgetkoll** skapades i Windows Forms för att ge användaren en tydlig översikt över sin privatekonomi genom att samla utgifter och inkomster i en och samma applikation. Inspiration till projektet hämtades från tidigare budgetkalkyler skapade i Microsoft Excel. För hantering av data används LINQ-frågespråket genom .NET-ramverket i stora delar av applikationen. Projektet skapades med utvecklingsverktyget Microsoft Visual Studio 2026 och C#.NET.    
 ### Funktionalitet
 * Hantering av transaktioner med CRUD-funktionalitet (Create, Read, Update, Delete).
 * Sortering, filtrering och sökning bland transaktioner.
