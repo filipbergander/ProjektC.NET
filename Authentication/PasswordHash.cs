@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Projekt.Authentication
 {
-    internal class PasswordAuthentication
+    internal class PasswordHash
     {
         // En random salt-sträng skapas när användaren registreras
         public static string GenerateSalt()

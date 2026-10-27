@@ -37,8 +37,8 @@ namespace Projekt.Services
                 return false;
             }
             // Skapar salt och hashar lösenordet med saltet
-            string salt = PasswordAuthentication.GenerateSalt();
-            string passwordHash = PasswordAuthentication.HashPassword(user.PasswordHash!, salt);
+            string salt = PasswordHash.GenerateSalt();
+            string passwordHash = PasswordHash.HashPassword(user.PasswordHash!, salt);
 
             // Skapar ny användare utifrån inmatning samt salt och hashen
             User createNewUser = new User
@@ -68,7 +68,7 @@ namespace Projekt.Services
                 return null;
             }
             // Hashar det inmatade lösenordet med salt och jämför med hashen i databasen
-            string loginHash = PasswordAuthentication.HashPassword(password, user.Salt!);
+            string loginHash = PasswordHash.HashPassword(password, user.Salt!);
             if (loginHash == user.PasswordHash)
             {
                 return user;
