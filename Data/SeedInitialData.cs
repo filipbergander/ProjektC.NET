@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Projekt.Models;
-using Projekt.Data;
-using Projekt.Authentication;
+using Projekt.Services;
 
 namespace Projekt.Data
 {

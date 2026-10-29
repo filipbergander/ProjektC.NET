@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Projekt.UI
+namespace Projekt.Forms
 {
     public static class UIEnhancer
     {

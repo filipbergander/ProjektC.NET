@@ -8,7 +8,6 @@ using Projekt.Data;
 using System.Runtime.InteropServices.Marshalling;
 using Projekt.Interfaces;
 using System.Data.Common;
-using Projekt.Authentication;
 
 namespace Projekt.Services
 {

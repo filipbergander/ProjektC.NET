@@ -249,8 +249,21 @@ namespace Projekt.Forms
         private void DisplayTotalTransactionsCount()
         {
             var totalTransactions = transaction.GetTransactions().Result; // Alla transaktioner i databasen
-            var displayingTransactions = transactionGrid.DataSource as List<Transaction>; // Hämtar in transaktionerna som visas i datagriden just nu
-            totalSumTransactions.Text = $"Summa: {displayingTransactions?.Sum(t => t.Typ == "Utgift" ? -t.Belopp : t.Belopp):N2} kr"; // Visar summan av transaktionerna som visas i datagriden, t.ex vid filtrering
+            var displayingTransactions = transactionGrid.DataSource as List<Transaction>; // Hämtar in transaktionerna som visas i datagriden just nu'
+            float totalSum = displayingTransactions?.Sum(t => t.Typ == "Utgift" ? -t.Belopp : t.Belopp) ?? 0; // Beräknar summan av transaktionerna som visas i datagriden, t.ex vid filtrering)
+            if (totalSum < 0)
+            {
+                totalSumTransactions.ForeColor = Color.Firebrick; // Sätter texten till röd färg om summan är negativ
+            }
+            else
+            {
+                totalSumTransactions.ForeColor = Color.FromArgb(13, 119, 56); // Sätter texten till grön färg om summan är positiv
+            }
+
+            totalSumTransactions.Text = $"Summa: {totalSum:N2} kr"; // Visar summan av transaktionerna som visas i datagriden, t.ex vid filtrering
+
+            //totalSumTransactions.Text = $"Summa: {displayingTransactions?.Sum(t => t.Typ == "Utgift" ? -t.Belopp : t.Belopp):N2} kr"; // Visar summan av transaktionerna som visas i datagriden, t.ex vid filtrering
+
             // Beroende på hur många transaktioner som visas i datagriden, skrivs texten ut olika i labeln
             if (displayingTransactions?.Count >= 1)
             {

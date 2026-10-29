@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Projekt.Authentication
+namespace Projekt.Services
 {
-    internal class PasswordHash
+    internal static class PasswordHash
     {
         // En random salt-sträng skapas när användaren registreras
         public static string GenerateSalt()
         {
-            var rng = RandomNumberGenerator.Create();
+            using var rng = RandomNumberGenerator.Create();
             byte[] saltBytes = new byte[16];
             rng.GetBytes(saltBytes);
             string saltText = Convert.ToBase64String(saltBytes);
@@ -19,7 +19,7 @@ namespace Projekt.Authentication
         // Lösenordet hashas genom saltet
         public static string HashPassword(string password, string salt)
         {
-            var sha = SHA256.Create();
+            using var sha = SHA256.Create();
             string saltedPassword = password + salt;
             byte[] hashBytes = sha.ComputeHash(Encoding.UTF8.GetBytes(saltedPassword));
             string hashText = Convert.ToBase64String(hashBytes);
