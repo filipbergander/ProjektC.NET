@@ -26,5 +26,14 @@ namespace Projekt.Forms
             progressBar?.Visible = false;
             button?.Enabled = true;
         }
+        // Visar en notifikation i formulär som försvinner efter 1.8 sekunder
+        public static async Task DisplayNotification(Label label, string message, string color)
+        {
+            label.ForeColor = Color.FromName(color); // Sätter färgen på texten i labeln
+            label.Text = message; // Meddelandet
+            label.Visible = true; // Visar labeln
+            await Task.Delay(1800); // Väntar i 1,8 sekunder
+            label.Visible = false; // Döljer labeln igen
+        }
     }
 }

@@ -78,7 +78,7 @@
             addTransactionTypeComboBox.Location = new Point(197, 30);
             addTransactionTypeComboBox.Margin = new Padding(10);
             addTransactionTypeComboBox.Name = "addTransactionTypeComboBox";
-            addTransactionTypeComboBox.Size = new Size(345, 26);
+            addTransactionTypeComboBox.Size = new Size(430, 26);
             addTransactionTypeComboBox.TabIndex = 1;
             addTransactionTypeComboBox.Tag = "";
             // 
@@ -89,7 +89,7 @@
             addTransactionTitleText.Margin = new Padding(10);
             addTransactionTitleText.Name = "addTransactionTitleText";
             addTransactionTitleText.PlaceholderText = "Skriv namn";
-            addTransactionTitleText.Size = new Size(345, 26);
+            addTransactionTitleText.Size = new Size(430, 26);
             addTransactionTitleText.TabIndex = 2;
             // 
             // addTransactionAmountNum
@@ -99,7 +99,7 @@
             addTransactionAmountNum.Margin = new Padding(10);
             addTransactionAmountNum.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             addTransactionAmountNum.Name = "addTransactionAmountNum";
-            addTransactionAmountNum.Size = new Size(345, 26);
+            addTransactionAmountNum.Size = new Size(430, 26);
             addTransactionAmountNum.TabIndex = 4;
             // 
             // addTransactionTypeLabel
@@ -166,7 +166,7 @@
             addTransactionPanel.Controls.Add(flowLayoutPanel2, 1, 6);
             addTransactionPanel.Controls.Add(flowLayoutPanel1, 1, 5);
             addTransactionPanel.Controls.Add(addTransactionCategoryCombo, 1, 2);
-            addTransactionPanel.Location = new Point(352, 88);
+            addTransactionPanel.Location = new Point(289, 87);
             addTransactionPanel.Name = "addTransactionPanel";
             addTransactionPanel.Padding = new Padding(20);
             addTransactionPanel.RowCount = 7;
@@ -177,7 +177,7 @@
             addTransactionPanel.RowStyles.Add(new RowStyle());
             addTransactionPanel.RowStyles.Add(new RowStyle());
             addTransactionPanel.RowStyles.Add(new RowStyle());
-            addTransactionPanel.Size = new Size(572, 382);
+            addTransactionPanel.Size = new Size(657, 382);
             addTransactionPanel.TabIndex = 11;
             // 
             // addTransactionDatePicker
@@ -186,7 +186,7 @@
             addTransactionDatePicker.Location = new Point(197, 214);
             addTransactionDatePicker.Margin = new Padding(10);
             addTransactionDatePicker.Name = "addTransactionDatePicker";
-            addTransactionDatePicker.Size = new Size(345, 26);
+            addTransactionDatePicker.Size = new Size(430, 26);
             addTransactionDatePicker.TabIndex = 4;
             // 
             // addTransactionDateLabel
@@ -252,6 +252,7 @@
             msgLabel.Name = "msgLabel";
             msgLabel.Size = new Size(0, 18);
             msgLabel.TabIndex = 7;
+            msgLabel.Visible = false;
             // 
             // addTransactionCategoryCombo
             // 
@@ -262,7 +263,7 @@
             addTransactionCategoryCombo.Margin = new Padding(10);
             addTransactionCategoryCombo.MaxDropDownItems = 20;
             addTransactionCategoryCombo.Name = "addTransactionCategoryCombo";
-            addTransactionCategoryCombo.Size = new Size(345, 26);
+            addTransactionCategoryCombo.Size = new Size(430, 26);
             addTransactionCategoryCombo.TabIndex = 3;
             // 
             // AddTransactionFormReturnBtn

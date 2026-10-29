@@ -11,18 +11,25 @@ namespace Projekt.Data
     {
         public static void SeedData(ProjektDbContext db)
         {
+            User adminUser;
             // För att hasha lösenordet och skapa salt, -> dölja lösenordet i databasen
             string salt = PasswordHash.GenerateSalt();
             if (!db.Users.Any())
             {
-                User adminUser = new User
+                adminUser = new User
                 {
                     Username = "Miun",
                     Role = "Admin",
                     Salt = salt,
                     PasswordHash = PasswordHash.HashPassword("rootroot123!", salt)
                 };
+                // Lägger till användaren i databasen och sparar
                 db.Users.Add(adminUser);
+                db.SaveChanges();
+            }
+            else
+            {
+                adminUser = db.Users.First();
             }
 
             // Om inga transaktioner finns i databasen, läggs det till några transaktioner
@@ -34,7 +41,8 @@ namespace Projekt.Data
                     Namn = "Försvarsmakten",
                     Kategori = "Lön",
                     Belopp = 25000,
-                    Datum = "2026-11-01"
+                    Datum = "2026-11-01",
+                    UserId = adminUser.Id
                 },
                 new Transaction
                 {
@@ -42,7 +50,8 @@ namespace Projekt.Data
                     Namn = "Sålde bil",
                     Kategori = "Bil",
                     Belopp = 3000,
-                    Datum = "2026-10-01"
+                    Datum = "2026-10-01",
+                    UserId = adminUser.Id
                 },
                     new Transaction
                     {
@@ -50,7 +59,8 @@ namespace Projekt.Data
                         Namn = "Hyra",
                         Kategori = "Hyra",
                         Belopp = 10000,
-                        Datum = "2026-10-01"
+                        Datum = "2026-10-01",
+                        UserId = adminUser.Id
                     },
                         new Transaction
                         {
@@ -58,7 +68,8 @@ namespace Projekt.Data
                             Namn = "Handlade på ICA",
                             Kategori = "Mat",
                             Belopp = 1500,
-                            Datum = "2026-10-01"
+                            Datum = "2026-10-01",
+                            UserId = adminUser.Id
                         },
                         new Transaction
                         {
@@ -66,7 +77,8 @@ namespace Projekt.Data
                             Namn = "Mobilabonnemang",
                             Kategori = "Räkningar",
                             Belopp = 250,
-                            Datum = "2026-10-01"
+                            Datum = "2026-10-01",
+                            UserId = adminUser.Id
                         },
                             new Transaction
                             {
@@ -74,7 +86,8 @@ namespace Projekt.Data
                                 Namn = "Köpte ny bil",
                                 Kategori = "Bil",
                                 Belopp = 15000,
-                                Datum = "2026-10-01"
+                                Datum = "2026-10-01",
+                                UserId = adminUser.Id
                             }
                 );
             }

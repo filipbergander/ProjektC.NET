@@ -69,6 +69,7 @@ namespace Projekt.Forms
             }
             LoggedInUsername = user.Username ?? string.Empty;
             LoggedInRole = user.Role ?? string.Empty;
+            SessionService.CurrentUser = user;
             // Öppnar MainForm
             this.DialogResult = DialogResult.OK;
             this.Close();

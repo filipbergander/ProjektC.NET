@@ -304,7 +304,7 @@
             closeFilterPanelButton.Cursor = Cursors.Hand;
             closeFilterPanelButton.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             closeFilterPanelButton.ForeColor = Color.Black;
-            closeFilterPanelButton.Location = new Point(137, 12);
+            closeFilterPanelButton.Location = new Point(151, 12);
             closeFilterPanelButton.Name = "closeFilterPanelButton";
             closeFilterPanelButton.Size = new Size(28, 31);
             closeFilterPanelButton.TabIndex = 18;

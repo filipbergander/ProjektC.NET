@@ -21,6 +21,7 @@ namespace Projekt.Forms
         private readonly QueryService queryService;
         private readonly MainForm mainForm;
 
+        private readonly int UserId = SessionService.CurrentUser!.Id; // Hämtar in den inloggade användarens id
         // Konstruktor
         public AddTransactionForm(ITransactionService transaction, TransactionForm transactionForm, QueryService queryService, MainForm mainForm, Transaction? transactionToEdit = null)
         {// Startar upp formuläret med alla komponenter
@@ -71,6 +72,10 @@ namespace Projekt.Forms
             {
                 errors.Add("* Ange kategori för transaktionen!");
             }
+            if (addTransactionCategoryCombo.Text.Equals("Sparande", StringComparison.OrdinalIgnoreCase))
+            {
+                errors.Add("* Kategorin \"Sparande\" är reserverad för sparutmaning");
+            }
             // Om angivet belopp är 0 eller mindre
             if (addTransactionAmountNum.Value <= 0)
             {
@@ -86,9 +91,10 @@ namespace Projekt.Forms
             {
                 // Radbryter varje felmeddelande
                 msgLabel.Text = string.Join("\n", errors);
+                msgLabel.Visible = true; // Visar labeln med felmeddelanden
                 return;
             }
-
+            msgLabel.Visible = false;
             // Hämtar in värdena i inputsen 
             string? type = addTransactionTypeComboBox.SelectedItem?.ToString()!;
             string? title = addTransactionTitleText.Text;
@@ -102,12 +108,12 @@ namespace Projekt.Forms
             string? dateStr = date.ToString("yyyy-MM-dd");
 
             // Lägger till den specifika transaktionen i listan av transaktioner
-            Transaction newTransaction = new Transaction(type, title, category, amount, dateStr);
+            Transaction newTransaction = new Transaction(type, title, category, amount, dateStr, UserId);
 
             // Lägger till en transaktion
             if (transactionToEdit == null)
             {
-                bool added = await transaction.AddTransaction(newTransaction);
+                bool added = await transaction.AddTransaction(newTransaction, UserId);
                 if (!added)
                 {
                     msgLabel.ForeColor = Color.Red;
@@ -119,13 +125,18 @@ namespace Projekt.Forms
             else if (transactionToEdit != null)
             {
                 await transaction.UpdateTransaction(transactionToEdit.Id, newTransaction);
+                ResetForm();
+                msgLabel.ForeColor = Color.Green;
+                await UIEnhancer.DisplayNotification(msgLabel, "Transaktionen har uppdaterats!\nNavigerar till transaktionssidan..", "ForestGreen");
+                this.Close();
+                return;
             }
 
             // Återställer inputs
             ResetForm();
             // Visar "lyckat-meddelande" beroende på vilken transaktion som görs i UI, sätter även textfärgen till grön
-            msgLabel.ForeColor = Color.Green;
-            msgLabel.Text = transactionToEdit == null ? "Transaktionen har lagts till!" : "Transaktionen har uppdaterats!";
+            msgLabel.Text = "Transaktionen har lagts till!";
+            await UIEnhancer.DisplayNotification(msgLabel, msgLabel.Text, "ForestGreen"); // Visar en notifikation om att transaktionen skapades/uppdaterades
         }
         // Går tillbaka till transaktionerna -> vid klick på "Gå tillbaka"
         private void AddTransactionFormReturnBtn_Click(object sender, EventArgs e)
@@ -175,6 +186,7 @@ namespace Projekt.Forms
         private async void LoadCategories()
         {
             var categories = await queryService.GetCategoryValues();
+            categories = categories.Where(c => c != "Sparande").ToList();
             addTransactionCategoryCombo.BeginUpdate();
             addTransactionCategoryCombo.Items.Clear();
             addTransactionCategoryCombo.Items.AddRange(categories.ToArray());

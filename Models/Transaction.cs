@@ -16,19 +16,22 @@ namespace Projekt.Models
         public string? Kategori { get; set; }
         public float Belopp { get; set; }
         public string? Datum { get; set; }
+        public int UserId { get; set; } // Främmande nyckel mot användartabellen
+        public User User { get; set; } = null!; 
 
         // Konstruktorer
         public Transaction() // Tom konstruktor som används när man skapar seedningsdata
         {
         }
 
-        public Transaction(string typ, string namn, string kategori, float belopp, string datum)
+        public Transaction(string typ, string namn, string kategori, float belopp, string datum, int userId)
         {
             Typ = typ;
             Namn = namn;
             Kategori = kategori;
             Belopp = belopp;
             Datum = datum;
+            UserId = userId;
         }
     }
 }

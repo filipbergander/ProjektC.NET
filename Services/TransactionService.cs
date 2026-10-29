@@ -22,7 +22,7 @@ namespace Projekt.Services
         }
 
         // Lägger till en ny transaktion
-        public async Task<bool> AddTransaction(Transaction transaction)
+        public async Task<bool> AddTransaction(Transaction transaction, int userId)
         {
             // Kollar om en transaktion redan finns i databasen
             var existingTransaction = await database.Set<Transaction>()
@@ -30,7 +30,8 @@ namespace Projekt.Services
                 dbTransaction.Namn == transaction.Namn &&
                 dbTransaction.Kategori == transaction.Kategori &&
                 dbTransaction.Belopp == transaction.Belopp &&
-                dbTransaction.Datum == transaction.Datum);
+                dbTransaction.Datum == transaction.Datum &&
+                dbTransaction.UserId == userId);
 
             // Transaktionen finns redan, kör inte vidare
             if (existingTransaction)
@@ -44,8 +45,8 @@ namespace Projekt.Services
             return true;
         }
         // Hämtar in alla transaktioner från databasen
-        public async Task<List<Transaction>> GetTransactions() =>
-            await database.Set<Transaction>().ToListAsync();
+        public async Task<List<Transaction>> GetTransactions(int userId) =>
+            await database.Set<Transaction>().Where(t => t.UserId == userId).ToListAsync();
 
         // Tar bort en transaktion från databasen
         public async Task RemoveTransaction(int id)

@@ -23,6 +23,7 @@ namespace Projekt.Forms
         private string currentSortColumn = ""; // Vilken kolumn som är sorterad i datagriden
         private bool ascending = true; // Sorteringsordningen för kolumnerna i datagriden
         private List<Transaction> displayingTransactions = []; // Sparar antalet transaktioner som visas i datagriden "nu" till denna variabel
+        private int UserId = SessionService.CurrentUser!.Id; // Hämtar in den inloggade användarens id
 
         // Konstruktor som tar emot en instans av TransactionService (transaction) och sätter den till _transaction
         public TransactionForm(ITransactionService transaction, MainForm mainForm)
@@ -37,7 +38,7 @@ namespace Projekt.Forms
         // Hämtar in transaktioner sparade i databasen och visar i datagriden (listan av transaktioner)
         private async void LoadTransactions()
         {
-            displayingTransactions = await transaction.GetTransactions();
+            displayingTransactions = await transaction.GetTransactions(UserId);
             resetTransactionGrid(displayingTransactions);
             await AddFilterInfo();
             DisplayTotalTransactionsCount();
@@ -172,11 +173,22 @@ namespace Projekt.Forms
         // Döljer id-kolumnen i datagriden och sätter en valfri ordning på resterande kolumner
         private void OrderColumns()
         {
-            // Dölj Id-kolumnen
+            // Dölj kolumner id, userid och user i datagrid
             if (transactionGrid.Columns["Id"] != null)
             {
                 transactionGrid.Columns["Id"]?.Visible = false;
             }
+
+            if (transactionGrid.Columns["UserId"] != null)
+            {
+                transactionGrid.Columns["UserId"]?.Visible = false;
+            }
+
+            if (transactionGrid.Columns["User"] != null)
+            {
+                transactionGrid.Columns["User"]?.Visible = false;
+            }
+
             // Sätter ordningen i datagridens resterande kolumner
             if (transactionGrid.Columns["Datum"] != null)
             {
@@ -248,7 +260,7 @@ namespace Projekt.Forms
         // Skriver ut antalet transaktioner som visas i datagriden
         private void DisplayTotalTransactionsCount()
         {
-            var totalTransactions = transaction.GetTransactions().Result; // Alla transaktioner i databasen
+            var totalTransactions = transaction.GetTransactions(UserId).Result; // Alla transaktioner i databasen
             var displayingTransactions = transactionGrid.DataSource as List<Transaction>; // Hämtar in transaktionerna som visas i datagriden just nu'
             float totalSum = displayingTransactions?.Sum(t => t.Typ == "Utgift" ? -t.Belopp : t.Belopp) ?? 0; // Beräknar summan av transaktionerna som visas i datagriden, t.ex vid filtrering)
             if (totalSum < 0)
@@ -352,15 +364,15 @@ namespace Projekt.Forms
                 if (selectedTransaction != null)
                 {
                     // Visa en bekräftelse innan användaren går vidare till att radera transaktionen
-                    var result = MessageBox.Show($"Är du säker på att du vill radera transaktionen?\nMed namn '{selectedTransaction.Namn}', och beloppet '{selectedTransaction.Belopp}'?", "Bekräfta radering", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    var result = MessageBox.Show($"Är du säker på att du vill radera transaktionen?\nNamn: \"{selectedTransaction.Namn}\"\nBelopp: \"{selectedTransaction.Belopp}\"", "Bekräfta radering", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     // Om användaren klickar "Ja" -> radera transaktionen
                     if (result == DialogResult.Yes)
                     {
                         await transaction.RemoveTransaction(selectedTransaction.Id);// Radera transaktionen från databasen
-                        displayingTransactions = await transaction.GetTransactions(); // Hämtar in de transaktionerna igen efter raderingen
+                        displayingTransactions = await transaction.GetTransactions(UserId); // Hämtar in de transaktionerna igen efter raderingen
                         resetTransactionGrid(displayingTransactions); // Uppdaterar & återställer datagriden med de inhämtade transaktionerna
                         DisplayTotalTransactionsCount(); // Visar antalet transaktioner som visas i datagriden igen
-                        await DisplayNotification(deleteTransactionNotificationLabel, "Transaktionen raderades!", "ForestGreen"); // Visar en notifikation om att transaktionen raderades
+                        await UIEnhancer.DisplayNotification(deleteTransactionNotificationLabel, "Transaktionen raderades!", "ForestGreen"); // Visar en notifikation om att transaktionen raderades
                     }
                 }
             }
@@ -409,15 +421,6 @@ namespace Projekt.Forms
                 DisableButton(deleteTransactionBtn);
                 DisableButton(updateTransactionBtn);
             }
-        }
-        // Visar en notifikation i formuläret som försvinner efter 2 sekunder
-        private async Task DisplayNotification(Label label, string message, string color)
-        {
-            label.ForeColor = Color.FromName(color); // Sätter färgen på texten i labeln
-            label.Text = message; // Meddelandet
-            label.Visible = true; // Visar labeln
-            await Task.Delay(1800); // Väntar i 1,8 sekunder
-            label.Visible = false; // Döljer labeln igen
         }
         // Öppnar formuläret för att uppdatera en transaktion vid klick -> "Uppdatera" knapp
         private void updateTransactionBtn_Click_1(object sender, EventArgs e)

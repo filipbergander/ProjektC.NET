@@ -16,6 +16,7 @@ namespace Projekt.Services
     {
         // Instans
         private readonly ITransactionService transaction;
+        private int UserId = SessionService.CurrentUser!.Id; // Hämtar in den inloggade användarens id
 
         // Konstruktor
         public QueryService(ITransactionService transaction)
@@ -43,7 +44,7 @@ namespace Projekt.Services
         // Hämtar in alla kategorier som lagts till i transaktioner
         public async Task<List<string>> GetCategoryValues()
         {
-            var transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner från databasen
+            var transactions = await transaction.GetTransactions(UserId); // Hämtar in alla transaktioner från databasen
             // Filtrerar ut kategorier
             return transactions
                 .Select(t => t.Kategori)
@@ -55,7 +56,7 @@ namespace Projekt.Services
         // Hämtar in alla typer av transaktioner som lagt till i -> listan av transaktioner
         public async Task<List<string>> GetTypeValues()
         {
-            var transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner från databasen
+            var transactions = await transaction.GetTransactions(UserId); // Hämtar in alla transaktioner från databasen
             // Filtrerar ut typ
             return transactions
                 .Select(t => t.Typ)
@@ -68,7 +69,7 @@ namespace Projekt.Services
         // Filtrerar transaktionerna beroende på vad användaren har valt i filterpanelen
         public async Task<List<Transaction>> FilterTransactions(TransactionFilter filter)
         {
-            var transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner från databasen
+            var transactions = await transaction.GetTransactions(UserId); // Hämtar in alla transaktioner från databasen
             // Filtrerar ut typer av transaktioner
             if (!string.IsNullOrWhiteSpace(filter.Typ) && filter.Typ != "Alla")
             {

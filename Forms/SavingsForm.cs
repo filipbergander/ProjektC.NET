@@ -78,7 +78,7 @@ namespace Projekt.Forms
 
             // Spelarens totala saldo som omvandlas så att modellen i Mlservice kan använda det
             var playerBalance = gaming.GetPlayerBalanceTransformToModel(decimal.Parse(playerTotalBalance.ToString()));
-
+            int userId = SessionService.CurrentUser?.Id ?? 0; // Hämtar in användarens id, om det inte finns sätts det till 0
             Random randomNumb = new Random(); // För att kunna generera ett random-nummer
 
             float luckFactor = randomNumb.Next(1, 11); // Random-nummer mellan 1 och 10, som sedan används för att påverka vinstchansen
@@ -99,25 +99,25 @@ namespace Projekt.Forms
             {
                 resultMsg = $"Fantastiskt! Du gick med +{netWin} kr plus i sparutmaningen!";
                 MessageBox.Show(resultMsg, "Sparutmaning", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                var winTransaction = new Transaction("Inkomst", "Sparutmaning (vinst)", "Sparande", (float)Math.Abs(netWin), DateTime.Today.ToString("yyyy-MM-dd"));
+                var winTransaction = new Transaction("Inkomst", "Sparutmaning (vinst)", "Sparande", (float)Math.Abs(netWin), DateTime.Today.ToString("yyyy-MM-dd"), userId);
 
-                await transaction.AddTransaction(winTransaction);
+                await transaction.AddTransaction(winTransaction, userId);
             }
             // Om man skulle gå +-0
             else if (netWin == 0)
             {
                 resultMsg = $"Ojdå! Det blev plus minus noll({netWin} kr) i sparutmaningen!";
                 MessageBox.Show(resultMsg, "Sparutmaning", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                var zeroTransaction = new Transaction("Inkomst", "Sparutmaning (nollresultat)", "Sparande", (float)Math.Abs(netWin), DateTime.Today.ToString("yyyy-MM-dd"));
-                await transaction.AddTransaction(zeroTransaction);
+                var zeroTransaction = new Transaction("Inkomst", "Sparutmaning (nollresultat)", "Sparande", (float)Math.Abs(netWin), DateTime.Today.ToString("yyyy-MM-dd"), userId);
+                await transaction.AddTransaction(zeroTransaction, userId);
             }
             else
             // Vid förlust
             {
                 resultMsg = $"Det blev en förlust på {Math.Abs(netWin)} kr denna gång, vilket räknas som en utgift.";
                 MessageBox.Show(resultMsg, "Sparutmaning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                var looseTransaction = new Transaction("Utgift", "Sparutmaning (förlust)", "Sparande", (float)Math.Abs(netWin), DateTime.Today.ToString("yyyy-MM-dd"));
-                await transaction.AddTransaction(looseTransaction);
+                var looseTransaction = new Transaction("Utgift", "Sparutmaning (förlust)", "Sparande", (float)Math.Abs(netWin), DateTime.Today.ToString("yyyy-MM-dd"), userId);
+                await transaction.AddTransaction(looseTransaction, userId);
             }
             await InsertChallengeValues(); // Uppdaterar värdena i sparutmaningen efter att användaren spelat
             dailyPlayCount++; // Ökar spelräknaren när användaren genomfört ett spel

@@ -13,6 +13,7 @@ namespace Projekt.Services
     {
         // Instans
         private readonly ITransactionService transaction;
+        private int UserId = SessionService.CurrentUser!.Id; // Hämtar in den inloggade användarens id
         // Konstruktor
         public GamingService(ITransactionService transaction)
         {
@@ -23,7 +24,7 @@ namespace Projekt.Services
         {
             var today = DateTime.Today.ToString("yyyy-MM-dd"); // Dagens datum
 
-            var transactions = await transaction.GetTransactions(); // Hämtar alla transaktioner
+            var transactions = await transaction.GetTransactions(UserId); // Hämtar alla transaktioner
 
             // Tittar om det finns två "Sparande" poster från samma dag 
             if (transactions.Count(t => t.Kategori == "Sparande" && t.Datum == today) >= 2)
@@ -35,7 +36,7 @@ namespace Projekt.Services
         // Räknar ut hur många gånger användaren har spelat sparutmaningen under dagen -> för att visa i savingsForm
         public async Task<int> GetAmountsPlayedToday()
         {
-            var transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner från databasen
+            var transactions = await transaction.GetTransactions(UserId); // Hämtar in alla transaktioner från databasen
             // Returnerar antalet transaktioner som innehåller "Sparutmaning" i namnet och har dagens datum
             return transactions.Count(t => t.Namn?.Contains("Sparutmaning") == true && DateTime.TryParse(t.Datum, out DateTime date) && date.Date == DateTime.Today);
         }
@@ -52,7 +53,7 @@ namespace Projekt.Services
         // Hämtar in den största "vinsten" som användaren vunnít i sparutmaningen
         public async Task<(float LargestWin, float TotalResult)> GetUserResult()
         {
-            List<Transaction> transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner
+            List<Transaction> transactions = await transaction.GetTransactions(UserId); // Hämtar in alla transaktioner
 
             var winTransactions = transactions.Where(t => t.Kategori == "Sparande" && t.Typ == "Inkomst").ToList(); // Filtrerar ut alla vinster
 

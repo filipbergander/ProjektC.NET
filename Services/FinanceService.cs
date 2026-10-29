@@ -11,6 +11,7 @@ namespace Projekt.Services
     {
         // Instans av Transactionsservicen
         private readonly ITransactionService transaction;
+        private int UserId = SessionService.CurrentUser!.Id; // Hämtar in den inloggade användarens id
         // Konstruktor
         public FinanceService(ITransactionService transaction)
         {
@@ -20,7 +21,7 @@ namespace Projekt.Services
         public async Task<(float MonthBalanceSum, float IncomeSum, float ExpenseSum, int Quantity)> InsertFinanceValues()
         {
             // Hämtar in alla transaktioner
-            List<Transaction> allTransactions = await transaction.GetTransactions();
+            List<Transaction> allTransactions = await transaction.GetTransactions(UserId);
 
             // Aktuella månaden
             string currentYearMonth = DateTime.Now.ToString("yyyy-MM");
@@ -41,7 +42,7 @@ namespace Projekt.Services
         // Beräknar summan av utgifter per kategori
         public async Task<List<(string Category, float Sum)>> GetExpensesByCategory()
         {
-            var transactions = await this.transaction.GetTransactions(); // Hämtar in transaktioner
+            var transactions = await this.transaction.GetTransactions(UserId); // Hämtar in transaktioner
             // Filtrerar ut utgifterna och grupperar dem efter kategori, samt summerar beloppet för varje kategori
             return transactions
                 .Where(t => t.Typ == "Utgift" && t.Kategori != "Sparande")
@@ -53,7 +54,7 @@ namespace Projekt.Services
         // Hämtar in alla transaktioner och beräknar totala saldot, inte bara för en specifik månad
         public async Task<float> GetTotalBalance()
         {
-            List<Transaction> transactions = await transaction.GetTransactions(); // Hämtar in alla transaktioner
+            List<Transaction> transactions = await transaction.GetTransactions(UserId); // Hämtar in alla transaktioner
             float incomeSum = transactions.Where(t => t.Typ == "Inkomst").Sum(t => t.Belopp); // Summa inkomster
             float expenseSum = transactions.Where(t => t.Typ == "Utgift").Sum(t => t.Belopp);// Summa utgifter
             return incomeSum - expenseSum; // Returnerar totala saldot

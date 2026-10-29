@@ -40,6 +40,7 @@
             newUserRoleLabel = new Label();
             newUserRoleCombo = new ComboBox();
             userMsgPanel = new Panel();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             label1 = new Label();
             msgLabel = new Label();
             progressBar = new ProgressBar();
@@ -50,11 +51,11 @@
             hjälpToolStripMenuItem = new ToolStripMenuItem();
             omToolStripMenuItem = new ToolStripMenuItem();
             addTransactionFormReturnBtn = new FontAwesome.Sharp.IconButton();
-            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            userCreatedLabel = new Label();
             userMsgPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // newUserNameLabel
@@ -175,6 +176,19 @@
             userMsgPanel.TabIndex = 12;
             userMsgPanel.Visible = false;
             // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = SystemColors.Info;
+            iconPictureBox1.ForeColor = Color.Firebrick;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.CircleExclamation;
+            iconPictureBox1.IconColor = Color.Firebrick;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPictureBox1.Location = new Point(85, 7);
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.Size = new Size(32, 32);
+            iconPictureBox1.TabIndex = 2;
+            iconPictureBox1.TabStop = false;
+            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -281,18 +295,17 @@
             addTransactionFormReturnBtn.UseVisualStyleBackColor = false;
             addTransactionFormReturnBtn.Click += addTransactionFormReturnBtn_Click;
             // 
-            // iconPictureBox1
+            // userCreatedLabel
             // 
-            iconPictureBox1.BackColor = SystemColors.Info;
-            iconPictureBox1.ForeColor = Color.Firebrick;
-            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.CircleExclamation;
-            iconPictureBox1.IconColor = Color.Firebrick;
-            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconPictureBox1.Location = new Point(85, 7);
-            iconPictureBox1.Name = "iconPictureBox1";
-            iconPictureBox1.Size = new Size(32, 32);
-            iconPictureBox1.TabIndex = 2;
-            iconPictureBox1.TabStop = false;
+            userCreatedLabel.AutoSize = true;
+            userCreatedLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            userCreatedLabel.ForeColor = Color.Green;
+            userCreatedLabel.Location = new Point(472, 463);
+            userCreatedLabel.Name = "userCreatedLabel";
+            userCreatedLabel.Size = new Size(192, 18);
+            userCreatedLabel.TabIndex = 18;
+            userCreatedLabel.Text = "Användaren skapades!";
+            userCreatedLabel.Visible = false;
             // 
             // newUserRegisterForm
             // 
@@ -301,6 +314,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(244, 245, 245);
             ClientSize = new Size(1184, 561);
+            Controls.Add(userCreatedLabel);
             Controls.Add(addTransactionFormReturnBtn);
             Controls.Add(menuStrip1);
             Controls.Add(panel1);
@@ -316,11 +330,11 @@
             Load += newUserRegisterForm_Load;
             userMsgPanel.ResumeLayout(false);
             userMsgPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -349,5 +363,6 @@
         private ToolStripMenuItem omToolStripMenuItem;
         private FontAwesome.Sharp.IconButton addTransactionFormReturnBtn;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private Label userCreatedLabel;
     }
 }

@@ -103,9 +103,9 @@ namespace Projekt.Forms
             }
             // Skapar användaren i databasen
             await userService.CreateUser(newUser);
-
             // Nollställer textfälten & felmeddelanden vid lyckad registrering
             ResetForm();
+            await UIEnhancer.DisplayNotification(userCreatedLabel, "Ny användare har skapats!", "ForestGreen"); // Visar en notifikation om att användaren skapades
         }
         // Stänger formuläret och går tillbaka till mainform
         private void addTransactionFormReturnBtn_Click(object sender, EventArgs e)

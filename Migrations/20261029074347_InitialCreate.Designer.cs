@@ -10,7 +10,7 @@ using Projekt.Data;
 namespace ProjektC_.NET.Migrations
 {
     [DbContext(typeof(ProjektDbContext))]
-    [Migration("20261025105305_InitialCreate")]
+    [Migration("20261029074347_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -40,7 +40,12 @@ namespace ProjektC_.NET.Migrations
                     b.Property<string>("Typ")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Transactions");
                 });
@@ -66,6 +71,22 @@ namespace ProjektC_.NET.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Projekt.Models.Transaction", b =>
+                {
+                    b.HasOne("Projekt.Models.User", "User")
+                        .WithMany("Transactions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Projekt.Models.User", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }
