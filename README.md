@@ -22,12 +22,20 @@
 För att köra projektet behöver .NET SDK samt EF Core CLI-verktyget (dotnet ef) vara installerade.
 Installera .NET SDK och dotnet-ef CLI-verktyget med kommandot:   
 `dotnet tool install --global dotnet-ef`
-1. Klona ned repot och gå in i projektets mapp med: `cd ProjektC.NET`
-2. Kör därefter: `dotnet restore`
-3. Skapa den initiala migreringen (om dem filerna redan finns, hoppa över detta steg): `dotnet ef migrations add InitialCreate`
+1. Klona ned repot och gå in i projektets mapp genom terminalkommandot: `cd ProjektC.NET`
+2. Kör därefter: `dotnet restore` i terminalen.
+3. Skapa den initiala migreringen (om filerna redan finns, hoppa över detta steg): `dotnet ef migrations add InitialCreate`
 4. Skapa och uppdatera databasen: `dotnet ef database update`
-5. Öppna och kör projektet via csproj- eller slnx-filen samt starta därefter applikationen, exempelvis i Visual Studio med: `Ctrl + F5`   
-När applikationen startas skapas SQLite-databasen automatiskt och initial testdata läggs till genom SeedInitialData.
+5. Dubbelklicka på ProjektC#.NET.slnx-filen i projektet och välj:
+  "Set as Startup Project", om det inte redan är valt.   
+Projektet har nu byggts, och mapparna bin samt obj har skapats automatiskt.
+SQLite-databasen är även skapad och initial testdata har lagts till genom SeedInitialData.
+7. Starta sedan applikationen med: `Ctrl + F5`
+
+### Testkonto inloggningsuppgifter:   
+Användarnamn: Miun   
+Lösenord: rootroot123!   
+Kontot används enbart för att demonstrera applikationens funktionalitet. 
 
 ## Struktur   
 Applikationen är uppbyggd i Services, Forms, Models, Interfaces och Data för att separera klasser mellan olika ansvarsområden.  
