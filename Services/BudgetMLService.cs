@@ -45,8 +45,8 @@ namespace Projekt.Services
                     numberOfLeaves: 4,
                     numberOfTrees: 10));
 
-           /* Testresultat för att utvärdera hur bra modellen faktiskt fungerar
-            * var cvResults = mlContext.Regression.CrossValidate(data, pipeline, numberOfFolds: 5, labelColumnName: nameof(BudgetGameInput.BonusReward)); // 5-faldig korsvalidering för att utvärdera modellen
+           // Testresultat för att utvärdera hur bra modellen faktiskt fungerar
+             /*var cvResults = mlContext.Regression.CrossValidate(data, pipeline, numberOfFolds: 5, labelColumnName: nameof(BudgetGameInput.BonusReward)); // 5-faldig korsvalidering för att utvärdera modellen
 
             double averageMAE = cvResults.Average(r => r.Metrics.MeanAbsoluteError); // Medelvärdet av Mean Absolute Error
             double averageRMSE = cvResults.Average(r => r.Metrics.RootMeanSquaredError); // Medelvärdet av Root Mean Squared Error
@@ -55,8 +55,9 @@ namespace Projekt.Services
             var testMetrics = mlContext.Regression.Evaluate(cvResults[0].Model.Transform(data), labelColumnName: nameof(BudgetGameInput.BonusReward)); // Utvärderar modellen med testdata
             MessageBox.Show($"Testresultat\n" +
                 $"MAE: {averageMAE:F2}\n" +
-                $"MSE: {averageRMSE:F2}\n" +
-                $"R: {averageR2:F2}");*/
+                $"RMSE: {averageRMSE:F2}\n" +
+                $"R²: {averageR2:F2}");
+            */
 
             // Tränar modellen på data från datasetet
             var model = pipeline.Fit(data);

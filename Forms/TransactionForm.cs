@@ -134,8 +134,8 @@ namespace Projekt.Forms
             var addTransactionForm = new AddTransactionForm(transaction, this, queryService, mainForm, null);
             addTransactionForm.FormClosed += (s, args) =>
             {
-                this.Show(); // Laddar om transaktionerna när formuläret stängs
-                LoadTransactions();
+                this.Show();
+                LoadTransactions(); // Laddar om transaktionerna när formuläret stängs
             };
             addTransactionForm.Show();
             this.Hide();
@@ -229,13 +229,20 @@ namespace Projekt.Forms
             {
                 filterCategoryListBox.SetItemChecked(i, false); // Avbockar alla kategorier
             }
-            // Återställer till deafult-värden
+            // Återställer till deafult-värden i filterpanelen och i filter-objektet
             fromDatePicker.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             toDatePicker.Value = DateTime.Now;
             searchTransactionBox.Text = string.Empty;
             minAmountNumeric.Value = 0;
             maxAmountNumeric.Value = 100000;
-            filter.sFras = null; // Sätter sökfrasen till null
+            filter.Typ = null;
+            filter.Kategori.Clear();
+            filter.fDatum = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            filter.tDatum = DateTime.Now;
+            filter.minBelopp = null;
+            filter.maxBelopp = null;
+            filter.sFras = null;
+
             LoadTransactions(); // Hämtar in alla transaktioner igen och visar i datagriden
         }
         // Togglar kategorier vid klick på "Alla" i filterpanelens listbox

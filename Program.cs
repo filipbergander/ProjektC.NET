@@ -1,3 +1,16 @@
+/*
+* Projektuppgift, Mittuniversitetet 2026
+* Filnamn: Program.cs
+* Författare: Filip Bergander
+* Datum: 2026-10-31
+* Kurs: Programmering i C#.NET
+*
+* Beskrivning:
+* En WinForms-applikation som hanterar användarens utgifter och inkomster,
+* med möjlighet att logga in, registrera nya användare, hantera transaktioner, beräkna sparande samt spela en sparutmaning. 
+* Applikationen använder sig av en SQLite-databas för att lagra användare och transaktioner.
+*/
+
 using Projekt.Forms;
 using Projekt.Interfaces;
 using Projekt.Services;
