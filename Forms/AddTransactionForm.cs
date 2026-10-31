@@ -148,7 +148,15 @@ namespace Projekt.Forms
         {
             addTransactionTypeComboBox.Items.Add("Utgift");
             addTransactionTypeComboBox.Items.Add("Inkomst");
-            addTransactionTypeComboBox.SelectedIndex = 0;
+            if (transactionToEdit == null)
+            {
+                addTransactionTypeComboBox.SelectedIndex = 0;
+
+            }
+            else
+            {
+                addTransactionTypeComboBox.SelectedItem = transactionToEdit.Typ;
+            }
         }
         // Vid klick på "Avbryt" återställs inputs
         private void addTransactionCancelBtn_Click(object sender, EventArgs e)
@@ -166,7 +174,7 @@ namespace Projekt.Forms
             addTransactionDatePicker.Value = DateTime.Now;
             msgLabel.Text = "";
         }
-        // Stänger sidan för att lägga till en transaktion
+        // Stänger sidan för att lägga till en transaktionp 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();

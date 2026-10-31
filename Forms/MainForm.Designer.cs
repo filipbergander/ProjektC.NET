@@ -253,7 +253,7 @@
             mainFormTransactionBtn.Padding = new Padding(5, 0, 0, 0);
             mainFormTransactionBtn.Size = new Size(147, 51);
             mainFormTransactionBtn.TabIndex = 1;
-            mainFormTransactionBtn.Text = "Dina transaktioner";
+            mainFormTransactionBtn.Text = "Mina transaktioner";
             mainFormTransactionBtn.UseVisualStyleBackColor = false;
             mainFormTransactionBtn.Click += mainFormTransactionBtn_Click;
             // 
@@ -271,7 +271,7 @@
             mainFormSavingsBtn.Padding = new Padding(5, 0, 0, 0);
             mainFormSavingsBtn.Size = new Size(147, 54);
             mainFormSavingsBtn.TabIndex = 2;
-            mainFormSavingsBtn.Text = "Ditt sparande";
+            mainFormSavingsBtn.Text = "Mitt sparande";
             mainFormSavingsBtn.TextAlign = ContentAlignment.MiddleRight;
             mainFormSavingsBtn.UseVisualStyleBackColor = false;
             mainFormSavingsBtn.Click += mainFormSavingsBtn_Click;

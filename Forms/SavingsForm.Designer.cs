@@ -103,9 +103,9 @@
             savingsHeaderLabel.Font = new Font("Lucida Sans", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             savingsHeaderLabel.Location = new Point(496, 24);
             savingsHeaderLabel.Name = "savingsHeaderLabel";
-            savingsHeaderLabel.Size = new Size(264, 22);
+            savingsHeaderLabel.Size = new Size(270, 22);
             savingsHeaderLabel.TabIndex = 0;
-            savingsHeaderLabel.Text = "Verktyg för ditt sparande";
+            savingsHeaderLabel.Text = "Verktyg för mitt sparande";
             // 
             // anticipateSavingsBtn
             // 
